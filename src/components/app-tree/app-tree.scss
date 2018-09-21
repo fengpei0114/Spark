@@ -1,0 +1,27 @@
+app-tree {
+  ul {
+    list-style:none;
+  }
+  li {
+    list-style: none;
+  }
+  .selected {
+    background-color: #CFD8DC !important;
+    color: #CFD8DC;
+  }
+
+  .btnHeader {
+    transition: all .25s ease-in;
+    transform: rotate(0);
+  }
+  .active .btnHeader {
+    transform: rotate(90deg);
+  }
+  .btnClass:active {
+    color: #007aff;
+  }
+  .btnClass:after {
+
+  }
+
+}

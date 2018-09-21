@@ -1,0 +1,78 @@
+<ion-header >
+    <ion-navbar color="primary"  style="text-align:center">
+        <ion-title>
+            任务
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label>选择网格</ion-label>
+                <ion-select  name="organization" [(ngModel)]="organization" (ionChange)="organChange()">
+                    <ion-option  [value]="organizationId" *ngIf="isHomeToTask" selected="true" disabled>{{organizationName}}</ion-option>
+                    <ion-option *ngFor="let item of organData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>选择项目</ion-label>
+                <ion-select name="project" [(ngModel)]="project" (ionChange)="projectChange()">
+
+                    <ion-option  [value]="prjId" *ngIf="isHomeToTask" selected="true" disabled>{{prjName}}</ion-option>
+                    <ion-option *ngFor="let item of projectData" value="{{item.id}}" (ionSelect)="getItem(item)">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-grid text-center>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button small clear (click)="taskCreate()" class="btn-create">
+                            <ion-icon name="ios-create-outline">
+                                创建
+                            </ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col >
+                        <button ion-button small clear (click)="taskQuery()" class="btn-search">
+                            <ion-icon name="ios-search">
+                                查询
+                            </ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list *ngIf="showTasklist">
+            <ion-grid class="result"  *ngFor="let item of tasklistData">
+                <ion-row class="borderStyle{{item.status|statusFilter}}">
+                    <ion-col>
+                        {{item.project}}
+                    </ion-col>
+                    <ion-col style="text-align: right;color: #007aff" (click)="taskDetailQuery(item)">
+                        任务号:{{item.no}}
+                    </ion-col>
+                </ion-row>
+                <ion-row class="taskRow borderStyle{{item.status|statusFilter}}">
+                    <ion-col width-25>
+                        {{item.alarmtype}}
+                    </ion-col>
+                    <ion-col width-25>
+                        <!--{{item.alarmtypeId}}-->
+                    </ion-col>
+
+                    <ion-col width-25>
+                        {{item.createtime}}
+                    </ion-col>
+                    <ion-col width-25 style="text-align: right">
+                        {{item.status}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+    </ion-card>
+</ion-content>

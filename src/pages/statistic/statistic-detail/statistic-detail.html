@@ -1,0 +1,90 @@
+<ion-header>
+
+    <ion-toolbar color="primary" style="text-align:center">
+        <ion-title>统计信息</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span showWhen="ios"></span>
+                <ion-icon ios="ios-close" showWhen="ios,android,windows,landscape"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content >
+    <ion-card>
+            <ion-list>
+                    <app-tree [treeLists] ="menu" (ItemSelect)="selectOrgan($event)"></app-tree>
+                </ion-list>
+        <ion-list>
+            <!-- <ion-item *ngIf="isTaskToStatistic">
+                <ion-label>选择网格</ion-label>
+                <ion-select  >
+                    <ion-option  [value]="organizationId" *ngIf="isTaskToStatistic" selected="true" disabled>{{organizationName}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="!isTaskToStatistic">
+                <ion-label>选择网格</ion-label>
+                <ion-select  name="organization" [(ngModel)]="organization" (ionChange)="organChange()">
+                    <ion-option  [value]="organizationId" *ngIf="isTaskToStatistic" selected="true" disabled>{{organizationName}}</ion-option>
+                    <ion-option *ngFor="let item of organData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item> -->
+            <!--<ion-item>-->
+                <!--<ion-label>选择网格</ion-label>-->
+                <!--<ion-select name="organization" [(ngModel)]="organization" (ionChange)="organChange()">-->
+                    <!--<ion-option  [value]="organizationId" *ngIf="isTaskToStatistic" selected="true" disabled>{{organizationName}}</ion-option>-->
+                    <!--<ion-option *ngFor="let item of organData" value="{{item.id}}">{{item.name}}</ion-option>-->
+                <!--</ion-select>-->
+            <!--</ion-item>-->
+            <ion-item>
+                <ion-label>选择项目</ion-label>
+                <ion-select name="project" [(ngModel)]="project" (ionChange)="projectChange()">
+                    <ion-option  [value]="prjId" *ngIf="isTaskToStatistic" selected="true" disabled>{{prjName}}</ion-option>
+                    <ion-option *ngFor="let item of projectData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>选择采集点</ion-label>
+                <ion-select name="collectionPoint" [(ngModel)]="collectionPoint" (ionChange)="collectionPointChange()">
+                    <ion-option *ngFor="let item of collectionData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-4 ><button (tap)="getTimeBefore()" ion-button clear small>向前查询</button></ion-col>
+                <ion-col style="text-align: center"><button (tap)="changeTime($event)" ion-button clear small>{{title}}</button></ion-col>
+                <ion-col ><button (tap)="getTimeAfter()" ion-button clear small>向后查询</button></ion-col>
+            </ion-row>
+            <!--<ion-row>-->
+                <!--<ion-col style="text-align: center">-->
+                    <!--<button ion-button (click)="statistic()" clear small>-->
+                        <!--<ion-icon ios="ios-search">-->
+                            <!--&lt;!&ndash;查询&ndash;&gt;-->
+                        <!--</ion-icon>-->
+                    <!--</button>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        </ion-grid>
+        <!--<ion-buttons end>-->
+            <!--<button ion-button (click)="statistic()" clear small>-->
+                <!--<ion-icon ios="ios-search">-->
+                    <!--查询-->
+                <!--</ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
+    </ion-card>
+
+    <ion-card >
+        <!--highchart-->
+        <div #chart></div>
+    </ion-card>
+
+</ion-content>

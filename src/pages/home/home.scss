@@ -1,0 +1,33 @@
+page-home {
+  .secoundRow  {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-small;
+    //background-color:#e6e6e6;
+  }
+  .NoiseResult button {
+    padding: 0px;
+    margin: 0px;
+    font-size: x-small;
+
+  }
+
+  .WellResult button {
+    padding: 0px;
+    margin: 0px;
+    font-size: x-small;
+
+  }
+
+  .WaterLevelResult button {
+    padding: 0px;
+    margin: 0px;
+    font-size: x-small;
+
+  }
+  .padding {
+        background: url('../assets/login.png');
+      }
+}

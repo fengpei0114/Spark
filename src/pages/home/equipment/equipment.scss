@@ -1,0 +1,41 @@
+page-equipment{
+  .ionlabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+  }
+  .buttonclass button {
+    width: 100%;
+    height: 2.0rem;
+    margin-left: 0rem;
+    padding-left: 0.5rem;
+    margin-right: 0rem;
+    padding-right: 0rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+  }
+  #padding {
+        background: url('../../assets/login.png');
+        //opacity:0.5;
+      }
+      .card-background {
+        
+            ion-card {
+              position: relative;
+              text-align: center;
+            }
+        
+            .card-title {
+              position: absolute;
+              margin-top: 35%;
+              font-size: 2.0em;
+              width: 93%;
+              font-weight: bold;
+              //color: #fff;
+            }
+        }
+        
+}

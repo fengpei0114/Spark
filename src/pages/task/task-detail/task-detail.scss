@@ -1,0 +1,48 @@
+page-task-detail {
+  .taskRow ion-row {
+    text-align: center;
+    border-bottom: 1px solid lightgray ;
+  }
+
+  .lCol {
+    //background-color: #32db64;
+  }
+
+  .rCol {
+    //background-color: rgba(160,255,240,0.66);
+  }
+  .taskOperation {
+    color: #007aff;
+  }
+
+  .progress-container{
+    width: 96%;
+    margin: 5px 1%;
+    padding: 1px;
+    text-align: center;
+    background-color: #f4f4f4;
+    border: 1px solid #dcdcdc;
+    color: #fff;
+    border-radius: 20px;
+  }
+  .progress{
+    min-width: 10%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2px;
+    border-radius: 20px;
+    background-color: map-get($colors, primary);
+  }
+  img {
+    float: left;
+    margin: 1%;
+    padding: 1%;
+    width: 21%;
+    height: auto;
+  }
+
+  .taskImage {
+    border-bottom: 1px solid;
+
+  }
+}

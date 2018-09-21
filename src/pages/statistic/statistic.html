@@ -1,0 +1,129 @@
+<ion-header >
+    <ion-navbar color="primary"  style="text-align:center">
+        <ion-title>
+            统计
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid *ngIf="showNoise">
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <button ion-button clear (click)="gotoStatistic(0)" style="width:80px;height:80px">
+                    <ion-img src="assets/noise.png"></ion-img></button>
+                    
+                </div>
+            </ion-col>
+            <ion-col>
+                <div style="text-align: center">
+                    
+                    <button ion-button clear (click)="gotoStatistic(1)" style="width:80px;height:80px">
+                    <ion-img src="assets/Dust25.png"></ion-img></button>          
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <button ion-button clear (click)="gotoStatistic(2)" style="width:80px;height:80px">
+                    <ion-img src="assets/Dust10.png"></ion-img></button>
+                   
+                </div>
+            </ion-col>
+        </ion-row>
+<!--
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/FixedWaterLevel.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(3)"><p>固定水位</p></button><br>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/ContinuousWaterLevel.jpg"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(4)"><p>连续水位</p></button><br>
+                </div>
+            </ion-col>
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust10.png"></ion-img>-->
+            <!--</ion-col>-->
+       <!--
+            </ion-row>
+    
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/Manhole.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(5)"><p>井盖</p></button><br>
+                </div>
+            </ion-col>
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust25.png"></ion-img>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust10.png"></ion-img>-->
+            <!--</ion-col>-->
+       <!-- </ion-row>-->
+  
+
+    </ion-grid>
+    <ion-grid *ngIf="showAll">
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/noise.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(0)"><p>噪音统计</p></button><br>
+
+                </div>
+            </ion-col>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/Dust25.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(1)"><p>PM2.5</p></button><br>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/Dust10.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(2)"><p>PM10</p></button><br>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/FixedWaterLevel.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(3)"><p>固定水位</p></button><br>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/ContinuousWaterLevel.jpg"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(4)"><p>连续水位</p></button><br>
+                </div>
+            </ion-col>
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust10.png"></ion-img>-->
+            <!--</ion-col>-->
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div style="text-align: center">
+                    <ion-img src="assets/Manhole.png"></ion-img><br>
+                    <button ion-button clear (click)="gotoStatistic(5)"><p>井盖</p></button><br>
+                </div>
+            </ion-col>
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust25.png"></ion-img>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+            <!--<ion-img src="../../assets/Dust10.png"></ion-img>-->
+            <!--</ion-col>-->
+        </ion-row>
+
+    </ion-grid>
+
+</ion-content>

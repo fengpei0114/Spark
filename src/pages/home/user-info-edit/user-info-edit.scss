@@ -1,0 +1,49 @@
+page-user-info-edit {
+
+  .error-box {
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 11px;
+    color: white;
+    font-style: italic;
+    border:  1px solid #FF8B51;
+    border-radius: 3px;
+    background: #FFC58C;
+  }
+  //.scroll-content {
+  //  overflow: hidden;
+  //}
+  //.round {
+  //  border-radius: 3%;
+  //}
+  //.swiper-pagination-bullet {
+  //  background-color: white;
+  //}
+  //.swiper-pagination-bullet-active {
+  //  background-color: #E43;
+  //  transition: all 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+  //}
+  ion-list {
+    margin: 0 !important;
+  }
+  ion-slides,
+  //.swiper-container {
+  //  height: 30vh;
+  //}
+  //.slider-item {
+  //  height: 30vh;
+  //  width: 100%;
+  //  background-size: cover;
+  //}
+  //.slide-zoom {
+  //  height: 100%;
+  //  background: linear-gradient(transparent, rgba(0, 0, 0, 0.22)) !important;
+  //}
+  //.scroll-content {
+  //  border-radius: 3%;
+  //}
+  ion-col {
+    text-align: center;
+  }
+
+}

@@ -1,0 +1,46 @@
+page-task {
+
+  .btn-search {
+    padding-right: 20px;
+  }
+
+  .taskRow {
+    border-bottom: 1px solid lightgray;
+    font-size: 8px;
+    //border-bottom-radius: 20px;
+  }
+
+  .result ion-row {
+    //border-left: 4px solid #21b94e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //border-bottom-left-radius: 20%;
+  }
+
+  .borderStyle1 {
+    border-left: 4px solid darkred;
+  }
+  .borderStyle2 {
+    border-left: 4px solid orangered;
+  }
+  .borderStyle3 {
+    border-left: 4px solid darkorange;
+  }
+  .borderStyle4 {
+    border-left: 4px solid springgreen;
+  }
+  .borderStyle5 {
+    border-left: 4px solid limegreen;
+  }
+
+
+  //ion-col {
+  //  border: 1px solid #ddd;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //}
+
+
+}

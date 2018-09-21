@@ -1,0 +1,48 @@
+<ion-menu id="loggedOutMenu" [content]="content">
+
+    <ion-header no-border class="menu-image-height">
+        <ion-navbar no-border style="padding:0" class="menu-image-height">
+            <img class="menu-image menu-image-height" src="assets/menu.jpg"/>
+        </ion-navbar>
+        <ion-toolbar>
+            <ion-title>绿色家园</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <!--<ion-header>-->
+    <!---->
+    <!--<ion-toolbar>-->
+    <!--<ion-title>绿色家园</ion-title>-->
+    <!--</ion-toolbar>-->
+    <!--</ion-header>-->
+
+    <ion-content class="outer-content">
+
+        <!--<ion-list-header align="center">-->
+
+        <!--</ion-list-header>-->
+        <!--设置menu菜单-->
+        <ion-list>
+            <!--<ion-item (click)="gotoPageNotice()" menuToggle>-->
+                <!--<ion-icon name='ios-home-outline' item-left></ion-icon>-->
+                <!--通知公告-->
+            <!--</ion-item>-->
+            <ion-item ion-item (click)="gotoPageAbout()" menuToggle>
+                <ion-icon name='ios-information-circle-outline' item-left></ion-icon>
+                关于
+            </ion-item>
+            <!--<ion-item ion-item (click)="gotoPageHelp()" menuToggle>-->
+                <!--<ion-icon name='ios-help-circle-outline' item-left></ion-icon>-->
+                <!--帮助-->
+            <!--</ion-item>-->
+            <ion-item ion-item (click)="logout()" menuToggle>
+                <ion-icon name='ios-exit-outline' item-left></ion-icon>
+                退出
+            </ion-item>
+
+            <!--<button ion-button (click)="logout()" color="danger" full>退出</button>-->
+        </ion-list>
+        <!-- <p class="powered-by" ion-text color="text3" (click)="poweredBy()">西安翔感电子科技有限公司</p> -->
+    </ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,57 @@
+<!--
+  Generated template for the UserInfoEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+
+    <ion-card >
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/userinfo.jpg" >
+            </ion-avatar>
+            <h2>{{user.realName}}</h2>
+            <p>职位:{{user.userPosition}}</p>
+        </ion-item>
+        <form [formGroup]="userInfoForm" class="card-title" (ngSubmit)="onSubmit(userInfoForm.value)">
+            <ion-list insert>
+                <ion-item style="background-color: transparent;border-top-color: rgba(255,255,255,0.04);" [class.error]="password.valid && password.touched">
+                    <ion-input  placeholder="输入新密码" type="text" [formControl]="password" style="border-bottom: 1px solid darkgray !important;font-size: smaller;" clearInput></ion-input>
+                </ion-item>
+                <div *ngIf="password.hasError('minlength') && password.touched"
+                     class="error-box">* 密码最小长度为4位!</div>
+                <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)" [class.error]="!passwordConfirm.valid && passwordConfirm.touched">
+                    <ion-input style="font-size: smaller" placeholder="确认新密码" type="password" [formControl]="passwordConfirm" clearInput></ion-input>
+                </ion-item>
+                <div *ngIf="!checkPassword"
+                     class="error-box">* 两次输入的密码不一致</div>
+                <!--<ion-item>-->
+                    <!--<ion-input [placeholder]="user.phone1" type="text" [formControl]="phone1" clearInput=""></ion-input>-->
+                <!--</ion-item>-->
+                <!--<div *ngIf="phone1.hasError('minlength') && phone1.touched"-->
+                     <!--class="error-box">* 输入正确的电话号码!</div>-->
+            </ion-list>
+            <ion-row class="align-center">
+                <ion-col col-6>
+                    <button ion-button primary round outline  type="submit" [disabled]="!userInfoForm.valid">
+                        <ion-icon name="ios-checkmark-outline"></ion-icon>
+                    </button>
+                </ion-col>
+                <ion-col col-6>
+                    <button ion-button round outline color="danger" (click)="dismiss()">
+                        <ion-icon name="ios-close-outline"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </form>
+        <!--<ion-item *ngFor="let place of card.places" (click)="placeTapped(place)">-->
+            <!--<ion-icon color="subtle" large item-start [name]='place.icon'></ion-icon>-->
+            <!--<h2>{{place.name}}</h2>-->
+            <!--<p>{{place.address}}</p>-->
+        <!--</ion-item>-->
+
+
+    </ion-card>
+
+</ion-content>

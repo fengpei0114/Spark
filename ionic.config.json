@@ -1,0 +1,8 @@
+{
+  "name": "greenhomelandv2",
+  "app_id": "com.xd.greenhomeland",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

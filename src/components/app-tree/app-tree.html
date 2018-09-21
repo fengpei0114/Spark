@@ -1,0 +1,45 @@
+ <!--Generated template for the AppTreeComponent component-->
+ <ion-list no-padding no-margin>
+     <ion-item *ngFor="let item of treeLists" [class.selected]="item === selectedItem" no-lines no-margin>
+       <button md-button  class="btnClass" style="font-size: medium" (click)="itemClick(item)">
+         <ion-icon *ngIf="item.children && item.children.length && !item.open" class="btnHeader"
+                    item-left
+                    name="ios-add">
+         </ion-icon>
+         <ion-icon *ngIf="item.children && item.children.length && item.open" class="btnHeader"
+                   item-left
+                   name="ios-remove">
+         </ion-icon>
+         {{item.title}}
+       </button>
+       <app-tree *ngIf="item.open && item.children && item.children.length" [treeLists]="item.children" ></app-tree>
+     </ion-item>
+ </ion-list>
+
+<!--<ul>-->
+    <!--<li *ngFor="let item of treeLists" [class.selected]="item === selectedItem">-->
+
+        <!--<button md-button  class="btnClass" style="font-size: medium" (click)="itemClick(item)">-->
+          <!--<ion-icon *ngIf="item.children && item.children.length" class="btnHeader"-->
+                    <!--item-left-->
+                    <!--name="ios-arrow-forward">-->
+          <!--</ion-icon>-->
+          <!--{{item.title}}-->
+        <!--</button>-->
+        <!--&lt;!&ndash; 调用组件本身，传递给下级，递归实现&ndash;&gt;-->
+        <!--<app-tree *ngIf="item.open && item.children && item.children.length" [treeLists]="item.children" ></app-tree>-->
+    <!--</li>-->
+<!--</ul>-->
+
+
+<!--<ion-list>-->
+    <!--<ion-item *ngFor="let item of treeLists">-->
+
+        <!--&lt;!&ndash;<ion-label>{{item.title}}</ion-label>&ndash;&gt;-->
+        <!--<button md-button (click)="itemClick(item)">{{item.title}}</button>-->
+        <!--&lt;!&ndash;<ion-checkbox color="secondary" (ionChange)="itemClick(item)"></ion-checkbox>&ndash;&gt;-->
+        <!--&lt;!&ndash; 调用组件本身，传递给下级，递归实现&ndash;&gt;-->
+        <!--<app-tree *ngIf="item.open && item.children && item.children.length" [treeLists]="item.children" ></app-tree>-->
+    <!--</ion-item>-->
+
+<!--</ion-list>-->

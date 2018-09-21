@@ -1,0 +1,88 @@
+<!--
+  Generated template for the TaskDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-toolbar color="primary" style="text-align:center">
+        <ion-title>任务详细信息</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <ion-icon name="ios-close-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card class="taskDetail">
+        <ion-grid class="taskRow">
+            <ion-row>
+                <ion-col col-3 class="lCol">
+                   任务号:{{task.no}}
+                </ion-col>
+                <ion-col col-9 class="rCol">
+                    {{task.project}} <br> {{task.site}}
+                    <!--{{task.}}-->
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 class="lCol">
+                    {{task.alarmtype}}
+                </ion-col>
+                <ion-col col-9 class="rCol">
+                    {{task.createtime}} <br> {{task.status}}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 class="lCol">
+                    {{task.generator}}
+                </ion-col>
+                <ion-col col-9 class="rCol">
+                    备注:{{task.note}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <div class="taskStatus" #taskStatus>
+            <div class="progress-container">
+                <div class="progress" [style.background-color]="background" [style.width]="current + '%'"> {{task.status}}</div>
+            </div>
+        </div>
+
+    </ion-card>
+    <ion-card>
+        <ion-grid>
+            <ion-row class="taskOperation">
+                <ion-col><button (click)="gotoHistoryAlaram()" ion-button clear small>历史报警</button></ion-col>
+                <ion-col style="text-align: center"><button (click)="gotoStatistic()" ion-button clear small>统计</button></ion-col>
+                <ion-col ><button (click)="gotoChangeStatus()" ion-button clear small>更新任务状态</button></ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-card>
+        <ion-grid class="taskImage">
+            <ion-row>
+                <ion-col col-11>任务图片</ion-col>
+                <ion-col col-1 style="text-align: right;border-left: 1px solid">
+                    <!--<button ion-button clear small>-->
+                        <ion-icon name="ios-camera" (click)="gotoUpload()">
+                        </ion-icon>
+                    <!--</button>-->
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div padding></div>
+
+        <img *ngFor="let item of imageUrl" (click)="showImage(item)" src="{{item}}">
+        <page-pagination [total]="22" (pageNumChange)="doSearch($event)" [pageSize]="pageSize" color="dark">
+        </page-pagination>
+    </ion-card>
+
+
+</ion-content>

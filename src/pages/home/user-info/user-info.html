@@ -1,0 +1,46 @@
+<!--
+  Generated template for the UserInfo page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+
+    <ion-navbar color="dark">
+        <ion-title>用户信息</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="openUserInfoEditPage()">
+                <ion-icon name="ios-create-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+
+</ion-header >
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="assets/userinfo.jpg">
+            </ion-avatar>
+            <h1>
+                {{ realName }}
+            </h1>
+            <h3>职位:{{userPosition}}  账号:{{account}}</h3>
+        </ion-item>
+        <ion-item>
+            所在机构：{{accountOrgName}}
+        </ion-item>
+        <ion-item>
+            手机号码1：{{phone1}}
+        </ion-item>
+
+        <ion-item>
+            手机号码2：{{phone2}}
+        </ion-item>
+        <ion-item>
+            邮箱地址：{{email}}
+        </ion-item>
+    </ion-list>
+</ion-content>

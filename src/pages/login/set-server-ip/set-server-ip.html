@@ -1,0 +1,50 @@
+<!--
+  Generated template for the SetServerIpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header style="text-align:center">
+
+  <ion-navbar color="primary" >
+    <ion-title>设置服务器地址</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-card>
+        <ion-list>
+            <ion-item style="background-color: transparent;border-top-color: rgba(255,255,255,0.04);">
+                <ion-label>当前IP: {{serverIp}}:{{serverPort}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-list insert>
+            <ion-item style="background-color: transparent;border-top-color: rgba(255,255,255,0.04);">
+                <ion-label><ion-icon name="ios-link-outline"></ion-icon></ion-label>
+                <ion-input placeholder="请输入IP地址" type="text" style="border-bottom: 1px solid darkgray !important;" clearInput [(ngModel)]="newServerIp"></ion-input>
+            </ion-item>
+            <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)">
+                <ion-label>
+                    <ion-icon name="ios-settings-outline"></ion-icon>
+                </ion-label>
+                <ion-input placeholder="请输入端口号" type="text" clearInput [(ngModel)]="newServerPort"></ion-input>
+            </ion-item>
+
+            <ion-item>
+
+                <ion-buttons end="">
+                    <button ion-button  clear (click)="changeIpAndPort()">
+                        <ion-icon name="ios-cloud-done-outline"> 修改 </ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+
+</ion-content>

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the TaskCreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary" style="text-align:center">
+    <ion-title>创建任务  </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label>所属项目</ion-label>
+                <ion-label style="font-size: smaller">  {{projectName}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label style="font-size: smaller">选择采集点</ion-label>
+                <ion-select name="collection" [(ngModel)]="collectionPoint" (ionChange)="collectionPointChange()" style="font-size: smaller">
+                    <ion-option *ngFor="let item of collectionData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label style="font-size: smaller">传感器类型</ion-label>
+                <ion-select name="deviceType" [(ngModel)]="sensorType" (ionChange)="sensorTypeChange()" style="font-size: smaller">
+                    <ion-option *ngFor="let item of deviceData" value="{{item.id}}">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label style="font-size: smaller">备注信息:</ion-label>
+                <ion-input type="text" [(ngModel)]="note" placeholder="备注信息"></ion-input>
+            </ion-item>
+
+            <ion-grid text-center>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button small clear (click)="taskCancel()" class="btn-create">
+                            <ion-icon name="ios-close-outline">
+                                取消
+                            </ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col >
+                        <button ion-button small clear (click)="taskSave()" class="btn-search">
+                            <ion-icon name="ios-checkmark-outline">
+                                保存
+                            </ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-list>
+    </ion-card>
+</ion-content>
