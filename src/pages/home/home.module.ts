@@ -7,6 +7,7 @@ import { UserInfoPage } from './user-info/user-info';
 import { UserInfoEditPage } from './user-info-edit/user-info-edit';
 import { StatisticOfHomePage } from  './statistic-of-home/statistic-of-home';
 import { EquipmentPage } from './equipment/equipment'
+import { HistoryPage } from './history/history';
 import { NameLengthPipe } from '../../pipes/name-length/name-length';
 import { AccordionlistComponentModule } from '../../components/accordionlist/accordionlist.module';
 import { AppTreeComponentModule } from '../../components/app-tree/app-tree.module';
@@ -14,7 +15,7 @@ import { AppTreeComponentModule } from '../../components/app-tree/app-tree.modul
 
 
   declarations: [
-    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage, NameLengthPipe
+    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage, HistoryPage, NameLengthPipe
   ],
   imports: [
     IonicPageModule.forChild(HomePage),
@@ -25,7 +26,7 @@ import { AppTreeComponentModule } from '../../components/app-tree/app-tree.modul
     HomePage
   ],
     entryComponents:[
-        MapPage,DevicePage,UserInfoPage, UserInfoEditPage, StatisticOfHomePage, EquipmentPage,
+        MapPage,DevicePage,UserInfoPage, UserInfoEditPage, StatisticOfHomePage, EquipmentPage, HistoryPage,
     ],
 
 })

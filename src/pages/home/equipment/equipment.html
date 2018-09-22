@@ -1,9 +1,6 @@
 <ion-header style="text-align:center;height:40px" no-border>
         <ion-navbar transparent >
-            <button ion-button color="dark" clear style="height:30px" (click)="changeItem()">
-                <ion-label class="ionlabel">{{equipmentName}}</ion-label>
-                    <ion-icon name = "md-arrow-dropdown"></ion-icon>
-            </button>
+            <ion-title>查看设备</ion-title>
             <ion-buttons end>
                     <button ion-button icon-only>
                         <ion-icon name="menue"></ion-icon>
@@ -14,16 +11,16 @@
     
     <ion-content id="padding">
         <div position="relative" style="padding:1px 0px 0px 0px;">
-            <div *ngIf="ischange" style="background-color:#000000;opacity:0.7;width:100%;position:fixed;z-index:99999;max-height:200px;overflow:scroll;">
-                <button ion-button style="width:100%;height:25px;padding:0px;margin:0 auto;" color="#ffffff" *ngFor="let item of Msg" value="{{item.id}}" (click)="chooseEqu(item.id)">{{item.name}}</button>           
+            <div *ngIf="ischange" style="background:url('../../assets/login.png');width:100%;position:fixed;z-index:99999;max-height:200px;overflow:scroll;">
+                <button ion-button clear style="width:100%;height:25px;padding:0px;margin:0 auto;" color="#ffffff" *ngFor="let item of Msg" value="{{item.id}}" (click)="chooseEqu(item.id)">{{item.name}}</button>           
             </div>
             <div *ngIf="ischange" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.3;filter:Alpha(ipacity=50);z-index:9999"></div>
             <div style="position:absolute;width:100%;height:100%;">
-                <ion-card style="position:relative;background:none;top:20px;">{{Ename}}--{{equipmentName}}</ion-card>
+                <ion-card style="position:relative;background:none;top:20px;box-shadow:none">{{Ename}}--{{equipmentName}}</ion-card>
                 <ion-card style="position:relative;background:none;top:20px;height:80px">设备信息</ion-card>
                 <ion-card style="position:relative;background:none;top:20px;height:80px">当前运行状态</ion-card>
                 <ion-card style="position:relative;background:none;top:20px;height:80px">设备器件状态</ion-card>
-                <button ion-item detail-none (click)="showchartOfAirTemper()" no-lines style="background-color: #33A1C9; color:#ffffff" >
+                <button ion-button  clear (click)="showchartOfAirTemper()" no-lines  style="height:60px;top:10px">
                         <ion-icon item-left name="ios-arrow-forward">
                         </ion-icon>
                         空气温度统计
@@ -45,7 +42,7 @@
                         <!--<div #chartOfAirTemper></div>-->
                     </accordionlist>
                 
-                    <button ion-item detail-none (click)="showchartOfAirHum()" no-lines style="background-color: #33A1C9; color:#ffffff" >
+                    <button ion-button  clear (click)="showchartOfAirTemper()" no-lines  style="height:60px;top:10px">
                         <ion-icon item-left name="ios-arrow-forward">
                         </ion-icon>
                         空气湿度统计

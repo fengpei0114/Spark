@@ -13,6 +13,7 @@ import { OrganizationServiceProvider } from "../../providers/organization-servic
 
 import 'rxjs/add/operator/map';
 import { EquipmentPage } from './equipment/equipment';
+import { HistoryPage } from './history/history';
 
 /**
  * Generated class for the HomePage page.
@@ -75,7 +76,7 @@ export class HomePage implements OnInit{
 
     }
     runningHistory(){
-
+        this.app.getRootNav().push(HistoryPage);
     }
     personalMsg(){
 
