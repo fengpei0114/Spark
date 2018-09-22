@@ -1,0 +1,46 @@
+<ion-header style="text-align:center" no-border>
+    <ion-navbar style="min-height:0px">
+        <ion-title>运行历史</ion-title>
+        <ion-buttons end>
+                <button ion-button icon-only>
+                    <ion-icon name="menue"></ion-icon>
+                </button>
+            </ion-buttons>
+    </ion-navbar>
+    <ion-row id = "row1">
+            <ion-col class = "buttonclass" col-6 id = "rowcol1" >
+                <button ion-button color="dark" clear (click)="ischoose(0)" id = "btn1">
+                    <ion-label id="ionlabel1">选择设备</ion-label>
+                    <ion-icon name = "md-arrow-dropdown" id = "ion1"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col class = "buttonclass" col-6 id = "rowcol2" >
+                <button ion-button color="dark" clear (click)="ischoose(1)">
+                    <ion-label id="ionlabel2">记录类型</ion-label>
+                    <ion-icon name = "md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+</ion-header> 
+
+
+<ion-content class = "padding">
+    <div style="position:relative">
+        <div *ngIf="isequipment" id = "equipmentdiv">
+            <div id = "equipmentdiv-inner1">
+                <button ion-button clear *ngFor="let item of Msg" id = "equipmentbtn1" (click)="equipmentchoose(item.id)">{{item.name}}</button>
+            </div>
+            <div id = "equipmentdiv-inner2">
+                <button ion-button clear *ngFor="let item of equipmentMsg" id = "equipmentbtn1" >{{item.name}}</button>
+            </div>
+        </div>
+        <div *ngIf="isrecord" id = "equipmentdiv">
+            <button ion-button id = "equipmentbtn2">喷淋</button>
+            <button ion-button id = "equipmentbtn2">预警</button>
+            <button ion-button id = "equipmentbtn2">故障</button>
+            <br>
+            <button ion-button id = "equipmentbtn3">确定</button>
+        </div>
+    </div>
+
+</ion-content>
