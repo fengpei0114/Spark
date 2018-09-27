@@ -13,6 +13,8 @@ import { HttpService } from '../providers/http-service/http-service';
 import { AccountService } from '../providers/account-service/account-service';
 import { Md5 } from 'ts-md5/dist/md5';
 import { HomePage } from '../pages/home/home';
+import { EquipmentPage } from '../pages/home/equipment/equipment';
+import { UserInfoPage } from '../pages/home/user-info/user-info'
 @Component({
   templateUrl: 'app.html'
 })
@@ -99,7 +101,9 @@ export class MyApp {
     }
     gotoPageHelp() {
         this.nav.push(HelpPage);
-
+    }
+    gotoPageUserinfo(){
+        this.nav.push(UserInfoPage);
     }
 
 }

@@ -32,7 +32,8 @@ page-history{
         border-right:1px solid #ffffff
       }
       #equipmentdiv{
-        position: absolute;
+        position: fixed;
+        z-index: 9999;
         height:200px;
         width:100%;
         background:#f8f8f8;

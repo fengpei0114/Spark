@@ -38,23 +38,23 @@ export class UserInfoPage {
                 private alertCtrl: AlertController,
                 private modalCtrl: ModalController,
     ) {
-        this.accountId = (this.accountService.getAccount() as any).accountId;
+        // this.accountId = (this.accountService.getAccount() as any).accountId;
 
         console.log("accounId:"+ this.accountId);
-        this.getUserInfoByAccountId(this.accountId).then(data => {
-            this.realName = data['realName'];
-            this.accountOrgName = data['accountOrgName'];
-            this.phone1 = data['phone1'];
-            this.email = data['email'];
-            this.phone2 = data['phone2'];
+        // this.getUserInfoByAccountId(this.accountId).then(data => {
+        //     this.realName = data['realName'];
+        //     this.accountOrgName = data['accountOrgName'];
+        //     this.phone1 = data['phone1'];
+        //     this.email = data['email'];
+        //     this.phone2 = data['phone2'];
 
-            this.userPosition = data['userPosition'];
-            this.account = data['account'];
+        //     this.userPosition = data['userPosition'];
+        //     this.account = data['account'];
 
-            this.user = data;
-            console.log(this.user);
+        //     this.user = data;
+        //     console.log(this.user);
 
-        });
+        // });
     }
 
     openSignupModal() {

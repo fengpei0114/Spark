@@ -83,7 +83,9 @@ export class HttpService {
     }
     setIpAndPort(Ip: string, port: string) {
         this.urlIp = "47.92.34.161";
-        this.urlPort = "80";
+        this.urlPort = "80"; 
+        // this.urlIp = Ip;
+        // this.urlPort = port;
         this.url = "http://" + Ip + ":" + port;
         this.storage.set('urlIp',this.urlIp).then();
         this.storage.set('urlPort',this.urlPort).then();

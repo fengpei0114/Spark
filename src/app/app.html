@@ -5,7 +5,7 @@
             <img class="menu-image menu-image-height" src="assets/menu.jpg"/>
         </ion-navbar>
         <ion-toolbar>
-            <ion-title>绿色家园</ion-title>
+            <ion-title>火花探测</ion-title>
         </ion-toolbar>
     </ion-header>
     <!--<ion-header>-->
@@ -26,9 +26,13 @@
                 <!--<ion-icon name='ios-home-outline' item-left></ion-icon>-->
                 <!--通知公告-->
             <!--</ion-item>-->
+            <ion-item (click)="gotoPageUserinfo()" menuToggle>
+                    <ion-icon name='ios-home-outline' item-left></ion-icon>
+                    个人资料
+                </ion-item>
             <ion-item ion-item (click)="gotoPageAbout()" menuToggle>
                 <ion-icon name='ios-information-circle-outline' item-left></ion-icon>
-                关于
+                关于系统
             </ion-item>
             <!--<ion-item ion-item (click)="gotoPageHelp()" menuToggle>-->
                 <!--<ion-icon name='ios-help-circle-outline' item-left></ion-icon>-->

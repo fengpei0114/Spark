@@ -65,7 +65,9 @@ export class HomePage implements OnInit{
     // openMenu(): void{
     //     this.menuCtrl.open();
     // }
-
+    openMenu(): void{
+        this.menuCtrl.open();
+    }
     ngOnInit() {
 
     }
