@@ -28,23 +28,25 @@
     <div style="position:relative">
         <div *ngIf="isequipment" id = "equipmentdiv">
             <div id = "equipmentdiv-inner1">
-                <button ion-button clear *ngFor="let item of Msg" id = "equipmentbtn1" name="{{item.id}}" (click)="equipmentchoose(item.id)">{{item.name}}</button>
+                <button ion-button clear *ngFor="let item of factoryArray" id = "equipmentbtn1" name="{{item.id}}" (click)="factoryChoose(item.id)">{{item.name}}</button>
             </div>
             <div id = "equipmentdiv-inner2">
-                <button ion-button clear *ngFor="let item of equipmentMsg" id = "equipmentbtn1" >{{item.name}}</button>
+                <button ion-button clear *ngFor="let item of equipmentArray"  (click)="equipmentChoose(item.id)" style="color: #000;">{{item.name}}</button>
             </div>
         </div>
         <div *ngIf="isrecord" id = "equipmentdiv">
-            <button ion-button id = "equipmentbtn2">喷淋</button>
-            <button ion-button id = "equipmentbtn2">预警</button>
-            <button ion-button id = "equipmentbtn2">故障</button>
+            <button ion-button id = "equipmentbtn2" (click)="btSprayClick()"  [style.background]="sprayColor">喷淋
+                <!--<ion-icon name="checkmark" *ngIf="isSpray"></ion-icon>-->
+            </button>
+            <button ion-button id = "equipmentbtn2" (click)="btWarningClick()"  [style.background]="warningColor">预警</button>
+            <button ion-button id = "equipmentbtn2" (click)="btFaultClick()"  [style.background]="faultColor">故障</button>
             <br>
-            <button ion-button id = "equipmentbtn3">确定</button>
+            <button ion-button id = "equipmentbtn3" (click)="btTypeSlectClick()">确定</button>
         </div>
-        <div *ngIf="isequipment||isrecord" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.5;filter:Alpha(ipacity=50);z-index:9977" (click)="changestatus()">  
+        <div *ngIf="isequipment||isrecord" class="equAndRecoBt" (click)="changestatus()">
         </div>
         <div style="position:absolute;width:100%;">
-            <ion-card *ngFor="let item of historyMsg" style="border-radius:15px;background:#f8f8f8">
+            <ion-card *ngFor="let item of displayArray" style="border-radius:15px;background:#f8f8f8">
                 <ion-title style="padding-left:5px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid #000000">{{item.time}}</ion-title>
                 <ion-grid>
                     <ion-row>
