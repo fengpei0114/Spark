@@ -195,7 +195,7 @@ export class HistoryPage {
                 private httpService: HttpService,
 
     ) {
-        
+        this.displayArray=this.historyArray;
         //this.equipmentName = JSON.stringify(this.Msg);
         
         

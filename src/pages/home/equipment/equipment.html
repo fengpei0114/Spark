@@ -37,48 +37,53 @@
             </div>
             <div *ngIf="ischangeE||ischangeH" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.5;filter:Alpha(ipacity=50);z-index:9977" (click)="changestatus()">  
                 </div>
-            
-            <div style="position:absolute;width:100%;height:100%;">
-                <ion-card style="position:relative;background:none;top:10px;height:80px">设备信息</ion-card>
-                <ion-card style="position:relative;background:none;top:20px;height:80px">当前运行状态</ion-card>
-                <ion-card style="position:relative;background:none;top:20px;height:80px">设备器件状态</ion-card>
-                <button ion-button  clear (click)="showchartOfAirTemper()" no-lines  style="height:60px;top:10px">
-                        <ion-icon item-left name="ios-arrow-forward">
-                        </ion-icon>
-                        空气温度统计
-                    </button>
-                    <ion-icon  *ngIf="AirTempButton"> </ion-icon>
-                    <accordionlist *ngIf="isAirTemperDisplay"
-                                   title="空气温度统计"
-                                   textColor="#FFF"
-                                   hasMargin="false"
-                                   headerColor="#33A1C9">
-                        <div #chartOfAirTemper></div>
-                       <ion-card>
-                        <ion-row>
-                            <ion-col col-4 ><button (tap)="getTimeBefore()" ion-button clear small>向前查询</button></ion-col>
-                            <ion-col style="text-align: center"><button (tap)="changeTime($event)" ion-button clear small>{{title}}</button></ion-col>
-                            <ion-col ><button (tap)="getTimeAfter()" ion-button clear small>向后查询</button></ion-col>
-                        </ion-row>
-                       </ion-card>
-                        <!--<div #chartOfAirTemper></div>-->
-                    </accordionlist>
-                
-                    <button ion-button  clear (click)="showchartOfAirTemper()" no-lines  style="height:60px;top:10px">
-                        <ion-icon item-left name="ios-arrow-forward">
-                        </ion-icon>
-                        空气湿度统计
-                    </button>
-                
-                    <accordionlist *ngIf="isAirHumDisplay"
-                                   title="空气湿度统计"
-                                   textColor="#FFF"
-                                   hasMargin="false"
-                                   headerColor="#33A1C9">
-                        <div #chartOfPM10></div>
-                    </accordionlist>
-            </div>
+
+
+
+
         </div>
-        
-        
+        <ion-card style="background-color: transparent">
+            <ion-list  inset>
+                <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
+                    <div class="name">设备名称 : </div>
+                    <!--<div class="detail">中国</div>-->
+
+                </ion-item >
+                <ion-item class="listItem"><ion-icon name="ios-keypad-outline"></ion-icon>
+                    <div class="name">序号 : </div>
+                    <div class="detail">{{dev_mod}}</div>
+                </ion-item>
+
+                <ion-item class="listItem"><ion-icon name="ios-game-controller-a-outline"></ion-icon>
+                    <div class="name"> 状态 :  </div>
+                    <div class="detail">{{dev_simNo}}</div>
+                    <!--<ion-icon name="ios-switch" color="secondary" item-end></ion-icon>-->
+                    <!--<ion-note  item-end>运行中</ion-note>-->
+                    <!--<ion-icon name="ios-switch" color="danger" item-end></ion-icon>-->
+                    <!--<ion-note  item-end>故障</ion-note>-->
+                    <ion-icon name="ios-switch" color="grey" item-end></ion-icon>
+                    <ion-note  item-end>未运行</ion-note>
+                </ion-item>
+                <ion-item class="listItem"><ion-icon name="ios-build-outline"></ion-icon>
+                    <div class="name"> 器件: </div>
+                    <div class="detail">{{dev_status}}</div>
+                </ion-item>
+                <ion-item class="listItem"><ion-icon name="ios-pulse-outline"></ion-icon>
+                    <div class="name"> 运行时间 : </div>
+                    <div class="detail">{{dev_latestHeartbeat}}</div>
+                </ion-item>
+                <ion-item class="listItem"><ion-icon name="ios-paper-outline"></ion-icon>
+                    <div class="name"> 备注信息 : </div>
+
+                    <div class="detail">{{dev_note}}</div>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+
+        <!--<div style="position:absolute;width:100%;height:100%;">-->
+            <!--<ion-card style="position:relative;background:none;top:10px;height:80px">设备信息</ion-card>-->
+            <!--<ion-card style="position:relative;background:none;top:20px;height:80px">当前运行状态</ion-card>-->
+            <!--<ion-card style="position:relative;background:none;top:20px;height:80px">设备器件状态</ion-card>-->
+        <!--</div>-->
     </ion-content>
