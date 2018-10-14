@@ -20,6 +20,19 @@ page-home {
     font-size: x-small;
 
   }
+  #div1{
+    display:relative;
+    margin:0 auto;
+    background-color:#7e7b7b;
+    height:40%;
+    width:80%
+  }
+  #div1inner{
+    display:absolute;
+    bottom:0px;
+    width:100%;
+    background-color:#7e7b7b;
+  }
 
   .WaterLevelResult button {
     padding: 0px;
@@ -29,5 +42,14 @@ page-home {
   }
   .padding {
         background: url('../assets/login.png');
+      }
+      .swiper-pagination-bullet {
+        background: white;
+        opacity: 0.5;
+      }
+    
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+        background: white;
       }
 }

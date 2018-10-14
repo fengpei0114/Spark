@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,App } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
-import { HistorydetailPage } from '../history_detail/history_detail'
 import {Color} from "highcharts";
+import { MalfunctiondetailPage } from '../malfunction_detail/malfunction_detail';
 
 /**
  * Generated class for the DevicePage page.
@@ -12,15 +12,17 @@ import {Color} from "highcharts";
  * on Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-history',
-  templateUrl: 'history.html',
+  selector: 'page-malfunction',
+  templateUrl: 'malfunction.html',
 })
-export class HistoryPage {
+export class MalfunctionPage {
 
    
     isequipment:boolean = false;
-    isrecord:boolean = false;
+    isplant:boolean = false;
 
+    plant_name = "选择厂房";
+    equipment_name = "选择设备";
 
     choosebtn:any;
 
@@ -115,83 +117,143 @@ export class HistoryPage {
             ]
         },
     ];
-    historyArray = [
+    malfunctionArray = [
         {
-            "id" : "1",
-            "time" : "2018-9-2",
+            "malfunctionId":"string11",
+            "malfunctionType":"string12",
+            "datetimeStart":"string13",
+            "datetimeEnd":"string14",
+            "identifier":"string15",
+            "measure":"string16",
+            "isConfirmed":"string17",
+            "affectedComponents":"string18",
+            "note":"string19",
             "name" : "331122",
             "Ename" : "31111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "2",
-            "time" : "2018-9-2",
+            "malfunctionId":"string21",
+            "malfunctionType":"string22",
+            "datetimeStart":"string23",
+            "datetimeEnd":"string24",
+            "identifier":"string25",
+            "measure":"string26",
+            "isConfirmed":"string27",
+            "affectedComponents":"string28",
+            "note":"string29",
             "name" : "331122",
             "Ename" : "41111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "3",
-            "time" : "2018-9-2",
+            "malfunctionId":"string31",
+            "malfunctionType":"string32",
+            "datetimeStart":"string33",
+            "datetimeEnd":"string34",
+            "identifier":"string35",
+            "measure":"string36",
+            "isConfirmed":"string37",
+            "affectedComponents":"string38",
+            "note":"string39",
             "name" : "331122",
             "Ename" : "21111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "4",
-            "time" : "2018-9-2",
+            "malfunctionId":"string41",
+            "malfunctionType":"string42",
+            "datetimeStart":"string43",
+            "datetimeEnd":"string44",
+            "identifier":"string45",
+            "measure":"string46",
+            "isConfirmed":"string47",
+            "affectedComponents":"string48",
+            "note":"string49",
             "name" : "331122",
             "Ename" : "11111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "5",
-            "time" : "2018-9-2",
+            "malfunctionId":"string51",
+            "malfunctionType":"string52",
+            "datetimeStart":"string53",
+            "datetimeEnd":"string54",
+            "identifier":"string55",
+            "measure":"string56",
+            "isConfirmed":"string57",
+            "affectedComponents":"string58",
+            "note":"string59",
             "name" : "331122",
             "Ename" : "71111111111",
-            "type" : "故障"
         },
         {
-            "id" : "6",
-            "time" : "2018-9-2",
+            "malfunctionId":"string61",
+            "malfunctionType":"string62",
+            "datetimeStart":"string63",
+            "datetimeEnd":"string64",
+            "identifier":"string65",
+            "measure":"string66",
+            "isConfirmed":"string67",
+            "affectedComponents":"string68",
+            "note":"string69",
             "name" : "331122",
             "Ename" : "61111111111",
-            "type" : "故障"
         },
         {
-            "id" : "7",
-            "time" : "2018-9-2",
+            "malfunctionId":"string71",
+            "malfunctionType":"string72",
+            "datetimeStart":"string73",
+            "datetimeEnd":"string74",
+            "identifier":"string75",
+            "measure":"string76",
+            "isConfirmed":"string77",
+            "affectedComponents":"string78",
+            "note":"string79",
             "name" : "331122",
             "Ename" : "81111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "8",
-            "time" : "2018-9-2",
+            "malfunctionId":"string81",
+            "malfunctionType":"string82",
+            "datetimeStart":"string83",
+            "datetimeEnd":"string84",
+            "identifier":"string85",
+            "measure":"string86",
+            "isConfirmed":"string87",
+            "affectedComponents":"string88",
+            "note":"string89",
             "name" : "331122",
             "Ename" : "91111111111",
-            "type" : "预警"
         },
         {
-            "id" : "9",
-            "time" : "2018-9-2",
+            "malfunctionId":"string91",
+            "malfunctionType":"string92",
+            "datetimeStart":"string93",
+            "datetimeEnd":"string94",
+            "identifier":"string95",
+            "measure":"string96",
+            "isConfirmed":"string97",
+            "affectedComponents":"string98",
+            "note":"string99",
             "name" : "331122",
             "Ename" : "01111111111",
-            "type" : "喷淋"
         },
         {
-            "id" : "10",
-            "time" : "2018-9-2",
+            "malfunctionId":"string211",
+            "malfunctionType":"string221",
+            "datetimeStart":"string231",
+            "datetimeEnd":"string241",
+            "identifier":"string251",
+            "measure":"string261",
+            "isConfirmed":"string271",
+            "affectedComponents":"string281",
+            "note":"string291",
             "name" : "331122",
             "Ename" : "51111111111",
-            "type" : "预警"
         },
     ]
 
     displayArray:any[];
 
     constructor(public http:Http,
-                public app: App,
+                public app:App,
                 public navCtrl: NavController,
                 public navParams: NavParams,
                 private httpService: HttpService,
@@ -199,9 +261,7 @@ export class HistoryPage {
     ) {
         
         //this.equipmentName = JSON.stringify(this.Msg);
-        this.displayArray=this.historyArray.filter(record=>
-            record.type=="喷淋"||record.type=="预警"||record.type=="故障"
-        );
+        
         
     }
     setup(){
@@ -209,23 +269,23 @@ export class HistoryPage {
     }
     ischoose(item){
         if(item == 0){
-            this.isrecord = false;
-            this.isequipment = !this.isequipment;
+            this.isplant = !this.isplant;
+            this.isequipment = false;
             this.equipmentArray = "";
         }
         if(item == 1){
-            this.isequipment = false;
-            this.isrecord = !this.isrecord;
+            this.isequipment = !this.isequipment;
+            this.isplant = false;
         }
     }
 
     changestatus(){
-        this.isrecord = false;
+        this.isplant = false;
         this.isequipment = false;
     }
 
 
-    factoryChoose(item){
+    plantChoose(item){
         this.factoryArray.forEach((x)=>{
             this.choosebtn = document.getElementsByName(x.id)[0];
             this.choosebtn.style.color = "#000000";
@@ -233,81 +293,29 @@ export class HistoryPage {
                 console.log(x.id);
                 this.choosebtn = document.getElementsByName(x.id)[0];
                 console.log("choosebtn"+this.choosebtn);
+                this.plant_name = x.name;
                 this.selectFactoryID = item;
                 this.choosebtn.style.color = this.colorBule;
                 this.equipmentArray = x.equipments;
+                this.isplant = !this.isplant;
+                this.isequipment = true;
             }
         });
     }
 
     equipmentChoose(item){
         this.selectEquipmentID = item;
-        this.isequipment=false;
         
+        this.equipmentArray.forEach((x)=>{
+            if(x.id==item){
+                this.equipment_name = x.name;
+                this.isequipment=false;
+            }
+        });
         console.log("工厂id:"+this.selectFactoryID+"\n设备id："+this.selectEquipmentID);
     }
-    gotohistortDetail(){
-        this.app.getRootNav().push(HistorydetailPage);
-    }
-
-
-    btSprayClick()
-    {
-        if(this.isSpray==false) {
-            this.isSpray = true;
-            this.sprayColor=this.colorBule;
-        }
-        else if(this.isSpray==true) {
-            this.isSpray = false;
-            this.sprayColor=this.colorGrey;
-        }
-    }
-
-    btFaultClick()
-    {
-        if(this.isFault==false) {
-            this.isFault = true;
-            this.faultColor=this.colorBule;
-        }
-        else if(this.isFault==true) {
-            this.isFault = false;
-            this.faultColor=this.colorGrey;
-        }
-    }
-
-    btWarningClick()
-    {
-        if(this.isWarning==false) {
-            this.isWarning = true;
-            this.warningColor=this.colorBule;
-        }
-        else if(this.isWarning==true) {
-            this.isWarning = false;
-            this.warningColor=this.colorGrey;
-        }
-    }
-
-    btTypeSlectClick()
-    {
-        this.isrecord = false;
-        console.log("选择的类型：");
-        if(this.isSpray){
-            console.log("喷淋");
-        }
-        if(this.isFault){
-            console.log("故障");
-        }
-        if(this.isWarning){
-            console.log("预警");
-        }
-        this.filtrateArray();
-    }
-
-    filtrateArray()
-    {
-        this.displayArray=this.historyArray.filter(record=>
-            record.type=="喷淋"&&this.isSpray ||record.type=="预警"&&this.isWarning||record.type=="故障"&&this.isFault
-        );
+    gotomalfunctionDetail(item){
+        this.app.getRootNav().push(MalfunctiondetailPage,item);
     }
 
 }

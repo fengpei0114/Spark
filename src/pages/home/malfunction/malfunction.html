@@ -1,6 +1,6 @@
 <ion-header style="text-align:center" no-border>
     <ion-navbar style="min-height:0px">
-        <ion-title>警报历史</ion-title>
+        <ion-title>查看故障</ion-title>
         <ion-buttons end>
                 <button ion-button icon-only>
                     <ion-icon name="menue"></ion-icon>
@@ -10,13 +10,13 @@
     <ion-row id = "row1">
             <ion-col class = "buttonclass" col-6 id = "rowcol1" >
                 <button ion-button color="dark" clear (click)="ischoose(0)" id = "btn1">
-                    <ion-label id="ionlabel1">选择设备</ion-label>
+                    <ion-label id="ionlabel1">{{plant_name}}</ion-label>
                     <ion-icon name = "md-arrow-dropdown" id = "ion1"></ion-icon>
                 </button>
             </ion-col>
             <ion-col class = "buttonclass" col-6 id = "rowcol2" >
                 <button ion-button color="dark" clear (click)="ischoose(1)">
-                    <ion-label id="ionlabel2">记录类型</ion-label>
+                    <ion-label id="ionlabel2">{{equipment_name}}</ion-label>
                     <ion-icon name = "md-arrow-dropdown"></ion-icon>
                 </button>
             </ion-col>
@@ -26,28 +26,20 @@
 
 <ion-content class = "padding">
     <div style="position:relative">
+        <div *ngIf="isplant" id = "equipmentdiv">
+                <button ion-button clear *ngFor="let item of factoryArray" id = "equipmentbtn1" name="{{item.id}}" (click)="plantChoose(item.id)">{{item.name}}</button>
+            
+            
+        </div>
         <div *ngIf="isequipment" id = "equipmentdiv">
-            <div id = "equipmentdiv-inner1">
-                <button ion-button clear *ngFor="let item of factoryArray" id = "equipmentbtn1" name="{{item.id}}" (click)="factoryChoose(item.id)">{{item.name}}</button>
-            </div>
-            <div id = "equipmentdiv-inner2">
                 <button ion-button clear *ngFor="let item of equipmentArray"  (click)="equipmentChoose(item.id)" style="color: #000;">{{item.name}}</button>
-            </div>
+            
         </div>
-        <div *ngIf="isrecord" id = "equipmentdiv">
-            <button ion-button id = "equipmentbtn2" (click)="btSprayClick()"  [style.background]="sprayColor">喷淋
-                <!--<ion-icon name="checkmark" *ngIf="isSpray"></ion-icon>-->
-            </button>
-            <button ion-button id = "equipmentbtn2" (click)="btWarningClick()"  [style.background]="warningColor">预警</button>
-            <button ion-button id = "equipmentbtn2" (click)="btFaultClick()"  [style.background]="faultColor">故障</button>
-            <br>
-            <button ion-button id = "equipmentbtn3" (click)="btTypeSlectClick()">确定</button>
-        </div>
-        <div *ngIf="isequipment||isrecord" class="equAndRecoBt" (click)="changestatus()">
+        <div *ngIf="isequipment||isplant" class="equAndRecoBt" (click)="changestatus()">
         </div>
         <div style="position:absolute;width:100%;">
-            <ion-card *ngFor="let item of displayArray" style="border-radius:15px;background:#f8f8f8" (click)="gotohistortDetail(item.id)">
-                <ion-title style="padding-left:5px;padding-top:10px;padding-bottom:10px;">{{item.time}}</ion-title>
+            <ion-card *ngFor="let item of malfunctionArray" style="border-radius:15px;background:#f8f8f8" (click) = "gotomalfunctionDetail(item)">
+                <ion-title style="padding-left:5px;padding-top:10px;padding-bottom:10px;">{{item.datetimeStart}}-{{item.datetimeEnd}}</ion-title>
                 <ion-grid style="border-top:1px solid #000000">
                     <ion-row>
                         <ion-col col-6>
@@ -58,7 +50,7 @@
                                 {{item.Ename}}
                             </ion-row>
                         </ion-col>
-                        <ion-col col-6 style="text-align:center">{{item.type}}</ion-col>
+                        <ion-col col-6 style="text-align:center">{{item.malfunctionType}}</ion-col>
                     </ion-row>
                     <ion-row>
                         
