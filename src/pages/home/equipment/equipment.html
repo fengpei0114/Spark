@@ -1,89 +1,114 @@
 <ion-header style="text-align:center" no-border>
-        <ion-navbar style="min-height:0px">
-            <ion-title>查看设备</ion-title>
-            <ion-buttons end>
-                    <button ion-button icon-only>
-                        <ion-icon name="menue"></ion-icon>
-                    </button>
-                </ion-buttons>
-        </ion-navbar>
-        <ion-row id = "row1">
-                <ion-col class = "buttonclass" col-6 id = "rowcol1" >
-                    <button ion-button color="dark" clear (click)="ischoose(0)" id = "btn1">
-                        <ion-label id="ionlabel1">{{Ename}}</ion-label>
-                        <ion-icon name = "md-arrow-dropdown" id = "ion1"></ion-icon>
-                    </button>
-                </ion-col>
-                <ion-col class = "buttonclass" col-6 id = "rowcol2" >
-                    <button ion-button color="dark" clear (click)="ischoose(1)">
-                        <ion-label id="ionlabel2">{{equipmentName}}</ion-label>
-                        <ion-icon name = "md-arrow-dropdown"></ion-icon>
-                    </button>
-                </ion-col>
-            </ion-row>
-    </ion-header> 
-    
-    <ion-content id="padding">
-        <div position="relative" style="padding:0px 0px 0px 0px;">
-            <div *ngIf="ischangeH" id = "equipmentdiv">
-                <div id = "equipmentdiv-inner" *ngFor="let item of Msg" (click)="chooseEqu(item.id)">
-                    <button ion-button clear color="dark" class = "buttonclass">{{item.name}}</button>
-                </div>
+    <ion-navbar style="min-height:0px">
+        <ion-title>查看设备</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="menue"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-row id="row1">
+        <ion-col class="buttonclass" col-3 id="rowcol1">
+            <button ion-button color="dark" clear (click)="beforeClick()" id="btn1">
+                <ion-label id="ionlabel1">上一条</ion-label>
+            </button>
+        </ion-col>
+        <ion-col class="buttonclass" col-6 id="rowcol2">
+            <button ion-button color="dark" clear (click)="ischoose(0)" id="btn1">
+                <ion-label id="ionlabel1">{{eq_name}}</ion-label>
+                <ion-icon name="md-arrow-dropdown" id="ion1"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col class="buttonclass" col-3 id="rowcol3">
+            <button ion-button color="dark" clear (click)="afterClick()">
+                <ion-label id="ionlabel2">下一条</ion-label>
+            </button>
+        </ion-col>
+    </ion-row>
+    <!--<ion-row id = "row1">-->
+    <!--<ion-col class = "buttonclass" col-6 id = "rowcol1" >-->
+    <!--<button ion-button color="dark" clear (click)="ischoose(0)" id = "btn1">-->
+    <!--<ion-label id="ionlabel1">{{Ename}}</ion-label>-->
+    <!--<ion-icon name = "md-arrow-dropdown" id = "ion1"></ion-icon>-->
+    <!--</button>-->
+    <!--</ion-col>-->
+    <!--<ion-col class = "buttonclass" col-6 id = "rowcol2" >-->
+    <!--<button ion-button color="dark" clear (click)="ischoose(1)">-->
+    <!--<ion-label id="ionlabel2">{{equipmentName}}</ion-label>-->
+    <!--<ion-icon name = "md-arrow-dropdown"></ion-icon>-->
+    <!--</button>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+</ion-header>
+
+<ion-content id="padding">
+    <!--<div position="relative" style="padding:0px 0px 0px 0px;">-->
+    <!--<div *ngIf="ischangeH" id = "equipmentdiv">-->
+    <!--<div id = "equipmentdiv-inner" *ngFor="let item of equipMsg" (click)="chooseEqu(item)">-->
+    <!--<button ion-button clear color="dark" class = "buttonclass">{{item.name}}</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="ischangeE" id = "equipmentdiv">-->
+    <!--<div id = "equipmentdiv-inner" *ngFor="let item of EquipmentMsg" (click) = "chooseMsg(item.id)">-->
+    <!--<button ion-button clear color="dark" class = "buttonclass">{{item.name}}</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="ischangeE||ischangeH" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.5;filter:Alpha(ipacity=50);z-index:9977" (click)="changestatus()">  -->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div position="relative" style="padding:0px 0px 0px 0px;">
+        <div *ngIf="ischangeH" id="equipmentdiv">
+            <div id="equipmentdiv-inner" *ngFor="let item of equipMsg" (click)="chooseEqu(item)" align="center">
+                <button ion-button clear color="dark" class="buttonclass">{{item.name}}</button>
             </div>
-            <div *ngIf="ischangeE" id = "equipmentdiv">
-                <div id = "equipmentdiv-inner" *ngFor="let item of EquipmentMsg" (click) = "chooseMsg(item.id)">
-                    <button ion-button clear color="dark" class = "buttonclass">{{item.name}}</button>
-                </div>
-            </div>
-            <div *ngIf="ischangeE||ischangeH" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.5;filter:Alpha(ipacity=50);z-index:9977" (click)="changestatus()">  
-                </div>
-
-
-
-
         </div>
-        <ion-card style="background-color: transparent">
-            <ion-list  inset>
-                <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
-                    <div class="name">设备名称 : </div>
-                    <!--<div class="detail">中国</div>-->
-
-                </ion-item >
-                <ion-item class="listItem"><ion-icon name="ios-keypad-outline"></ion-icon>
-                    <div class="name">序号 : </div>
-                    <div class="detail">{{dev_mod}}</div>
-                </ion-item>
-
-                <ion-item class="listItem"><ion-icon name="ios-game-controller-a-outline"></ion-icon>
-                    <div class="name"> 状态 :  </div>
-                    <div class="detail">{{dev_simNo}}</div>
-                    <!--<ion-icon name="ios-switch" color="secondary" item-end></ion-icon>-->
-                    <!--<ion-note  item-end>运行中</ion-note>-->
-                    <!--<ion-icon name="ios-switch" color="danger" item-end></ion-icon>-->
-                    <!--<ion-note  item-end>故障</ion-note>-->
-                    <ion-icon name="ios-switch" color="grey" item-end></ion-icon>
-                    <ion-note  item-end>未运行</ion-note>
-                </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-build-outline"></ion-icon>
-                    <div class="name"> 器件: </div>
-                    <div class="detail">{{dev_status}}</div>
-                </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-pulse-outline"></ion-icon>
-                    <div class="name"> 运行时间 : </div>
-                    <div class="detail">{{dev_latestHeartbeat}}</div>
-                </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-paper-outline"></ion-icon>
-                    <div class="name"> 备注信息 : </div>
-
-                    <div class="detail">{{dev_note}}</div>
-                </ion-item>
-            </ion-list>
-        </ion-card>
+    </div>
 
 
-        <!--<div style="position:absolute;width:100%;height:100%;">-->
-            <!--<ion-card style="position:relative;background:none;top:10px;height:80px">设备信息</ion-card>-->
-            <!--<ion-card style="position:relative;background:none;top:20px;height:80px">当前运行状态</ion-card>-->
-            <!--<ion-card style="position:relative;background:none;top:20px;height:80px">设备器件状态</ion-card>-->
-        <!--</div>-->
-    </ion-content>
+    <ion-card style="background-color: transparent">
+        <ion-list inset>
+            <ion-item class="listItem">
+                <ion-icon name="ios-keypad-outline"></ion-icon>
+                <div class="name">序号 :</div>
+                <ion-note class="detail" item-end>{{eq_id}}</ion-note>
+            </ion-item>
+
+            <ion-item class="listItem">
+                <ion-icon name="ios-cog-outline"></ion-icon>
+                <div class="name">名称 :</div>
+                <ion-note class="detail" item-end>{{eq_name}}</ion-note>
+
+            </ion-item>
+            <ion-item class="listItem">
+                <ion-icon name="ios-game-controller-a-outline"></ion-icon>
+                <div class="name"> 状态 :</div>
+                <ion-icon name="ios-switch" color={{statusColor}} item-end></ion-icon>
+                <ion-note class="detail" item-end>{{eq_status}}</ion-note>
+            </ion-item>
+            <ion-item class="listItem">
+                <ion-icon name="ios-build-outline"></ion-icon>
+                <div class="name"> 器件:</div>
+                <ion-note class="detail" item-end>{{eq_part}}</ion-note>
+            </ion-item>
+            <ion-item class="listItem">
+                <ion-icon name="ios-pulse-outline"></ion-icon>
+                <div class="name"> 运行时间 :</div>
+                <ion-note class="detail" item-end>{{eq_runTime}}</ion-note>
+            </ion-item>
+            <ion-item class="listItem">
+                <ion-icon name="ios-paper-outline"></ion-icon>
+                <div class="name"> 备注信息 :</div>
+
+                <ion-note class="detail" item-end>{{eq_note}}</ion-note>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+    <!--<div style="position:absolute;width:100%;height:100%;">-->
+    <!--<ion-card style="position:relative;background:none;top:10px;height:80px">设备信息</ion-card>-->
+    <!--<ion-card style="position:relative;background:none;top:20px;height:80px">当前运行状态</ion-card>-->
+    <!--<ion-card style="position:relative;background:none;top:20px;height:80px">设备器件状态</ion-card>-->
+    <!--</div>-->
+</ion-content>

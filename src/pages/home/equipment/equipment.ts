@@ -25,10 +25,19 @@ export class EquipmentPage {
     equipmentName:string;
     ischangeH:boolean = false;
     choose:boolean = false;
+    serial:number =0;
+
     ischangeE:boolean = false;
     Ename:string;
     name:string;
     EquipmentMsg:any;
+    eq_name:string;
+    eq_id:string;
+    eq_status:string;
+    statusColor:string;
+    eq_part:string;
+    eq_runTime:string;
+    eq_note:string;
     Msg = [{
         "id" : "1",
         "name" : "112233",
@@ -107,6 +116,32 @@ export class EquipmentPage {
     ];
 
 
+    equipMsg=[{
+        "id":"VOT-0001",
+        "name":"1区探测器",
+        "status":"running",
+        "part1":"探测头1",
+        "part2":"探测头2",
+        "runTime":"12h 50m",
+        "note":"设备运行正常",
+    },{
+        "id":"VOT-0002",
+        "name":"2区探测器",
+        "status":"breakdown",
+        "part1":"探测头1",
+        "part2":"探测头2",
+        "runTime":"1h 20m",
+        "note":"设备故障",
+    },{
+        "id":"VOT-0003",
+        "name":"3区探测器",
+        "status":"poweroff",
+        "part1":"探测头1",
+        "part2":"探测头2",
+        "runTime":"0m",
+        "note":"设备关闭",
+    }];
+
     constructor(public http:Http,
                 public navCtrl: NavController,
                 public navParams: NavParams,
@@ -114,12 +149,12 @@ export class EquipmentPage {
                 private toastCtrl: ToastController,
 
     ) {
-        this.equipmentName = this.Msg[0].msg[0].name;
-        this.Ename = this.Msg[0].name;
-        this.EquipmentMsg = this.Msg[0].msg;
-        //this.equipmentName = JSON.stringify(this.Msg);
-        
-        
+        // this.equipmentName = this.Msg[0].msg[0].name;
+        // this.Ename = this.Msg[0].name;
+        // this.EquipmentMsg = this.Msg[0].msg;
+        // //this.equipmentName = JSON.stringify(this.Msg);
+
+        this.changeEquipMsg(this.equipMsg[0]);
     }
 
     setup(){
@@ -139,16 +174,24 @@ export class EquipmentPage {
         // bg.style.background = "url('../../assets/login.png')";
     }
     chooseEqu(item){
-        let id = item-1;
-        console.log(this.Msg[id].name);
-        this.Ename = this.Msg[id].name;
-        this.EquipmentMsg = this.Msg[id].msg;
-        this.choose = true;
+        this.changeEquipMsg(item);
         this.ischangeH = false;
-        this.ischangeE = true;
+        // console.log(this.Msg[id].name);
+        // this.Ename = this.Msg[id].name;
+        // this.EquipmentMsg = this.Msg[id].msg;
+        // this.choose = true;
+        // this.ischangeH = false;
+        // this.ischangeE = true;
         // this.equipmentName = this.Msg[id].name;
         // this.ischange = false;
     }
+
+    checkSerial(item){
+        this.serial=this.equipMsg.indexOf(item);
+        console.log(this.serial);
+
+    }
+
     chooseMsg(item){
         this.ischangeE = false;
         this.EquipmentMsg.forEach((x)=>{
@@ -172,6 +215,49 @@ export class EquipmentPage {
             this.ischangeE = !this.ischangeE;
             this.ischangeH = false;
         }
+    }
+    changeEquipMsg(item){
+        this.checkSerial(item);
+        this.eq_id=item.id;
+        this.eq_name=item.name;
+        this.eq_part=item.part1+"  "+item.part2;
+        this.eq_runTime=item.runTime;
+        this.eq_note=item.note;
+        switch(item.status){
+            case "running":
+                this.statusColor="secondary";
+                this.eq_status="正常运行";
+                break;
+            case "breakdown":
+                this.statusColor="danger";
+                this.eq_status="设备故障";
+                break;
+            case "poweroff":
+                this.statusColor="grey";
+                this.eq_status="设备关闭";
+                break;
+            default:
+                this.statusColor="grey";
+                this.eq_status="设备异常";
+
+        }
+    }
+
+    beforeClick(){
+        if(this.serial==0)
+        {
+            this.serial=this.equipMsg.length-1;
+        }
+        else
+        {
+            this.serial=this.serial-1;
+        }
+        this.changeEquipMsg(this.equipMsg[this.serial]);
+    }
+
+    afterClick(){
+        this.serial=(this.serial+1)% this.equipMsg.length;
+        this.changeEquipMsg(this.equipMsg[this.serial]);
     }
 
 }
