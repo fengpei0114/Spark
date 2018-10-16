@@ -2,13 +2,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ToastController, App, Events } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { HttpService } from '../../providers/http-service/http-service';
-import { MapPage } from './map/map';
-import { DevicePage } from './device/device';
-import { UserInfoPage } from './user-info/user-info';
-import { StatisticOfHomePage } from './statistic-of-home/statistic-of-home';
 import { AccountService } from '../../providers/account-service/account-service';
-import { TakePhotoPage } from '../upload/take-photo/take-photo';
-import { TaskPage } from '../task/task';
 import { OrganizationServiceProvider } from "../../providers/organization-service/organization-service";
 import { MalfunctionPage } from './malfunction/malfunction'
 
@@ -17,6 +11,7 @@ import { EquipmentPage } from './equipment/equipment';
 import { HistoryPage } from './history/history';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail';
 import { HistorydetailPage } from './history_detail/history_detail';
+import { AlarmPage } from './alarm/alarm';
 
 /**
  * Generated class for the HomePage page.
@@ -43,7 +38,7 @@ export class HomePage implements OnInit{
     menu:Array<object> = [];
     historyArray = {
         "id":"1",
-        "color":"url('../assets/1.png')",
+        "image":"url('../assets/1.png')",
         "name":"设备一",
         "type":"类型一",
         "startTime":"2018-10-05",
@@ -89,8 +84,8 @@ export class HomePage implements OnInit{
     ngOnInit() {
 
     }
-    checkEquipment(){
-        this.app.getRootNav().push(EquipmentPage);
+    checkAlarm(){
+        this.app.getRootNav().push(AlarmPage);
     }
     staticOfHome(){
 

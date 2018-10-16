@@ -14,12 +14,13 @@ import { HistorydetailPage } from './history_detail/history_detail';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail'
 import { AccordionlistComponentModule } from '../../components/accordionlist/accordionlist.module';
 import { AppTreeComponentModule } from '../../components/app-tree/app-tree.module';
+import { AlarmPage } from './alarm/alarm'
 
 @NgModule({
 
 
   declarations: [
-    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage, NameLengthPipe
+    HomePage, UserInfoEditPage,  HistoryPage, MalfunctionPage,  MalfunctiondetailPage, AlarmPage, NameLengthPipe
   ],
   imports: [
     IonicPageModule.forChild(HomePage),
@@ -30,7 +31,7 @@ import { AppTreeComponentModule } from '../../components/app-tree/app-tree.modul
     HomePage
   ],
     entryComponents:[
-        MapPage,DevicePage,UserInfoPage, UserInfoEditPage, StatisticOfHomePage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage,
+        UserInfoEditPage, HistoryPage, MalfunctionPage,AlarmPage,
     ],
 
 })
