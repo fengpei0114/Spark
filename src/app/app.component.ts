@@ -15,6 +15,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { HomePage } from '../pages/home/home';
 import { EquipmentPage } from '../pages/home/equipment/equipment';
 import { UserInfoPage } from '../pages/home/user-info/user-info'
+import { ChangePasswordPage } from '../pages/home/change-password/change-password';
 @Component({
   templateUrl: 'app.html'
 })
@@ -104,7 +105,7 @@ export class MyApp {
         this.nav.push(HelpPage);
     }
     gotoPageUserinfo(){
-        this.nav.push(UserInfoPage);
+        this.nav.push(ChangePasswordPage);
     }
 
 }

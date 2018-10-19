@@ -44,7 +44,7 @@
 
         </ion-list>
     </ion-card> -->
-    <ion-title style="top:250px;text-align:center">修改Ip地址</ion-title>
+    <ion-title style="top:250px;text-align:center">设置服务器</ion-title>
     <div style="position: absolute;top: 50%;height: 340px;margin-top: -170px;right:0px;left:0px">
         
         <div>
@@ -55,7 +55,7 @@
                     <ion-list insert>
                         <ion-item style="background-color: transparent">
                             <ion-label><ion-icon name="ios-link-outline"></ion-icon></ion-label>
-                            <ion-input placeholder="请输入IP地址" type="text" clearInput [(ngModel)]="newServerIp"></ion-input>
+                            <ion-input placeholder="请输入新的IP地址" type="text" clearInput [(ngModel)]="newServerIp"></ion-input>
                         </ion-item>
                         
                         <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)">
@@ -68,7 +68,8 @@
                     </ion-list>
                     
                     <div style="text-align:center;padding-top:40px">
-                        <button ion-button primary round block  (click)="changeIpAndPort()">修 改</button>
+                        <button ion-button style="width:40%;border-radius:10px;"  (click)="miss()">取 消</button>
+                        <button ion-button style="width:40%;border-radius:10px;" (click)="changeIpAndPort()">修 改</button>
                     </div>
             </ion-card>
         </div>

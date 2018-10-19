@@ -15,13 +15,14 @@ import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail'
 import { AccordionlistComponentModule } from '../../components/accordionlist/accordionlist.module';
 import { AlarmPage } from './alarm/alarm';
 import { StatusPage } from './status/status';
+import { ChangePasswordPage } from './change-password/change-password'
 import { AppTreeComponentModule } from '../../components/app-tree/app-tree.module';
 
 @NgModule({
 
 
   declarations: [
-    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage, AlarmPage, StatusPage, NameLengthPipe
+    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage, AlarmPage, StatusPage, ChangePasswordPage, NameLengthPipe
   ],
   imports: [
     IonicPageModule.forChild(HomePage),
@@ -32,7 +33,7 @@ import { AppTreeComponentModule } from '../../components/app-tree/app-tree.modul
     HomePage
   ],
     entryComponents:[
-        MapPage,DevicePage,UserInfoPage, UserInfoEditPage, StatisticOfHomePage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage,AlarmPage, StatusPage,
+        MapPage,DevicePage,UserInfoPage, UserInfoEditPage, StatisticOfHomePage, EquipmentPage, HistoryPage, MalfunctionPage, HistorydetailPage, MalfunctiondetailPage,AlarmPage, StatusPage, ChangePasswordPage, 
     ],
 
 })

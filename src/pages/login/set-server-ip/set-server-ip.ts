@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ViewController } from 'ionic-angular';
 import { HttpService } from '../../../providers/http-service/http-service';
 import { NativeService } from '../../../providers/native-service/native-service';
 
@@ -19,6 +19,7 @@ export class SetServerIpPage {
     serverIp: string;
     serverPort: string;
     constructor(public navCtrl: NavController,
+                public  viewCtrl : ViewController,
                 public navParams: NavParams,
                 public httpService: HttpService,
                 public nativeService: NativeService,
@@ -40,5 +41,8 @@ export class SetServerIpPage {
         this.navCtrl.pop().then(() =>{
             this.nativeService.showToast("修改完成");
         });
+    }
+    miss(){
+        this.viewCtrl.dismiss();
     }
 }
