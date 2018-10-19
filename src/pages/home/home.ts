@@ -8,10 +8,11 @@ import { MalfunctionPage } from './malfunction/malfunction'
 
 import 'rxjs/add/operator/map';
 import { EquipmentPage } from './equipment/equipment';
-import { HistoryPage } from './history/history';
+// import { HistoryPage } from './history/history';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail';
 import { HistorydetailPage } from './history_detail/history_detail';
 import { AlarmPage } from './alarm/alarm';
+import { StatusPage } from './status/status'
 
 /**
  * Generated class for the HomePage page.
@@ -87,18 +88,15 @@ export class HomePage implements OnInit{
     checkAlarm(){
         this.app.getRootNav().push(AlarmPage);
     }
-    staticOfHome(){
 
-    }
-    runningHistory(){
-        this.app.getRootNav().push(HistoryPage);
+    checkStatus(){
+        this.app.getRootNav().push(StatusPage);
     }
     checkmalfunction(){
         this.app.getRootNav().push(MalfunctionPage);
+        // this.app.getRootNav().push(MalfunctionPage);
     }
-    personalMsg(){
 
-    }
     check(type,id){
         if(type=="1"){
             console.log("1");

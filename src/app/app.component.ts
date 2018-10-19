@@ -41,35 +41,36 @@ export class MyApp {
   }
 
     checkPreviousAuthorization(): void {
+        this.rootPage = HomePage;
 
-        this.storage.get('username').then((username) =>{
-            this.storage.get('password').then((password) =>{
-
-                if(username === null || username === "undefined" || password === null || password === "undefined" ){
-                    this.rootPage = LoginPage;
-                }else{
-
-                    let url = this.httpService.getUrl() + "/NoiseDust/mainOfApp.do";
-                    password = Md5.hashStr(password).toString();
-                    let body= "name="+username+"&password="+password;
-                    let headers = new Headers({
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    });
-                    let options = new RequestOptions({
-                        headers: headers
-                    });
-                    this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
-                                console.log(data);
-                                this.accountService.setAccount(data);
-                                this.rootPage = HomePage;
-                            },
-                            err =>{
-                            });
-
-                    
-                }
-            });
-        });
+        // this.storage.get('username').then((username) =>{
+        //     this.storage.get('password').then((password) =>{
+        //
+        //         if(username === null || username === "undefined" || password === null || password === "undefined" ){
+        //             this.rootPage = LoginPage;
+        //         }else{
+        //
+        //             let url = this.httpService.getUrl() + "/NoiseDust/mainOfApp.do";
+        //             password = Md5.hashStr(password).toString();
+        //             let body= "name="+username+"&password="+password;
+        //             let headers = new Headers({
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             });
+        //             let options = new RequestOptions({
+        //                 headers: headers
+        //             });
+        //             this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
+        //                         console.log(data);
+        //                         this.accountService.setAccount(data);
+        //                         this.rootPage = HomePage;
+        //                     },
+        //                     err =>{
+        //                     });
+        //
+        //
+        //         }
+        //     });
+        // });
     }
 
     logout() {

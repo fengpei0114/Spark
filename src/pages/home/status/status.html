@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AlarmPage page.
+  Generated template for the StatusPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>警报历史</ion-title>
+    <ion-title>状态历史</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,21 +17,21 @@
     <ion-card *ngFor="let item of dataArray">
         <ion-grid>
             <ion-row>
-                <ion-col col-3>{{item.alarmNo}}</ion-col>
-                <ion-col col-5>类型：{{item.alarmType}}</ion-col>
-                <ion-col col-4>等级：{{item.grade}}</ion-col>
+                <ion-col col-2>{{item.stateNo}}</ion-col>
+                <ion-col col-6>元器件：{{item.partName}}</ion-col>
+                <ion-col col-4>编号：{{item.partID}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>开始时间：{{item.startTime}}</ion-col>
+                <ion-col>元器件状态：{{item.partState}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>结束时间：{{item.endTime}}</ion-col>
+                <ion-col>元器件参数1：{{item.partParameter1}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>措施：{{item.measure}}</ion-col>
+                <ion-col>元器件参数2：{{item.partParameter2}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>影响器件：{{item.impactDevice}}</ion-col>
+                <ion-col>修改时间：{{item.modificationTime}}</ion-col>
             </ion-row>
 
         </ion-grid>

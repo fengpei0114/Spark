@@ -40,18 +40,13 @@ import { PaginationComponentModule } from '../components/pagination/pagination.m
 @NgModule({
   declarations: [
     MyApp,
-    // StatusFilterPipe,
-    // AutosizeComponent,
-    // AttentionPonitNamePipe,
-    // AccordionlistComponent,
-    // PaginationComponent,
-    // NameLengthPipe,
   ],
   imports: [
       // ChartModule,
       IonicStorageModule.forRoot(),
       BrowserModule,
-      IonicModule.forRoot(MyApp),
+      IonicModule.forRoot(MyApp,
+          {backButtonText: '返回'}),
       LoginPageModule,
       MenuPageModule,
       TabsPageModule,

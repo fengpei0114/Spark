@@ -14,13 +14,14 @@ import { HistorydetailPage } from './history_detail/history_detail';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail'
 import { AccordionlistComponentModule } from '../../components/accordionlist/accordionlist.module';
 import { AppTreeComponentModule } from '../../components/app-tree/app-tree.module';
-import { AlarmPage } from './alarm/alarm'
+import { AlarmPage } from './alarm/alarm';
+import { StatusPage } from './status/status'
 
 @NgModule({
 
 
   declarations: [
-    HomePage, UserInfoEditPage,  HistoryPage, MalfunctionPage,  MalfunctiondetailPage, AlarmPage, NameLengthPipe
+    HomePage, UserInfoEditPage, MalfunctionPage,  MalfunctiondetailPage, AlarmPage,StatusPage, NameLengthPipe
   ],
   imports: [
     IonicPageModule.forChild(HomePage),
@@ -31,7 +32,7 @@ import { AlarmPage } from './alarm/alarm'
     HomePage
   ],
     entryComponents:[
-        UserInfoEditPage, HistoryPage, MalfunctionPage,AlarmPage,
+        UserInfoEditPage, MalfunctionPage,AlarmPage,StatusPage,
     ],
 
 })

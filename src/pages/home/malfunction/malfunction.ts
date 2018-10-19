@@ -41,216 +41,114 @@ export class MalfunctionPage {
     warningColor:string=this.colorBule;
 
     equipmentArray:any;
-    factoryArray = [{
-        "id" : "1",
-        "name" : "112233",
-        "equipments" : [{
-                    "id" : "1",
-                    "EName":"11111111",
-                    "name" : "123123123123",
-                },
-                {
-                    "id" : "2",
-                    "EName":"22222222",
-                    "name" : "213213213213",
-                },
-                {
-                    "id" : "3",
-                    "EName":"33333333",
-                    "name" : "312312312312",
-                },
-                {
-                    "id" : "4",
-                    "EName":"4444444",
-                    "name" : "412341234123",
-                }
-            ]
+
+    malfunctionArray=[
+        {
+            "malfunctionNo":"01",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
+        },    {
+            "malfunctionNo":"02",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-        "id" : "2",
-        "name" : "223311",
-        "equipments" : [{
-                    "id" : "1",
-                    "EName":"211111111",
-                    "name" : "2123123123123",
-                },
-                {
-                    "id" : "2",
-                    "EName":"222222222",
-                    "name" : "2213213213213",
-                },
-                {
-                    "id" : "3",
-                    "EName":"233333333",
-                    "name" : "2312312312312",
-                },
-                {
-                    "id" : "4",
-                    "EName":"24444444",
-                    "name" : "2412341234123",
-                }
-            ]
+            "malfunctionNo":"03",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-        "id" : "3",
-        "name" : "331122",
-        "equipments" : [{
-                    "id" : "1",
-                    "EName":"311111111",
-                    "name" : "3123123123123",
-                },
-                {
-                    "id" : "2",
-                    "EName":"322222222",
-                    "name" : "3213213213213",
-                },
-                {
-                    "id" : "3",
-                    "EName":"333333333",
-                    "name" : "3312312312312",
-                },
-                {
-                    "id" : "4",
-                    "EName":"34444444",
-                    "name" : "3412341234123",
-                }
-            ]
-        },
-    ];
-    malfunctionArray = [
-        {
-            "malfunctionId":"string11",
-            "malfunctionType":"string12",
-            "datetimeStart":"string13",
-            "datetimeEnd":"string14",
-            "identifier":"string15",
-            "measure":"string16",
-            "isConfirmed":"string17",
-            "affectedComponents":"string18",
-            "note":"string19",
-            "name" : "331122",
-            "Ename" : "31111111111",
+            "malfunctionNo":"04",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string21",
-            "malfunctionType":"string22",
-            "datetimeStart":"string23",
-            "datetimeEnd":"string24",
-            "identifier":"string25",
-            "measure":"string26",
-            "isConfirmed":"string27",
-            "affectedComponents":"string28",
-            "note":"string29",
-            "name" : "331122",
-            "Ename" : "41111111111",
+            "malfunctionNo":"05",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string31",
-            "malfunctionType":"string32",
-            "datetimeStart":"string33",
-            "datetimeEnd":"string34",
-            "identifier":"string35",
-            "measure":"string36",
-            "isConfirmed":"string37",
-            "affectedComponents":"string38",
-            "note":"string39",
-            "name" : "331122",
-            "Ename" : "21111111111",
+            "malfunctionNo":"06",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string41",
-            "malfunctionType":"string42",
-            "datetimeStart":"string43",
-            "datetimeEnd":"string44",
-            "identifier":"string45",
-            "measure":"string46",
-            "isConfirmed":"string47",
-            "affectedComponents":"string48",
-            "note":"string49",
-            "name" : "331122",
-            "Ename" : "11111111111",
+            "malfunctionNo":"07",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string51",
-            "malfunctionType":"string52",
-            "datetimeStart":"string53",
-            "datetimeEnd":"string54",
-            "identifier":"string55",
-            "measure":"string56",
-            "isConfirmed":"string57",
-            "affectedComponents":"string58",
-            "note":"string59",
-            "name" : "331122",
-            "Ename" : "71111111111",
+            "malfunctionNo":"08",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string61",
-            "malfunctionType":"string62",
-            "datetimeStart":"string63",
-            "datetimeEnd":"string64",
-            "identifier":"string65",
-            "measure":"string66",
-            "isConfirmed":"string67",
-            "affectedComponents":"string68",
-            "note":"string69",
-            "name" : "331122",
-            "Ename" : "61111111111",
+            "malfunctionNo":"09",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string71",
-            "malfunctionType":"string72",
-            "datetimeStart":"string73",
-            "datetimeEnd":"string74",
-            "identifier":"string75",
-            "measure":"string76",
-            "isConfirmed":"string77",
-            "affectedComponents":"string78",
-            "note":"string79",
-            "name" : "331122",
-            "Ename" : "81111111111",
+            "malfunctionNo":"10",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
         {
-            "malfunctionId":"string81",
-            "malfunctionType":"string82",
-            "datetimeStart":"string83",
-            "datetimeEnd":"string84",
-            "identifier":"string85",
-            "measure":"string86",
-            "isConfirmed":"string87",
-            "affectedComponents":"string88",
-            "note":"string89",
-            "name" : "331122",
-            "Ename" : "91111111111",
+            "malfunctionNo":"11",
+            "malfunctionType":"1",
+            "startTime":"2018-08-01 15:54:52",
+            "endTime":"2018-08-01 15:55:52",
+            "tag":"1",
+            "measure":"1",
+            "impactDevice":["1","2"],
         },
-        {
-            "malfunctionId":"string91",
-            "malfunctionType":"string92",
-            "datetimeStart":"string93",
-            "datetimeEnd":"string94",
-            "identifier":"string95",
-            "measure":"string96",
-            "isConfirmed":"string97",
-            "affectedComponents":"string98",
-            "note":"string99",
-            "name" : "331122",
-            "Ename" : "01111111111",
-        },
-        {
-            "malfunctionId":"string211",
-            "malfunctionType":"string221",
-            "datetimeStart":"string231",
-            "datetimeEnd":"string241",
-            "identifier":"string251",
-            "measure":"string261",
-            "isConfirmed":"string271",
-            "affectedComponents":"string281",
-            "note":"string291",
-            "name" : "331122",
-            "Ename" : "51111111111",
-        },
+
     ]
 
-    displayArray:any[];
+
+    pageSize: number = 0;
+    pageNum: number = 0;
+    pageOther: number = 0;
+    dataArray:Array<Object> = [];
 
     constructor(public http:Http,
                 public app:App,
@@ -259,8 +157,13 @@ export class MalfunctionPage {
                 private httpService: HttpService,
 
     ) {
-        
-        //this.equipmentName = JSON.stringify(this.Msg);
+        this.pageOther = this.malfunctionArray.length % 10;
+        this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
+        console.log(this.pageSize);
+        console.log(this.pageOther);
+        for(var i = 0;i<10;i++) {
+            this.dataArray.push(this.malfunctionArray[i]);
+        }
         
         
     }
@@ -285,23 +188,23 @@ export class MalfunctionPage {
     }
 
 
-    plantChoose(item){
-        this.factoryArray.forEach((x)=>{
-            this.choosebtn = document.getElementsByName(x.id)[0];
-            this.choosebtn.style.color = "#000000";
-            if(x.id==item){
-                console.log(x.id);
-                this.choosebtn = document.getElementsByName(x.id)[0];
-                console.log("choosebtn"+this.choosebtn);
-                this.plant_name = x.name;
-                this.selectFactoryID = item;
-                this.choosebtn.style.color = this.colorBule;
-                this.equipmentArray = x.equipments;
-                this.isplant = !this.isplant;
-                this.isequipment = true;
-            }
-        });
-    }
+    // plantChoose(item){
+    //     this.factoryArray.forEach((x)=>{
+    //         this.choosebtn = document.getElementsByName(x.id)[0];
+    //         this.choosebtn.style.color = "#000000";
+    //         if(x.id==item){
+    //             console.log(x.id);
+    //             this.choosebtn = document.getElementsByName(x.id)[0];
+    //             console.log("choosebtn"+this.choosebtn);
+    //             this.plant_name = x.name;
+    //             this.selectFactoryID = item;
+    //             this.choosebtn.style.color = this.colorBule;
+    //             this.equipmentArray = x.equipments;
+    //             this.isplant = !this.isplant;
+    //             this.isequipment = true;
+    //         }
+    //     });
+    // }
 
     equipmentChoose(item){
         this.selectEquipmentID = item;
@@ -318,4 +221,27 @@ export class MalfunctionPage {
         this.app.getRootNav().push(MalfunctiondetailPage,item);
     }
 
+
+    doInfinite(infiniteScroll){
+        console.log('Begin async operation');
+
+        setTimeout(()=>{
+            this.pageNum++;
+            console.log(this.pageNum);
+            if(this.pageNum<this.pageSize){
+                for(var i = 0;i<10;i++){
+                    this.dataArray.push(this.malfunctionArray[i+this.pageNum*10]);
+                }
+            }else if(this.pageNum==this.pageSize){
+                for(i = 0;i<this.pageOther;i++){
+                    this.dataArray.push(this.malfunctionArray[i+this.pageNum*10]);
+                }
+            }else{
+                infiniteScroll.enable(false);
+            }
+
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        },500);
+    }
 }
