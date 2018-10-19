@@ -47,6 +47,15 @@
 .item-inner{
   border-bottom:none !important;
 }
+.item-block{
+  min-height:0rem;
+}
+.label-md{
+  margin-bottom:0px;
+}
+.list-md[inset]{
+  margin-top:0px;
+}
 // .button-md{
 //   height:1.5rem;
 // }

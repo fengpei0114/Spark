@@ -8,11 +8,11 @@ import { MalfunctionPage } from './malfunction/malfunction'
 
 import 'rxjs/add/operator/map';
 import { EquipmentPage } from './equipment/equipment';
-// import { HistoryPage } from './history/history';
+import { HistoryPage } from './history/history';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail';
 import { HistorydetailPage } from './history_detail/history_detail';
 import { AlarmPage } from './alarm/alarm';
-import { StatusPage } from './status/status'
+import { StatusPage } from './status/status';
 
 /**
  * Generated class for the HomePage page.
@@ -34,26 +34,110 @@ export class HomePage implements OnInit{
     @Output() projectOut = new EventEmitter();
     
 
-    // 测试树形结构
 
     menu:Array<object> = [];
-    historyArray = {
-        "id":"1",
-        "image":"url('../assets/1.png')",
-        "name":"设备一",
-        "type":"类型一",
-        "startTime":"2018-10-05",
-        "endTime":"2018-10-10"
-    };
-    malfunctionArray = {
-        "id":"1",
-        "color":"url('../assets/2.png')",
-        "name":"设备二",
-        "type":"类型二",
-        "startTime":"2018-10-12",
-        "endTime":"2018-10-15"
-    };
 
+    EquipmentArray = [{
+        "id":"1",
+        "status":{
+            "power":"关",
+            "running":"正常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"123123",
+            "alarmtimeEnd":"2018-08-05T15:57:39",
+            "malfunctionsum":"234234",
+            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"2018-08-05T15:57:39",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
+
+    {
+        "id":"2",
+        "status":{
+            "power":"开",
+            "running":"异常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"123123",
+            "alarmtimeEnd":"2018-08-05T15:57:39",
+            "malfunctionsum":"234234",
+            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"2018-08-05T15:57:39",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
+    {
+        "id":"3",
+        "status":{
+            "power":"开",
+            "running":"正常",
+            "malfunction":"有",
+        },
+        "alarmMsg":{
+            "alarmsum":"123123",
+            "alarmtimeEnd":"2018-08-05T15:57:39",
+            "malfunctionsum":"234234",
+            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"2018-08-05T15:57:39",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
+    {
+        "id":"4",
+        "status":{
+            "power":"开",
+            "running":"正常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"123123",
+            "alarmtimeEnd":"2018-08-05T15:57:39",
+            "malfunctionsum":"234234",
+            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"2018-08-05T15:57:39",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },]
 
     constructor(public navParams: NavParams,
                 public app: App,
@@ -85,26 +169,21 @@ export class HomePage implements OnInit{
     ngOnInit() {
 
     }
-    checkAlarm(){
-        this.app.getRootNav().push(AlarmPage);
+    checkAlarm(item){
+        this.app.getRootNav().push(AlarmPage,item);
     }
+    staticOfHome(){
 
-    checkStatus(){
-        this.app.getRootNav().push(StatusPage);
     }
-    checkmalfunction(){
-        this.app.getRootNav().push(MalfunctionPage);
+    checkStatus(item){
+        this.app.getRootNav().push(StatusPage,item);
+    }
+    checkmalfunction(item){
+        this.app.getRootNav().push(MalfunctionPage,item);
         // this.app.getRootNav().push(MalfunctionPage);
     }
+    personalMsg(){
 
-    check(type,id){
-        if(type=="1"){
-            console.log("1");
-            this.app.getRootNav().push(HistorydetailPage,id);
-        }else if(type=="2"){
-            console.log("2");
-            this.app.getRootNav().push(MalfunctiondetailPage,id);
-        }
     }
 }
 

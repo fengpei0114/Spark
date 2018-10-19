@@ -1,22 +1,29 @@
-<!--
-  Generated template for the StatisticOfHomePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-    <ion-toolbar color="primary" style="text-align:center">
-        <ion-title>
-            {{projectName}} {{pointName}}
-        </ion-title>
-        <ion-buttons start>
-            <button ion-button (click)="dismiss()">
-                <span showWhen="ios"></span>
-                <ion-icon ios="ios-close" showWhen="ios,android,windows,landscape"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<ion-header style="text-align:center" no-border>
+    <ion-navbar style="min-height:0px">
+        <ion-title>XX信息</ion-title>
+        <ion-buttons end>
+                <button ion-button icon-only>
+                    <ion-icon name="menue"></ion-icon>
+                </button>
+            </ion-buttons>
+    </ion-navbar>
+    <ion-row id = "row1">
+            <ion-col class = "buttonclass" col-6 id = "rowcol1" >
+                <button ion-button color="dark" clear (click)="ischoose(0)" id = "btn1">
+                    <ion-label id="ionlabel1">{{Ename}}</ion-label>
+                    <ion-icon name = "md-arrow-dropdown" id = "ion1"></ion-icon>
+                </button>
+                
+            </ion-col>
+            <ion-col class = "buttonclass" col-6 id = "rowcol2" >
+                <button ion-button color="dark" clear (click)="ischoose(1)">
+                    <ion-label id="ionlabel2">{{equipmentName}}</ion-label>
+                    <ion-icon name = "md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+</ion-header> 
 
 <!--isPM25Display          : boolean = false;-->
 <!--isPM10Display          : boolean = false;-->
@@ -25,44 +32,6 @@
 <!--isFixWaterLevelDisplay : boolean = false;-->
 <!--isWellDisplay          : boolean = false;-->
 
-<ion-content padding>
-    <accordionlist *ngIf="isNoiseDisplay"
-            title="噪音统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff">
-        <div #chartOfNoise></div>
-    </accordionlist>
+<ion-content class = "padding">
 
-    <accordionlist *ngIf="isPM25Display"
-            title="PM2.5统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff">
-        <div #chartOfPM25></div>
-    </accordionlist>
-
-    <accordionlist *ngIf="isPM10Display"
-            title="PM10统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff">
-        <div #chartOfPM10></div>
-    </accordionlist>
-
-    <accordionlist *ngIf="isFixWaterLevelDisplay"
-            title="固定水位统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff"></accordionlist>
-    <accordionlist *ngIf="isConWaterLevelDisplay"
-            title="连续水位统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff"></accordionlist>
-    <accordionlist *ngIf="isWellDisplay"
-            title="井盖统计"
-            textColor="#FFF"
-            hasMargin="false"
-            headerColor="#007aff"></accordionlist>
 </ion-content>
