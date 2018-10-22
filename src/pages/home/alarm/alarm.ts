@@ -24,7 +24,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },
         {
@@ -33,7 +33,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"03",
@@ -41,7 +41,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"04",
@@ -57,7 +57,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"06",
@@ -65,7 +65,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"07",
@@ -73,7 +73,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"08",
@@ -81,7 +81,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"09",
@@ -89,7 +89,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"10",
@@ -97,7 +97,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },{
             "alarmNo":"11",
@@ -105,7 +105,7 @@ export class AlarmPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "grade":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         }]
 

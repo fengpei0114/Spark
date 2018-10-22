@@ -14,12 +14,27 @@
 
 
 <ion-content padding class="padding">
+    <ion-item style="font-size: small">
+        <ion-row >
+            <ion-col col-5>已确认警报：4条</ion-col>
+            <ion-col col-5>未确认警报：14条</ion-col>
+        </ion-row>
+        <ion-row >
+            <ion-col>最后确认时间：2018/10/22 12:30:04</ion-col>
+        </ion-row>
+    </ion-item>
     <ion-card *ngFor="let item of dataArray">
+        <ion-item *ngIf="item.measure=='已确认'" style="border-bottom: solid darkgray 1px;">
+            <ion-note  style="color:grey" item-right >{{item.measure}}</ion-note>
+        </ion-item>
+        <ion-item *ngIf="item.measure=='未确认'" style="border-bottom: solid darkgray 1px;">
+            <ion-note style="color:black" item-right >{{item.measure}}</ion-note>
+        </ion-item>
         <ion-grid>
-            <ion-row>
+            <ion-row >
                 <ion-col col-3>{{item.alarmNo}}</ion-col>
                 <ion-col col-5>类型：{{item.alarmType}}</ion-col>
-                <ion-col col-4>等级：{{item.grade}}</ion-col>
+                <ion-col  col-4>等级：{{item.grade}}</ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>开始时间：{{item.startTime}}</ion-col>
