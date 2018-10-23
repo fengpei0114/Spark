@@ -3,7 +3,7 @@
             <button ion-button menuToggle (click)="openMenu()">
                     <ion-icon name="menu"></ion-icon>
                 </button>
-        <ion-title>火花探测</ion-title>
+        <ion-title>{{equipmentName}}</ion-title>
         <ion-buttons end>
             <button ion-button icon-only>
                 <ion-icon name="menue"></ion-icon>
@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content class="padding">
-    <ion-slides spaceBetween="20px" speed="200" [pager] = "true" class = "slidesstyle">
-        <ion-slide *ngFor="let item of EquipmentArray">
+    <ion-slides spaceBetween="20px" speed="200" [pager] = "true" class = "slidesstyle" (ionSlideDidChange)="slideChanged()">
+        <ion-slide *ngFor="let item of EquipmentArray" >
             <ion-card style="border-radius:20px;background-color:transparent;position:absolute;top:0px;bottom:5px;padding:0;margin-top:0px;margin-bottom:0px;overflow: auto;">
                
                 <ion-list inset>
@@ -23,7 +23,12 @@
                         <div class="name"> 设备名:</div>
                         <ion-note class="detail">{{item.id}}</ion-note>
                     </ion-item>
-        
+                    <ion-item class="listItem">
+                        <ion-icon name="ios-keypad-outline"></ion-icon>
+                        <div class="name"> 所属厂房:</div>
+                        <ion-note class="detail">{{item.factoryname}}</ion-note>
+                    </ion-item>
+
                     <ion-item class="listItem">
                         <ion-icon *ngIf = "item.status.power == '开'" name="ios-alert" color="secondary"></ion-icon>
                         <ion-icon *ngIf = "item.status.power == '关'" name="ios-alert" color="danger"></ion-icon>
@@ -40,7 +45,7 @@
                     </ion-item>
                     <ion-item class="listItem">
                         <ion-icon name="ios-build-outline"></ion-icon>
-                        <div class="name"> 警报总数:</div>
+                        <div class="name"> 未警报总数:</div>
                         <ion-note class="detail">{{item.alarmMsg.alarmsum}}</ion-note>
                     </ion-item>
                     <ion-item class="listItem">
@@ -57,21 +62,6 @@
                         <ion-icon name="ios-pulse-outline"></ion-icon>
                         <div class="name"> 最后故障时间 :</div>
                         <ion-note class="detail">{{item.alarmMsg.malfunctiontimeEnd}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-paper-outline"></ion-icon>
-                        <div class="name"> 配置总数 :</div>
-                        <ion-note class="detail">{{item.alarmMsg.sittingsum}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-paper-outline"></ion-icon>
-                        <div class="name"> 最后配置时间 :</div>
-                        <ion-note class="detail">{{item.alarmMsg.sittingtimeEnd}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-build-outline"></ion-icon>
-                        <div class="name"> 电池:</div>
-                        <ion-note class="detail">{{item.statusMsg.battery}}</ion-note>
                     </ion-item>
                     <ion-item class="listItem">
                         <ion-icon name="ios-build-outline"></ion-icon>
@@ -99,10 +89,9 @@
                     </ion-item>
                 </ion-list>
             <!-- <div style="position:relative;height:90%;width:90%;border:1px solid #000"> -->
-                <div style="padding-bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
+                <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
                     <button ion-button type="submit" (click)="checkAlarm(item.id)" style="border-radius:15px">警报历史</button>
                     <button ion-button type="submit" (click)="checkmalfunction(item.id)" style="border-radius:15px">故障历史</button>
-                    <button ion-button type="submit" (click)="checkStatus(item.id)" style="border-radius:15px">状态历史</button>
                 </div>
             <!-- </div> -->
             </ion-card>

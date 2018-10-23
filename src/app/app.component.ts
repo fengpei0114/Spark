@@ -21,7 +21,7 @@ import { ChangePasswordPage } from '../pages/home/change-password/change-passwor
 })
 export class MyApp {
   @ViewChild('content') nav;
-  rootPage:any = LoginPage;
+  rootPage:any;
 
   constructor(platform: Platform,
               statusBar: StatusBar,

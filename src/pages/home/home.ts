@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ToastController, App, Events } from 'ionic-angular';
+import { Component, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, App, Events, Slides } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { HttpService } from '../../providers/http-service/http-service';
 import { AccountService } from '../../providers/account-service/account-service';
@@ -27,7 +27,7 @@ import { StatusPage } from './status/status';
   providers: [OrganizationServiceProvider]
 })
 export class HomePage implements OnInit{
-
+    @ViewChild(Slides) slides: Slides;
     // @ViewChild('organSelect') organSelect:ElementRef;
 
     @Output() organizationOut = new EventEmitter();
@@ -36,9 +36,12 @@ export class HomePage implements OnInit{
 
 
     menu:Array<object> = [];
+    equipmentName:string;
 
     EquipmentArray = [{
+        "name":"XXXXX-XXXXX1",
         "id":"1",
+        "factoryname":"XXXXXX-XXXX",
         "status":{
             "power":"关",
             "running":"正常",
@@ -64,7 +67,9 @@ export class HomePage implements OnInit{
     },
 
     {
+        "name":"XXXXX-XXXXX2",
         "id":"2",
+        "factoryname":"XXXXXX-XXXX",
         "status":{
             "power":"开",
             "running":"异常",
@@ -89,7 +94,9 @@ export class HomePage implements OnInit{
         },
     },
     {
+        "name":"XXXXX-XXXXX3",
         "id":"3",
+        "factoryname":"XXXXXX-XXXX",
         "status":{
             "power":"开",
             "running":"正常",
@@ -114,7 +121,9 @@ export class HomePage implements OnInit{
         },
     },
     {
+        "name":"XXXXX-XXXXX4",
         "id":"4",
+        "factoryname":"XXXXXX-XXXX",
         "status":{
             "power":"开",
             "running":"正常",
@@ -152,7 +161,7 @@ export class HomePage implements OnInit{
                 // private elementREf:ElementRef,
                 // private appConfig: AppConfig,
     ){
-        // 订阅组织机构选中事件
+        this.equipmentName = this.EquipmentArray[0].name;
     }
 
     //初始化数据
@@ -184,6 +193,10 @@ export class HomePage implements OnInit{
     }
     personalMsg(){
 
+    }
+    slideChanged(){
+        console.log(this.EquipmentArray[this.slides.getActiveIndex()].id);
+        this.equipmentName = this.EquipmentArray[this.slides.getActiveIndex()].name;
     }
 }
 
