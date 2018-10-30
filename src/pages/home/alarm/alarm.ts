@@ -127,8 +127,10 @@ export class AlarmPage {
   }
 
     doInfinite(infiniteScroll){
-        console.log('Begin async operation');
 
+        console.log('Begin async operation');
+        console.log(infiniteScroll._scrollY);
+        console.log(infiniteScroll.scrollHeight);
         setTimeout(()=>{
             this.pageNum++;
             console.log(this.pageNum);

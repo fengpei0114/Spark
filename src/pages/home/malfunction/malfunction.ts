@@ -49,7 +49,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },    {
             "malfunctionNo":"02",
@@ -57,7 +57,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },
         {
@@ -66,7 +66,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },
         {
@@ -75,7 +75,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },
         {
@@ -84,7 +84,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"未确认",
             "impactDevice":["1","2"],
         },
         {
@@ -93,7 +93,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
         {
@@ -102,7 +102,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
         {
@@ -111,7 +111,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
         {
@@ -120,7 +120,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
         {
@@ -129,7 +129,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
         {
@@ -138,7 +138,7 @@ export class MalfunctionPage {
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
             "tag":"1",
-            "measure":"1",
+            "measure":"已确认",
             "impactDevice":["1","2"],
         },
 
