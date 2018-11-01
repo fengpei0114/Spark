@@ -39,21 +39,21 @@ export class HomePage implements OnInit{
     equipmentName:string;
 
     EquipmentArray = [{
-        "name":"XXXXX-XXXXX1",
+        "name":"XXX厂-火花探测设备1",
         "id":"1",
-        "factoryname":"XXXXXX-XXXX",
+        "factoryname":"XXX厂",
         "status":{
             "power":"关",
             "running":"正常",
             "malfunction":"无",
         },
         "alarmMsg":{
-            "alarmsum":"123123",
-            "alarmtimeEnd":"2018-08-05T15:57:39",
-            "malfunctionsum":"234234",
-            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "alarmsum":"14",
+            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "malfunctionsum":"14",
+            "malfunctiontimeEnd":"2018/10/22 12:30:04",
             "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05T15:57:39",
+            "sittingtimeEnd":"2018-08-05 15:57:39",
         },
         "statusMsg":{
             "battery":"12",
@@ -67,21 +67,21 @@ export class HomePage implements OnInit{
     },
 
     {
-        "name":"XXXXX-XXXXX2",
+        "name":"XXX厂-火花探测设备2",
         "id":"2",
-        "factoryname":"XXXXXX-XXXX",
+        "factoryname":"XXX厂",
         "status":{
             "power":"开",
             "running":"异常",
             "malfunction":"无",
         },
         "alarmMsg":{
-            "alarmsum":"123123",
-            "alarmtimeEnd":"2018-08-05T15:57:39",
-            "malfunctionsum":"234234",
-            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "alarmsum":"14",
+            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "malfunctionsum":"14",
+            "malfunctiontimeEnd":"2018/10/22 12:30:04",
             "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05T15:57:39",
+            "sittingtimeEnd":"2018-08-05 15:57:39",
         },
         "statusMsg":{
             "battery":"12",
@@ -94,21 +94,21 @@ export class HomePage implements OnInit{
         },
     },
     {
-        "name":"XXXXX-XXXXX3",
+        "name":"XXX厂-火花探测设备3",
         "id":"3",
-        "factoryname":"XXXXXX-XXXX",
+        "factoryname":"XXX厂",
         "status":{
             "power":"开",
             "running":"正常",
             "malfunction":"有",
         },
         "alarmMsg":{
-            "alarmsum":"123123",
-            "alarmtimeEnd":"2018-08-05T15:57:39",
-            "malfunctionsum":"234234",
-            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "alarmsum":"14",
+            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "malfunctionsum":"14",
+            "malfunctiontimeEnd":"2018/10/22 12:30:04",
             "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05T15:57:39",
+            "sittingtimeEnd":"2018-08-05 15:57:39",
         },
         "statusMsg":{
             "battery":"12",
@@ -121,21 +121,21 @@ export class HomePage implements OnInit{
         },
     },
     {
-        "name":"XXXXX-XXXXX4",
+        "name":"XXX厂-火花探测设备4",
         "id":"4",
-        "factoryname":"XXXXXX-XXXX",
+        "factoryname":"XXX厂",
         "status":{
             "power":"开",
             "running":"正常",
             "malfunction":"无",
         },
         "alarmMsg":{
-            "alarmsum":"123123",
-            "alarmtimeEnd":"2018-08-05T15:57:39",
-            "malfunctionsum":"234234",
-            "malfunctiontimeEnd":"2018-08-05T15:57:39",
+            "alarmsum":"14",
+            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "malfunctionsum":"14",
+            "malfunctiontimeEnd":"2018/10/22 12:30:04",
             "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05T15:57:39",
+            "sittingtimeEnd":"2018-08-05 15:57:39",
         },
         "statusMsg":{
             "battery":"12",

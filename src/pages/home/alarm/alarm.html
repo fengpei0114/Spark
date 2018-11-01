@@ -9,7 +9,7 @@
        <ion-row no-padding>
            <ion-col col-10 no-padding>
                <ion-label text-center style="font-size: medium;" no-margin>警报历史</ion-label>
-               <ion-label text-center no-margin style="font-size: x-small">x×××厂-火花探测设备1</ion-label>
+               <ion-label text-center no-margin style="font-size: x-small">{{name}}</ion-label>
            </ion-col>
            <ion-col col-2 style="color: transparent">
                <ion-icon item-right name="ios-hammer-outline" ></ion-icon>
@@ -30,7 +30,8 @@
             <ion-col>最后确认时间：2018/10/22 12:30:04</ion-col>
         </ion-row>
     </ion-item>
-    <ion-card *ngFor="let item of dataArray" no-padding style="border-radius:15px;">
+    <br>
+    <ion-card *ngFor="let item of dataArray" no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px">
         <ion-item *ngIf="item.measure=='已确认'" >
             <ion-item style="color: grey;border-bottom: solid darkgray 1px;">
                 <ion-note  item-left>{{item.alarmNo}}</ion-note>

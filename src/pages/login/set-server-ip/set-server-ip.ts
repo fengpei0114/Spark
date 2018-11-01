@@ -32,8 +32,8 @@ export class SetServerIpPage {
      this.serverIp = this.httpService.getIp();
      this.serverPort = this.httpService.getPort();
 
-        this.serverIp = "47.92.34.161";
-        this.serverPort = "80";
+        // this.serverIp = "47.92.34.161";
+        // this.serverPort = "80";
     }
 
     changeIpAndPort() {
@@ -85,6 +85,9 @@ export class SetServerIpPage {
     }
     miss(){
         this.viewCtrl.dismiss();
+    }
+    clearMsg(){
+        this.errorMsg = "";
     }
     showConfirm(item1,item2,item3,item4){
         let confirm = this.alertCtrl.create({

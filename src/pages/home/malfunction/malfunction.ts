@@ -41,6 +41,7 @@ export class MalfunctionPage {
     warningColor:string=this.colorBule;
 
     equipmentArray:any;
+    name:string;
 
     malfunctionArray=[
         {
@@ -157,6 +158,7 @@ export class MalfunctionPage {
                 private httpService: HttpService,
 
     ) {
+        this.name = this.navParams.data;
         this.pageOther = this.malfunctionArray.length % 10;
         this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
         console.log(this.pageSize);

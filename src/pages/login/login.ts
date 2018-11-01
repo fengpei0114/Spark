@@ -92,8 +92,8 @@ export class LoginPage {
                         if(this.isToggled){
 
                            // alert('记住密码');
-                            this.storage.set('username',value.username).then();
-                            this.storage.set('password',value.password).then();
+                            this.storage.set('username',"admin").then();
+                            this.storage.set('password',"69yananshengxi").then();
                         }
 
                         this.nativeService.hideLoading();

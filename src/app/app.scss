@@ -56,6 +56,24 @@
 .list-md[inset]{
   margin-top:0px;
 }
+.label-ios {
+  margin-top:7px;
+  margin-bottom:7px;
+}
+.item-ios{
+  font-size: 1.5rem;
+}
+.list-ios[inset] .item{
+  border-bottom:none;
+}
+.card-md{
+  margin-top:0px;
+  margin-bottom:0px;
+}
+.card-ios{
+  margin-top:0px;
+  margin-bottom:0px;
+}
 // .button-md{
 //   height:1.5rem;
 // }

@@ -18,31 +18,38 @@
             <ion-card style="border-radius:20px;background-color:transparent;position:absolute;top:0px;bottom:5px;padding:0;margin-top:0px;margin-bottom:0px;overflow: auto;">
                
                 <ion-list inset>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-keypad-outline"></ion-icon>
-                        <div class="name"> 设备名:</div>
-                        <ion-note class="detail">{{item.id}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-keypad-outline"></ion-icon>
-                        <div class="name"> 所属厂房:</div>
-                        <ion-note class="detail">{{item.factoryname}}</ion-note>
-                    </ion-item>
-
-                    <ion-item class="listItem">
-                        <ion-icon *ngIf = "item.status.power == '开'" name="ios-alert" color="secondary"></ion-icon>
-                        <ion-icon *ngIf = "item.status.power == '关'" name="ios-alert" color="danger"></ion-icon>
-                        <div class="name"> 电源 :</div>
-                        <ion-note class="detail">{{item.status.power}}</ion-note>
-                        <ion-icon *ngIf = "item.status.running == '正常'" name="ios-alert" color="secondary"></ion-icon>
-                        <ion-icon *ngIf = "item.status.running == '异常'" name="ios-alert" color="danger"></ion-icon>
-                        <div class="name">运行 :</div>
-                        <ion-note class="detail" >{{item.status.running}}</ion-note>
-                        <ion-icon *ngIf = "item.status.malfunction == '无'" name="ios-alert" color="secondary"></ion-icon>
-                        <ion-icon *ngIf = "item.status.malfunction == '有'" name="ios-alert" color="danger"></ion-icon>
-                        <div class="name"> 故障 :</div>
-                        <ion-note class="detail">{{item.status.malfunction}}</ion-note>
-                    </ion-item>
+                        <!-- <ion-card style="bottom:5px;background-color:transparent;border-radius:10px"> -->
+                                <ion-item class="listItem">
+                            
+                            <ion-icon name="ios-keypad-outline"></ion-icon>
+                            <div class="name"> 设备id:</div>
+                            <ion-note class="detail">{{item.id}}</ion-note>
+                        </ion-item>
+                        <ion-item class="listItem">
+                            <ion-icon name="ios-keypad-outline"></ion-icon>
+                            <div class="name"> 所属厂房:</div>
+                            <ion-note class="detail">{{item.factoryname}}</ion-note>
+                        </ion-item>
+                    <!-- </ion-card> -->
+                    <!-- <ion-card style="background-color:transparent;padding-bottom:5px;border-radius:10px;margin-top:5px;"> -->
+                        <ion-item class="listItem">
+                            <ion-icon *ngIf = "item.status.power == '开'" name="ios-alert" color="secondary"></ion-icon>
+                            <ion-icon *ngIf = "item.status.power == '关'" name="ios-alert" color="danger"></ion-icon>
+                            <div class="name"> 电源 :</div>
+                            <ion-note class="detail">{{item.status.power}}</ion-note>
+                            <ion-icon *ngIf = "item.status.running == '正常'" name="ios-alert" color="secondary"></ion-icon>
+                            <ion-icon *ngIf = "item.status.running == '异常'" name="ios-alert" color="danger"></ion-icon>
+                            <div class="name"> 故障 :</div>
+                            <ion-note class="detail">{{item.status.malfunction}}</ion-note>
+                        </ion-item>
+                        <ion-item class="listItem">
+                            <ion-icon *ngIf = "item.status.malfunction == '无'" name="ios-alert" color="secondary"></ion-icon>
+                            <ion-icon *ngIf = "item.status.malfunction == '有'" name="ios-alert" color="danger"></ion-icon>
+                            <div class="name">运行 :</div>
+                            <ion-note class="detail" >{{item.status.running}}</ion-note>
+                        </ion-item>
+                    <!-- </ion-card> -->
+                    <!-- <ion-card style="background-color:transparent;padding-bottom:5px;border-radius:10px;margin-top:5px;"> -->
                     <ion-item class="listItem">
                         <ion-icon name="ios-build-outline"></ion-icon>
                         <div class="name"> 未警报总数:</div>
@@ -63,35 +70,40 @@
                         <div class="name"> 最后故障时间 :</div>
                         <ion-note class="detail">{{item.alarmMsg.malfunctiontimeEnd}}</ion-note>
                     </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-build-outline"></ion-icon>
-                        <div class="name"> 1#探头:</div>
-                        <ion-note class="detail">{{item.statusMsg.probe1}}</ion-note>
-                        <ion-icon name="ios-build-outline"></ion-icon>
-                        <div class="name"> 2#探头:</div>
-                        <ion-note class="detail">{{item.statusMsg.probe2}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-pulse-outline"></ion-icon>
-                        <div class="name"> 1#熄灭 :</div>
-                        <ion-note class="detail">{{item.statusMsg.extinguish1}}</ion-note>
-                        <ion-icon name="ios-pulse-outline"></ion-icon>
-                        <div class="name"> 2#熄灭 :</div>
-                        <ion-note class="detail">{{item.statusMsg.extinguish2}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-paper-outline"></ion-icon>
-                        <div class="name"> 1#继电器 :</div>
-                        <ion-note class="detail">{{item.statusMsg.relay1}}</ion-note>
-                        <ion-icon name="ios-paper-outline"></ion-icon>
-                        <div class="name"> 2#继电器 :</div>
-                        <ion-note class="detail">{{item.statusMsg.relay2}}</ion-note>
-                    </ion-item>
+                <!-- </ion-card> -->
+                <ion-card style="padding-bottom:5px;font-size:0.8rem;background-color:transparent;border-radius:10px;box-shadow:none;border-left:2px solid #1d1b1b31;border-right:2px solid #1d1b1b31">
+                        <ion-item class="listItem" style="margin-top:0px">
+                            <ion-icon name="ios-build-outline"></ion-icon>
+                            <div class="name"> 1#探头:</div>
+                            <ion-note class="detail" color="secondary">{{item.statusMsg.probe1}}</ion-note>
+                            <ion-icon name="ios-build-outline"></ion-icon>
+                            <div class="name"> 2#探头:</div>
+                            <ion-note class="detail">{{item.statusMsg.probe2}}</ion-note>
+                        </ion-item>
+                        <ion-item class="listItem">
+                            <ion-icon name="ios-pulse-outline"></ion-icon>
+                            <div class="name"> 1#熄灭 :</div>
+                            <ion-note class="detail">{{item.statusMsg.extinguish1}}</ion-note>
+                            <ion-icon name="ios-pulse-outline"></ion-icon>
+                            <div class="name"> 2#熄灭 :</div>
+                            <ion-note class="detail">{{item.statusMsg.extinguish2}}</ion-note>
+                        </ion-item>
+                        <ion-item class="listItem">
+                            <ion-icon name="ios-paper-outline"></ion-icon>
+                            <div class="name"> 1#继电器 :</div>
+                            <ion-note class="detail">{{item.statusMsg.relay1}}</ion-note>
+                        </ion-item>
+                        <ion-item class="listItem">
+                                <ion-icon name="ios-paper-outline"></ion-icon>
+                                <div class="name"> 2#继电器 :</div>
+                                <ion-note class="detail">{{item.statusMsg.relay2}}</ion-note>
+                            </ion-item>
+                    </ion-card>
                 </ion-list>
             <!-- <div style="position:relative;height:90%;width:90%;border:1px solid #000"> -->
                 <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
-                    <button ion-button type="submit" (click)="checkAlarm(item.id)" style="border-radius:15px">警报历史</button>
-                    <button ion-button type="submit" (click)="checkmalfunction(item.id)" style="border-radius:15px">故障历史</button>
+                    <button ion-button type="submit" (click)="checkAlarm(item.name)" style="border-radius:15px">警报历史</button>
+                    <button ion-button type="submit" (click)="checkmalfunction(item.name)" style="border-radius:15px">故障历史</button>
                 </div>
             <!-- </div> -->
             </ion-card>

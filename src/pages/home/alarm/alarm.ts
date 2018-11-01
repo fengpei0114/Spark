@@ -17,6 +17,7 @@ export class AlarmPage {
     pageNum: number = 0;
     pageOther: number = 0;
     dataArray:Array<Object> = [];
+    name:string;
     alarmArray=[
         {
             "alarmNo":"01",
@@ -113,6 +114,7 @@ export class AlarmPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
+      this.name = this.navParams.data;
       this.pageOther = this.alarmArray.length % 10;
       this.pageSize = (this.alarmArray.length-this.pageOther) / 10;
       console.log(this.pageSize);

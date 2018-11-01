@@ -4,24 +4,32 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-    <ion-navbar color="primary">
-        <ion-title>关于</ion-title>
-    </ion-navbar>
+<ion-header style="text-align:center" no-border>
+        <ion-navbar transparent >
+            <ion-title>火花探测项目</ion-title>
+            <ion-buttons end>
+                <button ion-button icon-only>
+                    <ion-icon name="menue"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
 
-</ion-header>
 
-
-<ion-content padding>
-    <ion-card padding>
+<ion-content class = "padding">
+    <ion-card style="background-color:transparent;top:40%">
+        
         <div class="img">
-            <img src="assets/ic_launcher-web.png" style="width: 60%;margin-left: 20%">
+            <img src="assets/logo.png" style="padding-top:5%;width: 60%;margin-left: 20%">
         </div>
-        <ion-list no-border>
-            <ion-title style="text-align: center">火花探测项目</ion-title>
-            <ion-item>
+        <ion-list no-border style="padding-bottom:5%">
+            
+            <ion-item  style="background-color:transparent;">
+                <ion-title style="text-align: center;overflow:none;">
+                    广东金方圆安全技术检测有限公司
+                </ion-title>
                 <ion-title style="text-align: center">
-                    (移动终端 V1.0)
+                    联系电话：029-84214449
                 </ion-title>
             </ion-item>
         </ion-list>
