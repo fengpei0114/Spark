@@ -11,6 +11,7 @@ import { AttentionPageModule } from '../pages/attention/attention.module';
 import { StatisticPageModule } from '../pages/statistic/statistic.module';
 import { UploadPageModule } from '../pages/upload/upload.module';
 import { TaskPageModule } from '../pages/task/task.module';
+import { MapPageModule } from '../pages/map/map.module'
 
 // import { ChartModule } from 'angular2-highcharts';
 

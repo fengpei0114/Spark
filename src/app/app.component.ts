@@ -1,23 +1,24 @@
-import { Component, ViewChild} from '@angular/core';
-import { Platform, MenuController} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
+import {Component, ViewChild} from '@angular/core';
+import {Platform, MenuController} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {Storage} from '@ionic/storage';
 // import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from '../pages/login/login';
-import { HelpPage } from  '../pages/menu/help/help';
-import { AboutPage } from  '../pages/menu/about/about';
-import { Http, RequestOptions, Headers} from '@angular/http';
+import {LoginPage} from '../pages/login/login';
+import {HelpPage} from  '../pages/menu/help/help';
+import {AboutPage} from  '../pages/menu/about/about';
+import {Http, RequestOptions, Headers} from '@angular/http';
 // import { AboutPage } from '../pages/about/about';
-import { HttpService } from '../providers/http-service/http-service';
-import { AccountService } from '../providers/account-service/account-service';
-import { Md5 } from 'ts-md5/dist/md5';
-import { HomePage } from '../pages/home/home';
-import { EquipmentPage } from '../pages/home/equipment/equipment';
-import { UserInfoPage } from '../pages/home/user-info/user-info'
-import { ChangePasswordPage } from '../pages/home/change-password/change-password';
+import {HttpService} from '../providers/http-service/http-service';
+import {AccountService} from '../providers/account-service/account-service';
+import {Md5} from 'ts-md5/dist/md5';
+import {HomePage} from '../pages/home/home';
+import {EquipmentPage} from '../pages/home/equipment/equipment';
+import {UserInfoPage} from '../pages/home/user-info/user-info'
+import {ChangePasswordPage} from '../pages/home/change-password/change-password';
+import { MapPage } from '../pages/map/map'
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild('content') nav;
