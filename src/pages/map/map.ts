@@ -14,6 +14,9 @@ interface MyPoint{
     lng:number;
 }
 
+enum BMapPosition {BMAP_ANCHOR_BOTTOM_RIGHT,BMAP_ANCHOR_TOP_RIGHT}
+
+
 @IonicPage()
 @Component({
   selector: 'page-map',
@@ -34,6 +37,7 @@ interface MyPoint{
 
 
 
+
 export class MapPage {
    @ViewChild('map') mapElement : ElementRef;
 
@@ -43,6 +47,9 @@ export class MapPage {
    public currentPoint : MyPoint;
    public mousePoint;
    public pointArray:Array<any>=[];
+   public mapStatus:string="BMAP_STATUS_SUCCESS";
+   public toolPosition : BMapPosition;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private  platform:Platform,) {
   }
 
@@ -56,7 +63,7 @@ export class MapPage {
         geolocation.enableSDKLocation();
         geolocation.getCurrentPosition(function(r) {
             console.log(r.point);
-            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            if (this.getStatus() == this.mapStatus) {
                 this.currentPoint={lng: r.point.lng,lat: r.point.lat};
                 //坐标可以通过百度地图坐标拾取器获取
             }
@@ -68,7 +75,7 @@ export class MapPage {
         });
         let sizeMap = new BMap.Size(10, 80);//显示位置
         map.addControl(new BMap.NavigationControl({
-            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,//显示方向
+            anchor: BMapPosition.BMAP_ANCHOR_BOTTOM_RIGHT,//显示方向
             offset: sizeMap
         }));
 
@@ -76,7 +83,7 @@ export class MapPage {
 
         function showAttractionControl() {
             //定义显示位置
-            this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+            this.defaultAnchor = BMapPosition.BMAP_ANCHOR_TOP_RIGHT;
             this.defaultOffset = new BMap.Size(10, 50);
         }
 
@@ -108,7 +115,7 @@ export class MapPage {
             })//设置标注图片和位置
 
             let point = geolocation.getCurrentPosition(function(r) {
-                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                if (this.getStatus() == this.mapStatus) {
                     var mkr = new BMap.Marker(r.point
                         , {
                         icon: icon,
