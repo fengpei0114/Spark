@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App,AlertController } from 'ionic-angular';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
 import {Color} from "highcharts";
+import { NativeService } from '../../../providers/native-service/native-service'
 import { MalfunctiondetailPage } from '../malfunction_detail/malfunction_detail';
 
 /**
@@ -16,6 +17,7 @@ import { MalfunctiondetailPage } from '../malfunction_detail/malfunction_detail'
   templateUrl: 'malfunction.html',
 })
 export class MalfunctionPage {
+
 
    
     isequipment:boolean = false;
@@ -47,100 +49,144 @@ export class MalfunctionPage {
         {
             "malfunctionNo":"01",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"未确认",
-            "impactDevice":["1","2"],
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"未确认",
+            "dealPlatform":"equipment",
+            "dealStaff":"tony",
+            "note":""
         },    {
             "malfunctionNo":"02",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"未确认",
-            "impactDevice":["1","2"],
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"未确认",
+            "dealPlatform":"equipment",
+            "dealStaff":"tony",
+            "note":""
         },
         {
             "malfunctionNo":"03",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"未确认",
-            "impactDevice":["1","2"],
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"未确认",
+            "dealPlatform":"equipment",
+            "dealStaff":"tony",
+            "note":""
         },
         {
             "malfunctionNo":"04",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"未确认",
-            "impactDevice":["1","2"],
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"未确认",
+            "dealPlatform":"equipment",
+            "dealStaff":"tony",
+            "note":""
         },
         {
             "malfunctionNo":"05",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
             "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"未确认",
-            "impactDevice":["1","2"],
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"未确认",
+            "dealPlatform":"equipment",
+            "dealStaff":"tony",
+            "note":""
         },
         {
             "malfunctionNo":"06",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
         {
             "malfunctionNo":"07",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
         {
             "malfunctionNo":"08",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
         {
             "malfunctionNo":"09",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
         {
             "malfunctionNo":"10",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
         {
             "malfunctionNo":"11",
             "malfunctionType":"1",
+            "childNode":"XXX",
             "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "tag":"1",
-            "measure":"已确认",
-            "impactDevice":["1","2"],
+            "endTime":"",
+            "malfunctionEquipment":"xxx",
+            "recommendedMeasure":"XXX",
+            "malfunctionState":"已确认",
+            "dealPlatform":"",
+            "dealStaff":"",
+            "note":""
         },
 
     ]
@@ -156,8 +202,16 @@ export class MalfunctionPage {
                 public navCtrl: NavController,
                 public navParams: NavParams,
                 private httpService: HttpService,
+                private alertCtrl:AlertController,
+                private nativeService:NativeService,
 
     ) {
+        this.dataInit();
+        
+        
+    }
+
+    dataInit(){
         this.name = this.navParams.data;
         this.pageOther = this.malfunctionArray.length % 10;
         this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
@@ -166,8 +220,6 @@ export class MalfunctionPage {
         for(var i = 0;i<10;i++) {
             this.dataArray.push(this.malfunctionArray[i]);
         }
-        
-        
     }
     setup(){
         
@@ -245,5 +297,60 @@ export class MalfunctionPage {
             console.log('Async operation has ended');
             infiniteScroll.complete();
         },500);
+    }
+
+    OncomfirmClick(item)
+    {
+        const prompt = this.alertCtrl.create({
+            title: '确认故障',
+            message: "确认设备故障",
+            inputs: [
+                {
+                    type:'text',
+                    name: 'dealstaff',
+                    placeholder: '确认人员姓名'
+                },
+                {
+                    type:'text',
+                    name: 'note',
+                    placeholder: '备注'
+                },
+            ],
+            buttons: [
+                {
+                    text: '取消',
+                    handler: data => {
+                    }
+                },
+                {
+                    text: '确认',
+                    handler: data => {
+                        this.comfirmMalfunction(data,item);
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    comfirmMalfunction(comfirmData,item) {
+        if (comfirmData['dealstaff'] == "") {
+            this.nativeService.showToast("确认人不可为空！", 3000);
+        }
+        else {
+            for (var i = 0; i < this.malfunctionArray.length; i++) {
+                if (this.malfunctionArray[i].malfunctionNo == item.malfunctionNo) {
+                    this.malfunctionArray[i].malfunctionState = '已确认';
+                    let time = new Date();
+                    this.malfunctionArray[i].endTime = (time.getFullYear()).toString() + "-" + time.getMonth().toString() + "-" + time.getDay().toString() + " " + time.getHours().toString() + ":" + time.getMinutes().toString() + ":" + time.getSeconds().toString();
+                    this.malfunctionArray[i].dealPlatform = '移动端';
+                    this.malfunctionArray[i].dealStaff = comfirmData['dealstaff'];
+                    this.malfunctionArray[i].note = comfirmData['note'];
+                }
+            }
+            console.log(comfirmData);
+            this.dataArray.splice(0, this.dataArray.length);
+            this.dataInit();
+        }
     }
 }

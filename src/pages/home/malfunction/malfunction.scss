@@ -103,4 +103,25 @@ page-malfunction{
     //z-index: 2;
     font-size: small;
   }
+
+  .confirmHead{
+    color: grey;
+    border-bottom: solid grey 1px;
+  }
+  .confirmBody{
+    color: grey;
+    font-size: small;
+  }
+
+  .noconfirmHead{
+    color: black;
+    border-bottom: solid darkgray 1px;
+  }
+
+  .noconfirmBody{
+    color: black;
+    border-bottom: solid darkgray 1px;
+    font-size: small;
+  }
+
 }
