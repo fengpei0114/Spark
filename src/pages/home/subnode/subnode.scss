@@ -1,0 +1,30 @@
+page-subnode{
+    .padding {
+      background: url('../../assets/login.png');
+    }
+  .listItem{
+    background-color: transparent;
+  }
+  .name{
+    display:inline;
+    color:grey;
+  }
+  .detail{
+    display:inline;
+    color: #000;
+  }
+  .label-md{
+    margin-bottom:4px;
+    margin-top:4px;
+  } 
+  .card_style{
+    border-radius:20px;
+    background:rgba(255, 255, 255, 0.733);
+    top:0px;
+    bottom:5px;
+    padding:0;
+    margin-top:0px;
+    margin-bottom:10px;
+    overflow: auto;
+  }
+}

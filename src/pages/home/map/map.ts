@@ -59,7 +59,7 @@ export class MapPage {
         //     fillOpacity:0.2,
         //     strokeWeight:1
         // })
-        // circle.setMap(this.map);
+        // circle.setMap(this.map); 
         // this.map.setFitView();
         // var info = new AMap.InfoWindow({
         //     content:this.projectName+"<br>"+this.pointName,

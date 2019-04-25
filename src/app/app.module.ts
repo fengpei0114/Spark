@@ -11,7 +11,6 @@ import { AttentionPageModule } from '../pages/attention/attention.module';
 import { StatisticPageModule } from '../pages/statistic/statistic.module';
 import { UploadPageModule } from '../pages/upload/upload.module';
 import { TaskPageModule } from '../pages/task/task.module';
-import { MapPageModule } from '../pages/map/map.module'
 
 // import { ChartModule } from 'angular2-highcharts';
 
@@ -31,6 +30,7 @@ import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { AccountService } from '../providers/account-service/account-service';
 import { PaginationComponentModule } from '../components/pagination/pagination.module';
+import { MapPageModule } from '../pages/map/map.module'
 // import { StatusFilterPipe } from '../pipes/status-filter/status-filter';
 // import { AutosizeComponent } from '../components/autosize/autosize';
 // import { AccordionlistComponentModule } from '../components/accordionlist/accordionlist.module';
@@ -59,6 +59,7 @@ import { PaginationComponentModule } from '../components/pagination/pagination.m
       HttpModule,
 
       PaginationComponentModule,
+      MapPageModule,
       // AccordionlistComponentModule
   ],
   bootstrap: [IonicApp],
@@ -81,7 +82,7 @@ import { PaginationComponentModule } from '../components/pagination/pagination.m
       {provide: ErrorHandler, useClass: IonicErrorHandler},
       NativeService,
       HttpService,
-      AccountService
+      AccountService,
   ]
 })
 export class AppModule {}

@@ -12,7 +12,9 @@ import { HistoryPage } from './history/history';
 import { MalfunctiondetailPage } from './malfunction_detail/malfunction_detail';
 import { HistorydetailPage } from './history_detail/history_detail';
 import { AlarmPage } from './alarm/alarm';
+import { SubNodePage } from './subnode/subnode'
 import { StatusPage } from './status/status';
+import { ConfigHistoryPage } from './config_history/config_history'
 
 /**
  * Generated class for the HomePage page.
@@ -162,6 +164,7 @@ export class HomePage implements OnInit{
                 // private appConfig: AppConfig,
     ){
         this.equipmentName = this.EquipmentArray[0].name;
+        console.log("123");
     }
 
     //初始化数据
@@ -185,11 +188,15 @@ export class HomePage implements OnInit{
 
     }
     checkStatus(item){
-        this.app.getRootNav().push(StatusPage,item);
+        this.app.getRootNav().push(ConfigHistoryPage,item);
     }
     checkmalfunction(item){
         this.app.getRootNav().push(MalfunctionPage,item);
         // this.app.getRootNav().push(MalfunctionPage);
+    }
+    getSubNode(item){
+        this.app.getRootNav().push(SubNodePage,item);
+        // this.app.getRootNav().push(SafetySupervisionPage);
     }
     personalMsg(){
 

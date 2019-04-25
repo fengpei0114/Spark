@@ -1,5 +1,10 @@
 import { Component ,ViewChild,ElementRef} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, App, Platform,PopoverController,MenuController} from 'ionic-angular';
+import { PopoverPage } from './popover/popover';
+import { Http , Headers ,RequestOptions } from '@angular/http';
+import { HttpService } from '../../providers/http-service/http-service';
+import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_module_factory_loader';
+import { AlarmdetailPage } from './alarm_detail/alarm_detail';
 
 declare var BMap;
 
@@ -49,14 +54,227 @@ export class MapPage {
    public pointArray:Array<any>=[];
    public mapStatus:string="BMAP_STATUS_SUCCESS";
    public toolPosition : BMapPosition;
+   public IsMapChoose:boolean;
+   public IsListChoose:boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private  platform:Platform,) {
+
+   public provinceNameArray = [{
+    "id":"1",
+    "provinceName":"陕西省",
+    "cityArray" : [{
+        "id":"1",
+        "name":"西安市",
+    },{
+        "id":"2",
+        "name":"延安市",
+    },{
+        "id":"3",
+        "name":"渭南市",
+    }]
+},{
+    "id":"2",
+    "provinceName":"青海省",
+    "cityArray" : [{
+        "id":"1",
+        "name":"西宁市",
+    },{
+        "id":"2",
+        "name":"海东市",
+    },{
+        "id":"3",
+        "name":"海北藏族自治州",
+    },{
+        "id":"4",
+        "name":"黄南藏族自治州",
+    },{
+        "id":"5",
+        "name":"海西蒙古族藏族自治州",
+    }]
+},{
+    "id":"3",
+    "provinceName":"河北省",
+    "cityArray" : [{
+        "id":"1",
+        "name":"石家庄市",
+    },{
+        "id":"2",
+        "name":"唐山市",
+    },{
+        "id":"3",
+        "name":"秦皇岛市",
+    },{
+        "id":"4",
+        "name":"邯郸市",
+    },{
+        "id":"5",
+        "name":"邢台市",
+    },{
+        "id":"6",
+        "name":"保定市",
+    },{
+        "id":"7",
+        "name":"张家口市",
+    },{
+        "id":"8",
+        "name":"廊坊市",
+    }]
+},{
+    "id":"4",
+    "provinceName":"北京市",
+    "cityArray" :[{
+        "id":"1",
+        "name":"石家庄市",
+    },{
+        "id":"2",
+        "name":"唐山市",
+    },{
+        "id":"3",
+        "name":"秦皇岛市",
+    },{
+        "id":"4",
+        "name":"邯郸市",
+    },{
+        "id":"5",
+        "name":"邢台市",
+    },{
+        "id":"6",
+        "name":"保定市",
+    },{
+        "id":"7",
+        "name":"张家口市",
+    },{
+        "id":"8",
+        "name":"廊坊市",
+    }]
+}];
+public alarmArray=[{
+    "id":"1",
+    "alarm":[{
+        "equipmentName":"01",
+        "alarmNo":"012",
+        "measure":"未确认",
+        "grade":"2",
+        "sparknum":"12",
+    },
+    {
+        "equipmentName":"XX-XX",
+        "alarmNo":"02",
+        "measure":"未确认",
+        "grade":"2",
+        "sparknum":"21",
+    }]
+},{
+    "id":"2",
+    "alarm":[{
+        "equipmentName":"xx-XX",
+        "alarmNo":"012",
+        "measure":"未确认",
+        "grade":"5",
+        "sparknum":"35",
+    },
+    {
+        "equipmentName":"XX-XX",
+        "alarmNo":"02",
+        "measure":"未确认",
+        "grade":"2",
+        "sparknum":"21",
+    }]
+},{
+    "id":"3",
+    "alarm":[{
+        "equipmentName":"03",
+        "alarmNo":"012",
+        "measure":"未确认",
+        "grade":"2",
+        "sparknum":"12",
+    },
+    {
+        "equipmentName":"X3",
+        "alarmNo":"02",
+        "measure":"未确认",
+        "grade":"4",
+        "sparknum":"25",
+    }]
+},{
+    "id":"4",
+    "alarm":[{
+        "equipmentName":"XX-xx",
+        "alarmNo":"012",
+        "measure":"未确认",
+        "grade":"5",
+        "sparknum":"34",
+    }]
+}];
+public cityAlarmOrMul=[{
+    "equipmentName":"01",
+    "alarmNo":"012",
+    "measure":"未确认",
+    "grade":"2",
+    "sparknum":"2",
+},{
+    "equipmentName":"02",
+    "alarmNo":"01",
+    "measure":"未确认",
+    "grade":"1",
+    "sparknum":"12",
+},{
+    "equipmentName":"03",
+    "alarmNo":"01",
+    "measure":"未确认",
+    "grade":"3",
+    "sparknum":"2",
+},{
+    "equipmentName":"04",
+    "alarmNo":"01",
+    "measure":"未确认",
+    "grade":"1",
+    "sparknum":"11",
+},{
+    "equipmentName":"05",
+    "alarmNo":"01",
+    "measure":"未确认",
+    "grade":"2",
+    "sparknum":"20",
+}];
+public cityArray:any;
+public provincechoose:boolean;
+public choosebtn:any;
+public selectProvinceId:any;
+public colorBule:string='#5eb1f5';
+public remeberbtn:any;
+public proviceName:any="陕西省";
+public cityName:any="西安市";
+public AllcityAlarm:any;
+public element:any;
+public cityId:any=null; //记录当前查看的城市id
+public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
+
+
+  constructor(
+              public http:Http,
+              public app:App,
+              public menuCtrl: MenuController,
+              public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private  platform:Platform,
+              private httpService: HttpService,
+              public popoverCtrl: PopoverController,) {
+            this.IsMapChoose = true;
+            this.provincechoose = false;
+            this.AllcityAlarm = this.cityAlarmOrMul;
+            this.alarmOrmul = true;
   }
 
-    ionViewWillEnter() {
-
+  ionViewWillEnter () {
+          this.element = this.mapElement.nativeElement;
+          this.create();
+    console.log("ionViewDidEnter");
+}
+      create(){
         console.log("View Enter");
-        let map = this.map = new BMap.Map(this.mapElement.nativeElement, {enableMapClick: true});//创建地图实例
+        // this.element = document.getElementById("map");
+        let map = this.map = new BMap.Map(this.element, {enableMapClick: true});//创建地图实例
+        console.log("create"+this.map);
         map.enableScrollWheelZoom();//启动滚轮放大缩小，默认禁用
         map.enableContinuousZoom();//连续缩放效果，默认禁用
         var geolocation = new BMap.Geolocation();
@@ -115,6 +333,7 @@ export class MapPage {
             })//设置标注图片和位置
 
             let point = geolocation.getCurrentPosition(function(r) {
+                console.log("point");
                 if (this.getStatus() == this.mapStatus) {
                     var mkr = new BMap.Marker(r.point
                         , {
@@ -147,7 +366,7 @@ export class MapPage {
 
             div.onclick = function (e) {//地图上可以添加自定义标注
                 //点击按钮事件
-
+                
             }
             map.getContainer().appendChild(div);// 添加DOM元素到地图中
             return div;
@@ -171,6 +390,7 @@ export class MapPage {
             var point = toPoint(randomPoint);//this.pointArray[i].lng,this.pointArray[i].lat)
             var mkr = new BMap.Marker(point);
             map.addOverlay(mkr);
+            console.log("mkr"+mkr);
             this.pointArray[i]=randomPoint;
 
         }
@@ -180,11 +400,13 @@ export class MapPage {
     }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapPage');
+    // this.create();
     // this.loadMap();
     // this.loadToolBar();
   }
 
     loadToolBar(){
+        console.log("loadToolBar");
         AMap.plugin('AMap.ToolBar',function(){//异步
             var toolbar = new AMap.ToolBar();
             this.map.plugin(toolbar);
@@ -192,6 +414,7 @@ export class MapPage {
     }
 
     loadMap() {
+        console.log("loadMap");
         this.map = new AMap.Map('container', {
             resizeEnable: true,
             //mapStyle:'normal',  地图类型: normal  dark  blue_night  fresh  light
@@ -264,5 +487,111 @@ export class MapPage {
         // console.log(this.currentPoint.lat);
     }
 
-
+    presentPopover(ev) {
+        let popover = this.popoverCtrl.create(PopoverPage);
+        popover.present({
+            ev: ev
+        });
+        popover.onDidDismiss(data=>{
+            console.log(data);
+            if(data == 1){
+                this.IsMapChoose = true;
+                this.IsListChoose = false;
+                // this.ionViewWillEnter();
+                this.ionViewDidLoad();
+                this.create();
+                // this.loadMap();
+                // this.loadToolBar();
+                console.log(111);
+            }else{
+                this.IsMapChoose = false;
+                this.IsListChoose = true;
+            }
+        })
+    }
+    ischoose(){
+        console.log(this.provincechoose);
+        this.provincechoose = !this.provincechoose;
+        
+        
+        // this.remeberbtn.style.color = this.colorBule;
+    }
+    ProvinceChoose(item){
+        if(item=="全部"){
+            // this.isprovincechoose = false;
+            this.cityArray = null;
+            this.proviceName = "全部";
+            this.provincechoose = false;
+            this.cityName = "";
+            this.cityId = null;
+            this.cityAlarmOrMul = this.AllcityAlarm;
+            console.log(this.proviceName);
+        }else{
+            // this.isprovincechoose = true;
+            this.choosebtn = document.getElementsByName('00000000')[0];
+            this.choosebtn.style.color = "#000000";
+            this.provinceNameArray.forEach((x)=>{
+                this.choosebtn = document.getElementsByName(x.id)[0];
+                this.choosebtn.style.color = "#000000";
+                if(x.id==item){
+                    console.log(x.id);
+                    this.choosebtn = document.getElementsByName(x.id)[0];
+                    console.log("choosebtn"+this.choosebtn);
+                    this.selectProvinceId = item;
+                    this.choosebtn.style.color = this.colorBule;
+                    this.cityArray = x.cityArray;
+                    this.proviceName = x.provinceName;
+                    this.remeberbtn = this.choosebtn;
+                }
+            });
+        }
+        console.log(this.remeberbtn);
+    }
+    CityChoose(item){
+        this.provincechoose = false;
+        console.log(item);
+        this.cityName = item.name;
+        this.alarmArray.forEach((x)=>{
+            if(x.id == item.id){
+                this.cityId = x.id;
+                this.cityAlarmOrMul = x.alarm;
+            }
+        })
+        console.log(this.cityAlarmOrMul);
+    }
+    openMenu(): void{
+        this.menuCtrl.open();
+    }
+    getAlarmDetail(item){
+        let alarmOrmul = this.alarmOrmul;
+        item.alarmOrmul = this.alarmOrmul;
+        console.log(item);
+        this.app.getRootNav().push(AlarmdetailPage,item);
+    }
+    checkAlarm(){
+        this.alarmOrmul = true;
+        if(this.cityId == null){
+            this.cityAlarmOrMul = this.AllcityAlarm;
+        }else{
+            this.alarmArray.forEach((x)=>{
+                if(x.id == this.cityId){
+                    this.cityId = x.id;
+                    this.cityAlarmOrMul = x.alarm;
+                }
+            })  
+        }
+    }
+    checkMul(){
+        this.alarmOrmul = false;
+        if(this.cityId == null){
+            this.cityAlarmOrMul = this.AllcityAlarm;
+        }else{
+            this.alarmArray.forEach((x)=>{
+                if(x.id == this.cityId){
+                    this.cityId = x.id;
+                    this.cityAlarmOrMul = x.alarm;
+                }
+            })  
+        }
+    }
 }

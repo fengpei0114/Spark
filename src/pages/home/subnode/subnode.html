@@ -1,0 +1,47 @@
+<ion-header style="text-align:center" no-border>
+        <ion-navbar transparent >
+                <button ion-button menuToggle (click)="openMenu()">
+                        <ion-icon name="menu"></ion-icon>
+                    </button>
+            <ion-title>{{name}}</ion-title>
+            <ion-title>子节点列表</ion-title>
+            <ion-buttons end>
+                <button ion-button icon-only>
+                    <ion-icon name="menue"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content padding class="padding">
+    <ion-card *ngFor="let item of subnodeMsg" class="card_style">
+            <ion-list insert position = "relative">
+                <ion-item class="listItem">
+                    <ion-icon name="baseball"></ion-icon>
+                    <div class="name">子节点编号：</div>
+                    <ion-note class="detail">{{item.subnodeId}}</ion-note>
+                </ion-item>
+                <ion-item class="listItem">
+                    <ion-icon name="disc"></ion-icon>
+                    <div class="name">子节点安装点：</div>
+                    <ion-note class="detail">{{item.installpoint}}</ion-note>
+                </ion-item>
+                <ion-item class="listItem">
+                    <ion-icon name="clipboard"></ion-icon>
+                    <div class="name">报警总数：</div>
+                    <ion-note class="detail">{{item.subnode_alarmnum}}</ion-note>
+                </ion-item>
+                <ion-item class="listItem">
+                    <ion-icon name="bug"></ion-icon>
+                    <div class="name">故障总数：</div>
+                    <ion-note class="detail">{{item.subnode_malnum}}</ion-note>
+                    <ion-buttons end>
+                        <button style="background:transparent" (click)="getdetailMsg(item)">
+                            <ion-note  class="detail">查看详情</ion-note>
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </button>
+                    </ion-buttons>
+                </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

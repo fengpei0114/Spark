@@ -4,17 +4,117 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header style="text-align:center" no-border>
 
-  <ion-navbar>
-    <ion-title>map</ion-title>
-  </ion-navbar>
+  <ion-navbar transparent >
+    <button ion-button menuToggle (click)="openMenu()">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-row >
+            <ion-col class = "buttonclass" id = "rowcol">
+                <button ion-button color="dark" clear (click)="ischoose()">
+                    <ion-label class="ionlabel">{{proviceName}}{{cityName}}</ion-label>
+                    <ion-icon name = "md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-buttons end>
+                <button ion-button icon-only (click)="presentPopover($event)">
+                        <ion-icon name="copy"></ion-icon>
+              </button>
+            </ion-buttons>
+</ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-    <!--<button ion-button (click)="test()">test</button>-->
-    <div id="map" #map></div>
+<ion-content class="padding">
+    <!-- <button ion-button ()="test()">test</button> -->
+    <div [hidden]="!IsMapChoose" id="map" #map></div>
+    <div [hidden]="!IsListChoose" class = "padding">
+      <div *ngIf="provincechoose" position="absolute" style="padding:0px 0px 0px 0px">
+        <div class = "padding" style="position:absolute;height:300px;width:100%;z-index:9999">
+            
+        </div>
+            <div style="height:300px;overflow-y:scroll;width:100%;position:fixed;z-index:99999;">
+                    <div id = "equipmentdiv-inner1">
+                            <button ion-button clear (click)="ProvinceChoose('全部')" name = "00000000" id = "equipmentbtn1" >全部</button>
+                        <button ion-button clear *ngFor = "let item of provinceNameArray" (click)="ProvinceChoose(item.id)" name="{{item.id}}" id = "equipmentbtn1" >{{item.provinceName}}</button>
+                    </div>
+                    <div id = "equipmentdiv-inner2">
+                        <button ion-button clear *ngFor = "let item of cityArray" style="color: #000;width:100%" (click)="CityChoose(item)">{{item.name}}</button>
+                    </div>
+            </div>
+    
+            <div *ngIf="provincechoose" style="padding:0px 0px 0px 0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.1);opacity:0.3;filter:Alpha(ipacity=50);z-index:9998">
+    
+            </div>
 
+        </div>
+                <div *ngIf="alarmOrmul" style = "position:absolute;z-index:9900;overflow:scroll;width:100%;height:90%">
+                    <ion-card *ngFor="let item of cityAlarmOrMul" style="border-radius:15px;background:#f8f8f8;margin-top:10px;margin-bottom:10px" >
+                        <ion-title style="padding-left:5px;padding-top:10px;padding-bottom:10px;">设备名：{{item.equipmentName}}--警报</ion-title>
+                        <ion-grid style="border-top:1px solid #000000">
+                            <ion-row>
+                                <ion-col col-6>
+                                    <ion-row style="padding-left:10px">
+                                        是否确认：{{item.measure}}
+                                    </ion-row>
+                                    <ion-row style="padding-left:10px">
+                                       警报等级：{{item.grade}}
+                                    </ion-row>
+                                    <ion-row style="padding-left:10px">
+                                        火花数量：{{item.sparknum}}
+                                     </ion-row>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                        <ion-buttons end>
+                                    <button style="background:transparent" (click)="getAlarmDetail(item)">
+                                        <ion-note  class="detail">查看详情</ion-note>
+                                        <ion-icon name="arrow-forward"></ion-icon>
+                                    </button>
+                                    </ion-buttons>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </div>
+
+                <div *ngIf="!alarmOrmul" style = "position:absolute;z-index:9900;overflow:scroll;width:100%;height:90%">
+                        <ion-card *ngFor="let item of cityAlarmOrMul" style="border-radius:15px;background:#f8f8f8;margin-top:10px;margin-bottom:10px" >
+                            <ion-title style="padding-left:5px;padding-top:10px;padding-bottom:10px;">设备名：{{item.equipmentName}}--故障</ion-title>
+                            <ion-grid style="border-top:1px solid #000000">
+                                <ion-row>
+                                    <ion-col col-6>
+                                        <ion-row style="padding-left:10px">
+                                            是否确认：{{item.measure}}
+                                        </ion-row>
+                                        <ion-row style="padding-left:10px">
+                                            故障类型：{{item.grade}}
+                                        </ion-row>
+                                        <ion-row style="padding-left:10px">
+                                            建议修改措施：{{item.sparknum}}
+                                         </ion-row>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>
+                                            <ion-buttons end>
+                                        <button style="background:transparent" (click)="getAlarmDetail(item)">
+                                            <ion-note  class="detail">查看详情</ion-note>
+                                            <ion-icon name="arrow-forward"></ion-icon>
+                                        </button>
+                                        </ion-buttons>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card>
+                    </div>
+        <div style="position:fixed;bottom:0px;z-index:9901;width:100%;font-size:12px;color:aliceblue;padding-left:5px;height:11%">
+            <button ion-button type="submit" (click)="checkAlarm()" style="margin-left:3%;border-radius:15px;width:45%">警报历史</button>
+            <button ion-button type="submit" (click)="checkMul()" style="margin-left:3%;border-radius:15px;width:45%">故障历史</button>
+        </div>
+    </div>
 </ion-content>
