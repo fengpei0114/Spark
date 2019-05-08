@@ -7,8 +7,6 @@ import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_mo
 import { AlarmdetailPage } from './alarm_detail/alarm_detail';
 
 declare var BMap;
-declare var AMap: any;
-declare var AMapUI: any;
 declare var angular: any;
 var app = angular.module('show_map',[]);
 /**
@@ -60,7 +58,7 @@ export class MapPage{
    public IsMapChoose:boolean;
    public IsListChoose:boolean;
    public showInfoWindow:boolean;
-
+   public name:string;
 
    public provinceNameArray = [{
     "id":"1",
@@ -389,7 +387,7 @@ public AllcityAlarm:any;
 public element:any;
 public cityId:any=null; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
-
+public resultArray:any;
 
   constructor(
               public http:Http,
@@ -443,8 +441,10 @@ creat1(){
     })
 
     let marker = new AMap.Marker({content:'',map:map});
-    mass.on('mousedown', e=> {
+    mass.on('click', e=> {
         marker.setPosition(e.data.lnglat);
+        console.log("123");
+        this.resultArray = e.data;
         map.setCenter(e.data.lnglat);
         this.showInfoWindow = !this.showInfoWindow;
     });
@@ -694,6 +694,7 @@ closeInfoWindow(){
             if(data == 1){
                 this.IsMapChoose = true;
                 this.IsListChoose = false;
+                this.showInfoWindow = false;
                 // this.ionViewWillEnter();
                 this.ionViewDidLoad();
                 this.creat1();
@@ -703,6 +704,7 @@ closeInfoWindow(){
             }else{
                 this.IsMapChoose = false;
                 this.IsListChoose = true;
+                this.showInfoWindow = false;
             }
         })
     }
