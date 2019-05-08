@@ -40,16 +40,19 @@
             </ion-buttons>
             <ion-grid>
                 <ion-row>
-                    123
+                    地址：{{windowsMsg.name}}
                 </ion-row>
                 <ion-row>
-                        123
+                        设备编号：{{windowsMsg.deviceID}}
                     </ion-row>
                     <ion-row>
-                            123
+                            警报数量:{{windowsMsg.uncomfirmAlarmNum}}
                         </ion-row>
+                <ion-row>
+                    故障数量:{{windowsMsg.UncomfirmMalNum}}
+                </ion-row>
             </ion-grid>
-            <button ion-button>123123</button>
+            <button ion-button (click)="gotoDeviceInfo(windowsMsg.deviceID)">查看详情 >></button>
         </div>
         </div>
         

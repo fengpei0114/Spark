@@ -5,10 +5,13 @@ import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../providers/http-service/http-service';
 import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_module_factory_loader';
 import { AlarmdetailPage } from './alarm_detail/alarm_detail';
+import { DevicePage } from'../home/device/device'
 
 declare var BMap;
+declare var AMap: any;
+declare var AMapUI: any;
 declare var angular: any;
-var app = angular.module('show_map',[]);
+// var app = angular.module('show_map',[]);
 /**
  * Generated class for the MapPage page.
  *
@@ -58,7 +61,8 @@ export class MapPage{
    public IsMapChoose:boolean;
    public IsListChoose:boolean;
    public showInfoWindow:boolean;
-   public name:string;
+   public windowsMsg:object;
+   public mapArray:Array<object>=[];
 
    public provinceNameArray = [{
     "id":"1",
@@ -238,7 +242,8 @@ public cityAlarmOrMul=[{
     "grade":"2",
     "sparknum":"20",
 }];
-public citys=[{
+public citys=[
+    {
     "lnglat":[112.982279,28.19409],
     "name":"长沙市",
     "style":1
@@ -375,6 +380,348 @@ public citys=[{
     "name":"北京市",
     "style":0
 }];
+public mapdata=[
+        {
+            "lnglat":[112.982279,28.19409],
+            "name":"长沙市",
+            "deviceID":"12",
+            "runstate":"1",
+            "uncomfirmAlarmNum":"1",
+            "UncomfirmMalNum":"1",
+            "AlarmLevel":"2",
+            "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[123.429096,41.796767],
+            "name":"沈阳市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"2",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[126.642464,45.756967],
+            "name":"哈尔滨市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"1",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"2",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[121.472644,31.231706],
+            "name":"上海市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[118.767413,32.041544],
+            "name":"南京市",
+        "deviceID":"12",
+        "runstate":"0",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[121.509062,25.044332],
+            "name":"台北市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[114.173355,22.320048],
+            "name":"香港",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"1",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[120.153576,30.287459],
+            "name":"杭州市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"1",
+        "UncomfirmMalNum":"1",
+        "AlarmLevel":"2",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[111.670801,40.818311],
+            "name":"呼和浩特市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":1
+        },{
+            "lnglat":[117.283042,31.86119],
+            "name":"合肥市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[119.306239,26.075302],
+            "name":"福州市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[87.617733,43.792818],
+            "name":"乌鲁木齐市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[115.892151,28.676493],
+            "name":"南昌市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[117.000923,36.675807],
+            "name":"济南市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[106.278179,38.46637],
+            "name":"银川市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[113.665412,34.757975],
+            "name":"郑州市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[114.298572,30.584355],
+            "name":"武汉市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[125.3245,43.886841],
+            "name":"长春市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[101.778916,36.623178],
+            "name":"西宁市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[112.549248,37.857014],
+            "name":"太原市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[113.280637,23.125178],
+            "name":"广州市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":2
+        },{
+            "lnglat":[108.320004,22.82402],
+            "name":"南宁市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"1",
+        "UncomfirmMalNum":"2",
+        "AlarmLevel":"1",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[110.33119,20.031971],
+            "name":"海口市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[106.504962,29.533155],
+            "name":"重庆市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[104.065735,30.659462],
+            "name":"成都市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[113.54909,22.198951],
+            "name":"澳门",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[103.823557,36.058039],
+            "name":"兰州市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[106.713478,26.578343],
+            "name":"贵阳市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[102.712251,25.040609],
+            "name":"昆明市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[91.132212,29.660361],
+            "name":"拉萨市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[108.948024,34.263161],
+            "name":"西安市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[114.502461,38.045474],
+            "name":"石家庄市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[117.190182,39.125596],
+            "name":"天津市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        },{
+            "lnglat":[116.405285,39.904989],
+            "name":"北京市",
+        "deviceID":"12",
+        "runstate":"1",
+        "uncomfirmAlarmNum":"0",
+        "UncomfirmMalNum":"0",
+        "AlarmLevel":"",
+        "MalType":"探头故障",
+            "style":0
+        }];
 public cityArray:any;
 public provincechoose:boolean;
 public choosebtn:any;
@@ -387,14 +734,14 @@ public AllcityAlarm:any;
 public element:any;
 public cityId:any=null; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
-public resultArray:any;
+
 
   constructor(
               public http:Http,
               public app:App,
               public menuCtrl: MenuController,
-              public navCtrl: NavController, 
-              public navParams: NavParams, 
+              public navCtrl: NavController,
+              public navParams: NavParams,
               private  platform:Platform,
               private httpService: HttpService,
               public popoverCtrl: PopoverController,) {
@@ -405,12 +752,39 @@ public resultArray:any;
             this.showInfoWindow = false;
   }
   ionViewWillEnter () {
+      this.initdata();
           this.element = this.mapElement.nativeElement;
           this.creat1();
     console.log("ionViewDidEnter");
 }
+    initdata(){
+      for(let data of this.mapdata) {
+          if (data['uncomfirmAlarmNum'] != "0" && data['UncomfirmMalNum'] != "0") {
+              data['style'] = 0;
 
-creat1(){
+          }
+          else if (data['uncomfirmAlarmNum'] != "0") {
+                  data['style'] = 1;
+          }
+          else if (data['UncomfirmMalNum'] != "0") {
+                  data['style'] = 1;
+          }
+          else {
+              if (data['runstate'] == "0") {
+                  data['style'] = 2;
+              }
+              if (data['runstate'] == "1") {
+                  data['style'] = 2;
+              }
+
+           //   console.log(data);
+          }
+
+          this.mapArray.push(data);
+      }
+    }
+
+    creat1(){
 
     let map = new AMap.Map(this.element,{
         resizeEnable:true,
@@ -433,7 +807,7 @@ creat1(){
     }
     ];
 
-    let mass = new AMap.MassMarks(this.citys,{
+    let mass = new AMap.MassMarks(this.mapArray,{
         opacity:0.8,
         zIndex:111,
         cursor:'pointer',
@@ -441,12 +815,12 @@ creat1(){
     })
 
     let marker = new AMap.Marker({content:'',map:map});
-    mass.on('click', e=> {
+    mass.on('mousedown', e=> {
         marker.setPosition(e.data.lnglat);
-        console.log("123");
-        this.resultArray = e.data;
         map.setCenter(e.data.lnglat);
         this.showInfoWindow = !this.showInfoWindow;
+        console.log(e);
+        this.windowsMsg=e['data'];
     });
     mass.setMap(map);
 }
@@ -454,6 +828,10 @@ creat1(){
 closeInfoWindow(){
     this.showInfoWindow = false;
 }
+
+    gotoDeviceInfo(id){
+        this.app.getRootNav().push(DevicePage,id);
+    }
 
 
 
@@ -558,7 +936,7 @@ closeInfoWindow(){
 
     //         div.onclick = function (e) {//地图上可以添加自定义标注
     //             //点击按钮事件
-                
+
     //         }
     //         map.getContainer().appendChild(div);// 添加DOM元素到地图中
     //         return div;
@@ -694,7 +1072,6 @@ closeInfoWindow(){
             if(data == 1){
                 this.IsMapChoose = true;
                 this.IsListChoose = false;
-                this.showInfoWindow = false;
                 // this.ionViewWillEnter();
                 this.ionViewDidLoad();
                 this.creat1();
@@ -704,7 +1081,6 @@ closeInfoWindow(){
             }else{
                 this.IsMapChoose = false;
                 this.IsListChoose = true;
-                this.showInfoWindow = false;
             }
         })
     }
