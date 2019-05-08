@@ -7,7 +7,10 @@ import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_mo
 import { AlarmdetailPage } from './alarm_detail/alarm_detail';
 
 declare var BMap;
-
+declare var AMap: any;
+declare var AMapUI: any;
+declare var angular: any;
+var app = angular.module('show_map',[]);
 /**
  * Generated class for the MapPage page.
  *
@@ -43,7 +46,7 @@ enum BMapPosition {BMAP_ANCHOR_BOTTOM_RIGHT,BMAP_ANCHOR_TOP_RIGHT}
 
 
 
-export class MapPage {
+export class MapPage{
    @ViewChild('map') mapElement : ElementRef;
 
    public map:any;
@@ -236,6 +239,143 @@ public cityAlarmOrMul=[{
     "grade":"2",
     "sparknum":"20",
 }];
+public citys=[{
+    "lnglat":[112.982279,28.19409],
+    "name":"长沙市",
+    "style":1
+},{
+    "lnglat":[123.429096,41.796767],
+    "name":"沈阳市",
+    "style":1
+},{
+    "lnglat":[126.642464,45.756967],
+    "name":"哈尔滨市",
+    "style":1
+},{
+    "lnglat":[121.472644,31.231706],
+    "name":"上海市",
+    "style":1
+},{
+    "lnglat":[118.767413,32.041544],
+    "name":"南京市",
+    "style":1
+},{
+    "lnglat":[121.509062,25.044332],
+    "name":"台北市",
+    "style":1
+},{
+    "lnglat":[114.173355,22.320048],
+    "name":"香港",
+    "style":1
+},{
+    "lnglat":[120.153576,30.287459],
+    "name":"杭州市",
+    "style":1
+},{
+    "lnglat":[111.670801,40.818311],
+    "name":"呼和浩特市",
+    "style":1
+},{
+    "lnglat":[117.283042,31.86119],
+    "name":"合肥市",
+    "style":2
+},{
+    "lnglat":[119.306239,26.075302],
+    "name":"福州市",
+    "style":2
+},{
+    "lnglat":[87.617733,43.792818],
+    "name":"乌鲁木齐市",
+    "style":2
+},{
+    "lnglat":[115.892151,28.676493],
+    "name":"南昌市",
+    "style":2
+},{
+    "lnglat":[117.000923,36.675807],
+    "name":"济南市",
+    "style":2
+},{
+    "lnglat":[106.278179,38.46637],
+    "name":"银川市",
+    "style":2
+},{
+    "lnglat":[113.665412,34.757975],
+    "name":"郑州市",
+    "style":2
+},{
+    "lnglat":[114.298572,30.584355],
+    "name":"武汉市",
+    "style":2
+},{
+    "lnglat":[125.3245,43.886841],
+    "name":"长春市",
+    "style":2
+},{
+    "lnglat":[101.778916,36.623178],
+    "name":"西宁市",
+    "style":2
+},{
+    "lnglat":[112.549248,37.857014],
+    "name":"太原市",
+    "style":2
+},{
+    "lnglat":[113.280637,23.125178],
+    "name":"广州市",
+    "style":2
+},{
+    "lnglat":[108.320004,22.82402],
+    "name":"南宁市",
+    "style":0
+},{
+    "lnglat":[110.33119,20.031971],
+    "name":"海口市",
+    "style":0
+},{
+    "lnglat":[106.504962,29.533155],
+    "name":"重庆市",
+    "style":0
+},{
+    "lnglat":[104.065735,30.659462],
+    "name":"成都市",
+    "style":0
+},{
+    "lnglat":[113.54909,22.198951],
+    "name":"澳门",
+    "style":0
+},{
+    "lnglat":[103.823557,36.058039],
+    "name":"兰州市",
+    "style":0
+},{
+    "lnglat":[106.713478,26.578343],
+    "name":"贵阳市",
+    "style":0
+},{
+    "lnglat":[102.712251,25.040609],
+    "name":"昆明市",
+    "style":0
+},{
+    "lnglat":[91.132212,29.660361],
+    "name":"拉萨市",
+    "style":0
+},{
+    "lnglat":[108.948024,34.263161],
+    "name":"西安市",
+    "style":0
+},{
+    "lnglat":[114.502461,38.045474],
+    "name":"石家庄市",
+    "style":0
+},{
+    "lnglat":[117.190182,39.125596],
+    "name":"天津市",
+    "style":0
+},{
+    "lnglat":[116.405285,39.904989],
+    "name":"北京市",
+    "style":0
+}];
 public cityArray:any;
 public provincechoose:boolean;
 public choosebtn:any;
@@ -264,140 +404,200 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
             this.AllcityAlarm = this.cityAlarmOrMul;
             this.alarmOrmul = true;
   }
-
   ionViewWillEnter () {
           this.element = this.mapElement.nativeElement;
-          this.create();
+          this.creat1();
     console.log("ionViewDidEnter");
 }
-      create(){
-        console.log("View Enter");
-        // this.element = document.getElementById("map");
-        let map = this.map = new BMap.Map(this.element, {enableMapClick: true});//创建地图实例
-        console.log("create"+this.map);
-        map.enableScrollWheelZoom();//启动滚轮放大缩小，默认禁用
-        map.enableContinuousZoom();//连续缩放效果，默认禁用
-        var geolocation = new BMap.Geolocation();
-        geolocation.enableSDKLocation();
-        geolocation.getCurrentPosition(function(r) {
-            console.log(r.point);
-            if (this.getStatus() == this.mapStatus) {
-                this.currentPoint={lng: r.point.lng,lat: r.point.lat};
-                //坐标可以通过百度地图坐标拾取器获取
-            }
-            else {
-                this.currentPoint = {lng:  34.27,lat: 108.93};
-            }
-            map.centerAndZoom(toPoint(this.currentPoint), 15);//设置中心和地图显示级别
 
-        });
-        let sizeMap = new BMap.Size(10, 80);//显示位置
-        map.addControl(new BMap.NavigationControl({
-            anchor: BMapPosition.BMAP_ANCHOR_BOTTOM_RIGHT,//显示方向
-            offset: sizeMap
-        }));
+creat1(){
 
+    let map = new AMap.Map(this.element,{
+        resizeEnable:true,
+        center:[116.397428,39.90923],
+        zoom:4
+    });
 
-
-        function showAttractionControl() {
-            //定义显示位置
-            this.defaultAnchor = BMapPosition.BMAP_ANCHOR_TOP_RIGHT;
-            this.defaultOffset = new BMap.Size(10, 50);
-        }
-
-        //
-        // for(var i=0;i<20;i++)
-        // {
-        //     var point = new pointClass(this.currentPoint.lng+Math.random()*0.7,this.currentPoint.lat+Math.random()*0.7);
-        //     this.pointArray.push(point);
-        // }
-
-        // 初始化控件
-        showAttractionControl.prototype = new BMap.Control();
-        showAttractionControl.prototype.initialize = function (map) {
-            let div = document.createElement("button");// 创建一个按钮
-            div.appendChild(document.createTextNode("附近美食"));
-            div.style.width = "135px";
-            div.style.height = "35px";
-            div.style.borderRadius = "15px";
-            // div.onclick = function (e) {
-            //     let local = new BMap.LocalSearch(map, {
-            //         renderOptions: { map: map, autoViewport: true }
-            //     });
-            //     local.search("美食");
-            // }
-
-            // 指定点显示指定标记
-            let icon = new BMap.Icon('../assets/point.png', new BMap.Size(20, 32), {
-                anchor: new BMap.Size(10, 30),
-            })//设置标注图片和位置
-
-            let point = geolocation.getCurrentPosition(function(r) {
-                console.log("point");
-                if (this.getStatus() == this.mapStatus) {
-                    var mkr = new BMap.Marker(r.point
-                        , {
-                        icon: icon,
-                    //     enableDragging: true,
-                    //     raiseOnDrag: true
-                    }//自定义图标
-                    );//设置起始坐标点
-                    mkr.addEventListener("click",function () {
-                        var opts = {
-                            width : 100,     // 信息窗口宽度
-                            height: 50,     // 信息窗口高度
-                            title : "你的当前位置:"  // 信息窗口标题
-                        }
-                        var clickGeo= new BMap.Geocoder();
-                        clickGeo.getLocation(r.point,function (result) {
-                            var message;
-                            if(result)
-                            {
-                                message=result.address+"("+r.point.lat+r.point.lng+")";
-                            }
-                            var infoWindow = new BMap.InfoWindow(message, opts);  // 创建信息窗口对象
-                            map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
-                        })
-
-                    })
-                    map.addOverlay(mkr);//添加标注在地图中并实现拖拽
-                }
-            });
-
-            div.onclick = function (e) {//地图上可以添加自定义标注
-                //点击按钮事件
-                
-            }
-            map.getContainer().appendChild(div);// 添加DOM元素到地图中
-            return div;
-
-        }
-        let showAttraction = new showAttractionControl();
-        map.addControl(showAttraction);//添加控件
-
-
-        //
-        function toPoint(point:MyPoint){
-            return new BMap.Point(point.lng, point.lat);
-        }
-
-        //
-        let newpoint:MyPoint={lng:108.95,lat:34.27};
-        for(var i=0;i<20;i++)
-        {
-            // var point = new pointClass(this.currentPoint.lng+Math.random()*0.7,this.currentPoint.lat+Math.random()*0.7);
-            let randomPoint:MyPoint={lng:newpoint.lng+Math.random()*3,lat:newpoint.lat+Math.random()*3};
-            var point = toPoint(randomPoint);//this.pointArray[i].lng,this.pointArray[i].lat)
-            var mkr = new BMap.Marker(point);
-            map.addOverlay(mkr);
-            console.log("mkr"+mkr);
-            this.pointArray[i]=randomPoint;
-
-        }
-        // 让所有点在视野范围内
-         map.setViewport(this.pointArray);
-
+    var style = [{
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass0.png',
+        anchor: new AMap.Pixel(6, 6),
+        size: new AMap.Size(11, 11)
+    }, {
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass1.png',
+        anchor: new AMap.Pixel(4, 4),
+        size: new AMap.Size(7, 7)
+    }, {
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(5, 5)
     }
+    ];
+
+    let mass = new AMap.MassMarks(this.citys,{
+        opacity:0.8,
+        zIndex:111,
+        cursor:'pointer',
+        style:style
+    })
+
+    let marker = new AMap.Marker({content:'',map:map});
+    mass.on('mouseover', e=> {
+        marker.setPosition(e.data.lnglat);
+        // marker.setContent();    
+         let info = [];
+            info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b>高德软件</b>");
+            info.push("电话 : 010-84107000   邮编 : 100102");
+            info.push("地址 :北京市朝阳区望京阜荣街10号首开广场4层"+e.data.name+"</div>");
+            info.push("<button id=\"btn123\" click=\"getLngLat()\">123123</button>");
+            let infoWindow = new AMap.InfoWindow({
+                content: info.join("</br>"),
+                closeWhenClickMap:true,
+            });
+            infoWindow.open(map,marker.getPosition());
+        // marker.setLabel({content: e.data.name})
+    });
+    mass.setMap(map);
+}
+
+getWork(){
+    console.log("123123");
+}
+
+
+
+
+
+
+
+
+    //   create(){
+    //     console.log("View Enter");
+    //     // this.element = document.getElementById("map");
+    //     let map = this.map = new BMap.Map(this.element, {enableMapClick: true});//创建地图实例
+    //     console.log("create"+this.map);
+    //     map.enableScrollWheelZoom();//启动滚轮放大缩小，默认禁用
+    //     map.enableContinuousZoom();//连续缩放效果，默认禁用
+    //     var geolocation = new BMap.Geolocation();
+    //     geolocation.enableSDKLocation();
+    //     geolocation.getCurrentPosition(function(r) {
+    //         console.log(r.point);
+    //         if (this.getStatus() == this.mapStatus) {
+    //             this.currentPoint={lng: r.point.lng,lat: r.point.lat};
+    //             //坐标可以通过百度地图坐标拾取器获取
+    //         }
+    //         else {
+    //             this.currentPoint = {lng:  34.27,lat: 108.93};
+    //         }
+    //         map.centerAndZoom(toPoint(this.currentPoint), 15);//设置中心和地图显示级别
+
+    //     });
+    //     let sizeMap = new BMap.Size(10, 80);//显示位置
+    //     map.addControl(new BMap.NavigationControl({
+    //         anchor: BMapPosition.BMAP_ANCHOR_BOTTOM_RIGHT,//显示方向
+    //         offset: sizeMap
+    //     }));
+
+
+
+    //     function showAttractionControl() {
+    //         //定义显示位置
+    //         this.defaultAnchor = BMapPosition.BMAP_ANCHOR_TOP_RIGHT;
+    //         this.defaultOffset = new BMap.Size(10, 50);
+    //     }
+
+    //     //
+    //     // for(var i=0;i<20;i++)
+    //     // {
+    //     //     var point = new pointClass(this.currentPoint.lng+Math.random()*0.7,this.currentPoint.lat+Math.random()*0.7);
+    //     //     this.pointArray.push(point);
+    //     // }
+
+    //     // 初始化控件
+    //     showAttractionControl.prototype = new BMap.Control();
+    //     showAttractionControl.prototype.initialize = function (map) {
+    //         let div = document.createElement("button");// 创建一个按钮
+    //         div.appendChild(document.createTextNode("附近美食"));
+    //         div.style.width = "135px";
+    //         div.style.height = "35px";
+    //         div.style.borderRadius = "15px";
+    //         // div.onclick = function (e) {
+    //         //     let local = new BMap.LocalSearch(map, {
+    //         //         renderOptions: { map: map, autoViewport: true }
+    //         //     });
+    //         //     local.search("美食");
+    //         // }
+
+    //         // 指定点显示指定标记
+    //         let icon = new BMap.Icon('../assets/point.png', new BMap.Size(20, 32), {
+    //             anchor: new BMap.Size(10, 30),
+    //         })//设置标注图片和位置
+
+    //         let point = geolocation.getCurrentPosition(function(r) {
+    //             console.log("point");
+    //             if (this.getStatus() == this.mapStatus) {
+    //                 var mkr = new BMap.Marker(r.point
+    //                     , {
+    //                     icon: icon,
+    //                 //     enableDragging: true,
+    //                 //     raiseOnDrag: true
+    //                 }//自定义图标
+    //                 );//设置起始坐标点
+    //                 mkr.addEventListener("click",function () {
+    //                     var opts = {
+    //                         width : 100,     // 信息窗口宽度
+    //                         height: 50,     // 信息窗口高度
+    //                         title : "你的当前位置:"  // 信息窗口标题
+    //                     }
+    //                     var clickGeo= new BMap.Geocoder();
+    //                     clickGeo.getLocation(r.point,function (result) {
+    //                         var message;
+    //                         if(result)
+    //                         {
+    //                             message=result.address+"("+r.point.lat+r.point.lng+")";
+    //                         }
+    //                         var infoWindow = new BMap.InfoWindow(message, opts);  // 创建信息窗口对象
+    //                         map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+    //                     })
+
+    //                 })
+    //                 map.addOverlay(mkr);//添加标注在地图中并实现拖拽
+    //             }
+    //         });
+
+    //         div.onclick = function (e) {//地图上可以添加自定义标注
+    //             //点击按钮事件
+                
+    //         }
+    //         map.getContainer().appendChild(div);// 添加DOM元素到地图中
+    //         return div;
+
+    //     }
+    //     let showAttraction = new showAttractionControl();
+    //     map.addControl(showAttraction);//添加控件
+
+
+    //     //
+    //     function toPoint(point:MyPoint){
+    //         return new BMap.Point(point.lng, point.lat);
+    //     }
+
+    //     //
+    //     let newpoint:MyPoint={lng:108.95,lat:34.27};
+    //     for(var i=0;i<20;i++)
+    //     {
+    //         // var point = new pointClass(this.currentPoint.lng+Math.random()*0.7,this.currentPoint.lat+Math.random()*0.7);
+    //         let randomPoint:MyPoint={lng:newpoint.lng+Math.random()*3,lat:newpoint.lat+Math.random()*3};
+    //         var point = toPoint(randomPoint);//this.pointArray[i].lng,this.pointArray[i].lat)
+    //         var mkr = new BMap.Marker(point);
+    //         map.addOverlay(mkr);
+    //         console.log("mkr"+mkr);
+    //         this.pointArray[i]=randomPoint;
+
+    //     }
+    //     // 让所有点在视野范围内
+    //      map.setViewport(this.pointArray);
+
+    // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapPage');
     // this.create();
@@ -406,73 +606,73 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
   }
 
     loadToolBar(){
-        console.log("loadToolBar");
-        AMap.plugin('AMap.ToolBar',function(){//异步
-            var toolbar = new AMap.ToolBar();
-            this.map.plugin(toolbar);
-        });
+        // console.log("loadToolBar");
+        // AMap.plugin('AMap.ToolBar',function(){//异步
+        //     var toolbar = new AMap.ToolBar();
+        //     this.map.plugin(toolbar);
+        // });
     }
 
     loadMap() {
-        console.log("loadMap");
-        this.map = new AMap.Map('container', {
-            resizeEnable: true,
-            //mapStyle:'normal',  地图类型: normal  dark  blue_night  fresh  light
-            zoom: 15,
-            center: [113.400675, 22.88816]
-        });
+        // console.log("loadMap");
+        // this.map = new AMap.Map('container', {
+        //     resizeEnable: true,
+        //     //mapStyle:'normal',  地图类型: normal  dark  blue_night  fresh  light
+        //     zoom: 15,
+        //     center: [113.400675, 22.88816]
+        // });
 
-        function refresh(e) {
-            this.map.setMapStyle("dark");
-        };
+        // function refresh(e) {
+        //     this.map.setMapStyle("dark");
+        // };
 
-        //创建并添加工具条控件AMap.plugin
-        this.map.plugin(['AMap.ToolBar'], function () {
-            this.map.addControl(new AMap.ToolBar());
-        });
+        // //创建并添加工具条控件AMap.plugin
+        // this.map.plugin(['AMap.ToolBar'], function () {
+        //     this.map.addControl(new AMap.ToolBar());
+        // });
 
-        //创建高级信息窗体并在指定位置打开
-        this.map.plugin(['AMap.AdvancedInfoWindow'],function(){
-            var infowindow = new AMap.AdvancedInfoWindow({
-                content: '<div class="info-title">高德地图</div><div class="info-content">'+
-                '<img src="http://webapi.amap.com/images/amap.jpg">'+
-                '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br>'+
-                '<a target="_blank" href="http://mobile.amap.com/">点击下载高德地图</a></div>',
-                offset: new AMap.Pixel(0, -30)
-            });
-            infowindow.open(this.map, this.map.getCenter());//[116.480983, 39.989628]);
-        });
+        // //创建高级信息窗体并在指定位置打开
+        // this.map.plugin(['AMap.AdvancedInfoWindow'],function(){
+        //     var infowindow = new AMap.AdvancedInfoWindow({
+        //         content: '<div class="info-title">高德地图</div><div class="info-content">'+
+        //         '<img src="http://webapi.amap.com/images/amap.jpg">'+
+        //         '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br>'+
+        //         '<a target="_blank" href="http://mobile.amap.com/">点击下载高德地图</a></div>',
+        //         offset: new AMap.Pixel(0, -30)
+        //     });
+        //     infowindow.open(this.map, this.map.getCenter());//[116.480983, 39.989628]);
+        // });
 
-        let marker = new AMap.Marker({
-            position: this.map.getCenter(),
-            draggable: true,
-            cursor: 'move'
-        });
+        // let marker = new AMap.Marker({
+        //     position: this.map.getCenter(),
+        //     draggable: true,
+        //     cursor: 'move'
+        // });
 
-        marker.setLabel({
-            offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
-            content: "华科尔科技有限公司"
-        });
+        // marker.setLabel({
+        //     offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
+        //     content: "华科尔科技有限公司"
+        // });
 
-        marker.on('click',function(e){
-            marker.markOnAMAP({
-                name:'华科尔科技',
-                position:marker.getPosition()
-            })
-        });
+        // marker.on('click',function(e){
+        //     marker.markOnAMAP({
+        //         name:'华科尔科技',
+        //         position:marker.getPosition()
+        //     })
+        // });
 
-        //marker.content='华科尔科技有限公司'+this.map.getCenter();
-        //marker.on('click', markerClick); //绑定单击事件
+        // //marker.content='华科尔科技有限公司'+this.map.getCenter();
+        // //marker.on('click', markerClick); //绑定单击事件
 
-        marker.setMap(this.map);
-        // 设置点标记的动画效果，此处为弹跳效果
-        marker.setAnimation('AMAP_ANIMATION_BOUNCE');
+        // marker.setMap(this.map);
+        // // 设置点标记的动画效果，此处为弹跳效果
+        // marker.setAnimation('AMAP_ANIMATION_BOUNCE');
 
-        function markerClick(e){
-            var infoWindow = new AMap.InfoWindow();
-            infoWindow.setContent(e.target.content);
-            infoWindow.open(this.map, e.target.getPosition());
-        };
+        // function markerClick(e){
+        //     var infoWindow = new AMap.InfoWindow();
+        //     infoWindow.setContent(e.target.content);
+        //     infoWindow.open(this.map, e.target.getPosition());
+        // };
     }
 
     goToHomePage() {
@@ -487,6 +687,11 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
         // console.log(this.currentPoint.lat);
     }
 
+
+
+
+
+
     presentPopover(ev) {
         let popover = this.popoverCtrl.create(PopoverPage);
         popover.present({
@@ -499,7 +704,7 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
                 this.IsListChoose = false;
                 // this.ionViewWillEnter();
                 this.ionViewDidLoad();
-                this.create();
+                this.creat1();
                 // this.loadMap();
                 // this.loadToolBar();
                 console.log(111);
