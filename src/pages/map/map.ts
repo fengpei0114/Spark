@@ -59,6 +59,7 @@ export class MapPage{
    public toolPosition : BMapPosition;
    public IsMapChoose:boolean;
    public IsListChoose:boolean;
+   public showInfoWindow:boolean;
 
 
    public provinceNameArray = [{
@@ -403,6 +404,7 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
             this.provincechoose = false;
             this.AllcityAlarm = this.cityAlarmOrMul;
             this.alarmOrmul = true;
+            this.showInfoWindow = false;
   }
   ionViewWillEnter () {
           this.element = this.mapElement.nativeElement;
@@ -441,26 +443,16 @@ creat1(){
     })
 
     let marker = new AMap.Marker({content:'',map:map});
-    mass.on('mouseover', e=> {
+    mass.on('mousedown', e=> {
         marker.setPosition(e.data.lnglat);
-        // marker.setContent();    
-         let info = [];
-            info.push("<div><div style=\"padding:0px 0px 0px 4px;\"><b>高德软件</b>");
-            info.push("电话 : 010-84107000   邮编 : 100102");
-            info.push("地址 :北京市朝阳区望京阜荣街10号首开广场4层"+e.data.name+"</div>");
-            info.push("<button id=\"btn123\" click=\"getLngLat()\">123123</button>");
-            let infoWindow = new AMap.InfoWindow({
-                content: info.join("</br>"),
-                closeWhenClickMap:true,
-            });
-            infoWindow.open(map,marker.getPosition());
-        // marker.setLabel({content: e.data.name})
+        map.setCenter(e.data.lnglat);
+        this.showInfoWindow = !this.showInfoWindow;
     });
     mass.setMap(map);
 }
 
-getWork(){
-    console.log("123123");
+closeInfoWindow(){
+    this.showInfoWindow = false;
 }
 
 
