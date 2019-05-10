@@ -18,12 +18,12 @@ import { AppTreeComponentModule } from '../../components/app-tree/app-tree.modul
 import { SubNodePage } from './subnode/subnode';
 import { SubNodeDetailPage } from './subnode_detail/subnode_detail';
 import { ConfigHistoryPage } from './config_history/config_history'
-
+import { ChartPage } from './chart/chart'
 @NgModule({
 
 
   declarations: [
-    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage,  MalfunctionPage,  MalfunctiondetailPage, AlarmPage, StatusPage, ChangePasswordPage, NameLengthPipe,SubNodePage, SubNodeDetailPage,ConfigHistoryPage
+    HomePage, MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage,  MalfunctionPage,  MalfunctiondetailPage, AlarmPage, StatusPage, ChangePasswordPage, NameLengthPipe,SubNodePage, SubNodeDetailPage,ConfigHistoryPage,ChartPage
   ],
   imports: [
     IonicPageModule.forChild(HomePage),
@@ -34,7 +34,7 @@ import { ConfigHistoryPage } from './config_history/config_history'
     HomePage
   ],
     entryComponents:[
-      MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage,  MalfunctionPage,  MalfunctiondetailPage, AlarmPage, StatusPage, ChangePasswordPage, SubNodePage, SubNodeDetailPage,ConfigHistoryPage
+      MapPage, DevicePage, StatisticOfHomePage ,UserInfoPage, UserInfoEditPage, EquipmentPage,  MalfunctionPage,  MalfunctiondetailPage, AlarmPage, StatusPage, ChangePasswordPage, SubNodePage, SubNodeDetailPage,ConfigHistoryPage,ChartPage
     ],
 
 })

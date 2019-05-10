@@ -42,6 +42,7 @@ export class AlarmdetailPage {
     EquipmentMsg:any;
     alarmOrMul:boolean;
     alarmOrmulMsg:any;
+    TestArray:any;
     Msg_alarm = {
         "alarmId":"string1",
         "level":"一级",
@@ -78,10 +79,14 @@ export class AlarmdetailPage {
         // }else if(this.Msg.level == "三级"){
         //     document.getElementById("levelnote").style.color = "#000000"
         // }
+        this.TestArray=[];
+        this.dataInit();
+        console.log(this.TestArray);
         this.alarmOrmulMsg = this.navParams.data;
         this.alarmOrMul = this.navParams.data.alarmOrmul;
         this.equipmentName = this.navParams.data.equipmentName;
-        console.log("alarmormul:"+this.alarmOrMul);
+        
+        // console.log("alarmormul:"+this.alarmOrMul);
         if(this.alarmOrMul){
             this.alarmId = this.Msg_alarm.alarmId;
             this.level = this.Msg_alarm.level;
@@ -103,7 +108,32 @@ export class AlarmdetailPage {
             this.note = this.Msg_nul.isConfirmed;
         }
     }
-
+    dataInit(){
+        let url = "http://192.168.0.167:7002/Alarm/find/detail/byAlarmID";
+        let  body = {
+            "AlarmId":"1",
+        };
+        // let body="AlarmId=1";
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res=>{
+            return res.json();
+        }).subscribe(data=>{
+            console.log("111:"+data.sparkNum+","+data.subNode_InstallPoint);
+            this.TestArray.push(data);
+            //alarmTime: "Thu May 30 22:20:09 CST 2019"
+            console.log(new Date(Date.parse(data.alarmTime)).toLocaleString());
+            // console.log( $filter('date')(data.alarmTime, "yyyy-MM-dd hh:mm:ss"))
+        },error=>{
+            console.log(error);
+        })
+    }
     setup(){
         
     }

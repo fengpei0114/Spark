@@ -28,7 +28,7 @@
                         <ion-item class="listItem">
                             <ion-icon name="ios-keypad-outline"></ion-icon>
                             <div class="name"> 所属厂房:</div>
-                            <ion-note class="detail">{{item.factoryname}}</ion-note>
+                            <ion-note class="detail">{{item.factoryName}}</ion-note>
                         </ion-item>
                     <!-- </ion-card> -->
                     <!-- <ion-card style="background-color:transparent;padding-bottom:5px;border-radius:10px;margin-top:5px;"> -->
@@ -55,12 +55,12 @@
                     <ion-item class="listItem">
                         <ion-icon name="ios-build-outline"></ion-icon>
                         <div class="name"> 最后警报时间:</div>
-                        <ion-note class="detail">{{item.alarmMsg.alarmtimeEnd}}</ion-note>
+                        <ion-note class="detail">{{item.alarmMsg.alarmtimeStartTime}}</ion-note>
                     </ion-item>
                     <ion-item class="listItem">
                         <ion-icon name="ios-pulse-outline"></ion-icon>
                         <div class="name"> 最后故障时间 :</div>
-                        <ion-note class="detail">{{item.alarmMsg.malfunctiontimeEnd}}</ion-note>
+                        <ion-note class="detail">{{item.alarmMsg.malfunctiontimeTime}}</ion-note>
                     </ion-item>
                     <ion-item class="listItem">
                         <ion-icon name="ios-pulse-outline"></ion-icon>
@@ -74,7 +74,8 @@
                 </ion-list>
             <!-- <div style="position:relative;height:90%;width:90%;border:1px solid #000"> -->
                 <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
-                    <button ion-button type="submit" (click)="getSubNode(item.name)" style="width:90%;border-radius:15px;">查看子节点</button>
+                    <button ion-button type="submit" (click)="getSubNode(item.deviceId)" style="width:45%;border-radius:15px;">查看子节点</button>
+                    <button ion-button type="submit" (click)="getChart(item.name)" style="width:45%;border-radius:15px;">统计信息</button>
                     <button ion-button type="submit" (click)="checkAlarm(item.name)" style="border-radius:15px">警报历史</button>
                     <button ion-button type="submit" (click)="checkmalfunction(item.name)" style="border-radius:15px">故障历史</button>
                     <button ion-button type="submit" (click)="checkStatus(item.name)" style="border-radius:15px">配置历史</button>

@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar style="align-items: center;">
+       <ion-row no-padding>
+           <ion-col col-10 no-padding>
+               <ion-label text-center style="font-size: medium;" no-margin>统计信息</ion-label>
+           </ion-col>
+           <ion-col col-2 style="color: transparent">
+               <ion-icon item-right name="ios-hammer-outline" ></ion-icon>
+           </ion-col>
+       </ion-row>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="padding">
+  <ion-card  >
+    <ion-card-header>
+      <div>警报记录</div>
+      <div>警报总次数：{{getdataArray.MulNum}}</div>
+    </ion-card-header>
+  <ion-card-content>
+  <div id="alarm"></div>
+  </ion-card-content>
+  </ion-card> 
+  
+  <div hieht=100px></div>
+  <br/>
+  
+  <ion-card > 
+      <ion-card-header>
+      <div>故障记录</div>
+      <div>警报总次数：{{getdataArray.MulNum}}</div>
+      </ion-card-header>
+  <ion-card-content>
+  <div id="malfunction"></div>
+  </ion-card-content>
+  </ion-card>  
+
+
+
+
+</ion-content>

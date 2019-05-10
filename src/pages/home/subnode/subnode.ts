@@ -16,7 +16,9 @@ import {SubNodeDetailPage} from "../subnode_detail/subnode_detail"
   templateUrl: 'subnode.html',
 })
 export class SubNodePage {
-    name:string;
+    DeviceId:string;
+    pageNum:number = 0;
+    pagesizenow:number = 10;
     subnodeMsg = [{
         "subnodeId":"1",
         "installpoint":"XXX",
@@ -213,12 +215,85 @@ export class SubNodePage {
                 private httpService: HttpService,
 
     ) {
-        this.name = this.navParams.data;
+        this.subnodeMsg = [],
+        this.DeviceId = this.navParams.data;
+        console.log("123"+this.DeviceId);
+        this.InitData();
     }
     setup(){
         
     }
+    InitData(){
+        console.log("initDate");
+        let url = "http://192.168.0.167:7002/Subnode/find/byDeviceID";
+        let body = {
+            "DeviceId":this.DeviceId,
+            "pageSize":10,
+            "pageNum":1,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+            this.subnodeMsg = data.content;
+        })
+    }
+    ionViewDidEnter(){
+        
+    }
+
     getdetailMsg(item){
+        item.DeviceId = this.DeviceId;
+        // let data :any;
+        // data.subnodeID = item;
+        // data.DeviceId = this.DeviceId;
+        // console.log(data);
         this.app.getRootNav().push(SubNodeDetailPage,item);
     }
+
+    doInfinite1(infiniteScroll){
+        console.log('Begin async operation');
+        console.log(infiniteScroll._scrollY);
+        console.log(infiniteScroll.scrollHeight);
+        let url = this.httpService.getUrl() + "";
+        let body = {
+            "DeviceId":this.DeviceId,
+            "pageSize":10,
+            "pageNum":this.pageNum,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        setTimeout(()=>{
+            if(this.pagesizenow < 10){
+                infiniteScroll.enable(false);
+            }
+            this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data =>{
+                console.log(data);
+                this.pagesizenow = 0;
+                data.content.forEach((x)=>{
+                    this.pagesizenow++;
+                })  
+                if(this.pagesizenow == 0){
+                    infiniteScroll.enable(false);
+                }else{
+                    this.subnodeMsg = data;
+                }
+            })
+        console.log('Async operation has ended');
+        infiniteScroll.complete();
+        },500);
+        }
+
 }

@@ -15,6 +15,7 @@ import { AlarmPage } from './alarm/alarm';
 import { SubNodePage } from './subnode/subnode'
 import { StatusPage } from './status/status';
 import { ConfigHistoryPage } from './config_history/config_history'
+import { ChartPage } from './chart/chart';
 
 /**
  * Generated class for the HomePage page.
@@ -39,6 +40,7 @@ export class HomePage implements OnInit{
 
     menu:Array<object> = [];
     equipmentName:string;
+    userId:string;
 
     EquipmentArray = [{
         "name":"XXX厂-火花探测设备1",
@@ -51,9 +53,9 @@ export class HomePage implements OnInit{
         },
         "alarmMsg":{
             "alarmsum":"14",
-            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "alarmtimeStartTime":"2018/10/22 12:30:04",
             "malfunctionsum":"14",
-            "malfunctiontimeEnd":"2018/10/22 12:30:04",
+            "malfunctiontimeTime":"2018/10/22 12:30:04",
             "sittingsum":"345345",
             "sittingtimeEnd":"2018-08-05 15:57:39",
         },
@@ -79,9 +81,9 @@ export class HomePage implements OnInit{
         },
         "alarmMsg":{
             "alarmsum":"14",
-            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "alarmtimeStartTime":"2018/10/22 12:30:04",
             "malfunctionsum":"14",
-            "malfunctiontimeEnd":"2018/10/22 12:30:04",
+            "malfunctiontimeTime":"2018/10/22 12:30:04",
             "sittingsum":"345345",
             "sittingtimeEnd":"2018-08-05 15:57:39",
         },
@@ -106,9 +108,9 @@ export class HomePage implements OnInit{
         },
         "alarmMsg":{
             "alarmsum":"14",
-            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "alarmtimeStartTime":"2018/10/22 12:30:04",
             "malfunctionsum":"14",
-            "malfunctiontimeEnd":"2018/10/22 12:30:04",
+            "malfunctiontimeTime":"2018/10/22 12:30:04",
             "sittingsum":"345345",
             "sittingtimeEnd":"2018-08-05 15:57:39",
         },
@@ -133,9 +135,9 @@ export class HomePage implements OnInit{
         },
         "alarmMsg":{
             "alarmsum":"14",
-            "alarmtimeEnd":"2018/10/22 12:30:04",
+            "alarmtimeStartTime":"2018/10/22 12:30:04",
             "malfunctionsum":"14",
-            "malfunctiontimeEnd":"2018/10/22 12:30:04",
+            "malfunctiontimeTime":"2018/10/22 12:30:04",
             "sittingsum":"345345",
             "sittingtimeEnd":"2018-08-05 15:57:39",
         },
@@ -149,6 +151,7 @@ export class HomePage implements OnInit{
             "relay2":"开启",
         },
     },]
+    // EquipmentArray:any;
 
     constructor(public navParams: NavParams,
                 public app: App,
@@ -163,10 +166,53 @@ export class HomePage implements OnInit{
                 // private elementREf:ElementRef,
                 // private appConfig: AppConfig,
     ){
-        this.equipmentName = this.EquipmentArray[0].name;
-        console.log("123");
-    }
 
+        /**
+         * 接口3
+         */
+        // this.EquipmentArray=[],
+        // this.InitData();
+
+
+        this.userId = this.navParams.data;
+        // this.equipmentName = this.EquipmentArray[0].name;
+        // this.ArrayMsg=[],
+        // this.EquipmentArray=[],
+        console.log("123");
+        // console.log(this.ArrayMsg);
+        
+        
+    }
+    InitData(){
+        let url = "http://192.168.0.167:7002/Device/find/mobile_brief/byUserID";
+        let body = {
+            "userId":"1"
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+            
+            
+            data.forEach(x=>{
+                x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
+                x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();
+                x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
+            })
+            this.EquipmentArray = data;
+            this.equipmentName = this.EquipmentArray[0].name;
+            // this.ArrayMsg.push(data);
+            console.log(this.EquipmentArray);
+        })
+    }
+    ionViewDidEnter(){
+    }
     //初始化数据
     setUp() {
 
@@ -195,8 +241,12 @@ export class HomePage implements OnInit{
         // this.app.getRootNav().push(MalfunctionPage);
     }
     getSubNode(item){
+        console.log("home"+item);
         this.app.getRootNav().push(SubNodePage,item);
         // this.app.getRootNav().push(SafetySupervisionPage);
+    }
+    getChart(item){
+        this.app.getRootNav().push(ChartPage,item.id);
     }
     personalMsg(){
 
