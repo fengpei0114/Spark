@@ -4,8 +4,10 @@ import { PopoverPage } from './popover/popover';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../providers/http-service/http-service';
 import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_module_factory_loader';
+import { AlarmPage } from '../home/alarm/alarm'
 import { AlarmdetailPage } from './alarm_detail/alarm_detail';
-import { DevicePage } from'../home/device/device'
+import { MalfunctionPage } from '../home/malfunction/malfunction';
+import { MalfunctiondetailPage } from '../home/malfunction_detail/malfunction_detail'
 
 declare var BMap;
 declare var AMap: any;
@@ -18,31 +20,15 @@ declare var angular: any;
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-interface MyPoint{
-    lat:number;
-    lng:number;
-}
 
 enum BMapPosition {BMAP_ANCHOR_BOTTOM_RIGHT,BMAP_ANCHOR_TOP_RIGHT}
-
 
 @IonicPage()
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
 })
-//
-// class pointClass{
-//     lat:number;
-//     lng:number;
-//     info?:string;
-//     constructor(x:number,y:number,info?:string)
-//     {
-//         this.lng=x;
-//         this.lat=y;
-//         this.info=info;
-//     }
-// }
+
 
 
 
@@ -51,11 +37,6 @@ export class MapPage{
    @ViewChild('map') mapElement : ElementRef;
 
    public map:any;
-   public defaultAnchor;
-   public defaultOffset;
-   public currentPoint : MyPoint;
-   public mousePoint;
-   public pointArray:Array<any>=[];
    public mapStatus:string="BMAP_STATUS_SUCCESS";
    public toolPosition : BMapPosition;
    public IsMapChoose:boolean;
@@ -64,7 +45,8 @@ export class MapPage{
    public windowsMsg:object;
    public mapArray:Array<object>=[];
 
-   public provinceNameArray = [{
+   public provinceNameArray = [
+       {
     "id":"1",
     "provinceName":"陕西省",
     "cityArray" : [{
@@ -153,7 +135,8 @@ export class MapPage{
         "name":"廊坊市",
     }]
 }];
-public alarmArray=[{
+public alarmArray=[
+    {
     "id":"1",
     "alarm":[{
         "equipmentName":"01",
@@ -211,7 +194,8 @@ public alarmArray=[{
         "sparknum":"34",
     }]
 }];
-public cityAlarmOrMul=[{
+public cityAlarmOrMul=[
+    {
     "equipmentName":"01",
     "alarmNo":"012",
     "measure":"未确认",
@@ -722,6 +706,7 @@ public mapdata=[
         "MalType":"探头故障",
             "style":0
         }];
+
 public cityArray:any;
 public provincechoose:boolean;
 public choosebtn:any;
@@ -734,8 +719,6 @@ public AllcityAlarm:any;
 public element:any;
 public cityId:any=null; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
-
-
   constructor(
               public http:Http,
               public app:App,
@@ -757,31 +740,32 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
           this.creat1();
     console.log("ionViewDidEnter");
 }
-    initdata(){
-      for(let data of this.mapdata) {
-          if (data['uncomfirmAlarmNum'] != "0" && data['UncomfirmMalNum'] != "0") {
-              data['style'] = 0;
+    initdata() {
 
-          }
-          else if (data['uncomfirmAlarmNum'] != "0") {
-                  data['style'] = 1;
-          }
-          else if (data['UncomfirmMalNum'] != "0") {
-                  data['style'] = 1;
-          }
-          else {
-              if (data['runstate'] == "0") {
-                  data['style'] = 2;
-              }
-              if (data['runstate'] == "1") {
-                  data['style'] = 2;
-              }
+        let url = "http://192.168.0.167:7002/Statistics/GPS_Alarm_Mal/ByUserID";
+        let body = {
+            "userId": 1,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
+            console.log(data);
+            this.mapArray=data;
+            this.mapArray.map(devicedata=>{
+                devicedata['lnglat']=[devicedata['lng'],devicedata['lat']];
+            });
+            console.log(this.mapArray);
+        })
+    }
 
-           //   console.log(data);
-          }
+    mapDataProcessing(){
 
-          this.mapArray.push(data);
-      }
     }
 
     creat1(){
@@ -807,7 +791,7 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
     }
     ];
 
-    let mass = new AMap.MassMarks(this.mapArray,{
+    let mass = new AMap.MassMarks(this.mapdata,{ //接通接口后，mapdata改为mapArray
         opacity:0.8,
         zIndex:111,
         cursor:'pointer',
@@ -825,12 +809,17 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
     mass.setMap(map);
 }
 
-closeInfoWindow(){
-    this.showInfoWindow = false;
-}
+    closeInfoWindow(){
+         this.showInfoWindow = false;
+    }
 
-    gotoDeviceInfo(id){
-        this.app.getRootNav().push(DevicePage,id);
+    gotoAlarmPage(id){
+        this.app.getRootNav().push(AlarmPage,id);
+    }
+
+    gotoMalfunctionPage(id)
+    {
+        this.app.getRootNav().push(MalfunctionPage,id)
     }
 
 

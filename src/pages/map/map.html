@@ -40,20 +40,31 @@
             </ion-buttons>
             <ion-grid>
                 <ion-row>
-                    地址：{{windowsMsg.name}}
+                    设备编号：{{windowsMsg.deviceID}}
+                </ion-row>
+
+                <ion-row>
+                    设备地址：{{windowsMsg.name}}
                 </ion-row>
                 <ion-row>
-                        设备编号：{{windowsMsg.deviceID}}
-                    </ion-row>
-                    <ion-row>
-                            警报数量:{{windowsMsg.uncomfirmAlarmNum}}
-                        </ion-row>
+                    运行状态：{{windowsMsg.runstate|statusFilter}}
+                </ion-row>
                 <ion-row>
-                    故障数量:{{windowsMsg.UncomfirmMalNum}}
+                    <ion-col col-7 >未确认警报数:</ion-col>
+                      <ion-col style="color:red">
+                       {{windowsMsg.uncomfirmAlarmNum}}
+                      </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-7>未确认故障数:</ion-col>
+                    <ion-col style="color:orange">
+                        {{windowsMsg.UncomfirmMalNum}}
+                    </ion-col>
                 </ion-row>
             </ion-grid>
-            <button ion-button (click)="gotoDeviceInfo(windowsMsg.deviceID)">查看详情 >></button>
-        </div>
+                <button ion-button clear small (click)="gotoAlarmPage(windowsMsg.deviceID)">查看警报列表 >></button>
+                <button ion-button clear small (click)="gotoMalfunctionPage(windowsMsg.deviceID)">查看故障列表 >></button>
+            </div>
         </div>
         
     
