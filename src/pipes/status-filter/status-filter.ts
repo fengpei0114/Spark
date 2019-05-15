@@ -14,28 +14,19 @@ export class StatusFilterPipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {
-     let styleType :number = 0;
+     let status :string = '';
 
      switch (value) {
-         case "待处理":
-             styleType = 1;
+         case '0':
+             status = '关闭';
              break;
-         case "下发告知书":
-             styleType = 2;
-             break;
-         case "下发决定书":
-             styleType = 3;
-             break;
-         case "已交款":
-             styleType = 4;
-             break;
-         case "办结":
-             styleType = 5;
+         case '1':
+             status = '开启';
              break;
          default:
-             styleType = 0;
+             status = '异常';
              break;
      }
-    return styleType;
+    return status;
   }
 }
