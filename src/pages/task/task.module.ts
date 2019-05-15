@@ -6,10 +6,9 @@ import { PaginationComponentModule } from '../../components/pagination/paginatio
 import { TaskCreatePage } from './task-create/task-create';
 import { TaskHistoryAlarmPage } from './task-history-alarm/task-history-alarm';
 import { ViewerPicPage } from  './viewer-pic/viewer-pic';
-import { StatusFilterPipe } from '../../pipes/status-filter/status-filter';
 @NgModule({
   declarations: [
-    TaskPage, TaskDetailPage,TaskCreatePage, TaskHistoryAlarmPage, ViewerPicPage, StatusFilterPipe
+    TaskPage, TaskDetailPage,TaskCreatePage, TaskHistoryAlarmPage, ViewerPicPage,
   ],
   imports: [
     IonicPageModule.forChild(TaskPage),

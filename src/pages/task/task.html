@@ -49,7 +49,7 @@
     <ion-card>
         <ion-list *ngIf="showTasklist">
             <ion-grid class="result"  *ngFor="let item of tasklistData">
-                <ion-row class="borderStyle{{item.status|statusFilter}}">
+                <ion-row class="borderStyle{{item.status}}">
                     <ion-col>
                         {{item.project}}
                     </ion-col>
@@ -57,7 +57,7 @@
                         任务号:{{item.no}}
                     </ion-col>
                 </ion-row>
-                <ion-row class="taskRow borderStyle{{item.status|statusFilter}}">
+                <ion-row class="taskRow borderStyle{{item.status}}">
                     <ion-col width-25>
                         {{item.alarmtype}}
                     </ion-col>
