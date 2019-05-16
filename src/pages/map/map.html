@@ -40,25 +40,40 @@
             </ion-buttons>
             <ion-grid>
                 <ion-row>
-                    设备编号：{{windowsMsg.deviceID}}
+                    设备编号：{{windowsMsg.deviceId}}
                 </ion-row>
 
-                <ion-row>
-                    设备地址：{{windowsMsg.name}}
+                <ion-row >
+                    设备地址：{{windowsMsg.address}}
+                </ion-row>
+                <ion-row *ngIf="windowsMsg.runstate=='0'">
+                <ion-col>运行状态：</ion-col>
+                    <ion-col style="color:grey">
+                       {{windowsMsg.runstate|statusFilter}}
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="windowsMsg.runstate=='1'">
+                    <ion-col>运行状态：</ion-col>
+                    <ion-col style="color:green">
+                        {{windowsMsg.runstate|statusFilter}}
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="windowsMsg.runstate=='2'">
+                    <ion-col>运行状态：</ion-col>
+                    <ion-col style="color:red">
+                        {{windowsMsg.runstate|statusFilter}}
+                    </ion-col>
                 </ion-row>
                 <ion-row>
-                    运行状态：{{windowsMsg.runstate|statusFilter}}
-                </ion-row>
-                <ion-row>
-                    <ion-col col-7 >未确认警报数:</ion-col>
+                    <ion-col col-9 >未确认警报数:</ion-col>
                       <ion-col style="color:red">
-                       {{windowsMsg.uncomfirmAlarmNum}}
+                       {{windowsMsg.unconfirmedAlarmNum}}
                       </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-7>未确认故障数:</ion-col>
+                    <ion-col col-9>未确认故障数:</ion-col>
                     <ion-col style="color:orange">
-                        {{windowsMsg.UncomfirmMalNum}}
+                        {{windowsMsg.unconfirmedMalNum}}
                     </ion-col>
                 </ion-row>
             </ion-grid>

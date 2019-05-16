@@ -519,7 +519,7 @@ public mapdata=[
             "lnglat":[113.665412,34.757975],
             "name":"郑州市",
         "deviceID":"12",
-        "runstate":"1",
+        "runstate":"0",
         "uncomfirmAlarmNum":"0",
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
@@ -539,7 +539,7 @@ public mapdata=[
             "lnglat":[125.3245,43.886841],
             "name":"长春市",
         "deviceID":"12",
-        "runstate":"1",
+        "runstate":"2",
         "uncomfirmAlarmNum":"0",
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
@@ -736,8 +736,7 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
   }
   ionViewWillEnter () {
       this.initdata();
-          this.element = this.mapElement.nativeElement;
-          this.creat1();
+
     console.log("ionViewDidEnter");
 }
     initdata() {
@@ -755,12 +754,15 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
             headers: headers
         });
         this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
-            console.log(data);
+
             this.mapArray=data;
             this.mapArray.map(devicedata=>{
-                devicedata['lnglat']=[devicedata['lng'],devicedata['lat']];
+                devicedata['lnglat']=[devicedata['lat'],devicedata['lng']];
             });
             console.log(this.mapArray);
+            this.element = this.mapElement.nativeElement;
+            this.creat1();
+         //   console.log(this.mapdata);
         })
     }
 
@@ -788,10 +790,18 @@ public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报tru
         url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
         anchor: new AMap.Pixel(3, 3),
         size: new AMap.Size(5, 5)
+    }, {
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
+        anchor: new AMap.Pixel(6, 6),
+        size: new AMap.Size(11, 1)
+    }, {
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(15, 5)
     }
     ];
 
-    let mass = new AMap.MassMarks(this.mapdata,{ //接通接口后，mapdata改为mapArray
+    let mass = new AMap.MassMarks(this.mapArray,{ //接通接口后，mapdata改为mapArray
         opacity:0.8,
         zIndex:111,
         cursor:'pointer',
