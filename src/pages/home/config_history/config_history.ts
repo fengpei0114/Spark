@@ -21,39 +21,35 @@ export class ConfigHistoryPage {
    pageNum:number=0;
     pageSize:number=0;
     pageOther:number=0;
-
+    name:any;
 
     dataArray:Array<Object> = [];
+    deviceId:any;
     configHistoryArray = [
         {
-            "id":"1",
-            "configEquipment":"xxx",
-            "configInfo":"添加子节点",
-            "configurator":"peter"
+            "configId":"1",
+            "configinfo":"xxx",
+            "user":"peter"
         },
         {
-            "id":"1",
-            "configEquipment":"xxx",
-            "configInfo":"修改子节点",
-            "configurator":"tony"
+            "configId":"1",
+            "configinfo":"xxx",
+            "user":"tony"
         },
         {
-            "id":"1",
-            "configEquipment":"xxx",
-            "configInfo":"添加子节点",
-            "configurator":"peter"
+            "configId":"1",
+            "configinfo":"xxx",
+            "user":"peter"
         },
         {
-            "id":"1",
-            "configEquipment":"xxx",
-            "configInfo":"拆除子节点",
-            "configurator":"mary"
+            "configId":"1",
+            "configinfo":"xxx",
+            "user":"mary"
         },
         {
-            "id":"1",
-            "configEquipment":"xxx",
-            "configInfo":"添加子节点",
-            "configurator":"peter"
+            "configId":"1",
+            "configinfo":"xxx",
+            "user":"peter"
         },
     ]
 
@@ -65,15 +61,38 @@ export class ConfigHistoryPage {
                 private httpService: HttpService,
 
     ) {
-        this.pageOther = this.configHistoryArray.length % 10;
-        this.pageSize = (this.configHistoryArray.length-this.pageOther) / 10;
-        let maxnum=this.configHistoryArray.length<10?this.configHistoryArray.length:10;
-        for(var i = 0;i<maxnum;i++) {
-            this.dataArray.push(this.configHistoryArray[i]);
-        }
+        this.deviceId = this.navParams.data.deviceId;
+        this.name = this.navParams.data.factoryName+" - "+this.deviceId;
+        console.log("name"+this.name);
+        this.dataInit();
+        // this.pageOther = this.configHistoryArray.length % 10;
+        // this.pageSize = (this.configHistoryArray.length-this.pageOther) / 10;
+        // let maxnum=this.configHistoryArray.length<10?this.configHistoryArray.length:10;
+        // for(var i = 0;i<maxnum;i++) {
+        //     this.dataArray.push(this.configHistoryArray[i]);
+        // }
         
     }
-
+    dataInit(){
+        let url = "http://192.168.0.167:7002/Config/find/byDeviceID";
+        let body = {
+            "DeviceId":this.deviceId,
+            "pageSize":10,
+            "pageNum":1,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        })
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+            this.dataArray = data;
+        })
+    }
     getdata(){
 
     }

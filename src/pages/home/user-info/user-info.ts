@@ -21,10 +21,12 @@ export class UserInfoPage {
 
     userInfo: UserInfo;
     accountOrgName:string = "";
-    realName = "";
-    phone1 = "";
-    phone2 = "";
+    username = "";
+    userId = "";
+    plantname = "";
+    phone = "";
     email = "";
+    remark = "";
     userPosition = "";
     account = "";
     accountId = 0 ;
@@ -38,9 +40,10 @@ export class UserInfoPage {
                 private alertCtrl: AlertController,
                 private modalCtrl: ModalController,
     ) {
-        // this.accountId = (this.accountService.getAccount() as any).accountId;
-
-        console.log("accounId:"+ this.accountId);
+        // this.accountId = (this.accountService.getAccount() as any).userId;
+        console.log("userinfoPage");
+        this.dataInit();
+        // console.log("accounId:"+ this.accountId);
         // this.getUserInfoByAccountId(this.accountId).then(data => {
         //     this.realName = data['realName'];
         //     this.accountOrgName = data['accountOrgName'];
@@ -57,6 +60,30 @@ export class UserInfoPage {
         // });
     }
 
+
+    dataInit(){
+        let url = "http://192.168.0.136:7000/user/getuser";
+        let body= {
+            "userId":3,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+            this.username = data.username;
+            this.email = data.email;
+            this.phone = data.phone;
+            this.remark = data.remark;
+            
+        })
+    }
+
     openSignupModal() {
         this.openModal(UserInfoEditPage);
     }
@@ -70,14 +97,19 @@ export class UserInfoPage {
     }
 
     getUserInfoByAccountId(accountID) {
+        let url = "";
+        let body= {
+            "userId":this.accountId,
+        }
         let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
         });
         let options = new RequestOptions({
             headers: headers
         });
-        let body= "accountID="+accountID;
-        let url = this.httpService.getUrl()+"/NoiseDust/getAccount.do";
+        
         return new Promise((resolve,reject) => {
             this.http.post(url, body, options)
                 .map(res => res.json())

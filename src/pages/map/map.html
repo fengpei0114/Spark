@@ -40,7 +40,7 @@
             </ion-buttons>
             <ion-grid>
                 <ion-row>
-                    设备编号：{{windowsMsg.deviceId}}
+                    设备编号：{{windowsMsg.deviceID}}
                 </ion-row>
 
                 <ion-row >
@@ -49,19 +49,19 @@
                 <ion-row *ngIf="windowsMsg.runstate=='0'">
                 <ion-col>运行状态：</ion-col>
                     <ion-col style="color:grey">
-                       {{windowsMsg.runstate|statusFilter}}
+                       <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
                 <ion-row *ngIf="windowsMsg.runstate=='1'">
                     <ion-col>运行状态：</ion-col>
                     <ion-col style="color:green">
-                        {{windowsMsg.runstate|statusFilter}}
+                        <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
                 <ion-row *ngIf="windowsMsg.runstate=='2'">
                     <ion-col>运行状态：</ion-col>
                     <ion-col style="color:red">
-                        {{windowsMsg.runstate|statusFilter}}
+                        <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -155,7 +155,7 @@
                                 <ion-row>
                                     <ion-col>
                                             <ion-buttons end>
-                                        <button style="background:transparent" (click)="getAlarmDetail(item)">
+                                        <button style="background:transparent" (click)="getMalDetail(item)">
                                             <ion-note  class="detail">查看详情</ion-note>
                                             <ion-icon name="arrow-forward"></ion-icon>
                                         </button>

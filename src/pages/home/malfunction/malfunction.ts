@@ -19,7 +19,7 @@ import { MalfunctiondetailPage } from '../malfunction_detail/malfunction_detail'
 export class MalfunctionPage {
 
 
-   
+    deviceId:any;
     isequipment:boolean = false;
     isplant:boolean = false;
 
@@ -44,7 +44,10 @@ export class MalfunctionPage {
 
     equipmentArray:any;
     name:string;
-
+    MulNum:any;
+    unconfirmMulNum:any;
+    lastConfirmTime:any;
+    mulMsg:any;
     malfunctionArray=[
         {
             "malfunctionNo":"01",
@@ -206,20 +209,43 @@ export class MalfunctionPage {
                 private nativeService:NativeService,
 
     ) {
+        this.deviceId = this.navParams.data.deviceId;
+        this.mulMsg = this.navParams.data.alarmMsg;
         this.dataInit();
         
         
     }
 
     dataInit(){
-        this.name = this.navParams.data;
-        this.pageOther = this.malfunctionArray.length % 10;
-        this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
-        console.log(this.pageSize);
-        console.log(this.pageOther);
-        for(var i = 0;i<10;i++) {
-            this.dataArray.push(this.malfunctionArray[i]);
+        let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
+        let body = {
+            "DeviceId":this.deviceId,
+            "pageSize":10,
+            "pageNum":1,
         }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        })
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            data.forEach(x=>{
+                x.malTime = new Date(Date.parse(x.malTime)).toLocaleString();
+            })
+            console.log(data);
+            this.dataArray = data;
+        })
+        // this.name = this.navParams.data;
+        // this.pageOther = this.malfunctionArray.length % 10;
+        // this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
+        // console.log(this.pageSize);
+        // console.log(this.pageOther);
+        // for(var i = 0;i<10;i++) {
+        //     this.dataArray.push(this.malfunctionArray[i]);
+        // }
     }
     setup(){
         
@@ -307,11 +333,6 @@ export class MalfunctionPage {
             inputs: [
                 {
                     type:'text',
-                    name: 'dealstaff',
-                    placeholder: '确认人员姓名'
-                },
-                {
-                    type:'text',
                     name: 'note',
                     placeholder: '备注'
                 },
@@ -334,23 +355,57 @@ export class MalfunctionPage {
     }
 
     comfirmMalfunction(comfirmData,item) {
-        if (comfirmData['dealstaff'] == "") {
-            this.nativeService.showToast("确认人不可为空！", 3000);
+        console.log(comfirmData.note);
+        let url = "http://192.168.0.167:7002/Malfunction/update/confirm/ByMalID";
+        let body = {
+            "userName":"1233",
+            "malfunctionID":item.malId,
+            "Plantform":true,
+            "note":comfirmData.note,
         }
-        else {
-            for (var i = 0; i < this.malfunctionArray.length; i++) {
-                if (this.malfunctionArray[i].malfunctionNo == item.malfunctionNo) {
-                    this.malfunctionArray[i].malfunctionState = '已确认';
-                    let time = new Date();
-                    this.malfunctionArray[i].endTime = (time.getFullYear()).toString() + "-" + time.getMonth().toString() + "-" + time.getDay().toString() + " " + time.getHours().toString() + ":" + time.getMinutes().toString() + ":" + time.getSeconds().toString();
-                    this.malfunctionArray[i].dealPlatform = '移动端';
-                    this.malfunctionArray[i].dealStaff = comfirmData['dealstaff'];
-                    this.malfunctionArray[i].note = comfirmData['note'];
-                }
-            }
-            console.log(comfirmData);
-            this.dataArray.splice(0, this.dataArray.length);
-            this.dataInit();
-        }
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers:headers
+        })
+        this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data=>{
+            console.log(data);
+            if(data.status=="0"){
+                console.log("status==0")
+                const prompt = this.alertCtrl.create({
+                    title: '确认失败',
+                    message: data.Msg,
+                    buttons: [
+                        {
+                            text: '确认',
+                            handler: data => {
+                            }
+                        }
+                    ]
+                });
+                prompt.present();
+            }else{
+                this.pageNum--;
+                this.dataInit();
+            }                
+        },err =>{
+            //设置输入错误提示
+            console.log("status==0")
+            const prompt = this.alertCtrl.create({
+                title: '确认失败',
+                message: '网络连接错误',
+                buttons: [
+                    {
+                        text: '确认',
+                        handler: data => {
+                        }
+                    }
+                ]
+            });
+            prompt.present();
+        });
     }
 }

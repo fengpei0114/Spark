@@ -42,116 +42,116 @@ export class HomePage implements OnInit{
     equipmentName:string;
     userId:string;
 
-    EquipmentArray = [{
-        "name":"XXX厂-火花探测设备1",
-        "id":"1",
-        "factoryname":"XXX厂",
-        "status":{
-            "power":"关",
-            "running":"正常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"2018/10/22 12:30:04",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"2018/10/22 12:30:04",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05 15:57:39",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
+    // EquipmentArray = [{
+    //     "name":"XXX厂-火花探测设备1",
+    //     "id":"1",
+    //     "factoryname":"XXX厂",
+    //     "status":{
+    //         "power":"关",
+    //         "running":"正常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"2018-08-05 15:57:39",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },
 
-    {
-        "name":"XXX厂-火花探测设备2",
-        "id":"2",
-        "factoryname":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"异常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"2018/10/22 12:30:04",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"2018/10/22 12:30:04",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05 15:57:39",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
-    {
-        "name":"XXX厂-火花探测设备3",
-        "id":"3",
-        "factoryname":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"正常",
-            "malfunction":"有",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"2018/10/22 12:30:04",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"2018/10/22 12:30:04",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05 15:57:39",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
-    {
-        "name":"XXX厂-火花探测设备4",
-        "id":"4",
-        "factoryname":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"正常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"2018/10/22 12:30:04",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"2018/10/22 12:30:04",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"2018-08-05 15:57:39",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },]
-    // EquipmentArray:any;
+    // {
+    //     "name":"XXX厂-火花探测设备2",
+    //     "id":"2",
+    //     "factoryname":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"异常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"2018-08-05 15:57:39",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },
+    // {
+    //     "name":"XXX厂-火花探测设备3",
+    //     "id":"3",
+    //     "factoryname":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"正常",
+    //         "malfunction":"有",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"2018-08-05 15:57:39",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },
+    // {
+    //     "name":"XXX厂-火花探测设备4",
+    //     "id":"4",
+    //     "factoryname":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"正常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"2018-08-05 15:57:39",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },]
+    EquipmentArray:any;
 
     constructor(public navParams: NavParams,
                 public app: App,
@@ -170,11 +170,13 @@ export class HomePage implements OnInit{
         /**
          * 接口3
          */
-        // this.EquipmentArray=[],
-        // this.InitData();
+        this.EquipmentArray=[],
+        this.InitData();
 
 
         this.userId = this.navParams.data;
+        console.log("123");
+        console.log(this.httpService.getUrl());
         // this.equipmentName = this.EquipmentArray[0].name;
         // this.ArrayMsg=[],
         // this.EquipmentArray=[],
@@ -186,7 +188,7 @@ export class HomePage implements OnInit{
     InitData(){
         let url = "http://192.168.0.167:7002/Device/find/mobile_brief/byUserID";
         let body = {
-            "userId":"1"
+            "userId":1
         };
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -206,9 +208,10 @@ export class HomePage implements OnInit{
                 x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
             })
             this.EquipmentArray = data;
-            this.equipmentName = this.EquipmentArray[0].name;
+            this.equipmentName = this.EquipmentArray[0].factoryName;
             // this.ArrayMsg.push(data);
             console.log(this.EquipmentArray);
+            console.log(this.equipmentName);
         })
     }
     ionViewDidEnter(){

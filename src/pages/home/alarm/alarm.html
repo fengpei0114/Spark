@@ -23,34 +23,30 @@
 <ion-content padding class="padding">
     <ion-item class="staticBar">
         <ion-row >
-            <ion-col col-5 >4条 已确认</ion-col>
-            <ion-col col-5 >14 条未确认</ion-col>
+            <ion-col col-5 >{{alarmMsg.alarmsum-alarmMsg.unconfirmedAlarmSum}}条 已确认</ion-col>
+            <ion-col col-5 >{{alarmMsg.unconfirmedAlarmSum}} 条未确认</ion-col>
         </ion-row>
         <ion-row >
-            <ion-col>最后确认时间：2018/10/22 12:30:04</ion-col>
+            <ion-col>最后确认时间：{{alarmMsg.alarmtimeStartTime}}</ion-col>
         </ion-row>
     </ion-item>
     <br>
     <ion-card *ngFor="let item of dataArray" no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px">
-        <ion-item *ngIf="item.measure=='已确认'" >
+        <ion-item *ngIf="item.isConfirmed" >
             <ion-item style="color: grey;border-bottom: solid darkgray 1px;">
-                <ion-note  item-left>{{item.alarmNo}}</ion-note>
-                <ion-note  item-right>{{item.measure}}</ion-note>
+                <ion-note  item-left>{{item.alarmID}}</ion-note>
+                <ion-note  item-right>已确认</ion-note>
             </ion-item>
             <ion-item style="color:grey ;font-size: small" no-padding>
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-5>类型：{{item.alarmType}}</ion-col>
                         <ion-col col-4>等级：{{item.grade}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>报警探头：{{item.alarmProbe}}</ion-col>
+                        <ion-col>报警探头：{{item.alarmDetectors}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>开始：{{item.startTime}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>结束：{{item.endTime}}</ion-col>
+                        <ion-col>开始：{{item.alarmTime}}</ion-col>
                     </ion-row>
                     <!--<ion-row>-->
                     <!--<ion-col>措施：{{item.measure}}</ion-col>-->
@@ -58,25 +54,21 @@
                 </ion-grid>
             </ion-item>
         </ion-item>
-        <ion-item *ngIf="item.measure=='未确认'" >
+        <ion-item *ngIf="!item.isConfirmed" >
             <ion-item style="border-bottom: solid darkgray 1px;">
-                <ion-note style="color:black" item-left>{{item.alarmNo}}</ion-note>
-                <ion-note style="color:black" item-right>{{item.measure}}</ion-note>
+                <ion-note style="color:black" item-left>{{item.alarmID}}</ion-note>
+                <ion-note style="color:black" item-right>未确认</ion-note>
             </ion-item>
             <ion-item style="color:black ;font-size: small;" no-padding>
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-5>类型：{{item.alarmType}}</ion-col>
                         <ion-col col-4>等级：{{item.grade}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>报警探头：{{item.alarmProbe}}</ion-col>
+                        <ion-col>报警探头：{{item.alarmDetectors}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>开始：{{item.startTime}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>结束：{{item.endTime}}</ion-col>
+                        <ion-col>开始：{{item.alarmTime}}</ion-col>
                     </ion-row>
                     <!--<ion-row>-->
                     <!--<ion-col>措施：{{item.measure}}</ion-col>-->

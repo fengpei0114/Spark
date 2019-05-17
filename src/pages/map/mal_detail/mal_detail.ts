@@ -10,10 +10,10 @@ import { HttpService } from '../../../providers/http-service/http-service';
  * on Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-alarmdetail',
-  templateUrl: 'alarm_detail.html',
+  selector: 'page-maldetail',
+  templateUrl: 'mal_detail.html',
 })
-export class AlarmdetailPage {
+export class MaldetailPage {
     alarmId:string;
     level:string;
     fireNum:string;
@@ -47,26 +47,26 @@ export class AlarmdetailPage {
     prinicipalphone:any;
     plantform:any;
     comfirmUser:any;
-    Msg_alarm = {
-        "alarmId":"string1",
-        "level":"一级",
-        "fireNum":"string2",
-        "subNode":"string6",
-        "alarmDetector":"string3",
-        "alarmdatetime":"string4",
-        "enddatetime":"string8",
-        "isConfirmed":"string7",
-        "note":"string9",
-        }
-    Msg_nul={
-        "multype":"XXX",
-        "mulComponent":"string2",
-        "subNode":"string6",
-        "muldata":"string3",
-        "measure":"string4",
-        "isConfirmed":"string7",
-        "note":"string9",
-    }
+    // Msg_alarm = {
+    //     "alarmId":"string1",
+    //     "level":"一级",
+    //     "fireNum":"string2",
+    //     "subNode":"string6",
+    //     "alarmDetector":"string3",
+    //     "alarmdatetime":"string4",
+    //     "enddatetime":"string8",
+    //     "isConfirmed":"string7",
+    //     "note":"string9",
+    //     }
+    // Msg_nul={
+    //     "multype":"XXX",
+    //     "mulComponent":"string2",
+    //     "subNode":"string6",
+    //     "muldata":"string3",
+    //     "measure":"string4",
+    //     "isConfirmed":"string7",
+    //     "note":"string9",
+    // }
 
     constructor(public http:Http,
                 public navCtrl: NavController,
@@ -85,13 +85,14 @@ export class AlarmdetailPage {
         // }
         this.TestArray=[];
         // console.log(this.TestArray);
+        this.deviceName = this.navParams.data.deviceName;
+        this.measure = this.navParams.data.measure;
         // this.alarmOrmulMsg = this.navParams.data;
         // this.alarmOrMul = this.navParams.data.alarmOrmul;
         // this.equipmentName = this.navParams.data.equipmentName;
         // this.alarmOrMul = this.navParams.data.alarmOrmul;
-        this.deviceName = this.navParams.data.deviceName;
-        this.AlarmdataInit();
-            // this.MuldataInit();
+
+        this.MuldataInit();
 
     }
     /**
@@ -114,41 +115,20 @@ export class AlarmdetailPage {
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
-            
-        })
-    }
-    /**
-     * 获取警报详细信息
-     */
-    AlarmdataInit(){
-        console.log("alarmdata Init");
-        let url = "http://192.168.0.167:7002/Alarm/find/detail/byAlarmID";
-        let  body = {
-            "AlarmId":"1",
-        };
-        // let body="AlarmId=1";
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            'Accept': 'application/json'
-        });
-        let options = new RequestOptions({
-            headers: headers
-        });
-        this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data=>{
-            this.alarmId = data.alarmId;
-            this.level = data.level;
-            this.fireNum = data.sparkNum;
-            this.subNode = data.subNode_InstallPoint;
-            this.alarmDetector = data.alarmDetector;
-            this.alarmdatetime = data.alarmTime;
-            this.plantform = data.plantform;
-            this.comfirmUser = data.comfirmUser;
+            this.multype = data.malType;
+            this.mulComponent = data.component;
+            this.muldata = data.malTime;
+            this.isConfirmed = data.confirmed;
             this.prinicipalName = data.prinicipalName;
             this.prinicipalphone = data.prinicipalphone;
-            this.isConfirmed = data.isConfirmed;
-            this.note = data.note;
-            console.log("alarmdata");
+            this.note = data.isConfirmed;
+            if(data.confirmed){
+                this.plantform = data.plantform;
+                this.comfirmUser = data.user;
+            }
+            
+            
+            console.log("maldata");
         },error=>{
             console.log(error);
         })
@@ -163,40 +143,5 @@ export class AlarmdetailPage {
             position : 'bottom',
             dismissOnPageChange : true,
         }).present();
-    }
-    chooseEqu(item){
-        let id = item-1;
-        console.log(this.Msg_alarm[id].name);
-        this.Ename = this.Msg_alarm[id].name;
-        this.EquipmentMsg = this.Msg_alarm[id].msg;
-        this.choose = true;
-        this.ischangeH = false;
-        this.ischangeE = true;
-        // this.equipmentName = this.Msg[id].name;
-        // this.ischange = false;
-    }
-    chooseMsg(item){
-        this.ischangeE = false;
-        this.EquipmentMsg.forEach((x)=>{
-            if(x.id==item){
-                console.log(x.id);
-                // this.choosebtn.style.color = "#000000";
-                this.equipmentName = x.name;
-            }
-        });
-    }
-    changestatus(){
-        this.ischangeE = false;
-        this.ischangeH = false;
-    }
-    ischoose(item){
-        if(item == 0){
-            this.ischangeH = !this.ischangeH;
-            this.ischangeE = false;
-        }
-        if(item == 1){
-            this.ischangeE = !this.ischangeE;
-            this.ischangeH = false;
-        }
     }
 }

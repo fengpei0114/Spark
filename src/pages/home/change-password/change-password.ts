@@ -64,10 +64,6 @@ export class ChangePasswordPage {
         if(this.new1 == "" || this.new2 == "" || this.old == ""){
             this.errorMsg = "密码不能为空！"
         }
-        //1.原密码正确
-        else if(this.old != "123123"){
-            this.errorMsg = "原始密码错误！";
-        }
         //2.两次输入密码相同
         else if(this.new1 != this.new2){
             this.errorMsg = "两次输入密码不一致！"
@@ -87,18 +83,45 @@ export class ChangePasswordPage {
                         text: '确定',
                         handler: () => {
                             console.log("确定");
-                            if(this.is == true){
-                                this.showConfirm("修改密码","修改密码成功！","确定",()=>{
-                                    this.old = "";
-                                    this.new1 = "";
-                                    this.new2 = "";
-                                    this.errorMsg = "";
-                                })
-                            }else{
-                                this.showConfirm("修改密码","修改密码失败！","确定",()=>{
-
-                                })
+                            let url = "http://192.168.0.136:7000/user/updatepassword";
+                            let body = {
+                                "userId":1,
+                                "oldpassword":this.old,
+                                "newpassword":this.new1,
                             }
+                            let headers = new Headers({
+                                'Content-Type': 'application/json',
+                                "Access-Control-Allow-Origin": "*",
+                                'Accept': 'application/json'
+                            });
+                            let options = new RequestOptions({
+                                headers:headers
+                            })
+                            this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data=>{
+                                console.log(data);
+                                    console.log("status==0")
+                                    if(data.status == 1){
+                                        this.errorMsg = data.Msg;
+                                    }else{
+                                        this.showConfirm("修改密码","修改密码成功！","确定",()=>{
+                                        })
+                                    }               
+                            },err =>{
+                                //设置输入错误提示
+                                // console.log("status==0")
+                                // const prompt = this.alertCtrl.create({
+                                //     title: '确认失败',
+                                //     message: '网络连接错误',
+                                //     buttons: [
+                                //         {
+                                //             text: '确认',
+                                //             handler: data => {
+                                //             }
+                                //         }
+                                //     ]
+                                // });
+                                // prompt.present();
+                            });
                         }
                     }
                 ]

@@ -29,11 +29,11 @@ export class SetServerIpPage {
                 public alertCtrl: AlertController,
     ) {
 
-     this.serverIp = this.httpService.getIp();
-     this.serverPort = this.httpService.getPort();
+    //  this.serverIp = this.httpService.getIp();
+    //  this.serverPort = this.httpService.getPort();
 
-        // this.serverIp = "47.92.34.161";
-        // this.serverPort = "80";
+        this.serverIp = "47.92.34.161";
+        this.serverPort = "80";
     }
 
     changeIpAndPort() {

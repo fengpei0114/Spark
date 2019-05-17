@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 import { Md5 } from 'ts-md5/dist/md5';
 import { HomePage } from '../home/home';
 import { concat } from 'rxjs/operator/concat';
+import { MapPage } from '../map/map';
 declare let cordova: any;
 /**
  * Generated class for the LoginPage page.
@@ -67,6 +68,13 @@ export class LoginPage {
         this.password = this.loginForm.controls['password'];
         this.randomCode = this.loginForm.controls['randomCode'];
 
+        // if(this.username == "111111"){
+        //     this.nativeService.hideLoading();
+        //     this.navCtrl.setRoot(HomePage).then();
+        // }else if(this.username == "222222"){
+        //     this.nativeService.hideLoading();
+        //     this.navCtrl.setRoot(MapPage).then();
+        // }
     }
     ngAfterViewInit() {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('input'),
@@ -75,42 +83,122 @@ export class LoginPage {
 
     //判断是否记住密码
     onSubmit(value) {
-        this.httpService.setIpAndPort("47.92.34.161","80");
+        
+        // this.httpService.setIpAndPort("47.92.34.161","80");
         if (value.randomCode === this.randomCodeImage){
-            
+            // console.log(this.loginForm.valid);
+            // this.username = value.username;
+            // this.password = value.password;
             if(this.loginForm.valid) {
-                
+                // console.log(this.username+"  "+value.password);
                 this.nativeService.showLoading('正在登陆...');
-                
-                this.checkUserInfo("admin","69yananshengxi").then(data =>{
-                    // alert(data['load']);
-                    this.accountService.setAccount(data);
 
-                   // alert(this.isToggled);
-                    console.log(this.accountService.getAccount());
-                    if(data['load'] == "Y"){
-                        if(this.isToggled){
-
-                           // alert('记住密码');
-                            this.storage.set('username',"admin").then();
-                            this.storage.set('password',"69yananshengxi").then();
-                        }
-
-                        this.nativeService.hideLoading();
-                        this.navCtrl.setRoot(HomePage,data).then();
-                    }else {
-                        //console.log(value.password.length());
-                        this.errorMsg = "  *用户名或密码错误！"
-                        //设置输入错误提示
-                        // let toast = this.toastCtrl.create({
-                        //     message: '用户名或密码错误！',
-                        //     duration: 2000,
-                        //     position: 'middle'
-                        // });
-                        
-                        // toast.present(toast).then();
-                    }
+                let url = "http://192.168.0.136:8080/auth/login";
+                // this.password = Md5.hashStr(this.password).toString();
+                let body= {
+                    // "username":"admin",
+                    // "password":"admin",
+                    "username":value.username,
+                    "password":value.password,
+                };
+                let body2={
+                    "username":"admin",
+                    "password":"admin",
+                }
+                let headers = new Headers({
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
+                    'Accept': 'application/json'
                 });
+                let options = new RequestOptions({
+                    headers: headers
+                });
+                this.http.post(url,JSON.parse(JSON.stringify(body)),options).map(res =>res.json()).subscribe(data => {
+                    // alert(data);
+                    console.log("112233");
+                    console.log(data);
+                    if(data.status == "1"){
+                        //  console.log(value.password.length());
+                        this.errorMsg = data.Msg;
+                    }else if(data.status == "0"){
+                        this.accountService.setAccount(data);
+                        if(this.isToggled){
+                            // alert('记住密码');
+                            this.storage.set('username',this.username).then();
+                            this.storage.set('password',this.password).then();
+                            this.storage.set('identyid',data['identyid']).then();
+                        }
+                        if(data.identity == "1"){
+                            this.nativeService.hideLoading();
+                            this.navCtrl.setRoot(HomePage).then();
+                        }else if(data.identity == "2"){
+                            this.nativeService.hideLoading();
+                            this.navCtrl.setRoot(MapPage).then();
+                        }
+                    }
+                },error=>{
+                    console.log(error);
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // this.checkUserInfo(this.username,this.password).then(data =>{
+                //     // alert(data['load']);
+                //     this.accountService.setAccount(data);
+
+                //     if(data[status]="0"){
+
+                //     }
+
+
+                //    // alert(this.isToggled);
+                //     console.log(this.accountService.getAccount());
+                //     if(data['status'] == "0"){
+                //         if(this.isToggled){
+
+                //            // alert('记住密码');
+                //             this.storage.set('username',this.username).then();
+                //             this.storage.set('password',this.password).then();
+                //             this.storage.set('identyid',data['identyid']).then();
+                //         }
+                //         if(data['identyid'] == "1"){
+                //             this.nativeService.hideLoading();
+                //             this.navCtrl.setRoot(MapPage).then();
+                //         }else if(data['identyid'] == "2"){
+                //             this.nativeService.hideLoading();
+                //             this.navCtrl.setRoot(HomePage).then();
+                //         }else if(data['identyid'] == "3"){
+                //             this.nativeService.hideLoading();
+                //             this.navCtrl.setRoot(HomePage).then();
+                //         }
+                //         this.nativeService.hideLoading();
+                //         this.navCtrl.setRoot(HomePage).then();
+                //     }else {
+                //         //console.log(value.password.length());
+                //         this.errorMsg = data['Msg'];
+                //         //设置输入错误提示
+                //         // let toast = this.toastCtrl.create({
+                //         //     message: '用户名或密码错误！',
+                //         //     duration: 2000,
+                //         //     position: 'middle'
+                //         // });
+                        
+                //         // toast.present(toast).then();
+                //     }
+                // });
             }else{
                 if(value.username==""){
                     this.errorMsg = "  *用户名不能为空！";

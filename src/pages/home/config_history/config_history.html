@@ -17,13 +17,16 @@
             <ion-item class="Body" no-padding>
                 <ion-grid>
                     <ion-row>
-                        <ion-col>所属设备：{{item.configEquipment}}</ion-col>
+                        <ion-col>所属设备：{{name}}</ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>配置信息：{{item.configInfo}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>配置人员：{{item.configurator}}</ion-col>
+                        <ion-col>配置人员：{{item.user}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>配置时间：{{item.configTime}}</ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-item>

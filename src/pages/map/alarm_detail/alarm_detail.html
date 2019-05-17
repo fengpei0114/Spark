@@ -11,7 +11,7 @@
     </ion-header> 
     
     <ion-content id="padding">
-        <ion-card *ngIf="alarmOrMul" style="background-color: transparent">
+        <ion-card style="background-color: transparent">
             <ion-list  inset>
                 <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
                     <div class="name">警报等级 : </div>
@@ -48,39 +48,6 @@
                 </ion-item>
             </ion-list>
         </ion-card>
-        <ion-card *ngIf="!alarmOrMul" style="background-color: transparent">
-                <ion-list  inset>
-                    <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
-                        <div class="name">故障类型 : </div>
-                        <div class="detail">{{multype}} </div>
-    
-                    </ion-item >
-                    <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
-                        <div class="name">故障元器件 : </div>
-                        <div class="detail">{{mulComponent}}</div>
-                    </ion-item>
-                    <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
-                        <div class="name">所属子节点 : </div>
-                        <div class="detail">{{subNode}}</div>
-                    </ion-item>
-                    <ion-item class="listItem"><ion-icon name="ios-stopwatch-outline"></ion-icon>
-                        <div class="name"> 故障时间 :  </div>
-                        <div class="detail">{{muldata}}</div>
-                    </ion-item>
-                    <ion-item class="listItem"><ion-icon name="ios-notifications-outline"></ion-icon>
-                        <div class="name"> 建议处理措施: </div>
-                        <div class="detail">{{measure}} </div>
-                    </ion-item>
-                    <ion-item class="listItem"><ion-icon name="ios-construct-outline"></ion-icon>
-                        <div class="name"> 是否确认 : </div>
-                        <div class="detail">{{isConfirmed}} </div>
-                    </ion-item>
-                    <ion-item class="listItem"><ion-icon name="ios-create-outline"></ion-icon>
-                        <div class="name"> 备注信息 : </div>
-                        <div class="detail">{{note}}</div>
-                    </ion-item>
-                </ion-list>
-            </ion-card>
 
         <!--<div style="position:absolute;width:100%;height:100%;">-->
             <!--<ion-card style="position:relative;background:none;top:10px;height:80px">设备信息</ion-card>-->

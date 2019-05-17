@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,AlertController} from 'ionic-angular';
+import { NavController, NavParams ,AlertController,ToastController} from 'ionic-angular';
 import { HttpService } from '../../../providers/http-service/http-service';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeService } from '../../../providers/native-service/native-service'
+import { Header } from 'ionic-angular/components/toolbar/toolbar-header';
+import { AccountService } from '../../../providers/account-service/account-service'
 /**
  * Generated class for the AlarmPage page.
  *
@@ -23,6 +25,13 @@ export class AlarmPage {
     deviceId:string;
     pagesizenow:number;
     alarmId:any;
+    alarmNum:any;
+    unconfirmAlarmNum:any;
+    lastConfirmTime:any;
+    errorMsg:any;
+    confirmNum:number;
+    alarmMsg:any;
+    unconfirmNum:number;
     alarmArray=[
         {
             "alarmNo":"01",
@@ -121,20 +130,44 @@ export class AlarmPage {
             public navParams: NavParams,
             public httpService: HttpService,
             public http: Http,
+            public accountService:AccountService,
             private alertCtrl:AlertController,
+            public toastCtrl: ToastController,
             private nativeService:NativeService,) {
-
+                console.log(this.httpService.getUrl());
+                this.alarmMsg = this.navParams.data.alarmMsg;
+                console.log(this.alarmMsg);
+    this.name = this.navParams.data.name;
+    this.deviceId = this.navParams.data.deviceId;
+    // this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
+    // this.alarmNum = this.navParams.data.alarmsum;
+    // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
+    // this.alarmTime = this.alarm
       this.dataInit();
+      console.log(this.dataArray);
   }
   dataInit(){
-    this.name = this.navParams.data;
-    this.pageOther = this.alarmArray.length % 10;
-    this.pageSize = (this.alarmArray.length-this.pageOther) / 10;
-    console.log(this.pageSize);
-    console.log(this.pageOther);
-    for(var i = 0;i<10;i++) {
-        this.dataArray.push(this.alarmArray[i]);
+    let url = "http://192.168.0.167:7002/Alarm/find/brief/byDeviceID";
+    let body = {
+        "DeviceId":this.deviceId,
+        "pageSize":10,
+        "pageNum":1,
     }
+    let headers = new Headers({
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        'Accept': 'application/json'
+    })
+    let options = new RequestOptions({
+        headers: headers
+    });
+    this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+        data.forEach(x=>{
+            x.AlarmTime = new Date(Date.parse(x.AlarmTime)).toLocaleString();
+        })
+        console.log(data);
+        this.dataArray = data;
+    })
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmPage');
@@ -208,11 +241,6 @@ export class AlarmPage {
                     inputs: [
                         {
                             type:'text',
-                            name: 'dealstaff',
-                            placeholder: '确认人员姓名'
-                        },
-                        {
-                            type:'text',
                             name: 'note',
                             placeholder: '备注'
                         },
@@ -235,24 +263,57 @@ export class AlarmPage {
             }
         
             comfirmAlarmfunction(comfirmData,item) {
-                if (comfirmData['dealstaff'] == "") {
-                    this.nativeService.showToast("确认人不可为空！", 3000);
+                console.log(comfirmData.note);
+                let url = "http://192.168.0.167:7002/Alarm/update/confirm/single";
+                let body = {
+                    "userName":"1233",
+                    "alarmID":item.alarmID,
+                    "Plantform":"移动端",
+                    "note":comfirmData.note,
                 }
-                else {
-                    // let url = this.httpService.getUrl() + "";
-                    // let body = "AlarmId=1&confirmplant='移动端'&username='123123'&note=''";
-                    // let headers = new Headers({
-                    //     'Content-Type': 'application/x-www-form-urlencoded'
-                    // });
-                    // let options = new RequestOptions({
-                    //     headers:headers
-                    // })
-                    // this.http.post(url,body,options).map(res=>res.json()).subscribe(data=>{
-                    //     console.log(data);
-                    // })
-                    console.log(comfirmData);
-                    //this.dataArray.splice(0, this.dataArray.length);
-                    //this.dataInit();
-                }
+                let headers = new Headers({
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
+                    'Accept': 'application/json'
+                });
+                let options = new RequestOptions({
+                    headers:headers
+                })
+                this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data=>{
+                    console.log(data);
+                    if(data.status=="0"){
+                        console.log("status==0")
+                        const prompt = this.alertCtrl.create({
+                            title: '确认失败',
+                            message: data.Msg,
+                            buttons: [
+                                {
+                                    text: '确认',
+                                    handler: data => {
+                                    }
+                                }
+                            ]
+                        });
+                        prompt.present();
+                    }else{
+                        this.pageNum--;
+                        this.dataInit();
+                    }                
+                },err =>{
+                    //设置输入错误提示
+                    console.log("status==0")
+                    const prompt = this.alertCtrl.create({
+                        title: '确认失败',
+                        message: '网络连接错误',
+                        buttons: [
+                            {
+                                text: '确认',
+                                handler: data => {
+                                }
+                            }
+                        ]
+                    });
+                    prompt.present();
+                });
             }
 }

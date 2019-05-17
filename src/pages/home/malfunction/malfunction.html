@@ -17,41 +17,42 @@
 <ion-content padding class="padding">
     <ion-item class="staticBar">
         <ion-row >
-            <ion-col col-5 no-padding>4条 已确认</ion-col>
-            <ion-col col-5 no-padding>14 条未确认</ion-col>
+            <ion-col col-5 no-padding>{{mulMsg.alarmsum-mulMsg.unconfirmedAlarmSum}}条 已确认</ion-col>
+            <ion-col col-5 no-padding>{{mulMsg.unconfirmedAlarmSum}} 条未确认</ion-col>
         </ion-row>
         <ion-row >
-            <ion-col>最后确认时间：2019/4/22 12:30:04</ion-col>
+            <ion-col>最后确认时间：{{mulMsg.alarmtimeStartTime}}</ion-col>
         </ion-row>
     </ion-item>
     <br>
     <ion-card *ngFor="let item of dataArray" no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px">
-        <ion-item *ngIf="item.malfunctionState=='已确认'" >
+        <ion-item *ngIf="item.confirmed" >
             <ion-item class="confirmHead">
-                <ion-note  item-left>{{item.malfunctionNo}}</ion-note>
+                <ion-note  item-left>{{item.malId}}</ion-note>
                 <ion-note  item-right>已确认</ion-note>
             </ion-item>
             <ion-item class="confirmBody" no-padding>
                 <ion-grid>
                     <ion-row>
-                      <ion-col col>故障时间：{{item.startTime}}</ion-col>
-                    <ion-col col>确认时间：{{item.endTime}}</ion-col>
+                      <ion-col col>故障时间：{{item.malTime}}</ion-col>
+                    <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
                     </ion-row>
                     <ion-row>
-                        <ion-col col>故障类型：{{item.malfunctionType}}</ion-col>
+                        <ion-col col>故障类型：{{item.malType}}</ion-col>
                     </ion-row>
-                    <ion-row>
+                    <!-- <ion-row>
                         <ion-col>故障子节点：{{item.childNode}}</ion-col>
-                    </ion-row>
+                    </ion-row> -->
                     <ion-row>
-                        <ion-col>故障元器件：{{item.malfunctionEquipment}}</ion-col>
+                        <ion-col>故障元器件：{{item.component}}</ion-col>
                     </ion-row>
-                    <ion-row>
+                    <!-- <ion-row>
                         <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                    </ion-row>
+                    </ion-row> -->
                     <ion-row>
-                        <ion-col col-5>确认人：{{item.dealStaff}}</ion-col>
-                        <ion-col >确认方：{{item.dealPlatform}}</ion-col>
+                        <ion-col col-5>确认人：{{item.user}}</ion-col>
+                        <ion-col *ngIf="item.platform">确认方：移动端</ion-col>
+                        <ion-col *ngIf="!item.platform">确认方：设备端</ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>备注：{{item.note}}</ion-col>
@@ -59,28 +60,28 @@
                 </ion-grid>
             </ion-item>
         </ion-item>
-        <ion-item *ngIf="item.malfunctionState=='未确认'" >
+        <ion-item *ngIf="!item.confirmed" >
             <ion-item class="noconfirmHead">
-                <ion-note style="color:black" item-left>{{item.malfunctionNo}}</ion-note>
+                <ion-note style="color:black" item-left>{{item.malId}}</ion-note>
                 <ion-note style="color:black" item-right>未确认</ion-note>
             </ion-item>
             <ion-item class="noconfirmBody" no-padding>
                 <ion-grid>
                     <ion-row>
-                    <ion-col col>故障时间：{{item.startTime}}</ion-col>
+                    <ion-col col>故障时间：{{item.malTime}}</ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col col>故障类型：{{item.malfunctionType}}</ion-col>
+                        <ion-col col>故障类型：{{item.malType}}</ion-col>
                     </ion-row>
-                    <ion-row>
+                    <!-- <ion-row>
                         <ion-col>故障子节点：{{item.childNode}}</ion-col>
-                    </ion-row>
+                    </ion-row> -->
                     <ion-row>
-                        <ion-col>故障元器件：{{item.malfunctionEquipment}}</ion-col>
+                        <ion-col>故障元器件：{{item.component}}</ion-col>
                     </ion-row>
-                    <ion-row>
+                    <!-- <ion-row>
                         <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                    </ion-row>
+                    </ion-row> -->
                 </ion-grid>
             </ion-item>
             <ion-item>
