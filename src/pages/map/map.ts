@@ -66,7 +66,10 @@ export class MapPage{
    public showInfoWindow:boolean;
    public windowsMsg:object;
    public mapArray:Array<object>=[];
-
+   public alarmpageNum:number=0;
+   public malpageNum:number=0;
+   public alarmMsgArray:Array<any>=[];
+   public malMsgArray:Array<any>=[];
    public provinceNameArray = [
        {
     "id":"1",
@@ -336,7 +339,7 @@ public citys=[
 },{
     "lnglat":[108.320004,22.82402],
     "name":"南宁市",
-    "style":0
+    "style":1
 },{
     "lnglat":[110.33119,20.031971],
     "name":"海口市",
@@ -348,15 +351,15 @@ public citys=[
 },{
     "lnglat":[104.065735,30.659462],
     "name":"成都市",
-    "style":0
+    "style":4
 },{
     "lnglat":[113.54909,22.198951],
     "name":"澳门",
-    "style":0
+    "style":5
 },{
     "lnglat":[103.823557,36.058039],
     "name":"兰州市",
-    "style":0
+    "style":3
 },{
     "lnglat":[106.713478,26.578343],
     "name":"贵阳市",
@@ -372,7 +375,7 @@ public citys=[
 },{
     "lnglat":[108.948024,34.263161],
     "name":"西安市",
-    "style":0
+    "style":2
 },{
     "lnglat":[114.502461,38.045474],
     "name":"石家庄市",
@@ -734,13 +737,14 @@ public choosebtn:any;
 public selectProvinceId:any;
 public colorBule:string='#5eb1f5';
 public remeberbtn:any;
-public proviceName:any="陕西省";
-public cityName:any="西安市";
+public proviceName:any="全部";
+public cityName:any="";
 public AllcityAlarm:any;
 public element:any;
-public cityId:any=null; //记录当前查看的城市id
+public cityId:number; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
 public resultArray:any;
+public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部下，false为指定地区
 
   constructor(
               public http:Http,
@@ -762,7 +766,8 @@ public resultArray:any;
     console.log("ionViewDidEnter");
 }
 initdata(){
-
+    this.element = this.mapElement.nativeElement;
+        this.creat1();
         let url = "http://192.168.0.167:7002/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
             "userId": 1,
@@ -794,44 +799,44 @@ initdata(){
 creat1(){
 
     let map = new AMap.Map(this.element,{
-        resizeEnable:true,
-        center:[116.397428,39.90923],
+        // resizeEnable:true,
+
         zoom:4
     });
-
     var style = [{
-        url: 'https://a.amap.com/jsapi_demos/static/images/mass0.png',
+        url: '../../assets/style_1.png',
+        // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
         anchor: new AMap.Pixel(6, 6),
-        size: new AMap.Size(11, 11)
+        size: new AMap.Size(15, 22)
     }, {
-        url: 'https://a.amap.com/jsapi_demos/static/images/mass1.png',
+        url: '../../assets/style_2.png',
         anchor: new AMap.Pixel(4, 4),
-        size: new AMap.Size(7, 7)
+        size: new AMap.Size(15, 22)
     }, {
-        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
+        url: '../../assets/style_3.png',
         anchor: new AMap.Pixel(3, 3),
-        size: new AMap.Size(5, 5)
+        size: new AMap.Size(15, 22)
     }, {
-        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
-        anchor: new AMap.Pixel(6, 6),
-        size: new AMap.Size(11, 1)
+        url: '../../assets/style_4.png',
+        anchor: new AMap.Pixel(11, 11),
+        size: new AMap.Size(15,22)
     }, {
-        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
-        anchor: new AMap.Pixel(3, 3),
-        size: new AMap.Size(15, 5)
+        url: '../../assets/style_5.png',
+        anchor: new AMap.Pixel(11, 11),
+        size: new AMap.Size(15, 22)
     }
     ];
 
-    let mass = new AMap.MassMarks(this.mapArray,{ //接通接口后，mapdata改为mapArray
+    let mass = new AMap.MassMarks(this.citys,{ //接通接口后，mapdata改为mapArray
         opacity:0.8,
         zIndex:111,
         cursor:'pointer',
         style:style
     })
 
-    let marker = new AMap.Marker({content:'',map:map});
+    // let marker = new AMap.Marker({content:'',map:map});
     mass.on('click', e=> {
-        marker.setPosition(e.data.lnglat);
+        // marker.setPosition(e.data.lnglat);
         map.setCenter(e.data.lnglat);
         this.showInfoWindow = !this.showInfoWindow;
         console.log(e);
@@ -892,26 +897,98 @@ gotoMalfunctionPage(id)
                 this.IsMapChoose = true;
                 this.IsListChoose = false;
                 this.showInfoWindow = false;
-                // this.ionViewWillEnter();
                 this.ionViewDidLoad();
                 this.creat1();
-                // this.loadMap();
-                // this.loadToolBar();
                 console.log(111);
             }else{
                 this.IsMapChoose = false;
                 this.IsListChoose = true;
                 this.showInfoWindow = false;
+                this.alarmOrmul = true;
+                if(this.alarmOrmul)
+                    this.AlarmdataInit();
+                else{
+                    this.MaldataInit();
+                }
             }
         })
     }
-    ischoose(){
-        console.log(this.provincechoose);
-        this.provincechoose = !this.provincechoose;
-        
-        
-        // this.remeberbtn.style.color = this.colorBule;
+    /**
+     *  16. 获取全部警报
+     */
+    AlarmdataInit(){
+            let url = "http://192.168.0.167:7002/Alarm/find/brief/byUserID";
+            let body = {
+                "userID":1,
+                "pageSize":10,
+                "pageNum":this.alarmpageNum
+            };
+            let headers = new Headers({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                'Accept': 'application/json'
+            });
+            let options = new RequestOptions({
+                headers: headers
+            });
+            this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+                console.log(data);
+                this.cityAlarmOrMul = data;
+            })
     }
+    /**
+     *  16. 获取全部故障
+     */
+    MaldataInit(){
+        let url = "http://192.168.0.167:7002/Malfunction/find/brief/byUserID";
+        let body = {
+            "userId":1,
+            "pageSize":10,
+            "pageNum":this.malpageNum
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+           this.cityAlarmOrMul = data;
+        })
+    }
+    /**
+     * 18. 获取存在警报/故障的省份
+     */
+    ischoose(){
+        this.provincechoose = !this.provincechoose;
+        if(this.provincechoose){
+            let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/provinceLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/provinceLevel/malOccurred";
+            let body = {
+                "userID":1,
+            };
+            let headers = new Headers({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                'Accept': 'application/json'
+            });
+            let options = new RequestOptions({
+                headers: headers
+            });
+            this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+                console.log(data);
+               this.provinceNameArray = data;
+            })
+        }else{
+            this.cityArray = [];
+        }
+    }
+    /**
+     * 19. 获取存在警报/故障的市
+     * @param item 市上级的省
+     */
     ProvinceChoose(item){
         if(item=="全部"){
             // this.isprovincechoose = false;
@@ -919,41 +996,99 @@ gotoMalfunctionPage(id)
             this.proviceName = "全部";
             this.provincechoose = false;
             this.cityName = "";
+            this.isInnerMsg = true;
             this.cityId = null;
-            this.cityAlarmOrMul = this.AllcityAlarm;
+            // this.cityAlarmOrMul = this.AllcityAlarm;
             console.log(this.proviceName);
+            if(this.alarmOrmul)
+                this.AlarmdataInit();
+            else
+                this.MaldataInit();
         }else{
-            // this.isprovincechoose = true;
-            this.choosebtn = document.getElementsByName('00000000')[0];
-            this.choosebtn.style.color = "#000000";
-            this.provinceNameArray.forEach((x)=>{
-                this.choosebtn = document.getElementsByName(x.id)[0];
-                this.choosebtn.style.color = "#000000";
-                if(x.id==item){
-                    console.log(x.id);
-                    this.choosebtn = document.getElementsByName(x.id)[0];
-                    console.log("choosebtn"+this.choosebtn);
-                    this.selectProvinceId = item;
-                    this.choosebtn.style.color = this.colorBule;
-                    this.cityArray = x.cityArray;
-                    this.proviceName = x.provinceName;
-                    this.remeberbtn = this.choosebtn;
-                }
+            let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/cityLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/cityLevel/malOccurred";
+            let body = {
+                "userID":1,
+                "provID":item,
+            };
+            let headers = new Headers({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                'Accept': 'application/json'
             });
+            let options = new RequestOptions({
+                headers: headers
+            });
+            this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+                console.log(data);
+                this.cityArray = data;
+            })
         }
         console.log(this.remeberbtn);
     }
+    /**
+     * 获取指定地区的警报或故障
+     * @param item 
+     */
     CityChoose(item){
         this.provincechoose = false;
-        console.log(item);
-        this.cityName = item.name;
-        this.alarmArray.forEach((x)=>{
-            if(x.id == item.id){
-                this.cityId = x.id;
-                this.cityAlarmOrMul = x.alarm;
-            }
-        })
+        this.isInnerMsg = false;
+        this.cityId = item;
+        if(this.alarmOrmul){
+            this.AlarmCityArray(item);
+        }else{
+            this.MalCityArray(item);
+        }
         console.log(this.cityAlarmOrMul);
+    }
+    /**
+     * 20. 获取指定地区的警报
+     */
+    AlarmCityArray(item){
+        let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
+        let body = {
+            "userID":1,
+            "griddingID":item,
+            "pageSize":10,
+            "pageNum":this.malpageNum
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+           this.alarmMsgArray = data;
+           this.malpageNum++;
+        })
+    }
+    /**
+     * 21. 获取指定地区的故障
+     */
+    MalCityArray(item){
+        let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
+        let body = {
+            "userID":1,
+            "guiddingID":item,
+            "pageSize":10,
+            "pageNum":this.malpageNum
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'Accept': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+            console.log(data);
+           this.alarmMsgArray = data;
+           this.malpageNum++;
+        })
     }
     openMenu(): void{
         this.menuCtrl.open();
@@ -971,29 +1106,19 @@ gotoMalfunctionPage(id)
         this.app.getRootNav().push(MaldetailPage,item);
     }
     checkAlarm(){
-        // this.alarmOrmul = true;
-        if(this.cityId == null){
-            this.cityAlarmOrMul = this.AllcityAlarm;
-        }else{
-            this.alarmArray.forEach((x)=>{
-                if(x.id == this.cityId){
-                    this.cityId = x.id;
-                    this.cityAlarmOrMul = x.alarm;
-                }
-            })  
+        if(this.isInnerMsg){//点击按钮时加载全部警报信息
+            this.AlarmdataInit();
+        }else{//点击按钮时加载指定地区警报信息
+            this.AlarmCityArray(this.cityId);
         }
+        this.alarmOrmul = true;
     }
     checkMul(){
-        // this.alarmOrmul = false;
-        if(this.cityId == null){
-            this.cityAlarmOrMul = this.AllcityAlarm;
+        if(this.isInnerMsg){
+            this.MaldataInit();
         }else{
-            this.alarmArray.forEach((x)=>{
-                if(x.id == this.cityId){
-                    this.cityId = x.id;
-                    this.cityAlarmOrMul = x.alarm;
-                }
-            })  
+            this.MalCityArray(this.cityId);
         }
+        this.alarmOrmul = false;
     }
 }

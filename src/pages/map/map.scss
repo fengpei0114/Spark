@@ -1,6 +1,7 @@
 page-map {
   .padding {
     background: url('/assets/login.png');
+    // background: url('../assets/login.png');手机打包时使用，否则图片不显示
     height:100%;
   }
   #map{
