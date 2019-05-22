@@ -48,7 +48,7 @@ export class MalfunctionPage {
     unconfirmMulNum:any;
     lastConfirmTime:any;
     mulMsg:any;
-    malfunctionArray=[
+    dataArray=[
         {
             "malfunctionNo":"01",
             "malfunctionType":"1",
@@ -198,7 +198,7 @@ export class MalfunctionPage {
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
-    dataArray:Array<Object> = [];
+    malfunctionArray:Array<Object> = [];
 
     constructor(public http:Http,
                 public app:App,
@@ -210,13 +210,14 @@ export class MalfunctionPage {
 
     ) {
         this.deviceId = this.navParams.data.deviceId;
-        this.mulMsg = this.navParams.data.alarmMsg;
+        this.unconfirmMulNum = this.navParams.data.unconfirmedMalNum;
         this.dataInit();
         
         
     }
 
     dataInit(){
+      this.nativeService.showLoading("数据加载中...")
         let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
         let body = {
             "DeviceId":this.deviceId,
@@ -233,10 +234,17 @@ export class MalfunctionPage {
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             data.forEach(x=>{
-                x.malTime = new Date(Date.parse(x.malTime)).toLocaleString();
+              var d=(new Date(x.malTime));
+              x.malTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
             })
             console.log(data);
-            this.dataArray = data;
+          this.nativeService.hideLoading();
+            this.malfunctionArray = data;
+        },error=> {
+
+          this.nativeService.hideLoading();
+          this.nativeService.showToast("数据获取失败！");
+          this.malfunctionArray = this.dataArray;
         })
         // this.name = this.navParams.data;
         // this.pageOther = this.malfunctionArray.length % 10;
@@ -310,11 +318,11 @@ export class MalfunctionPage {
             console.log(this.pageNum);
             if(this.pageNum<this.pageSize){
                 for(var i = 0;i<10;i++){
-                    this.dataArray.push(this.malfunctionArray[i+this.pageNum*10]);
+                    this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
                 }
             }else if(this.pageNum==this.pageSize){
                 for(i = 0;i<this.pageOther;i++){
-                    this.dataArray.push(this.malfunctionArray[i+this.pageNum*10]);
+                    this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
                 }
             }else{
                 infiniteScroll.enable(false);
