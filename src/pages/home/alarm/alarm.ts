@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeService } from '../../../providers/native-service/native-service'
 import { Header } from 'ionic-angular/components/toolbar/toolbar-header';
 import { AccountService } from '../../../providers/account-service/account-service'
+import {DatePipe} from "@angular/common";
 /**
  * Generated class for the AlarmPage page.
  *
@@ -20,7 +21,50 @@ export class AlarmPage {
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
-    dataArray:Array<Object> = [];
+    dataArray=[
+      {
+        "alarmID":"01",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"1",
+        "alarmDetectors":"1号探头",
+      },{
+        "alarmID":"02",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"1",
+        "alarmDetectors":"1号探头",
+      },{
+        "alarmID":"03",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"1",
+        "alarmDetectors":"1号探头",
+      },{
+        "alarmID":"04",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"0",
+        "alarmDetectors":"1号探头",
+      },{
+        "alarmID":"05",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"0",
+        "alarmDetectors":"1号探头",
+      },{
+        "alarmID":"06",
+        "alarmType":"1",
+        "alarmTime":"2018-08-01 15:54:52.03",
+        "grade":"1",
+        "isConfirmed":"0",
+        "alarmDetectors":"1号探头",
+      } ]
     name:string;
     deviceId:string;
     pagesizenow:number;
@@ -32,97 +76,7 @@ export class AlarmPage {
     confirmNum:number;
     alarmMsg:any;
     unconfirmNum:number;
-    alarmArray=[
-        {
-            "alarmNo":"01",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52.03",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },
-        {
-            "alarmNo":"02",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52.03",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"03",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52.03",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"04",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52.03",
-            "grade":"1",
-            "measure":"1",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"05",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52.03",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"06",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"07",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"未确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"08",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"已确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"09",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"已确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"10",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"已确认",
-            "alarmProbe":"1号探头",
-        },{
-            "alarmNo":"11",
-            "alarmType":"1",
-            "startTime":"2018-08-01 15:54:52.03",
-            "endTime":"2018-08-01 15:55:52",
-            "grade":"1",
-            "measure":"已确认",
-            "alarmProbe":"1号探头",
-        }]
+    alarmArray:Array<any> =[];
 
 
 
@@ -134,19 +88,20 @@ export class AlarmPage {
             private alertCtrl:AlertController,
             public toastCtrl: ToastController,
             private nativeService:NativeService,) {
-                console.log(this.httpService.getUrl());
-                this.alarmMsg = this.navParams.data.alarmMsg;
-                console.log(this.alarmMsg);
+    console.log(this.httpService.getUrl());
+    this.unconfirmNum = this.navParams.data.unconfirmedAlarmNum;
+    console.log(this.alarmMsg);
     this.name = this.navParams.data.name;
     this.deviceId = this.navParams.data.deviceId;
+    console.log(this.navParams.data);
     // this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
     // this.alarmNum = this.navParams.data.alarmsum;
     // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
     // this.alarmTime = this.alarm
-      this.dataInit();
-      console.log(this.dataArray);
+    this.dataInit();
   }
   dataInit(){
+    this.nativeService.showLoading("数据加载中...")
     let url = "http://192.168.0.167:7002/Alarm/find/brief/byDeviceID";
     let body = {
         "DeviceId":this.deviceId,
@@ -162,12 +117,23 @@ export class AlarmPage {
         headers: headers
     });
     this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+      this.nativeService.hideLoading();
         data.forEach(x=>{
-            x.AlarmTime = new Date(Date.parse(x.AlarmTime)).toLocaleString();
+          x.grade=x.grade.toString();
+          console.log( x.grade);
+          var d=(new Date(x.alarmTime));
+          x.alarmTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
         })
-        console.log(data);
-        this.dataArray = data;
-    })
+        this.nativeService.hideLoading();
+        this.alarmArray = data;
+        console.log(this.alarmArray);
+    },
+      error=> {
+
+        this.nativeService.hideLoading();
+        this.nativeService.showToast("数据获取失败！");
+        this.alarmArray = this.dataArray;
+      })
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmPage');
