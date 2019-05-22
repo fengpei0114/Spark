@@ -3,17 +3,12 @@ import {IonicPage, NavController, NavParams, App, Platform,PopoverController,Men
 import { PopoverPage } from './popover/popover';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../providers/http-service/http-service';
-import { SystemJsNgModuleLoader } from '@angular/core/src/linker/system_js_ng_module_factory_loader';
 import { AlarmdetailPage } from './alarm_detail/alarm_detail';
 import { AlarmPage } from '../home/alarm/alarm';
-import { ChartPage } from '../home/chart/chart';
-import { DevicePage } from'../home/device/device';
 import { MalfunctionPage } from '../home/malfunction/malfunction';
-import { MalfunctiondetailPage } from '../home/malfunction_detail/malfunction_detail'
 import { MaldetailPage } from'./mal_detail/mal_detail';
-
-declare var BMap;
-declare var angular: any;
+import { NativeService } from'../../providers/native-service/native-service'
+import {getErrorLogger} from "@angular/core/src/errors";
 // var app = angular.module('show_map',[]);
 /**
  * Generated class for the MapPage page.
@@ -54,18 +49,11 @@ export class MapPage{
    @ViewChild('map') mapElement : ElementRef;
 
    public map:any;
-   public defaultAnchor;
-   public defaultOffset;
-   public currentPoint : MyPoint;
-   public mousePoint;
-   public pointArray:Array<any>=[];
-   public mapStatus:string="BMAP_STATUS_SUCCESS";
-   public toolPosition : BMapPosition;
    public IsMapChoose:boolean;
    public IsListChoose:boolean;
    public showInfoWindow:boolean;
    public windowsMsg:object;
-   public mapArray:Array<object>=[];
+   public markerArray:Array<object>=[];
    public alarmpageNum:number=0;
    public malpageNum:number=0;
    public alarmMsgArray:Array<any>=[];
@@ -743,17 +731,17 @@ public AllcityAlarm:any;
 public element:any;
 public cityId:number; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
-public resultArray:any;
 public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部下，false为指定地区
 
   constructor(
               public http:Http,
               public app:App,
               public menuCtrl: MenuController,
-              public navCtrl: NavController, 
-              public navParams: NavParams, 
+              public navCtrl: NavController,
+              public navParams: NavParams,
               private  platform:Platform,
               private httpService: HttpService,
+              private nativeService:NativeService,
               public popoverCtrl: PopoverController,) {
             this.IsMapChoose = true;
             this.provincechoose = false;
@@ -762,12 +750,11 @@ public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部�
             this.showInfoWindow = false;
   }
   ionViewWillEnter () {
-    this.initdata();
+    this.creatMap();
     console.log("ionViewDidEnter");
 }
 initdata(){
-    this.element = this.mapElement.nativeElement;
-        this.creat1();
+  this.nativeService.showLoading("数据加载中");
         let url = "http://192.168.0.167:7002/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
             "userId": 1,
@@ -781,81 +768,90 @@ initdata(){
             headers: headers
         });
         this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
-            
-            this.mapArray=data;
-            this.mapArray.map(devicedata=>{
+
+            this.markerArray=data;
+            this.markerArray.map(devicedata=>{
                 devicedata['lnglat']=[devicedata['lat'],devicedata['lng']];
             });
-            console.log(this.mapArray);
-            this.element = this.mapElement.nativeElement;
-            this.creat1();
+            console.log(this.markerArray);
+            this.nativeService.hideLoading();
+            this.addMarker();
          //   console.log(this.mapdata);
-        })
+        },
+          error => {
+            this.nativeService.hideLoading();
+            this.nativeService.showToast("获取数据失败");
+            console.log(error);
+            this.markerArray=this.mapdata;
+            this.addMarker();
+          })
     }
 
-    mapDataProcessing(){
+creatMap() {
+  this.element = this.mapElement.nativeElement;
+  this.map = new AMap.Map(this.element, {
+    // resizeEnable:true,
 
-    }
-creat1(){
+    zoom: 4
+  });
+  this.initdata();
+}
 
-    let map = new AMap.Map(this.element,{
-        // resizeEnable:true,
 
-        zoom:4
-    });
-    var style = [{
-        url: '../../assets/style_1.png',
-        // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
-        anchor: new AMap.Pixel(6, 6),
-        size: new AMap.Size(15, 22)
-    }, {
-        url: '../../assets/style_2.png',
-        anchor: new AMap.Pixel(4, 4),
-        size: new AMap.Size(15, 22)
-    }, {
-        url: '../../assets/style_3.png',
-        anchor: new AMap.Pixel(3, 3),
-        size: new AMap.Size(15, 22)
-    }, {
-        url: '../../assets/style_4.png',
-        anchor: new AMap.Pixel(11, 11),
-        size: new AMap.Size(15,22)
-    }, {
-        url: '../../assets/style_5.png',
-        anchor: new AMap.Pixel(11, 11),
-        size: new AMap.Size(15, 22)
-    }
-    ];
+addMarker() {
+  var style = [{
+    url: '../../assets/style_1.png',
+    // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
+    anchor: new AMap.Pixel(6, 6),
+    size: new AMap.Size(15, 22)
+  }, {
+    url: '../../assets/style_2.png',
+    anchor: new AMap.Pixel(4, 4),
+    size: new AMap.Size(15, 22)
+  }, {
+    url: '../../assets/style_3.png',
+    anchor: new AMap.Pixel(3, 3),
+    size: new AMap.Size(15, 22)
+  }, {
+    url: '../../assets/style_4.png',
+    anchor: new AMap.Pixel(11, 11),
+    size: new AMap.Size(15, 22)
+  }, {
+    url: '../../assets/style_5.png',
+    anchor: new AMap.Pixel(11, 11),
+    size: new AMap.Size(15, 22)
+  }
+  ];
 
-    let mass = new AMap.MassMarks(this.citys,{ //接通接口后，mapdata改为mapArray
-        opacity:0.8,
-        zIndex:111,
-        cursor:'pointer',
-        style:style
-    })
+  let mass = new AMap.MassMarks(this.markerArray, { //接通接口后，mapdata改为markerArray
+    opacity: 0.8,
+    zIndex: 111,
+    cursor: 'pointer',
+    style: style
+  })
 
-    // let marker = new AMap.Marker({content:'',map:map});
-    mass.on('click', e=> {
-        // marker.setPosition(e.data.lnglat);
-        map.setCenter(e.data.lnglat);
-        this.showInfoWindow = !this.showInfoWindow;
-        console.log(e);
-        this.windowsMsg=e['data'];
-    });
-    mass.setMap(map);
+  // let marker = new AMap.Marker({content:'',map:map});
+  mass.on('click', e => {
+    // marker.setPosition(e.data.lnglat);
+    this.map.setCenter(e.data.lnglat);
+    this.showInfoWindow = !this.showInfoWindow;
+    console.log(e);
+    this.windowsMsg = e['data'];
+  });
+  mass.setMap(this.map);
 }
 
 closeInfoWindow(){
     this.showInfoWindow = false;
 }
 
-gotoAlarmPage(id){
-   this.app.getRootNav().push(AlarmPage,id);
+gotoAlarmPage(data){
+   this.app.getRootNav().push(AlarmPage,data);
 }
 
-gotoMalfunctionPage(id)
+gotoMalfunctionPage(data)
 {
-   this.app.getRootNav().push(MalfunctionPage,id)
+   this.app.getRootNav().push(MalfunctionPage,data)
 }
 
   ionViewDidLoad() {
@@ -897,8 +893,7 @@ gotoMalfunctionPage(id)
                 this.IsMapChoose = true;
                 this.IsListChoose = false;
                 this.showInfoWindow = false;
-                this.ionViewDidLoad();
-                this.creat1();
+                this.initdata();
                 console.log(111);
             }else{
                 this.IsMapChoose = false;
@@ -1027,7 +1022,7 @@ gotoMalfunctionPage(id)
     }
     /**
      * 获取指定地区的警报或故障
-     * @param item 
+     * @param item
      */
     CityChoose(item){
         this.provincechoose = false;

@@ -31,7 +31,7 @@
 <ion-content class="padding">
     <!-- <button ion-button ()="test()">test</button> -->
     <div [hidden]="!IsMapChoose" id="map" #map style="height:100%;width:100%;position:absolute" ></div>
-    <div style="width:33%;left:6px;bottom:4px;background:rgb(255, 255, 255);position: absolute;z-index:99999">
+    <div [hidden]="!IsMapChoose" style="width:33%;left:6px;bottom:4px;background:rgb(255, 255, 255);position: absolute;z-index:99999">
         <ion-grid>
             <ion-row>
                 <ion-col col-4>
@@ -85,45 +85,54 @@
             </ion-buttons>
             <ion-grid>
                 <ion-row>
-                    设备编号：{{windowsMsg.deviceId}}
+                  <ion-col>
+                    设备号：
+                </ion-col>
+              <ion-col>
+                {{windowsMsg.deviceId}}
+              </ion-col>
                 </ion-row>
 
                 <ion-row >
-                    设备地址：{{windowsMsg.address}}
+                  <ion-col>位置：</ion-col>
+                  <ion-col>{{windowsMsg.address}}</ion-col>
                 </ion-row>
-                <ion-row *ngIf="windowsMsg.runstate=='0'">
-                <ion-col>运行状态：</ion-col>
+                <ion-row *ngIf="windowsMsg.runstate==0">
+                <ion-col>状态：</ion-col>
                     <ion-col style="color:grey">
+                      关机
                        <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
-                <ion-row *ngIf="windowsMsg.runstate=='1'">
-                    <ion-col>运行状态：</ion-col>
+                <ion-row *ngIf="windowsMsg.runstate==1">
+                    <ion-col>状态：</ion-col>
                     <ion-col style="color:green">
+                      正常
                         <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
-                <ion-row *ngIf="windowsMsg.runstate=='2'">
-                    <ion-col>运行状态：</ion-col>
+                <ion-row *ngIf="!(windowsMsg.runstate == 0) && !(windowsMsg.runstate==1)">
+                    <ion-col>状态：</ion-col>
                     <ion-col style="color:red">
+                      异常
                         <!-- {{windowsMsg.runstate|statusFilter}} -->
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-9 >未确认警报数:</ion-col>
+                    <ion-col >警报数:</ion-col>
                       <ion-col style="color:red">
                        {{windowsMsg.unconfirmedAlarmNum}}
                       </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-9>未确认故障数:</ion-col>
+                    <ion-col >故障数:</ion-col>
                     <ion-col style="color:orange">
                         {{windowsMsg.unconfirmedMalNum}}
                     </ion-col>
                 </ion-row>
             </ion-grid>
-                <button ion-button clear small (click)="gotoAlarmPage(windowsMsg)">查看警报列表 >></button>
-                <button ion-button clear small (click)="gotoMalfunctionPage(windowsMsg)">查看故障列表 >></button>
+                <button ion-button clear small (click)="gotoAlarmPage(windowsMsg)">查看警报></button>
+                <button ion-button clear small (click)="gotoMalfunctionPage(windowsMsg)">查看故障></button>
             </div>
         </div>
         
