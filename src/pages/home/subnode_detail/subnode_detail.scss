@@ -1,17 +1,22 @@
 page-subnodedetail{
     .padding {
-        background: url('../../assets/login.png');
+        // background: url('../../assets/login.png');
+        background: url('../assets/background.png');
+        height:100%;
+        background-size:100% 100%;
       }
     .listItem{
       background-color: transparent;
     }
     .name{
       display:inline;
-      color:grey;
+      // color:grey;
+      color:aliceblue;
     }
     .detail{
       display:inline;
-      color: #000;
+      // color: #000;
+      color:aliceblue
     }
     .label-md{
       margin-bottom:8px;
@@ -19,7 +24,7 @@ page-subnodedetail{
     } 
     .card_style{
       border-radius:20px;
-      background:rgba(255, 255, 255, 0.733);
+      background:rgba(255, 255, 255, 0.116);
       top:0px;
       bottom:5px;
       padding:0;

@@ -1,6 +1,9 @@
 page-malfunction{
     .padding {
-      background: url('../assets/login.png');
+      // background: url('../assets/login.png');
+      background: url('../assets/background.png');
+      height:100%;
+      background-size:100% 100%;
     }
     .buttonclass button {
         height: 1.0rem;

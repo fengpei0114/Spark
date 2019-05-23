@@ -3,7 +3,7 @@
 <ion-header style="text-align:center;top:12%"  no-border>
     <ion-navbar transparent>
         
-        <ion-title >火花探测</ion-title>
+        <ion-title><p style="color:rgb(255,255,255) !important;font-weight:100">火花探测</p></ion-title>
         
     </ion-navbar>
 </ion-header>
@@ -16,25 +16,25 @@
         <form [formGroup]="loginForm" class="card-title" (ngSubmit)="onSubmit(loginForm.value)">
             <ion-list insert>
                 <ion-item style="background-color: transparent;" >
-                    <ion-label><ion-icon name="ios-person-outline"></ion-icon></ion-label>
-                    <ion-input  placeholder="请输入用户名" type="text" (tap)="clickBtn()" [formControl]="username" style="font-size: smaller;" clearInput></ion-input>
+                    <ion-label><ion-icon name="ios-person-outline" style="color:aliceblue"></ion-icon></ion-label>
+                    <ion-input  placeholder="请输入用户名" type="text" (tap)="clickBtn()" [formControl]="username" style="font-size: smaller;;color:aliceblue" clearInput></ion-input>
                 </ion-item>
                 
                 <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)">
                     <ion-label>
-                        <ion-icon name="ios-lock-outline"></ion-icon>
+                        <ion-icon name="ios-lock-outline"  style="color:aliceblue"></ion-icon>
                     </ion-label>
-                    <ion-input style="font-size: smaller" placeholder="请输入密码(最少四位)" (tap)="clickBtn()"  type="password" [formControl]="password" clearInput></ion-input>
+                    <ion-input style="font-size: smaller;color:aliceblue" placeholder="请输入密码(最少四位)" (tap)="clickBtn()"  type="password" [formControl]="password" clearInput></ion-input>
                 </ion-item>
                 <!-- <div *ngIf="password.hasError('required')"
                      class="error-box">* 请输入正确的密码</div> -->
                 
                 <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)" [class.error]="!randomCode.valid && randomCode.touched">
                     <ion-label>
-                        <ion-icon name="ios-grid-outline"></ion-icon>
+                        <ion-icon name="ios-grid-outline"  style="color:aliceblue"></ion-icon>
                     </ion-label>
-                    <ion-input style="font-size: smaller;" placeholder="请输入验证码" (tap)="clickBtn()"  type="text" [formControl]="randomCode" clearInput></ion-input>
-                    <ion-input style="text-align: right;background: image('../../assets/randomCode.jpg')" value="{{randomCodeImage}}" disabled="true"></ion-input>
+                    <ion-input style="font-size: smaller;color:aliceblue" placeholder="请输入验证码" (tap)="clickBtn()"  type="text" [formControl]="randomCode" clearInput></ion-input>
+                    <ion-input style="text-align: right;" value="{{randomCodeImage}}" disabled="true" style="color:aliceblue"></ion-input>
                 </ion-item>
                 <!-- <div *ngIf="randomCode.hasError('required') && randomCode.touched"
                      class="error-box">* 请输入验证码</div>
@@ -54,13 +54,13 @@
                 <!-- </ion-item> -->
             </ion-list>
                 <div style="position:relative;float:right;font-size:1em;height:80px">
-                    <div style="float:right;font-size:small;line-height:40px;color:#383737cb">记住密码</div>
-                        <div style="float:right;font-size:1em"><ion-toggle (ionChange)="toggled()" [checked]="isToggled"></ion-toggle></div>
+                    <div style="float:right;font-size:small;line-height:40px;color:#383737cb;color:aliceblue;display:inline;top:0;bottom:0">记住密码</div>
+                    <div style="float:right;font-size:1em;color:aliceblue;display:inline;top:0;bottom:0"><ion-toggle (ionChange)="toggled()" [checked]="isToggled"></ion-toggle></div>
                         
                     </div>
             
             <div style="text-align:center;padding-top:40px">
-                <button ion-button primary round block  type="submit">登  陆</button>
+                <button ion-button clear type="submit" style="border-radius:15px;width:90%;background-image:url('../../assets/loginbutton.png');background-size:100% 100%"></button>
             </div>
             
             
@@ -68,7 +68,7 @@
     </ion-card>
     <div style="position:absolute;bottom:0;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
             <ion-buttons end>
-                <button ion-button clear style="height:30px;padding:0px;margin:0 auto;"  (tap)="setServerIP()"><ion-icon name="ios-hammer-outline"></ion-icon>服务器</button>
+                <button ion-button clear style="height:30px;padding:0px;margin:0 auto;color:aliceblue"  (tap)="setServerIP()"><ion-icon name="ios-hammer-outline"></ion-icon>服务器</button>
             </ion-buttons>
             </div>
 </ion-content>

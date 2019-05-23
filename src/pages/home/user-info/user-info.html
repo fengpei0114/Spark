@@ -7,7 +7,7 @@
 <ion-header style="text-align:center" no-border>
 
     <ion-navbar color="#f8f8f8" transparent>
-        <ion-title>用户信息</ion-title>
+        <ion-title><p style="color:rgb(255,255,255) !important;font-weight:100">用户信息</p></ion-title>
 
         <ion-buttons end>
             <button ion-button icon-only (click)="openUserInfoEditPage()">
@@ -18,25 +18,29 @@
 
 
 </ion-header >
-<ion-content padding class="padding">
-    <ion-card no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px;background-color:transparent;">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="assets/userinfo.jpg">
-            </ion-avatar>
-            <h1>
-                {{ username }}
-            </h1>
-            <h3>账号:{{userId}}</h3>
-        </ion-item>
-        <ion-item>
-            所在机构：{{plantname}}
-        </ion-item>
-        <ion-item>
-            手机号码1：{{phone}}
-        </ion-item>
-        <ion-item>
-            邮箱地址：{{email}}
-        </ion-item>
-</ion-card>
+<ion-content class="padding">
+        <ion-card class="card_style">
+            <ion-list>
+            <ion-item class="listItem">
+                <div class="name" style="display:inline;"><img src="assets/userinfo.jpg" style="height:70px;width:70px"/></div>
+                <div class="detail" style="display:inline;">{{ username }}</div>
+            </ion-item>
+            <ion-item class="listItem">
+                <div class="name">账号：</div>
+                <div class="detail">{{username}}</div>
+            </ion-item>
+            <ion-item class="listItem">
+                <div class="name">所在机构：</div>
+                <div class="detail">{{plantname}}</div>
+            </ion-item>
+            <ion-item class="listItem">
+                <div class="name">手机号码：</div>
+                <div class="detail">{{phone}}</div>
+            </ion-item>
+            <ion-item class="listItem">
+                <div class="name">邮箱地址：</div>
+                <div class="detail">{{email}}</div>
+            </ion-item>
+            </ion-list>
+    </ion-card>
 </ion-content>

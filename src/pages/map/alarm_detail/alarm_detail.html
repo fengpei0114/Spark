@@ -1,7 +1,6 @@
 <ion-header style="text-align:center" no-border>
         <ion-navbar style="min-height:0px" transparent>
-            <ion-title *ngIf="alarmOrMul">{{alarmOrmulMsg.equipmentName}}警报详细信息</ion-title>
-            <ion-title *ngIf="!alarmOrMul">{{equipmentName}}故障详细信息</ion-title>
+            <ion-title><p style="color:rgb(255,255,255) !important;font-weight:100">警报详细信息</p></ion-title>
             <ion-buttons end>
                     <button ion-button icon-only>
                         <ion-icon name="menue"></ion-icon>
@@ -13,36 +12,32 @@
     <ion-content id="padding">
         <ion-card style="background-color: transparent">
             <ion-list  inset>
-                <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
+                <ion-item class="listItem"> <ion-icon name="ios-cog-outline" style="color:aliceblue"></ion-icon>
                     <div class="name">警报等级 : </div>
                     <div class="detail">{{level}} </div>
 
                 </ion-item >
-                <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-warning-outline" style="color:aliceblue"></ion-icon>
                     <div class="name">火花数量 : </div>
                     <div class="detail">{{fireNum}}</div>
                 </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-warning-outline" style="color:aliceblue"></ion-icon>
                     <div class="name">所属子节点 : </div>
                     <div class="detail">{{subNode}}</div>
                 </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-warning-outline" style="color:aliceblue"></ion-icon>
                     <div class="name">报警探头 : </div>
                     <div class="detail">{{alarmDetector}}</div>
                 </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-stopwatch-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-stopwatch-outline" style="color:aliceblue"></ion-icon>
                     <div class="name"> 警报时间 :  </div>
                     <div class="detail">{{alarmdatetime}}</div>
                 </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-notifications-outline"></ion-icon>
-                    <div class="name"> 结束时间: </div>
-                    <div class="detail">{{enddatetime}} </div>
-                </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                     <div class="name"> 是否确认 : </div>
                     <div class="detail">{{isConfirmed}} </div>
                 </ion-item>
-                <ion-item class="listItem"><ion-icon name="ios-create-outline"></ion-icon>
+                <ion-item class="listItem"><ion-icon name="ios-create-outline" style="color:aliceblue"></ion-icon>
                     <div class="name"> 备注信息 : </div>
                     <div class="detail">{{note}}</div>
                 </ion-item>

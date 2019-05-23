@@ -199,6 +199,7 @@ export class MalfunctionPage {
     pageNum: number = 0;
     pageOther: number = 0;
     malfunctionArray:Array<Object> = [];
+    pagesizenow:number;
 
     constructor(public http:Http,
                 public app:App,
@@ -217,7 +218,7 @@ export class MalfunctionPage {
     }
 
     dataInit(){
-      this.nativeService.showLoading("数据加载中...")
+        this.nativeService.showLoading("数据加载中...")
         let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
         let body = {
             "DeviceId":this.deviceId,
@@ -234,18 +235,19 @@ export class MalfunctionPage {
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             data.forEach(x=>{
-              var d=(new Date(x.malTime));
-              x.malTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
-            })
-            console.log(data);
-          this.nativeService.hideLoading();
-            this.malfunctionArray = data;
-        },error=> {
-
-          this.nativeService.hideLoading();
-          this.nativeService.showToast("数据获取失败！");
-          this.malfunctionArray = this.dataArray;
-        })
+                var d=(new Date(x.malTime));
+                x.malTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+              })
+              console.log(data);
+            this.nativeService.hideLoading();
+              this.malfunctionArray = data;
+              this.pageNum++;
+          },error=> {
+  
+            this.nativeService.hideLoading();
+            this.nativeService.showToast("数据获取失败！");
+            this.malfunctionArray = this.dataArray;
+          })
         // this.name = this.navParams.data;
         // this.pageOther = this.malfunctionArray.length % 10;
         // this.pageSize = (this.malfunctionArray.length-this.pageOther) / 10;
@@ -332,7 +334,45 @@ export class MalfunctionPage {
             infiniteScroll.complete();
         },500);
     }
-
+    doInfinite1(infiniteScroll){
+        console.log('Begin async operation');
+        console.log(infiniteScroll._scrollY);
+        console.log(infiniteScroll.scrollHeight);
+        let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
+        let body = {
+            "DeviceId":this.deviceId,
+            "pageSize":10,
+            "pageNum":this.pageNum,
+        }
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        setTimeout(()=>{
+                this.http.post(url,body,options).map(res=>res.json()).subscribe(data =>{
+                    console.log(data);
+                    if(this.pagesizenow < 10){
+                        infiniteScroll.enable(false);
+                    }
+                    this.pagesizenow = 0;
+                    data.content.forEach((x)=>{
+                        this.pagesizenow++;
+                    })  
+                    if(this.pagesizenow == 0){
+                        infiniteScroll.enable(false);
+                    }else{
+                        for(let i = 0 ; i < this.pagesizenow; i++){
+                            this.dataArray.push(data.content[i]);
+                        }
+                        this.pageNum++;
+                    }
+                })
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        },500);
+    }
     OncomfirmClick(item)
     {
         const prompt = this.alertCtrl.create({

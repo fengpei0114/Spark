@@ -19,7 +19,7 @@ export class AlarmdetailPage {
     fireNum:string;
     subNode:string;
     alarmDetector:string;
-    alarmdatetime:string;
+    alarmdatetime:any;
     enddatetime:string;
     isConfirmed:string;
     note:string;
@@ -84,38 +84,10 @@ export class AlarmdetailPage {
         //     document.getElementById("levelnote").style.color = "#000000"
         // }
         this.TestArray=[];
-        // console.log(this.TestArray);
-        // this.alarmOrmulMsg = this.navParams.data;
-        // this.alarmOrMul = this.navParams.data.alarmOrmul;
-        // this.equipmentName = this.navParams.data.equipmentName;
-        // this.alarmOrMul = this.navParams.data.alarmOrmul;
         this.deviceName = this.navParams.data.deviceName;
+        this.alarmId = this.navParams.data.alarmId;
         this.AlarmdataInit();
-            // this.MuldataInit();
 
-    }
-    /**
-     * 获取故障详细信息
-     */
-    MuldataInit(){
-
-        console.log("maldata Init");
-        let url = "http://192.168.0.167:7002/Malfunction/find/byMalID";
-        let body = {
-            "malfunctionID":1,
-        };
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            'Accept': 'application/json'
-        })
-        let options = new RequestOptions({
-            headers: headers
-        });
-        this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
-            console.log(data);
-            
-        })
     }
     /**
      * 获取警报详细信息
@@ -124,7 +96,7 @@ export class AlarmdetailPage {
         console.log("alarmdata Init");
         let url = "http://192.168.0.167:7002/Alarm/find/detail/byAlarmID";
         let  body = {
-            "AlarmId":"1",
+            "AlarmId":1,
         };
         // let body="AlarmId=1";
         let headers = new Headers({
@@ -136,17 +108,18 @@ export class AlarmdetailPage {
             headers: headers
         });
         this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data=>{
-            this.alarmId = data.alarmId;
-            this.level = data.level;
+            console.log(data);
+            this.alarmId = data.alarmID;
+            this.level = data.alarmLevel;
             this.fireNum = data.sparkNum;
-            this.subNode = data.subNode_InstallPoint;
-            this.alarmDetector = data.alarmDetector;
-            this.alarmdatetime = data.alarmTime;
-            this.plantform = data.plantform;
-            this.comfirmUser = data.comfirmUser;
-            this.prinicipalName = data.prinicipalName;
-            this.prinicipalphone = data.prinicipalphone;
-            this.isConfirmed = data.isConfirmed;
+            this.subNode = data.installPoint;
+            this.alarmDetector = data.alarmDetectors;
+            this.alarmdatetime = new Date(Date.parse(data.alarmTime)).toLocaleString();
+            this.plantform = data.factoryName;
+            this.comfirmUser = data.confirmedUser;
+            this.prinicipalName = data.principalName;
+            this.prinicipalphone = data.principalPhone;
+            this.isConfirmed = data.confirmed;
             this.note = data.note;
             console.log("alarmdata");
         },error=>{

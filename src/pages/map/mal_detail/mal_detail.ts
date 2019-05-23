@@ -47,6 +47,7 @@ export class MaldetailPage {
     prinicipalphone:any;
     plantform:any;
     comfirmUser:any;
+    malId:number;
     // Msg_alarm = {
     //     "alarmId":"string1",
     //     "level":"一级",
@@ -86,6 +87,7 @@ export class MaldetailPage {
         this.TestArray=[];
         // console.log(this.TestArray);
         this.deviceName = this.navParams.data.deviceName;
+        this.malId = this.navParams.data.malId;
         this.measure = this.navParams.data.measure;
         // this.alarmOrmulMsg = this.navParams.data;
         // this.alarmOrMul = this.navParams.data.alarmOrmul;
@@ -117,11 +119,11 @@ export class MaldetailPage {
             console.log(data);
             this.multype = data.malType;
             this.mulComponent = data.component;
-            this.muldata = data.malTime;
+            this.muldata = new Date(Date.parse(data.malTime)).toLocaleString();
             this.isConfirmed = data.confirmed;
             this.prinicipalName = data.prinicipalName;
             this.prinicipalphone = data.prinicipalphone;
-            this.note = data.isConfirmed;
+            this.note = data.note;
             if(data.confirmed){
                 this.plantform = data.plantform;
                 this.comfirmUser = data.user;

@@ -22,61 +22,61 @@ export class AlarmPage {
     pageNum: number = 0;
     pageOther: number = 0;
     dataArray=[
-      {
-        "alarmID":"01",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"1",
-        "alarmDetectors":"1号探头",
-      },{
-        "alarmID":"02",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"1",
-        "alarmDetectors":"1号探头",
-      },{
-        "alarmID":"03",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"1",
-        "alarmDetectors":"1号探头",
-      },{
-        "alarmID":"04",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"0",
-        "alarmDetectors":"1号探头",
-      },{
-        "alarmID":"05",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"0",
-        "alarmDetectors":"1号探头",
-      },{
-        "alarmID":"06",
-        "alarmType":"1",
-        "alarmTime":"2018-08-01 15:54:52.03",
-        "grade":"1",
-        "isConfirmed":"0",
-        "alarmDetectors":"1号探头",
-      } ]
-    name:string;
-    deviceId:string;
-    pagesizenow:number;
-    alarmId:any;
-    alarmNum:any;
-    unconfirmAlarmNum:any;
-    lastConfirmTime:any;
-    errorMsg:any;
-    confirmNum:number;
-    alarmMsg:any;
-    unconfirmNum:number;
-    alarmArray:Array<any> =[];
+        {
+          "alarmID":"01",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"1",
+          "alarmDetectors":"1号探头",
+        },{
+          "alarmID":"02",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"1",
+          "alarmDetectors":"1号探头",
+        },{
+          "alarmID":"03",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"1",
+          "alarmDetectors":"1号探头",
+        },{
+          "alarmID":"04",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"0",
+          "alarmDetectors":"1号探头",
+        },{
+          "alarmID":"05",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"0",
+          "alarmDetectors":"1号探头",
+        },{
+          "alarmID":"06",
+          "alarmType":"1",
+          "alarmTime":"2018-08-01 15:54:52.03",
+          "grade":"1",
+          "isConfirmed":"0",
+          "alarmDetectors":"1号探头",
+        } ]
+      name:string;
+      deviceId:string;
+      pagesizenow:number;
+      alarmId:any;
+      alarmNum:any;
+      unconfirmAlarmNum:any;
+      lastConfirmTime:any;
+      errorMsg:any;
+      confirmNum:number;
+      alarmMsg:any;
+      unconfirmNum:number;
+      alarmArray:Array<any> =[];
 
 
 
@@ -88,17 +88,17 @@ export class AlarmPage {
             private alertCtrl:AlertController,
             public toastCtrl: ToastController,
             private nativeService:NativeService,) {
-    console.log(this.httpService.getUrl());
-    this.unconfirmNum = this.navParams.data.unconfirmedAlarmNum;
-    console.log(this.alarmMsg);
+                console.log(this.httpService.getUrl());
+                this.alarmMsg = this.navParams.data.alarmMsg;
+                console.log(this.alarmMsg);
     this.name = this.navParams.data.name;
     this.deviceId = this.navParams.data.deviceId;
-    console.log(this.navParams.data);
-    // this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
+    this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
     // this.alarmNum = this.navParams.data.alarmsum;
     // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
     // this.alarmTime = this.alarm
-    this.dataInit();
+      this.dataInit();
+      console.log(this.dataArray);
   }
   dataInit(){
     this.nativeService.showLoading("数据加载中...")
@@ -117,7 +117,7 @@ export class AlarmPage {
         headers: headers
     });
     this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
-      this.nativeService.hideLoading();
+        this.nativeService.hideLoading();
         data.forEach(x=>{
           x.grade=x.grade.toString();
           console.log( x.grade);

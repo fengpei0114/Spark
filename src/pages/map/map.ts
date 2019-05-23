@@ -737,8 +737,8 @@ public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部�
               public http:Http,
               public app:App,
               public menuCtrl: MenuController,
-              public navCtrl: NavController,
-              public navParams: NavParams,
+              public navCtrl: NavController, 
+              public navParams: NavParams, 
               private  platform:Platform,
               private httpService: HttpService,
               private nativeService:NativeService,
@@ -754,7 +754,7 @@ public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部�
     console.log("ionViewDidEnter");
 }
 initdata(){
-  this.nativeService.showLoading("数据加载中");
+    this.nativeService.showLoading("数据加载中");
         let url = "http://192.168.0.167:7002/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
             "userId": 1,
@@ -767,88 +767,119 @@ initdata(){
         let options = new RequestOptions({
             headers: headers
         });
+        
         this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
-
             this.markerArray=data;
             this.markerArray.map(devicedata=>{
                 devicedata['lnglat']=[devicedata['lat'],devicedata['lng']];
+                devicedata['style']=devicedata['style']-1;
             });
             console.log(this.markerArray);
             this.nativeService.hideLoading();
             this.addMarker();
          //   console.log(this.mapdata);
         },
-          error => {
-            this.nativeService.hideLoading();
-            this.nativeService.showToast("获取数据失败");
-            console.log(error);
-            this.markerArray=this.mapdata;
-            this.addMarker();
-          })
+        error => {
+          this.nativeService.hideLoading();
+          this.nativeService.showToast("获取数据失败");
+          console.log(error);
+          this.markerArray=this.mapdata;
+          this.addMarker();
+        })
     }
 
-creatMap() {
-  this.element = this.mapElement.nativeElement;
-  this.map = new AMap.Map(this.element, {
-    // resizeEnable:true,
-
-    zoom: 4
-  });
-  this.initdata();
-}
-
+    creatMap() {
+        this.element = this.mapElement.nativeElement;
+        this.map = new AMap.Map(this.element, {
+          // resizeEnable:true,
+      
+          zoom: 4
+        });
+        this.initdata();
+      }
 
 addMarker() {
-  var style = [{
-    url: '../../assets/style_1.png',
-    // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
-    anchor: new AMap.Pixel(6, 6),
-    size: new AMap.Size(15, 22)
-  }, {
-    url: '../../assets/style_2.png',
-    anchor: new AMap.Pixel(4, 4),
-    size: new AMap.Size(15, 22)
-  }, {
-    url: '../../assets/style_3.png',
-    anchor: new AMap.Pixel(3, 3),
-    size: new AMap.Size(15, 22)
-  }, {
-    url: '../../assets/style_4.png',
-    anchor: new AMap.Pixel(11, 11),
-    size: new AMap.Size(15, 22)
-  }, {
-    url: '../../assets/style_5.png',
-    anchor: new AMap.Pixel(11, 11),
-    size: new AMap.Size(15, 22)
-  }
-  ];
+    // var style = [{
+    //     url: '../../assets/style_1.png',
+    //     // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
+    //     anchor: new AMap.Pixel(6, 6),
+    //     size: new AMap.Size(15, 22)
+    // }, {
+    //     url: '../../assets/style_2.png',
+    //     anchor: new AMap.Pixel(4, 4),
+    //     size: new AMap.Size(15, 22)
+    // }, {
+    //     url: '../../assets/style_3.png',
+    //     anchor: new AMap.Pixel(3, 3),
+    //     size: new AMap.Size(15, 22)
+    // }, {
+    //     url: '../../assets/style_4.png',
+    //     anchor: new AMap.Pixel(11, 11),
+    //     size: new AMap.Size(15,22)
+    // }, {
+    //     url: '../../assets/style_5.png',
+    //     anchor: new AMap.Pixel(11, 11),
+    //     size: new AMap.Size(15, 22)
+    // }
+    // ];
 
-  let mass = new AMap.MassMarks(this.markerArray, { //接通接口后，mapdata改为markerArray
-    opacity: 0.8,
-    zIndex: 111,
-    cursor: 'pointer',
-    style: style
-  })
+    var style = [{
+        url: '../../assets/style_3.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(15, 22)
+    }, {
+        url: '../../assets/style_1.png',
+        // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
+        anchor: new AMap.Pixel(6, 6),
+        size: new AMap.Size(15, 22)
+    }, {
+        url: '../../assets/style_2.png',
+        anchor: new AMap.Pixel(4, 4),
+        size: new AMap.Size(15, 22)
+    }, {
+        url: '../../assets/style_4.png',
+        anchor: new AMap.Pixel(11, 11),
+        size: new AMap.Size(15,22)
+    }, {
+        url: '../../assets/style_5.png',
+        anchor: new AMap.Pixel(11, 11),
+        size: new AMap.Size(15, 22)
+    }
+    ];
 
-  // let marker = new AMap.Marker({content:'',map:map});
-  mass.on('click', e => {
-    // marker.setPosition(e.data.lnglat);
-    this.map.setCenter(e.data.lnglat);
-    this.showInfoWindow = !this.showInfoWindow;
-    console.log(e);
-    this.windowsMsg = e['data'];
-  });
-  mass.setMap(this.map);
+    let mass = new AMap.MassMarks(this.markerArray,{ //接通接口后，mapdata改为markerArray
+        opacity:0.8,
+        zIndex:111,
+        cursor:'pointer',
+        style:style
+    })
+
+    // let marker = new AMap.Marker({content:'',map:map});
+    mass.on('click', e => {
+        // marker.setPosition(e.data.lnglat);
+        this.map.setCenter(e.data.lnglat);
+        this.showInfoWindow = !this.showInfoWindow;
+        console.log(e);
+        this.windowsMsg = e['data'];
+    });
+    mass.setMap(this.map);
 }
 
 closeInfoWindow(){
     this.showInfoWindow = false;
 }
-
+/**
+ * 跳转至当前设备的警报列表
+ * @param data 当前设备信息
+ */
 gotoAlarmPage(data){
+    console.log(data);
    this.app.getRootNav().push(AlarmPage,data);
 }
-
+/**
+ * 跳转至当前设备的故障列表
+ * @param data 当前设备信息
+ */
 gotoMalfunctionPage(data)
 {
    this.app.getRootNav().push(MalfunctionPage,data)
@@ -912,6 +943,7 @@ gotoMalfunctionPage(data)
      *  16. 获取全部警报
      */
     AlarmdataInit(){
+        this.nativeService.showLoading("数据加载中");
             let url = "http://192.168.0.167:7002/Alarm/find/brief/byUserID";
             let body = {
                 "userID":1,
@@ -929,12 +961,17 @@ gotoMalfunctionPage(data)
             this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
                 console.log(data);
                 this.cityAlarmOrMul = data;
+                this.nativeService.hideLoading();
+            },error=>{
+                this.nativeService.hideLoading();
+                alert("网络连接错误！");
             })
     }
     /**
-     *  16. 获取全部故障
+     *  17. 获取全部故障
      */
     MaldataInit(){
+        this.nativeService.showLoading("数据加载中");
         let url = "http://192.168.0.167:7002/Malfunction/find/brief/byUserID";
         let body = {
             "userId":1,
@@ -952,6 +989,10 @@ gotoMalfunctionPage(data)
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
            this.cityAlarmOrMul = data;
+           this.nativeService.hideLoading();
+        },error=>{
+            this.nativeService.hideLoading();
+            alert("网络连接错误！");
         })
     }
     /**
@@ -985,6 +1026,7 @@ gotoMalfunctionPage(data)
      * @param item 市上级的省
      */
     ProvinceChoose(item){
+        console.log(item);
         if(item=="全部"){
             // this.isprovincechoose = false;
             this.cityArray = null;
@@ -1003,7 +1045,7 @@ gotoMalfunctionPage(data)
             let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/cityLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/cityLevel/malOccurred";
             let body = {
                 "userID":1,
-                "provID":item,
+                "provinceName":item,
             };
             let headers = new Headers({
                 'Content-Type': 'application/json',
@@ -1022,7 +1064,7 @@ gotoMalfunctionPage(data)
     }
     /**
      * 获取指定地区的警报或故障
-     * @param item
+     * @param item 
      */
     CityChoose(item){
         this.provincechoose = false;
@@ -1039,7 +1081,7 @@ gotoMalfunctionPage(data)
      * 20. 获取指定地区的警报
      */
     AlarmCityArray(item){
-        let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
+        let url = "http://192.168.0.167:7002/Alarm/find/byCitybyUserID";
         let body = {
             "userID":1,
             "griddingID":item,
@@ -1056,7 +1098,9 @@ gotoMalfunctionPage(data)
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
-           this.alarmMsgArray = data;
+        //    this.alarmMsgArray = data;
+            this.cityAlarmOrMul = data;
+            this.cityArray=[];
            this.malpageNum++;
         })
     }
@@ -1081,25 +1125,39 @@ gotoMalfunctionPage(data)
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
-           this.alarmMsgArray = data;
+           this.cityAlarmOrMul = data;
+           this.cityArray=[];
            this.malpageNum++;
         })
     }
     openMenu(): void{
         this.menuCtrl.open();
     }
+
+    /**
+     * 查看警报详细信息
+     * @param item 当前警报信息 
+     */
     getAlarmDetail(item){
         // let alarmOrmul = this.alarmOrmul;
         // item.alarmOrmul = this.alarmOrmul;
         console.log(item);
         this.app.getRootNav().push(AlarmdetailPage,item);
     }
+
+    /**
+     * 查看故障详细信息
+     * @param item 当前故障信息 
+     */
     getMalDetail(item){
         // let alarmOrmul = this.alarmOrmul;
         // item.alarmOrmul = this.alarmOrmul;
         console.log(item);
         this.app.getRootNav().push(MaldetailPage,item);
     }
+    /**
+     * 选择下部警报按钮
+     */
     checkAlarm(){
         if(this.isInnerMsg){//点击按钮时加载全部警报信息
             this.AlarmdataInit();
@@ -1108,6 +1166,9 @@ gotoMalfunctionPage(data)
         }
         this.alarmOrmul = true;
     }
+    /**
+     * 选择下部故障按钮
+     */
     checkMul(){
         if(this.isInnerMsg){
             this.MaldataInit();

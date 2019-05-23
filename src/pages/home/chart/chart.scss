@@ -1,9 +1,22 @@
 page-chart {
     .padding {
-        background: url('../assets/login.png');
+        // background: url('../assets/login.png');
+        background: url('../assets/background.png');
+        height:100%;
+        background-size:100% 100%;
       }
     ion-card {
         text-align: center;
         background-color:#f2f2f2
+      }
+      .card_style{
+        border-radius:20px;
+        background:rgba(255, 255, 255, 0.116);
+        top:0px;
+        bottom:5px;
+        padding:0;
+        margin-top:0px;
+        margin-bottom:10px;
+        overflow: auto;
       }
 }

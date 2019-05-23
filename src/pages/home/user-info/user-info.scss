@@ -1,12 +1,38 @@
 page-user-info {
   .padding {
-    background: url('../assets/login.png');
+    // background: url('../assets/login.png');
+    background: url('../assets/background.png');
+    height:100%;
+    background-size:100% 100%;
+  }
+  .card_style{
+    border-radius:20px;
+    background:rgba(255, 255, 255, 0.116);
+    top:0px;
+    bottom:5px;
+    padding:0;
+    margin-top:0px;
+    margin-bottom:10px;
+    overflow: auto;
+  }
+  .listItem{
+    background-color: transparent;
+  }
+  .name{
+    display:inline;
+    // color:grey;
+    color:aliceblue;
+  }
+  .detail{
+    display:inline;
+    color:aliceblue;
   }
 }
 
-ion-modal.inset-modal {
-  // transparent black background overlay
-  background-color: rgba(0, 0, 0, .5) !important;
-  transition: opacity .25s ease-in-out;
-  padding: 20vh 10vw;
-}
+// ion-modal.inset-modal {
+//   // transparent black background overlay
+//   background-color: rgba(0, 0, 0, .5) !important;
+//   transition: opacity .25s ease-in-out;
+//   padding: 20vh 10vw;
+// }
+

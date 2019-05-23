@@ -1,6 +1,7 @@
 page-maldetail{
     #padding {
-      background: url('../assets/login.png');
+      background: url('../assets/background.png');
+      // background: url('../assets/login.png');
       //opacity:0.5;
     }
     .card-background {
@@ -80,11 +81,12 @@ page-maldetail{
     }
     .name{
       display:inline;
-      color:grey;
+      // color:grey;
+      color:aliceblue;
     }
     .detail{
       display:inline;
-  
+      color:aliceblue;
     }
     .listItem{
       background-color: transparent;

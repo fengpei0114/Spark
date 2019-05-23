@@ -1,9 +1,8 @@
 <ion-header>
-    <ion-navbar style="align-items: center;">
+    <ion-navbar style="align-items: center;" transparent>
         <ion-row no-padding>
             <ion-col col-10 no-padding>
-                <ion-label text-center style="font-size: medium;" no-margin>故障历史</ion-label>
-                <ion-label text-center no-margin style="font-size: x-small">{{name}}</ion-label>
+                <ion-label text-center style="font-size: medium;" no-margin><p style="color:rgb(255,255,255) !important;font-weight:100">{{name}}故障历史</p></ion-label>
             </ion-col>
             <ion-col col-2 style="color: transparent">
                 <ion-icon item-right name="ios-hammer-outline" ></ion-icon>
@@ -16,8 +15,7 @@
 
 <ion-content padding class="padding">
     <ion-item class="staticBar">
-
-      <ion-label style="text-align: center">{{unconfirmMulNum}}条故障未确认</ion-label>
+        <ion-label style="text-align: center">{{unconfirmMulNum}}条故障未确认</ion-label>
 <!--        <ion-row >-->
 <!--            <ion-col col-5 no-padding>{{mulMsg.alarmsum-mulMsg.unconfirmedAlarmSum}}条 已确认</ion-col>-->
 <!--            <ion-col col-5 no-padding>{{mulMsg.unconfirmMulNum}} 条未确认</ion-col>-->
@@ -27,10 +25,10 @@
 <!--        </ion-row>-->
     </ion-item>
     <br>
-  <ion-card *ngIf="0 == malfunctionArray.length" style="background-color: transparent">
-    <ion-label style="text-align: center"> 此设备无故障历史</ion-label>
+    <ion-card *ngIf="0 == malfunctionArray.length" style="background-color: transparent">
+    <ion-label style="text-align: center;color:aliceblue"> 此设备无故障历史</ion-label>
 
-  </ion-card>
+    </ion-card>
     <ion-card *ngFor="let item of malfunctionArray" no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px">
         <ion-item *ngIf="item.confirmed" >
             <ion-item class="confirmHead">
@@ -39,27 +37,27 @@
             </ion-item>
             <ion-item class="confirmBody" no-padding>
                 <ion-grid>
-                  <ion-row>
-                    <ion-col >故障类型：{{item.malType}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>故障元器件：{{item.component}}</ion-col>
-                  </ion-row>
                     <ion-row>
-                      <ion-col >故障时间：{{item.malTime}}</ion-col>
-                    <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
-                    </ion-row>
-                    <!-- <ion-row>
-                        <ion-col>故障子节点：{{item.childNode}}</ion-col>
-                    </ion-row> -->
-                    <!-- <ion-row>
-                        <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                    </ion-row> -->
-                    <ion-row>
-                        <ion-col col-6>故障确认人：{{item.user}}</ion-col>
+                        <ion-col >故障类型：{{item.malType}}</ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col>故障元器件：{{item.component}}</ion-col>
+                      </ion-row>
+                        <ion-row>
+                          <ion-col >故障时间：{{item.malTime}}</ion-col>
+                        <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
+                        </ion-row>
+                        <!-- <ion-row>
+                            <ion-col>故障子节点：{{item.childNode}}</ion-col>
+                        </ion-row> -->
+                        <!-- <ion-row>
+                            <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
+                        </ion-row> -->
+                        <ion-row>
+                            <ion-col col-6>故障确认人：{{item.user}}</ion-col>
                         <ion-col *ngIf="item.platform">确认方：移动端</ion-col>
                         <ion-col *ngIf="!item.platform">确认方：设备端</ion-col>
                     </ion-row>
@@ -75,27 +73,27 @@
                 <ion-note style="color:black" item-right>未确认</ion-note>
             </ion-item>
             <ion-item class="noconfirmBody" no-padding>
-              <ion-grid>
-                <ion-row>
-                  <ion-col >故障类型：{{item.malType}}</ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>故障元器件：{{item.component}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col >故障时间：{{item.malTime}}</ion-col>
-                  <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
-                </ion-row>
-                <!-- <ion-row>
-                    <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                </ion-row> -->
-                <!-- <ion-row>
-                    <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                </ion-row> -->
-              </ion-grid>            </ion-item>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col >故障类型：{{item.malType}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>故障元器件：{{item.component}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col >故障时间：{{item.malTime}}</ion-col>
+                      <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
+                    </ion-row>
+                    <!-- <ion-row>
+                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
+                    </ion-row> -->
+                    <!-- <ion-row>
+                        <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
+                    </ion-row> -->
+                  </ion-grid>            </ion-item>
             <ion-item>
               <button ion-button (click)="OncomfirmClick(item)" item-right>确认故障</button>
             </ion-item>

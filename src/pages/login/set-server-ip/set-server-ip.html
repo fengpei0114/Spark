@@ -44,25 +44,25 @@
 
         </ion-list>
     </ion-card> -->
-    <ion-title style="top:250px;text-align:center">设置服务器</ion-title>
+    <ion-title style="top:250px;text-align:center"><p style="color:rgb(255,255,255) !important;font-weight:100">设置服务器</p></ion-title>
     <div style="position: absolute;top: 50%;height: 340px;margin-top: -170px;right:0px;left:0px">
         
         <div>
             <ion-item style="background-color: transparent;border-bottom:none" no-border>
-                <ion-label>当前IP: {{serverIp}}:{{serverPort}}</ion-label>
+                <ion-label style="color:aliceblue">当前IP: {{serverIp}}:{{serverPort}}</ion-label>
              </ion-item>
              <ion-card class="card-background">
                     <ion-list insert>
                         <ion-item style="background-color: transparent">
-                            <ion-label><ion-icon name="ios-link-outline"></ion-icon></ion-label>
-                            <ion-input placeholder="请输入新的IP地址" (tap)="clearMsg()"  type="text" clearInput [(ngModel)]="newServerIp"></ion-input>
+                            <ion-label><ion-icon name="ios-link-outline" style="color:aliceblue"></ion-icon></ion-label>
+                            <ion-input placeholder="请输入新的IP地址" style="color:aliceblue" (tap)="clearMsg()"  type="text" clearInput [(ngModel)]="newServerIp"></ion-input>
                         </ion-item>
                         
                         <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)">
                             <ion-label>
-                                <ion-icon name="ios-settings-outline"></ion-icon>
+                                <ion-icon name="ios-settings-outline" style="color:aliceblue"></ion-icon>
                             </ion-label>
-                            <ion-input placeholder="请输入端口号" type="text" (tap)="clearMsg()"  clearInput [(ngModel)]="newServerPort"></ion-input>
+                            <ion-input placeholder="请输入端口号" style="color:aliceblue" type="text" (tap)="clearMsg()"  clearInput [(ngModel)]="newServerPort"></ion-input>
                         </ion-item>
                         <ion-item style="background-color: transparent;border-color: rgba(255,255,255,0.01)">
                             <ion-label class="error-box">
@@ -73,8 +73,8 @@
                     </ion-list>
                     
                     <div style="text-align:center;padding-top:40px">
-                        <button ion-button style="width:40%;border-radius:10px;"  (click)="miss()">取 消</button>
-                        <button ion-button style="width:40%;border-radius:10px;" (click)="changeIpAndPort()">修 改</button>
+                        <button ion-button clear (click)="miss()" style="border-radius:15px;width:45%;background-image:url('../../../assets/canclebutton.png');background-size:100% 100%"></button>
+                        <button ion-button clear type="submit"style="border-radius:15px;width:45%;background-image:url('../../../assets/definedpage.png');background-size:100% 100%"></button>                
                     </div>
             </ion-card>
         </div>

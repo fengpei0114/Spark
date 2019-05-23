@@ -1,8 +1,8 @@
 <ion-header>
-    <ion-navbar style="align-items: center;">
+    <ion-navbar style="align-items: center;" transparent>
        <ion-row no-padding>
            <ion-col col-10 no-padding>
-               <ion-label text-center style="font-size: medium;" no-margin>统计信息</ion-label>
+               <ion-label text-center style="font-size: medium;" no-margin><p style="color:rgb(255,255,255) !important;font-weight:100">统计信息</p></ion-label>
            </ion-col>
            <ion-col col-2 style="color: transparent">
                <ion-icon item-right name="ios-hammer-outline" ></ion-icon>
@@ -13,26 +13,26 @@
 </ion-header>
 
 <ion-content padding class="padding">
-  <ion-card  >
+  <ion-card class = "card_style">
     <ion-card-header>
-      <div>警报记录</div>
-      <div>警报总次数：{{getdataArray.MulNum}}</div>
+      <div style="color:aliceblue">警报记录</div>
+      <div style="color:aliceblue">警报总次数：{{getdataArray.MulNum}}</div>
     </ion-card-header>
   <ion-card-content>
-  <div id="alarm"></div>
+  <div id="alarm" #alarm></div>
   </ion-card-content>
   </ion-card> 
   
   <div hieht=100px></div>
   <br/>
   
-  <ion-card > 
+  <ion-card class = "card_style"> 
       <ion-card-header>
-      <div>故障记录</div>
-      <div>警报总次数：{{getdataArray.MulNum}}</div>
+      <div style="color:aliceblue">故障记录</div>
+      <div style="color:aliceblue">警报总次数：{{getdataArray.MulNum}}</div>
       </ion-card-header>
   <ion-card-content>
-  <div id="malfunction"></div>
+  <div id="malfunction" #malfunction></div>
   </ion-card-content>
   </ion-card>  
 

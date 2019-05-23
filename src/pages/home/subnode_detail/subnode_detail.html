@@ -3,8 +3,8 @@
             <button ion-button menuToggle (click)="openMenu()">
                     <ion-icon name="menu"></ion-icon>
                 </button>
-        <ion-title>子节点{{installpoint}}</ion-title>
-        <ion-title>详细信息</ion-title>
+        <ion-title><p style="color:rgb(255,255,255) !important;font-weight:100">子节点{{installpoint}}-详细信息</p></ion-title>
+        <!-- <ion-title></ion-title> -->
         <ion-buttons end>
             <button ion-button icon-only>
                 <ion-icon name="menue"></ion-icon>
@@ -16,76 +16,76 @@
 <ion-content padding class="padding">
     <ion-card class = "card_style">
         <ion-list>
-            <ion-item class="listItem"> <ion-icon name="ios-cog-outline"></ion-icon>
+            <ion-item class="listItem"> <ion-icon name="ios-cog-outline" style="color:aliceblue"></ion-icon>
                 <div class="name">子节点名称 : </div>
                 <div class="detail">{{subnodeId}} </div>
 
             </ion-item >
-            <ion-item class="listItem"><ion-icon name="ios-warning-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-warning-outline" style="color:aliceblue"></ion-icon>
                 <div class="name">子节点安装点 : </div>
                 <div class="detail">{{installpoint}}</div>
             </ion-item>
 
-            <ion-item class="listItem"><ion-icon name="ios-stopwatch-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-stopwatch-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 子节点报警总数 :  </div>
                 <div class="detail">{{subnode_alarmnum}} </div>
             </ion-item>
-            <ion-item class="listItem"><ion-icon name="ios-notifications-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-notifications-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 子节点故障总数: </div>
                 <div class="detail">{{subnode_malnum}} </div>
             </ion-item>
-            <ion-item class="listItem"><ion-icon name="md-radio-button-on"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="md-radio-button-on" style="color:aliceblue"></ion-icon>
                 <div class="name"> 未确认警报数 : </div>
                 <div class="detail">{{subnode_noconfirmalarm}} </div>
             </ion-item>
-            <ion-item class="listItem"><ion-icon name="ios-cube-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-cube-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 未确认故障数 : </div>
                 <div class="detail">{{subnode_noconfirmmal}} </div>
             </ion-item>
-            <ion-item class="listItem"><ion-icon name="ios-construct-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 探头数量 : </div>
                 <div class="detail">{{subnode_detectornum}} </div>
             </ion-item>
             <ion-item class="listItem">
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 探头1 : </div>
                 <div class = "detail" *ngIf = "subnode_detector_1 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_detector_1 == false">关闭</div>
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 探头2 : </div>
                 <div class = "detail" *ngIf = "subnode_detector_2 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_detector_2 == false">关闭</div>
             </ion-item>
             <ion-item class="listItem">
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 探头3 : </div>
                 <div class = "detail" *ngIf = "subnode_detector_3 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_detector_3 == false">关闭</div>
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 探头4 : </div>
                 <div class = "detail" *ngIf = "subnode_detector_4 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_detector_4 == false">关闭</div>
             </ion-item>
-            <ion-item class="listItem"><ion-icon name="ios-create-outline"></ion-icon>
+            <ion-item class="listItem"><ion-icon name="ios-create-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 电磁阀数量 : </div>
                 <div class="detail">{{subnode_valvenum}}</div>
             </ion-item>
             <ion-item class="listItem">
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 电磁阀1 : </div>
                 <div class = "detail" *ngIf = "subnode_valve_1 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_valve_1 == false">关闭</div>
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 电磁阀2 : </div>
                 <div class = "detail" *ngIf = "subnode_valve_2 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_valve_2 == false">关闭</div>
             </ion-item>
             <ion-item class="listItem">
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 电磁阀3 : </div>
                 <div class = "detail" *ngIf = "subnode_valve_3 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_valve_3 == false">关闭</div>
-                <ion-icon name="ios-construct-outline"></ion-icon>
+                <ion-icon name="ios-construct-outline" style="color:aliceblue"></ion-icon>
                 <div class="name"> 电磁阀4 : </div>
                 <div class = "detail" *ngIf = "subnode_valve_4 == true">开启</div>
                 <div class = "detail" *ngIf = "subnode_valve_4 == false">关闭</div>

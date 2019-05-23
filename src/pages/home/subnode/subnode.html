@@ -1,10 +1,12 @@
 <ion-header style="text-align:center" no-border>
         <ion-navbar transparent >
                 <button ion-button menuToggle (click)="openMenu()">
-                        <ion-icon name="menu"></ion-icon>
+                        <ion-icon name="menu" style="color:rgb(255,255,255)"></ion-icon>
                     </button>
-            <ion-title>{{name}}</ion-title>
-            <ion-title>子节点列表</ion-title>
+            <ion-title>
+                    <p style="color:rgb(255,255,255) !important;font-weight:100">{{name}}子节点列表</p>
+                    <!-- <p style="color:rgb(255,255,255) !important"></p> -->
+            </ion-title>
             <ion-buttons end>
                 <button ion-button icon-only>
                     <ion-icon name="menue"></ion-icon>
@@ -17,28 +19,28 @@
     <ion-card *ngFor="let item of subnodeMsg" class="card_style">
             <ion-list insert position = "relative">
                 <ion-item class="listItem">
-                    <ion-icon name="baseball"></ion-icon>
+                    <ion-icon name="baseball"  style="color:aliceblue"></ion-icon>
                     <div class="name">子节点编号：</div>
                     <ion-note class="detail">{{item.subnodeID}}</ion-note>
                 </ion-item>
                 <ion-item class="listItem">
-                    <ion-icon name="disc"></ion-icon>
+                    <ion-icon name="disc"  style="color:aliceblue"></ion-icon>
                     <div class="name">子节点安装点：</div>
                     <ion-note class="detail">{{item.installPoint}}</ion-note>
                 </ion-item>
                 <ion-item class="listItem">
-                    <ion-icon name="clipboard"></ion-icon>
+                    <ion-icon name="clipboard"  style="color:aliceblue"></ion-icon>
                     <div class="name">报警总数：</div>
                     <ion-note class="detail">{{item.alarmNum}}</ion-note>
                 </ion-item>
                 <ion-item class="listItem">
-                    <ion-icon name="bug"></ion-icon>
+                    <ion-icon name="bug"  style="color:aliceblue"></ion-icon>
                     <div class="name">故障总数：</div>
                     <ion-note class="detail">{{item.malfunctionNum}}</ion-note>
                     <ion-buttons end>
                         <button style="background:transparent" (click)="getdetailMsg(item)">
                             <ion-note  class="detail">查看详情</ion-note>
-                            <ion-icon name="arrow-forward"></ion-icon>
+                            <ion-icon name="arrow-forward" style="color:aliceblue"></ion-icon>
                         </button>
                     </ion-buttons>
                 </ion-item>

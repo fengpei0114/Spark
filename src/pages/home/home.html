@@ -1,9 +1,12 @@
 <ion-header style="text-align:center" no-border>
     <ion-navbar transparent >
             <button ion-button menuToggle (click)="openMenu()">
-                    <ion-icon name="menu"></ion-icon>
+                    <ion-icon name="menu" style="color:rgb(255,255,255)"></ion-icon>
                 </button>
-        <ion-title>{{equipmentName}}</ion-title>
+        <ion-title>
+            <ion-icon *ngIf = "runstatus == '正常'" name="ios-alert" color="secondary"style="display:inline"></ion-icon>
+            <p style="color:rgb(255,255,255);display:inline">{{equipmentName}}</p>
+        </ion-title>
         <ion-buttons end>
             <button ion-button icon-only>
                 <ion-icon name="menue"></ion-icon>
@@ -15,87 +18,62 @@
 <ion-content class="padding">
     <ion-slides spaceBetween="20px" speed="200" [pager] = "true" class = "slidesstyle" (ionSlideDidChange)="slideChanged()">
         <ion-slide *ngFor="let item of EquipmentArray" >
-            <ion-card style="border-radius:20px;background-color:transparent;position:absolute;top:0px;bottom:5px;padding:0;margin-top:0px;margin-bottom:0px;overflow: auto;">
-               
-                <ion-list inset>
-                        <!-- <ion-card style="bottom:5px;background-color:transparent;border-radius:10px"> -->
-                                <ion-item class="listItem">
-                            
-                            <ion-icon name="ios-keypad-outline"></ion-icon>
-                            <div class="name"> 设备编号:</div>
-                            <ion-note class="detail">{{item.deviceId}}</ion-note>
-                        </ion-item>
-                        <ion-item class="listItem">
-                            <ion-icon name="ios-keypad-outline"></ion-icon>
-                            <div class="name"> 所属厂房:</div>
-                            <ion-note class="detail">{{item.factoryName}}</ion-note>
-                        </ion-item>
-                    <!-- </ion-card> -->
-                    <!-- <ion-card style="background-color:transparent;padding-bottom:5px;border-radius:10px;margin-top:5px;"> -->
-                        <ion-item class="listItem">
-                            <ion-icon *ngIf = "item.status.power == '开'" name="ios-alert" color="secondary"></ion-icon>
-                            <ion-icon *ngIf = "item.status.power == '关'" name="ios-alert" color="danger"></ion-icon>
-                            <div class="name">电源 :</div>
-                            <ion-note class="detail">{{item.status.power}}</ion-note>
-                        </ion-item>
-                        <ion-item class="listItem">
-                            <ion-icon *ngIf = "item.status.malfunction == '无'" name="ios-alert" color="secondary"></ion-icon>
-                            <ion-icon *ngIf = "item.status.malfunction == '有'" name="ios-alert" color="danger"></ion-icon>
-                            <div class="name">故障 :</div>
-                            <ion-note class="detail" >{{item.status.malfunction}}</ion-note>
-                        <!-- </ion-item> -->
-                        <!-- <ion-item class="listItem"> -->
-                            <ion-icon *ngIf = "item.status.running == '正常'" name="ios-alert" color="secondary"></ion-icon>
-                            <ion-icon *ngIf = "item.status.running == '异常'" name="ios-alert" color="danger"></ion-icon>
-                            <div class="name">运行 :</div>
-                            <ion-note class="detail" >{{item.status.running}}</ion-note>
-                        </ion-item>
-                    <!-- </ion-card> -->
-                    <!-- <ion-card style="background-color:transparent;padding-bottom:5px;border-radius:10px;margin-top:5px;"> -->
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-build-outline"></ion-icon>
-                        <div class="name"> 最后警报时间:</div>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-note class="detail">{{item.alarmMsg.alarmtimeStartTime}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-pulse-outline"></ion-icon>
-                        <div class="name"> 最后故障时间 :</div>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-note class="detail">{{item.alarmMsg.malfunctiontimeTime}}</ion-note>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-icon name="ios-pulse-outline"></ion-icon>
-                        <div class="name"> 最后配置时间 :</div>
-                    </ion-item>
-                    <ion-item class="listItem">
-                        <ion-note class="detail">{{item.alarmMsg.sittingtimeEnd}}</ion-note>
-                    </ion-item>
-                <!-- </ion-card> -->
-                <div>
-                    
-                </div>
-                </ion-list>
-            <!-- <div style="position:relative;height:90%;width:90%;border:1px solid #000"> -->
+            <ion-card style="border-radius:20px;background-color:rgba(255, 255, 255, 0.116);position:absolute;top:0px;bottom:5px;padding:0;margin-top:0px;margin-bottom:0px;overflow: auto;">
+                <ion-grid style="top:50%;left:50%;position: absolute;transform: translate(-50%, -90%);">
+                    <ion-row style="padding-top:50px">
+                        <ion-col>
+                            <img *ngIf = "item.status.malfunction == '无'" src="../../assets/alarmgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.malfunction == '有'" src="../../assets/alarmred.png" class="imgstyle"/>
+                        </ion-col>
+                        <ion-col>
+                            <img *ngIf = "item.status.running == '正常'" src="../../assets/malgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.running == '异常'" src="../../assets/malred.png" class="imgstyle"/>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue">报警 :</div>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.malfunction}}</ion-note>
+                        </ion-col>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue">故障 :</div>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.running}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue"> 最后时间:</div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue"> 最后时间 :</div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-note class="detail" style="color:aliceblue">{{item.alarmMsg.alarmtimeStartTime}}</ion-note>
+                        </ion-col>
+                        <ion-col>
+                            <ion-note class="detail" style="color:aliceblue">{{item.alarmMsg.malfunctiontimeTime}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!-- <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;"> -->
+                    <!-- <button ion-button clear type="submit" (click)="getSubNode(item.deviceId)" style="color:aliceblue;width:45%;background-image:url('../../assets/button2.png');background-size:100% 100%">子节点</button>
+                    <button ion-button clear type="submit" (click)="getChart(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button2.png');background-size:100% 100%">统计</button>
+                    <button ion-button clear type="submit" (click)="checkAlarm(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button2.png');background-size:100% 100%">警报</button>
+                    <button ion-button clear type="submit" (click)="checkmalfunction(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button2.png');background-size:100% 100%">故障</button> -->
+                    <!-- <button ion-button clear type="submit" (click)="checkStatus(item)" style="border-radius:15px;margin-left:0;margin-right:0;padding-right:1;padding-left:0;">配置</button> -->
+                <!-- </div> -->
+
                 <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
-                    <button ion-button type="submit" (click)="getSubNode(item.deviceId)" style="width:45%;border-radius:15px;">查看子节点</button>
-                    <button ion-button type="submit" (click)="getChart(item.name)" style="width:45%;border-radius:15px;">统计信息</button>
-                    <button ion-button type="submit" (click)="checkAlarm(item)" style="border-radius:15px">警报历史</button>
-                    <button ion-button type="submit" (click)="checkmalfunction(item)" style="border-radius:15px">故障历史</button>
-                    <button ion-button type="submit" (click)="checkStatus(item)" style="border-radius:15px">配置历史</button>
+                    <button ion-button clear type="submit" (click)="getSubNode(item.deviceId)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">子节点</button>
+                    <button ion-button clear type="submit" (click)="getChart(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">统计</button>
+                    <button ion-button clear type="submit" (click)="checkAlarm(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">警报</button>
+                    <button ion-button clear type="submit" (click)="checkmalfunction(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">故障</button>
+                    <!-- <button ion-button clear type="submit" (click)="checkStatus(item)" style="border-radius:15px;margin-left:0;margin-right:0;padding-right:1;padding-left:0;">配置</button> -->
                 </div>
-            <!-- </div> -->
             </ion-card>
         </ion-slide>
-    </ion-slides>
-    <!-- <div style="padding-top:20%;padding-left:20%;padding-right:20%;height:100%">
-            
-        
-    </div> -->
-
-    
-    
+    </ion-slides>   
 </ion-content>
 

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
-import Highcharts from 'highcharts';
+import { Component,ElementRef,ViewChild } from '@angular/core';
+import { NavController, NavParams,App ,ViewController} from 'ionic-angular';
+import { Http , Headers ,RequestOptions } from '@angular/http';
+import HighCharts from 'highcharts';
+import { NativeService } from '../../../providers/native-service/native-service';
 import { GetdataProvider } from '../../providers/getdata/getdata';
 // import { preserveWhitespacesDefault } from '@angular/compiler';
 
@@ -10,8 +12,15 @@ import { GetdataProvider } from '../../providers/getdata/getdata';
     templateUrl: 'chart.html',
 })
 export class ChartPage {
-  listData=[];
-  listNum=[];
+  @ViewChild('alarm')       public alarmElement  : ElementRef;
+  @ViewChild('malfunction') public malElement    : ElementRef;
+
+  public AlarmlistData:Array<any>=[];
+  public MallistData=[];
+  public AlarmlistNum=[];
+  public MallistNum=[];
+  public deviceId:any;
+  private _chart: any;
   public getdataArray={
     "MulNum":"12",
     "chartMsg":[{
@@ -46,123 +55,214 @@ export class ChartPage {
       "mulnum":0
     }]
   }
+  example={
+    "2019-05-11":1,
+    "2019-05-12":0,
+    "2019-05-13":3,
+    "2019-05-14":0,
+    "2019-05-15":2,
+    "2019-05-16":0,
+    "2019-05-17":0,
+    "2019-05-18":4,
+    "2019-05-19":0,
+    "2019-05-20":1,
+  }
+  public alarmdom:any;
+  public maldom:any;
     constructor(public navCtrl: NavController,
-                // public getdata: GetdataProvider,
+                public navParams: NavParams,
+                public http:Http,
+                private nativeService: NativeService,
                 public viewCtrl: ViewController ) {
-                  this.getRequestContact();
+                  this.deviceId = this.navParams.data.deviceId;
     }
 
-    getRequestContact(){
-      this.getdataArray.chartMsg.forEach((x)=>{
-        // this.listData[x.datatime]=x.mulnum;
-        this.listData.push(x.datatime);
-        this.listNum.push(x.mulnum);
+    AlarmdataInit(){
+      let url = "http://192.168.0.167:7002/Statistics/alarm/countByDay/byDeviceID";
+      let body = {
+          "deviceID":this.deviceId,
+      }
+      let headers = new Headers({
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          'Accept': 'application/json'
       })
-      console.log(this.listData);
-      console.log(this.listNum);
+      let options = new RequestOptions({
+          headers: headers
+      });
+      return new Promise((resolve,reject) => {
+        this.http.post(url, JSON.stringify(body), options)
+            .map(res => res.json())
+            .subscribe(data => {
+                resolve(data);
+            },err => {
+                reject(err);
+            });
+    });
     }
-    
-    
-
+    MaldataInit(){
+      let url = "http://192.168.0.167:7002/Statistics/malfunction/countByDay/byDeviceID";
+      let body = {
+          "deviceID":this.deviceId,
+      }
+      let headers = new Headers({
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          'Accept': 'application/json'
+      })
+      let options = new RequestOptions({
+          headers: headers
+      });
+      return new Promise((resolve,reject) => {
+        this.http.post(url, JSON.stringify(body), options)
+            .map(res => res.json())
+            .subscribe(data => {
+                resolve(data);
+            },err => {
+                reject(err);
+            });
+    });
+    }
     ionViewDidLoad(){
-       
-      // this.getRequestContact();
+        this.deviceId = this.navParams.data.deviceId;
+        // this.AlarmdataInit().then(data=>{
+        //     console.log(data);
+        //     // console.log(this.example);
+        //   for(var key in data){
+        //         this.AlarmlistData.push(key);
+        //         this.AlarmlistNum.push(data[key]);
+        //   }
+        //   this.paint();
+        // })
+        // this.MaldataInit().then(data=>{
+        //     console.log(data);
+        //     // console.log(this.example);
+        //     for(var key in data){
+        //         this.MallistData.push(key);
+        //         this.MallistNum.push(data[key]);
+        //     }
+        //     this.paint();
+        // })
+        for(var key in this.example){
+          this.AlarmlistData.push(key);
+          this.MallistData.push(key);
+          this.AlarmlistNum.push(this.example[key]);
+          this.MallistNum.push(this.example[key]);
+        }
+        this.paint();
+    }
 
-        var chart = Highcharts.chart('alarm', {
-          chart:{
-           // backgroundColor:'#f2f2f2',
-          },
-            title:{
-              text:null
-            },
-            credits:{
-              enabled:false
-             },
-            xAxis: {
-              title: {
-                text: '时间'
-            },
-                categories:this.listData
-            },
-            yAxis: {
-              title: {
-                text: '警报次数'
-            },           
-            allowDecimals:false,
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                headerFormat:'<b>{point.x}</b><br>',
-                pointFormat:'警报次数:{point.y}次',
-            },
-            plotOptions: {
-              series: {
-                lineWidth:0,
-                // lineColor:preserveWhitespacesDefault,
-                // fillOpacity: 0.1
-                // fillOpacity: 0.1,
-                showInLegend: false
-              }
-            },
-            series: [{
-                type:'scatter',
-                name: '警报次数',
-                data: this.listNum
-               }]
-        });
+    paint(){
+      let opts1:any = {
+        title:{
+          text:null
+        },
+        credits:{
+          enabled:false
+         },
+        xAxis: {
+          title: {
+            text: '时间'
+        },
+            categories:this.AlarmlistData
+        },
+        yAxis: {
+          title: {
+            text: '警报次数'
+        },           
+        allowDecimals:false,
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            headerFormat:'<b>{point.x}</b><br>',
+            pointFormat:'警报次数:{point.y}次',
+        },
+        plotOptions: {
+          series: {
+            lineWidth:0,
+            showInLegend: false
+          }
+        },
+        series: [{
+            type:'scatter',
+            name: '警报次数',
+            data: this.AlarmlistNum
+           }]
+      }
 
+      let opts2:any = {
+        title:{
+          text:null
+        },
+        credits:{
+          enabled:false
+         },
+        xAxis: {
+          title: {
+            text: '时间'
+        },
+            categories:this.MallistData
+        },
+        yAxis: {
+          title: {
+            text: '警报次数'
+        },           
+        allowDecimals:false,
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            headerFormat:'<b>{point.x}</b><br>',
+            pointFormat:'警报次数:{point.y}次',
+        },
+        plotOptions: {
+          series: {
+            lineWidth:0,
+            showInLegend: false
+          }
+        },
+        series: [{
+            type:'scatter',
+            name: '警报次数',
+            data: this.MallistNum
+           }]
+      }
 
-        var chart2 = Highcharts.chart('malfunction', {
-          chart:{
-           // backgroundColor:'#f2f2f2',
-          },
-            title:{
-              text:null
-            },
-            credits:{
-              enabled:false
-             },
-            xAxis: {
-              title: {
-                text: '时间'
-            },
-                categories:this.listData
-            },
-            yAxis: {
-              title: {
-                text: '故障次数'
-            },
-            allowDecimals:false,
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                headerFormat:'<b>{point.x}</b><br>',
-                pointFormat:'故障次数:{point.y}次',
-            },
-            plotOptions: {
-              series: {
-                lineWidth:0,
-                // lineColor:preserveWhitespacesDefault,
-                // fillOpacity: 0.1
-                // fillOpacity: 0.1,
-                showInLegend: false
-              }
-            },
-            series: [{
-                type:'scatter',
-                name: '警报次数',
-                data: this.listNum
-               }]
-        });
-        
+      if (this.alarmElement && this.alarmElement.nativeElement) {
+        opts1.chart = {
+            type: 'scatter',
+            backgroundColoe:'rgba(255, 255, 255, 0.116)',
+            renderTo: this.alarmElement.nativeElement,
+            zoomType: 'x',
+            marginRight: 10,
+            marginTop:20,
+            height:200 ,
+            spacingBottom: 0 ,
+          };
+        this._chart = new HighCharts.Chart(opts1);
+        this._chart.redraw;
+    }
+    if (this.malElement && this.malElement.nativeElement) {
+      opts2.chart = {
+          type: 'scatter',
+          renderTo: this.malElement.nativeElement,
+          zoomType: 'x',
+          marginRight: 10,
+          marginTop:20,
+          height:200 ,
+          spacingBottom: 0 ,
+        };
+      this._chart = new HighCharts.Chart(opts2);
+      this._chart.redraw;
+  }
+      
     }
     
     dismiss(){

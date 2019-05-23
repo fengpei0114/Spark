@@ -18,6 +18,7 @@ import {SubNodeDetailPage} from "../subnode_detail/subnode_detail"
 export class SubNodePage {
     DeviceId:string;
     pageNum:number = 0;
+    name:any;
     pagesizenow:number = 10;
     subnodeMsg = [{
         "subnodeId":"1",
@@ -215,9 +216,11 @@ export class SubNodePage {
                 private httpService: HttpService,
 
     ) {
-        this.subnodeMsg = [],
+        
         this.DeviceId = this.navParams.data;
+        this.name = "设备"+this.DeviceId;
         console.log("123"+this.DeviceId);
+        this.subnodeMsg = [];
         this.InitData();
     }
     setup(){

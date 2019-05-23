@@ -41,117 +41,114 @@ export class HomePage implements OnInit{
     menu:Array<object> = [];
     equipmentName:string;
     userId:string;
+    test:any;
+    EquipmentArray = [{
+        "deviceId":"1",
+        "factoryName":"XXX厂",
+        "status":{
+            "power":"关",
+            "running":"正常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"14",
+            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "malfunctionsum":"14",
+            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
 
-    // EquipmentArray = [{
-    //     "name":"XXX厂-火花探测设备1",
-    //     "id":"1",
-    //     "factoryname":"XXX厂",
-    //     "status":{
-    //         "power":"关",
-    //         "running":"正常",
-    //         "malfunction":"无",
-    //     },
-    //     "alarmMsg":{
-    //         "alarmsum":"14",
-    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
-    //         "malfunctionsum":"14",
-    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
-    //         "sittingsum":"345345",
-    //         "sittingtimeEnd":"2018-08-05 15:57:39",
-    //     },
-    //     "statusMsg":{
-    //         "battery":"12",
-    //         "probe1":"开启",
-    //         "probe2":"开启",
-    //         "extinguish1":"开启",
-    //         "extinguish2":"开启",
-    //         "relay1":"开启",
-    //         "relay2":"开启",
-    //     },
-    // },
-
-    // {
-    //     "name":"XXX厂-火花探测设备2",
-    //     "id":"2",
-    //     "factoryname":"XXX厂",
-    //     "status":{
-    //         "power":"开",
-    //         "running":"异常",
-    //         "malfunction":"无",
-    //     },
-    //     "alarmMsg":{
-    //         "alarmsum":"14",
-    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
-    //         "malfunctionsum":"14",
-    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
-    //         "sittingsum":"345345",
-    //         "sittingtimeEnd":"2018-08-05 15:57:39",
-    //     },
-    //     "statusMsg":{
-    //         "battery":"12",
-    //         "probe1":"开启",
-    //         "probe2":"开启",
-    //         "extinguish1":"开启",
-    //         "extinguish2":"开启",
-    //         "relay1":"开启",
-    //         "relay2":"开启",
-    //     },
-    // },
-    // {
-    //     "name":"XXX厂-火花探测设备3",
-    //     "id":"3",
-    //     "factoryname":"XXX厂",
-    //     "status":{
-    //         "power":"开",
-    //         "running":"正常",
-    //         "malfunction":"有",
-    //     },
-    //     "alarmMsg":{
-    //         "alarmsum":"14",
-    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
-    //         "malfunctionsum":"14",
-    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
-    //         "sittingsum":"345345",
-    //         "sittingtimeEnd":"2018-08-05 15:57:39",
-    //     },
-    //     "statusMsg":{
-    //         "battery":"12",
-    //         "probe1":"开启",
-    //         "probe2":"开启",
-    //         "extinguish1":"开启",
-    //         "extinguish2":"开启",
-    //         "relay1":"开启",
-    //         "relay2":"开启",
-    //     },
-    // },
-    // {
-    //     "name":"XXX厂-火花探测设备4",
-    //     "id":"4",
-    //     "factoryname":"XXX厂",
-    //     "status":{
-    //         "power":"开",
-    //         "running":"正常",
-    //         "malfunction":"无",
-    //     },
-    //     "alarmMsg":{
-    //         "alarmsum":"14",
-    //         "alarmtimeStartTime":"2018/10/22 12:30:04",
-    //         "malfunctionsum":"14",
-    //         "malfunctiontimeTime":"2018/10/22 12:30:04",
-    //         "sittingsum":"345345",
-    //         "sittingtimeEnd":"2018-08-05 15:57:39",
-    //     },
-    //     "statusMsg":{
-    //         "battery":"12",
-    //         "probe1":"开启",
-    //         "probe2":"开启",
-    //         "extinguish1":"开启",
-    //         "extinguish2":"开启",
-    //         "relay1":"开启",
-    //         "relay2":"开启",
-    //     },
-    // },]
-    EquipmentArray:any;
+    {
+        "deviceId":"2",
+        "factoryName":"XXX厂",
+        "status":{
+            "power":"开",
+            "running":"异常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"14",
+            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "malfunctionsum":"14",
+            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
+    {
+        "deviceId":"3",
+        "factoryName":"XXX厂",
+        "status":{
+            "power":"开",
+            "running":"正常",
+            "malfunction":"有",
+        },
+        "alarmMsg":{
+            "alarmsum":"14",
+            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "malfunctionsum":"14",
+            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },
+    {
+        "deviceId":"4",
+        "factoryName":"XXX厂",
+        "status":{
+            "power":"开",
+            "running":"正常",
+            "malfunction":"无",
+        },
+        "alarmMsg":{
+            "alarmsum":"14",
+            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "malfunctionsum":"14",
+            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+            "sittingsum":"345345",
+            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+        },
+        "statusMsg":{
+            "battery":"12",
+            "probe1":"开启",
+            "probe2":"开启",
+            "extinguish1":"开启",
+            "extinguish2":"开启",
+            "relay1":"开启",
+            "relay2":"开启",
+        },
+    },]
+    // EquipmentArray:any;
+    runstatus:any;
 
     constructor(public navParams: NavParams,
                 public app: App,
@@ -166,26 +163,18 @@ export class HomePage implements OnInit{
                 // private elementREf:ElementRef,
                 // private appConfig: AppConfig,
     ){
-
-        /**
-         * 接口3
-         */
-        this.EquipmentArray=[],
-        this.InitData();
-
-
         this.userId = this.navParams.data;
-        console.log("123");
-        console.log(this.httpService.getUrl());
-        // this.equipmentName = this.EquipmentArray[0].name;
-        // this.ArrayMsg=[],
+        /**
+         * 接口3 
+         */
         // this.EquipmentArray=[],
-        console.log("123");
-        // console.log(this.ArrayMsg);
-        
+        // this.InitData();
+        this.runstatus = this.EquipmentArray[0].status.running;
+        this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
         
     }
     InitData(){
+        console.log("123123");
         let url = "http://192.168.0.167:7002/Device/find/mobile_brief/byUserID";
         let body = {
             "userId":1
@@ -208,13 +197,27 @@ export class HomePage implements OnInit{
                 x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
             })
             this.EquipmentArray = data;
-            this.equipmentName = this.EquipmentArray[0].factoryName;
-            // this.ArrayMsg.push(data);
+            this.runstatus = this.EquipmentArray[0].status.running;
+            this.equipmentName = this.EquipmentArray[0].factoryName+" - 设备"+this.EquipmentArray[0].deviceId
             console.log(this.EquipmentArray);
             console.log(this.equipmentName);
         })
     }
     ionViewDidEnter(){
+        this.EquipmentArray.forEach(x=>{
+            x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
+            x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();
+            x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
+        })
+        /**
+         * 获取年月日和时分秒
+         */
+        // this.EquipmentArray.forEach(e=>{
+        //     e['alarmdate1'] = new Date(e.alarmMsg.alarmtimeStartTime).getFullYear()+"-"+(new Date(e.alarmMsg.alarmtimeStartTime).getMonth()+1)+"-"+new Date(e.alarmMsg.alarmtimeStartTime).getDate(); 
+        //     e['alarmdate2'] = new Date(e.alarmMsg.alarmtimeStartTime).getHours()+":"+new Date(e.alarmMsg.alarmtimeStartTime).getMinutes()+":"+new Date(e.alarmMsg.alarmtimeStartTime).getSeconds();
+        //     e['maldate1'] = new Date(e.alarmMsg.malfunctiontimeTime).getFullYear()+"-"+(new Date(e.alarmMsg.malfunctiontimeTime).getMonth()+1)+"-"+new Date(e.alarmMsg.malfunctiontimeTime).getDate(); 
+        //     e['maldate2'] = new Date(e.alarmMsg.malfunctiontimeTime).getHours()+":"+new Date(e.alarmMsg.malfunctiontimeTime).getMinutes()+":"+new Date(e.alarmMsg.malfunctiontimeTime).getSeconds();
+        // })
     }
     //初始化数据
     setUp() {
@@ -249,14 +252,16 @@ export class HomePage implements OnInit{
         // this.app.getRootNav().push(SafetySupervisionPage);
     }
     getChart(item){
-        this.app.getRootNav().push(ChartPage,item.id);
+        this.app.getRootNav().push(ChartPage,item);
     }
     personalMsg(){
 
     }
     slideChanged(){
-        console.log(this.EquipmentArray[this.slides.getActiveIndex()].id);
-        this.equipmentName = this.EquipmentArray[this.slides.getActiveIndex()].name;
+        // console.log(this.EquipmentArray[this.slides.getActiveIndex()].id);
+        this.equipmentName = this.EquipmentArray[this.slides.getActiveIndex()].factoryName+" - 设备"+this.EquipmentArray[this.slides.getActiveIndex()].deviceId;
+        // this.equipmentName = this.EquipmentArray[0].factoryName+"火花探测设备"+this.EquipmentArray[0].deviceId;
+        this.runstatus = this.EquipmentArray[this.slides.getActiveIndex()].status.running;
     }
 }
 
