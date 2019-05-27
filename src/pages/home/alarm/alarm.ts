@@ -100,6 +100,10 @@ export class AlarmPage {
       this.dataInit();
       console.log(this.dataArray);
   }
+
+  /**
+   *  6. 获取设备警报信息
+   */
   dataInit(){
     this.nativeService.showLoading("数据加载中...")
     let url = "http://192.168.0.167:7002/Alarm/find/brief/byDeviceID";
@@ -119,10 +123,11 @@ export class AlarmPage {
     this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
         this.nativeService.hideLoading();
         data.forEach(x=>{
-          x.grade=x.grade.toString();
           console.log( x.grade);
-          var d=(new Date(x.alarmTime));
-          x.alarmTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          var d=(new Date(x.alarmtime));
+          x.alarmtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          d=(new Date(x.endtime));
+          x.endtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
         })
         this.nativeService.hideLoading();
         this.alarmArray = data;

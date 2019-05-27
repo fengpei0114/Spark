@@ -217,6 +217,10 @@ export class MalfunctionPage {
         
     }
 
+  /**
+   *  9. 获取设备故障信息
+   */
+
     dataInit(){
         this.nativeService.showLoading("数据加载中...")
         let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";

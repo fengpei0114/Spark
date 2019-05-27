@@ -41,21 +41,11 @@
                         <ion-col >故障类型：{{item.malType}}</ion-col>
                       </ion-row>
                       <ion-row>
-                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col>故障元器件：{{item.component}}</ion-col>
+                        <ion-col>故障器件：{{item.subNodeId}}号子节点-{{item.component}}</ion-col>
                       </ion-row>
                         <ion-row>
                           <ion-col >故障时间：{{item.malTime}}</ion-col>
-                        <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
                         </ion-row>
-                        <!-- <ion-row>
-                            <ion-col>故障子节点：{{item.childNode}}</ion-col>
-                        </ion-row> -->
-                        <!-- <ion-row>
-                            <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                        </ion-row> -->
                         <ion-row>
                             <ion-col col-6>故障确认人：{{item.user}}</ion-col>
                         <ion-col *ngIf="item.platform">确认方：移动端</ion-col>
@@ -74,26 +64,17 @@
             </ion-item>
             <ion-item class="noconfirmBody" no-padding>
                 <ion-grid>
-                    <ion-row>
-                      <ion-col >故障类型：{{item.malType}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>故障元器件：{{item.component}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col >故障时间：{{item.malTime}}</ion-col>
-                      <!-- <ion-col col>确认时间：{{item.endTime}}</ion-col> -->
-                    </ion-row>
-                    <!-- <ion-row>
-                        <ion-col>故障子节点：{{item.subNodeId}}</ion-col>
-                    </ion-row> -->
-                    <!-- <ion-row>
-                        <ion-col>建议处理措施：{{item.recommendedMeasure}}</ion-col>
-                    </ion-row> -->
-                  </ion-grid>            </ion-item>
+                  <ion-row>
+                    <ion-col >故障类型：{{item.malType}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>故障器件：{{item.subNodeId}}号子节点-{{item.component}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col >故障时间：{{item.malTime}}</ion-col>
+                  </ion-row>
+                  </ion-grid>
+            </ion-item>
             <ion-item>
               <button ion-button (click)="OncomfirmClick(item)" item-right>确认故障</button>
             </ion-item>

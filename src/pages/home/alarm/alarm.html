@@ -32,29 +32,32 @@
         <ion-label style="text-align: center;color:aliceblue"> 此设备无警报历史</ion-label>
       </ion-card>
     <ion-card *ngFor="let item of alarmArray" no-padding style="border-radius:15px;margin-top:10px;margin-bottom:10px">
-        <ion-item *ngIf="item.isConfirmed" >
+        <ion-item *ngIf="item.isconfirmed" >
             <ion-item style="color: grey;border-bottom: solid darkgray 1px;">
-                <ion-note  item-left>{{item.alarmID}}</ion-note>
+                <ion-note  item-left>{{item.alarmid}}</ion-note>
                 <ion-note  item-right>已确认</ion-note>
             </ion-item>
             <ion-item style="color:grey ;font-size: small" no-padding>
                 <ion-grid>
+                  <ion-row>
+                    <ion-col >火花数量：{{item.sparknum}}（{{item.alarmlevel}}级）</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>报警探头：{{item.subnodeid}}号子节点-{{item.alarmdetectors}}号探头</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>报警时间：{{item.alarmtime}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>结束报警：{{item.endtime}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>处理措施：{{item.measure}}</ion-col>
+                  </ion-row>
                     <ion-row>
-                        <ion-col>火花等级：{{item.grade}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>报警探头：{{item.alarmDetectors}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>报警时间：{{item.alarmTime}}</ion-col>
-                    </ion-row>
-                    <!--<ion-row>-->
-                    <!--<ion-col>措施：{{item.measure}}</ion-col>-->
-                    <!--</ion-row>-->
-                    <ion-row>
-                        <ion-col col-6>警报确认人：{{item.user}}</ion-col>
-                        <ion-col *ngIf="item.platform">确认方：移动端</ion-col>
-                        <ion-col *ngIf="!item.platform">确认方：设备端</ion-col>
+                        <ion-col col-6>确认人员：{{item.comfirmuser}}</ion-col>
+                        <ion-col *ngIf="item.plantform">确认平台：移动端</ion-col>
+                        <ion-col *ngIf="!item.plantform">确认平台：设备端</ion-col>
                       </ion-row>
                       <ion-row>
                         <ion-col>备注：{{item.note}}</ion-col>
@@ -62,26 +65,22 @@
                 </ion-grid>
             </ion-item>
         </ion-item>
-        <ion-item *ngIf="!item.isConfirmed" >
+        <ion-item *ngIf="!item.isconfirmed" >
             <ion-item style="border-bottom: solid darkgray 1px;">
                 <ion-note style="color:black" item-left>{{item.alarmID}}</ion-note>
                 <ion-note style="color:black" item-right>未确认</ion-note>
             </ion-item>
             <ion-item style="color:black ;font-size: small;" no-padding>
                 <ion-grid>
-                    <ion-row>
-                        <ion-col>火花等级：{{item.grade}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>报警探头：{{item.alarmDetectors}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>开始：{{item.alarmTime}}</ion-col>
-                    </ion-row>
-                    <!--<ion-row>-->
-                    <!--<ion-col>措施：{{item.measure}}</ion-col>-->
-                    <!--</ion-row>-->
-
+                  <ion-row>
+                    <ion-col >火花数量：{{item.sparknum}}（{{item.alarmlevel}}级）</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>报警部件：{{item.subnodeid}}号子节点-{{item.alarmdetectors}}号探头</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>报警时间：{{item.alarmtime}}</ion-col>
+                  </ion-row>
                 </ion-grid>
             </ion-item>
             <ion-item>
