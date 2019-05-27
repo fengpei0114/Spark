@@ -54,8 +54,8 @@ export class MapPage{
    public showInfoWindow:boolean;
    public windowsMsg:object;
    public markerArray:Array<object>=[];
-   public alarmpageNum:number=0;
-   public malpageNum:number=0;
+   public alarmpageNum:number=1;
+   public malpageNum:number=1;
    public alarmMsgArray:Array<any>=[];
    public malMsgArray:Array<any>=[];
    public provinceNameArray = [
@@ -1025,9 +1025,9 @@ gotoMalfunctionPage(data)
      * 19. 获取存在警报/故障的市
      * @param item 市上级的省
      */
-    ProvinceChoose(item){
-        console.log(item);
-        if(item=="全部"){
+    ProvinceChoose(proviceName){
+        console.log(proviceName);
+        if(proviceName=="全部"){
             // this.isprovincechoose = false;
             this.cityArray = null;
             this.proviceName = "全部";
@@ -1042,10 +1042,11 @@ gotoMalfunctionPage(data)
             else
                 this.MaldataInit();
         }else{
+          this.proviceName=proviceName;
             let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/cityLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/cityLevel/malOccurred";
             let body = {
                 "userID":1,
-                "provinceName":item,
+                "provinceName":this.proviceName,
             };
             let headers = new Headers({
                 'Content-Type': 'application/json',
@@ -1066,14 +1067,16 @@ gotoMalfunctionPage(data)
      * 获取指定地区的警报或故障
      * @param item 
      */
-    CityChoose(item){
+    CityChoose(city){
+      console.log(city);
         this.provincechoose = false;
         this.isInnerMsg = false;
-        this.cityId = item;
+        this.cityName = city.name;
+        this.cityId=city.id;
         if(this.alarmOrmul){
-            this.AlarmCityArray(item);
+            this.AlarmCityArray(city.id);
         }else{
-            this.MalCityArray(item);
+            this.MalCityArray(city.id);
         }
         console.log(this.cityAlarmOrMul);
     }
@@ -1084,9 +1087,9 @@ gotoMalfunctionPage(data)
         let url = "http://192.168.0.167:7002/Alarm/find/byCitybyUserID";
         let body = {
             "userID":1,
-            "griddingID":item,
+            "cityName":item,
             "pageSize":10,
-            "pageNum":this.malpageNum
+            "pageNum":this.alarmpageNum,
         };
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -1101,19 +1104,19 @@ gotoMalfunctionPage(data)
         //    this.alarmMsgArray = data;
             this.cityAlarmOrMul = data;
             this.cityArray=[];
-           this.malpageNum++;
+       //    this.alarmpageNum++;
         })
     }
     /**
      * 21. 获取指定地区的故障
      */
     MalCityArray(item){
-        let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
-        let body = {
+      let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
+      let body = {
             "userID":1,
-            "guiddingID":item,
+            "cityName":item,
             "pageSize":10,
-            "pageNum":this.malpageNum
+            "pageNum":this.malpageNum,
         };
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -1127,7 +1130,7 @@ gotoMalfunctionPage(data)
             console.log(data);
            this.cityAlarmOrMul = data;
            this.cityArray=[];
-           this.malpageNum++;
+         //  this.malpageNum++;
         })
     }
     openMenu(): void{
@@ -1162,7 +1165,7 @@ gotoMalfunctionPage(data)
         if(this.isInnerMsg){//点击按钮时加载全部警报信息
             this.AlarmdataInit();
         }else{//点击按钮时加载指定地区警报信息
-            this.AlarmCityArray(this.cityId);
+            this.AlarmCityArray(this.cityName);
         }
         this.alarmOrmul = true;
     }
@@ -1173,7 +1176,7 @@ gotoMalfunctionPage(data)
         if(this.isInnerMsg){
             this.MaldataInit();
         }else{
-            this.MalCityArray(this.cityId);
+            this.MalCityArray(this.cityName);
         }
         this.alarmOrmul = false;
     }
