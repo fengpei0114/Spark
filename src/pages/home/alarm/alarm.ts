@@ -6,6 +6,7 @@ import { NativeService } from '../../../providers/native-service/native-service'
 import { Header } from 'ionic-angular/components/toolbar/toolbar-header';
 import { AccountService } from '../../../providers/account-service/account-service'
 import {DatePipe} from "@angular/common";
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the AlarmPage page.
  *
@@ -75,6 +76,7 @@ export class AlarmPage {
       errorMsg:any;
       confirmNum:number;
       alarmMsg:any;
+      roleId:string;
       unconfirmNum:number;
       alarmArray:Array<any> =[];
 
@@ -84,6 +86,7 @@ export class AlarmPage {
             public navParams: NavParams,
             public httpService: HttpService,
             public http: Http,
+              private  storage:Storage,
             public accountService:AccountService,
             private alertCtrl:AlertController,
             public toastCtrl: ToastController,
@@ -94,6 +97,9 @@ export class AlarmPage {
     this.name = this.navParams.data.name;
     this.deviceId = this.navParams.data.deviceId;
     this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
+    this.storage.get('roleId').then(roleId=>{
+      this.roleId=roleId;
+    })
     // this.alarmNum = this.navParams.data.alarmsum;
     // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
     // this.alarmTime = this.alarm

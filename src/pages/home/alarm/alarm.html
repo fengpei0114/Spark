@@ -83,7 +83,7 @@
                   </ion-row>
                 </ion-grid>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="roleId==3">
                 <button ion-button (click)="OncomfirmClick(item)" item-right>确认警报</button>
               </ion-item>
         </ion-item>

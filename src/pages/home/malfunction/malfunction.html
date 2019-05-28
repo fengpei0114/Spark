@@ -75,7 +75,7 @@
                   </ion-row>
                   </ion-grid>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="roleId==3">
               <button ion-button (click)="OncomfirmClick(item)" item-right>确认故障</button>
             </ion-item>
         </ion-item>

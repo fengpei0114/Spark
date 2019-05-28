@@ -43,8 +43,8 @@ export class MyApp {
   }
 
     checkPreviousAuthorization(): void {
-        this.rootPage = MapPage;
-
+        // this.rootPage = MapPage;
+      this.rootPage=LoginPage;
         // this.storage.get('username').then((username) =>{
         //     this.storage.get('password').then((password) =>{
         

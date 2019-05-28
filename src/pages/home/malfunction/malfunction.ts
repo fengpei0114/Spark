@@ -5,6 +5,7 @@ import { HttpService } from '../../../providers/http-service/http-service';
 import {Color} from "highcharts";
 import { NativeService } from '../../../providers/native-service/native-service'
 import { MalfunctiondetailPage } from '../malfunction_detail/malfunction_detail';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the DevicePage page.
@@ -200,7 +201,7 @@ export class MalfunctionPage {
     pageOther: number = 0;
     malfunctionArray:Array<Object> = [];
     pagesizenow:number;
-
+    roleId:string;
     constructor(public http:Http,
                 public app:App,
                 public navCtrl: NavController,
@@ -208,8 +209,12 @@ export class MalfunctionPage {
                 private httpService: HttpService,
                 private alertCtrl:AlertController,
                 private nativeService:NativeService,
+                private  storage:Storage,
 
     ) {
+      this.storage.get('roleId').then(roleId=>{
+        this.roleId=roleId;
+      })
         this.deviceId = this.navParams.data.deviceId;
         this.unconfirmMulNum = this.navParams.data.unconfirmedMalNum;
         this.dataInit();

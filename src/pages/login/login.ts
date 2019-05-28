@@ -36,6 +36,7 @@ export class LoginPage {
     errorMsg:string;
     randomCodeImage: string = "";
     randomCodeIsRight: boolean = false;
+    roleId:string;
 
 
 
@@ -85,7 +86,7 @@ export class LoginPage {
     onSubmit(value) {
         
         // this.httpService.setIpAndPort("47.92.34.161","80");
-        if (value.randomCode === this.randomCodeImage){
+        if (value.randomCode.toLocaleLowerCase() === this.randomCodeImage.toLocaleLowerCase()){
             // console.log(this.loginForm.valid);
             // this.username = value.username;
             // this.password = value.password;
@@ -93,7 +94,7 @@ export class LoginPage {
                 // console.log(this.username+"  "+value.password);
                 this.nativeService.showLoading('正在登陆...');
 
-                let url = "http://192.168.0.136:8080/auth/login";
+                let url = "http://192.168.0.136:7000/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
                     // "username":"admin",
@@ -106,32 +107,33 @@ export class LoginPage {
                     "password":"admin",
                 }
                 let headers = new Headers({
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*",
-                    'Accept': 'application/json'
+                  'Content-Type': 'application/json',
+                  "Access-Control-Allow-Origin": "*",
+                  'Accept': 'application/json'
                 });
                 let options = new RequestOptions({
                     headers: headers
                 });
-                this.http.post(url,JSON.parse(JSON.stringify(body)),options).map(res =>res.json()).subscribe(data => {
+                this.http.post(url,JSON.stringify(body),options).map(res =>res.json()).subscribe(data => {
                     // alert(data);
-                    console.log("112233");
+                  this.nativeService.hideLoading();
                     console.log(data);
                     if(data.status == "1"){
                         //  console.log(value.password.length());
                         this.errorMsg = data.Msg;
                     }else if(data.status == "0"){
                         this.accountService.setAccount(data);
+                      this.roleId=data['roles'];
+                      this.storage.set('roleId',this.roleId);
                         if(this.isToggled){
-                            // alert('记住密码');
-                            this.storage.set('username',this.username).then();
-                            this.storage.set('password',this.password).then();
-                            this.storage.set('identyid',data['identyid']).then();
+                            // // alert('记住密码');
+                            this.storage.set('username',value.username);
+                            this.storage.set('password',value.password);
                         }
-                        if(data.identity == "1"){
+                        if(this.roleId == "3" || this.roleId == "4"){
                             this.nativeService.hideLoading();
                             this.navCtrl.setRoot(HomePage).then();
-                        }else if(data.identity == "2"){
+                        }else if(this.roleId == "5"){
                             this.nativeService.hideLoading();
                             this.navCtrl.setRoot(MapPage).then();
                         }
@@ -139,22 +141,6 @@ export class LoginPage {
                 },error=>{
                     console.log(error);
                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 // this.checkUserInfo(this.username,this.password).then(data =>{
                 //     // alert(data['load']);
                 //     this.accountService.setAccount(data);
