@@ -49,151 +49,151 @@ export class MalfunctionPage {
     unconfirmMulNum:any;
     lastConfirmTime:any;
     mulMsg:any;
-    dataArray=[
-        {
-            "malfunctionNo":"01",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"未确认",
-            "dealPlatform":"equipment",
-            "dealStaff":"tony",
-            "note":""
-        },    {
-            "malfunctionNo":"02",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"未确认",
-            "dealPlatform":"equipment",
-            "dealStaff":"tony",
-            "note":""
-        },
-        {
-            "malfunctionNo":"03",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"未确认",
-            "dealPlatform":"equipment",
-            "dealStaff":"tony",
-            "note":""
-        },
-        {
-            "malfunctionNo":"04",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"未确认",
-            "dealPlatform":"equipment",
-            "dealStaff":"tony",
-            "note":""
-        },
-        {
-            "malfunctionNo":"05",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"2018-08-01 15:55:52",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"未确认",
-            "dealPlatform":"equipment",
-            "dealStaff":"tony",
-            "note":""
-        },
-        {
-            "malfunctionNo":"06",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
-        {
-            "malfunctionNo":"07",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
-        {
-            "malfunctionNo":"08",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
-        {
-            "malfunctionNo":"09",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
-        {
-            "malfunctionNo":"10",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
-        {
-            "malfunctionNo":"11",
-            "malfunctionType":"1",
-            "childNode":"XXX",
-            "startTime":"2018-08-01 15:54:52",
-            "endTime":"",
-            "malfunctionEquipment":"xxx",
-            "recommendedMeasure":"XXX",
-            "malfunctionState":"已确认",
-            "dealPlatform":"",
-            "dealStaff":"",
-            "note":""
-        },
+    // dataArray=[
+    //     {
+    //         "malfunctionNo":"01",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"2018-08-01 15:55:52",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"未确认",
+    //         "dealPlatform":"equipment",
+    //         "dealStaff":"tony",
+    //         "note":""
+    //     },    {
+    //         "malfunctionNo":"02",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"2018-08-01 15:55:52",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"未确认",
+    //         "dealPlatform":"equipment",
+    //         "dealStaff":"tony",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"03",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"2018-08-01 15:55:52",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"未确认",
+    //         "dealPlatform":"equipment",
+    //         "dealStaff":"tony",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"04",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"2018-08-01 15:55:52",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"未确认",
+    //         "dealPlatform":"equipment",
+    //         "dealStaff":"tony",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"05",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"2018-08-01 15:55:52",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"未确认",
+    //         "dealPlatform":"equipment",
+    //         "dealStaff":"tony",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"06",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"07",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"08",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"09",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"10",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
+    //     {
+    //         "malfunctionNo":"11",
+    //         "malfunctionType":"1",
+    //         "childNode":"XXX",
+    //         "startTime":"2018-08-01 15:54:52",
+    //         "endTime":"",
+    //         "malfunctionEquipment":"xxx",
+    //         "recommendedMeasure":"XXX",
+    //         "malfunctionState":"已确认",
+    //         "dealPlatform":"",
+    //         "dealStaff":"",
+    //         "note":""
+    //     },
 
-    ]
+    // ]
 
 
     pageSize: number = 0;
@@ -202,6 +202,7 @@ export class MalfunctionPage {
     malfunctionArray:Array<Object> = [];
     pagesizenow:number;
     roleId:string;
+    username:string;
     constructor(public http:Http,
                 public app:App,
                 public navCtrl: NavController,
@@ -212,9 +213,12 @@ export class MalfunctionPage {
                 private  storage:Storage,
 
     ) {
-      this.storage.get('roleId').then(roleId=>{
-        this.roleId=roleId;
-      })
+        this.storage.get('roleId').then(roleId=>{
+            this.roleId=roleId;
+        })
+        this.storage.get('username').then((username)=>{
+            this.username=username;
+          })
         this.deviceId = this.navParams.data.deviceId;
         this.unconfirmMulNum = this.navParams.data.unconfirmedMalNum;
         this.dataInit();
@@ -222,13 +226,9 @@ export class MalfunctionPage {
         
     }
 
-  /**
-   *  9. 获取设备故障信息
-   */
-
     dataInit(){
         this.nativeService.showLoading("数据加载中...")
-        let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
+        let url = this.httpService.getUrl()+"/Malfunction/find/byDeviceID";
         let body = {
             "DeviceId":this.deviceId,
             "pageSize":10,
@@ -255,7 +255,7 @@ export class MalfunctionPage {
   
             this.nativeService.hideLoading();
             this.nativeService.showToast("数据获取失败！");
-            this.malfunctionArray = this.dataArray;
+            // this.malfunctionArray = this.dataArray;
           })
         // this.name = this.navParams.data;
         // this.pageOther = this.malfunctionArray.length % 10;
@@ -321,33 +321,33 @@ export class MalfunctionPage {
     }
 
 
-    doInfinite(infiniteScroll){
-        console.log('Begin async operation');
+    // doInfinite(infiniteScroll){
+    //     console.log('Begin async operation');
 
-        setTimeout(()=>{
-            this.pageNum++;
-            console.log(this.pageNum);
-            if(this.pageNum<this.pageSize){
-                for(var i = 0;i<10;i++){
-                    this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
-                }
-            }else if(this.pageNum==this.pageSize){
-                for(i = 0;i<this.pageOther;i++){
-                    this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
-                }
-            }else{
-                infiniteScroll.enable(false);
-            }
+    //     setTimeout(()=>{
+    //         this.pageNum++;
+    //         console.log(this.pageNum);
+    //         if(this.pageNum<this.pageSize){
+    //             for(var i = 0;i<10;i++){
+    //                 this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
+    //             }
+    //         }else if(this.pageNum==this.pageSize){
+    //             for(i = 0;i<this.pageOther;i++){
+    //                 this.malfunctionArray.push(this.dataArray[i+this.pageNum*10]);
+    //             }
+    //         }else{
+    //             infiniteScroll.enable(false);
+    //         }
 
-            console.log('Async operation has ended');
-            infiniteScroll.complete();
-        },500);
-    }
+    //         console.log('Async operation has ended');
+    //         infiniteScroll.complete();
+    //     },500);
+    // }
     doInfinite1(infiniteScroll){
         console.log('Begin async operation');
         console.log(infiniteScroll._scrollY);
         console.log(infiniteScroll.scrollHeight);
-        let url = "http://192.168.0.167:7002/Malfunction/find/byDeviceID";
+        let url = this.httpService.getUrl()+"";
         let body = {
             "DeviceId":this.deviceId,
             "pageSize":10,
@@ -373,7 +373,7 @@ export class MalfunctionPage {
                         infiniteScroll.enable(false);
                     }else{
                         for(let i = 0 ; i < this.pagesizenow; i++){
-                            this.dataArray.push(data.content[i]);
+                            this.malfunctionArray.push(data.content[i]);
                         }
                         this.pageNum++;
                     }
@@ -413,9 +413,9 @@ export class MalfunctionPage {
 
     comfirmMalfunction(comfirmData,item) {
         console.log(comfirmData.note);
-        let url = "http://192.168.0.167:7002/Malfunction/update/confirm/ByMalID";
+        let url = this.httpService.getUrl()+"/Malfunction/update/confirm/ByMalID";
         let body = {
-            "userName":"1233",
+            "userName":this.username,
             "malfunctionID":item.malId,
             "Plantform":true,
             "note":comfirmData.note,

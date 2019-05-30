@@ -94,7 +94,7 @@ export class AlarmdetailPage {
      */
     AlarmdataInit(){
         console.log("alarmdata Init");
-        let url = "http://192.168.0.167:7002/Alarm/find/detail/byAlarmID";
+        let url = this.httpService.getUrl() + "/Alarm/find/detail/byAlarmID";
         let  body = {
             "AlarmId":1,
         };

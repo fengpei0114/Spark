@@ -23,7 +23,8 @@ import { MapPage } from '../pages/map/map';
 export class MyApp {
   @ViewChild('content') nav;
   rootPage:any ;
-
+  roleId:string;
+  userId:string;
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
@@ -43,36 +44,42 @@ export class MyApp {
   }
 
     checkPreviousAuthorization(): void {
-        // this.rootPage = MapPage;
-      this.rootPage=LoginPage;
-        // this.storage.get('username').then((username) =>{
-        //     this.storage.get('password').then((password) =>{
-        
-        //         if(username === null || username === "undefined" || password === null || password === "undefined" ){
-        //             this.rootPage = LoginPage;
-        //         }else{
-        
-        //             let url = this.httpService.getUrl() + "/NoiseDust/mainOfApp.do";
-        //             password = Md5.hashStr(password).toString();
-        //             let body= "name="+username+"&password="+password;
-        //             let headers = new Headers({
-        //                 'Content-Type': 'application/x-www-form-urlencoded' 
-        //             });
-        //             let options = new RequestOptions({
-        //                 headers: headers
-        //             });
-        //             this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
-        //                         console.log(data);
-        //                         this.accountService.setAccount(data);
-        //                         this.rootPage = HomePage;
-        //                     },
-        //                     err =>{
-        //                     });
-        
-        
-        //         }
-        //     });
-        // });
+        // this.rootPage = LoginPage;
+
+        this.storage.get('username').then((username) =>{
+            this.storage.get('password').then((password) =>{
+                if(username === null || username === "undefined" || password === null || password === "undefined" ){
+                    this.rootPage = LoginPage;
+                }else{
+                    let url = "http://192.168.0.137:7000/login";
+                    // let url = this.httpService.getUrl() + "/login";
+                    // password = Md5.hashStr(password).toString();
+                    let body= "name="+username+"&password="+password;
+                    let headers = new Headers({
+                        'Content-Type': 'application/x-www-form-urlencoded' 
+                    });
+                    let options = new RequestOptions({
+                        headers: headers
+                    });
+                    this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
+                                // console.log(data);
+                                // this.accountService.setAccount(data);
+                        this.accountService.setAccount(data);
+                        this.roleId=data['roles'];
+                        this.storage.set('roleId',this.roleId);
+                        this.userId=data['userId'];
+                        this.storage.set('userId',this.userId);
+                        this.storage.set('username',username);
+                        if(this.roleId == "3" || this.roleId == "4"){
+                            this.rootPage = HomePage;
+                        }else if(this.roleId == "5"){
+                            this.rootPage = MapPage;
+                        }
+                    },err =>{
+                    });
+                }
+            });
+        });
     }
 
     logout() {
@@ -105,7 +112,11 @@ export class MyApp {
     gotoPageHelp() {
         this.nav.push(HelpPage);
     }
+    
     gotoPageUserinfo(){
+        this.nav.push(UserInfoPage);
+    }
+    gotoPageChange(){
         this.nav.push(ChangePasswordPage);
     }
 

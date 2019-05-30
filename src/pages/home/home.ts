@@ -43,112 +43,108 @@ export class HomePage implements OnInit{
     equipmentName:string;
     userId:string;
     test:any;
-    EquipmentArray = [{
-        "deviceId":"1",
-        "factoryName":"XXX厂",
-        "status":{
-            "power":"关",
-            "running":"正常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
-
-    {
-        "deviceId":"2",
-        "factoryName":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"异常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
-    {
-        "deviceId":"3",
-        "factoryName":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"正常",
-            "malfunction":"有",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },
-    {
-        "deviceId":"4",
-        "factoryName":"XXX厂",
-        "status":{
-            "power":"开",
-            "running":"正常",
-            "malfunction":"无",
-        },
-        "alarmMsg":{
-            "alarmsum":"14",
-            "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "malfunctionsum":"14",
-            "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
-            "sittingsum":"345345",
-            "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
-        },
-        "statusMsg":{
-            "battery":"12",
-            "probe1":"开启",
-            "probe2":"开启",
-            "extinguish1":"开启",
-            "extinguish2":"开启",
-            "relay1":"开启",
-            "relay2":"开启",
-        },
-    },]
-    // EquipmentArray:any;
+    // EquipmentArray = [{
+    //     "deviceId":"1",
+    //     "factoryName":"XXX厂",
+    //     "status":{
+    //         "power":"关",
+    //         "running":"正常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },{
+    //     "deviceId":"2",
+    //     "factoryName":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"异常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },{
+    //     "deviceId":"3",
+    //     "factoryName":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"正常",
+    //         "malfunction":"有",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },{
+    //     "deviceId":"4",
+    //     "factoryName":"XXX厂",
+    //     "status":{
+    //         "power":"开",
+    //         "running":"正常",
+    //         "malfunction":"无",
+    //     },
+    //     "alarmMsg":{
+    //         "alarmsum":"14",
+    //         "alarmtimeStartTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "malfunctionsum":"14",
+    //         "malfunctiontimeTime":"Wed May 22 2019 09:29:04 GMT+0800",
+    //         "sittingsum":"345345",
+    //         "sittingtimeEnd":"Wed May 22 2019 09:29:04 GMT+0800",
+    //     },
+    //     "statusMsg":{
+    //         "battery":"12",
+    //         "probe1":"开启",
+    //         "probe2":"开启",
+    //         "extinguish1":"开启",
+    //         "extinguish2":"开启",
+    //         "relay1":"开启",
+    //         "relay2":"开启",
+    //     },
+    // },]
+    EquipmentArray:any;
     runstatus:any;
 
     constructor(public navParams: NavParams,
@@ -166,8 +162,8 @@ export class HomePage implements OnInit{
                 // private appConfig: AppConfig,
     ){
         this.storage.get('userId').then((userid)=>{
-          this.userId=userid;
-        })
+            this.userId=userid;
+          })
         /**
          * 接口3 
          */
@@ -175,11 +171,11 @@ export class HomePage implements OnInit{
         this.InitData();
         // this.runstatus = this.EquipmentArray[0].status.running;
         // this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
-        
+        console.log("url:"+httpService.getUrl());
     }
     InitData(){
         console.log("123123");
-        let url = "http://192.168.0.167:7002/Device/find/mobile_brief/byUserID";
+        let url = this.httpService.getUrl()+"/Device/find/mobile_brief/byUserID";
         let body = {
             "userId":this.userId
         };
@@ -193,8 +189,6 @@ export class HomePage implements OnInit{
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
-            
-            
             data.forEach(x=>{
                 x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
                 x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();

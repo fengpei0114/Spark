@@ -103,7 +103,7 @@ export class MaldetailPage {
     MuldataInit(){
 
         console.log("maldata Init");
-        let url = "http://192.168.0.167:7002/Malfunction/find/byMalID";
+        let url = this.httpService.getUrl() + "/Malfunction/find/byMalID";
         let body = {
             "malfunctionID":1,
         };

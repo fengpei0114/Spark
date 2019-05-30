@@ -84,6 +84,7 @@ export class ChangePasswordPage {
                         handler: () => {
                             console.log("确定");
                             let url = "http://192.168.0.136:7000/user/updatepassword";
+                            // let url = this.httpService.getUrl() + "/user/updatepassword";
                             let body = {
                                 "userId":1,
                                 "oldpassword":this.old,

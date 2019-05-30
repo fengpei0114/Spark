@@ -61,7 +61,7 @@ export class SubNodeDetailPage {
         // this.subnode_valve_4 = this.navParams.data.subnode_valve_4;
     }
     InitData(){
-        let url = "http://192.168.0.167:7002/Subnode/find/bySubnodeID";
+        let url = this.httpService.getUrl()+"/Subnode/find/bySubnodeID";
         let body = {
             // "DeviceId":this.DeviceId,
             "subnodeID":this.subnodeId

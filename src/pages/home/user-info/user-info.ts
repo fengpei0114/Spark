@@ -63,6 +63,7 @@ export class UserInfoPage {
 
     dataInit(){
         let url = "http://192.168.0.136:7000/user/getuser";
+        // let url = this.httpService.getUrl() + "/user/getuser";
         let body= {
             "userId":3,
         }

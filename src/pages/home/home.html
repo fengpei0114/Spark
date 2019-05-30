@@ -4,7 +4,10 @@
                     <ion-icon name="menu" style="color:rgb(255,255,255)"></ion-icon>
                 </button>
         <ion-title>
-            <ion-icon *ngIf = "runstatus == '正常'" name="ios-alert" color="secondary"style="display:inline"></ion-icon>
+                <!-- <img *ngIf = "runstatus == '正常'" src="../../assets/powergreen.png" class="imgstyle_small"/> -->
+                <!-- <img *ngIf = "runstatus == '异常'" src="../../assets/powerred.png" class="imgstyle_small"/> -->
+                <img *ngIf = "runstatus == '正常'" src="assets/powergreen.png" class="imgstyle_small"/>
+                <img *ngIf = "runstatus == '异常'" src="assets/powerred.png" class="imgstyle_small"/>
             <p style="color:rgb(255,255,255);display:inline">{{equipmentName}}</p>
         </ion-title>
         <ion-buttons end>
@@ -21,13 +24,17 @@
             <ion-card style="border-radius:20px;background-color:rgba(255, 255, 255, 0.116);position:absolute;top:0px;bottom:5px;padding:0;margin-top:0px;margin-bottom:0px;overflow: auto;">
                 <ion-grid style="top:50%;left:50%;position: absolute;transform: translate(-50%, -90%);">
                     <ion-row style="padding-top:50px">
-                        <ion-col>
-                            <img *ngIf = "item.status.malfunction == '无'" src="../../assets/alarmgreen.png" class="imgstyle"/>
-                            <img *ngIf = "item.status.malfunction == '有'" src="../../assets/alarmred.png" class="imgstyle"/>
+                        <ion-col class="stylecol">
+                            <!-- <img *ngIf = "item.status.malfunction == '无'" src="../../assets/alarmgreen.png" class="imgstyle"/> -->
+                            <!-- <img *ngIf = "item.status.malfunction == '有'" src="../../assets/alarmred.png" class="imgstyle"/> -->
+                            <img *ngIf = "item.status.malfunction == '无'" src="assets/alarmgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.malfunction == '有'" src="assets/alarmred.png" class="imgstyle"/>
                         </ion-col>
                         <ion-col>
-                            <img *ngIf = "item.status.running == '正常'" src="../../assets/malgreen.png" class="imgstyle"/>
-                            <img *ngIf = "item.status.running == '不正常'" src="../../assets/malred.png" class="imgstyle"/>
+                            <!-- <img *ngIf = "item.status.running == '正常'" src="../../assets/malgreen.png" class="imgstyle"/> -->
+                            <!-- <img *ngIf = "item.status.running == '异常'" src="../../assets/malred.png" class="imgstyle"/> -->
+                            <img *ngIf = "item.status.running == '正常'" src="assets/malgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.running == '不正常'" src="assets/malred.png" class="imgstyle"/>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -38,6 +45,16 @@
                         <ion-col>
                             <div class="name" style="color:aliceblue">故障 :</div>
                             <ion-note class="detail" style="color:aliceblue" >{{item.status.running}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue">未确认 :</div>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.unconfirmedAlarmSum}}条</ion-note>
+                        </ion-col>
+                        <ion-col>
+                            <div class="name" style="color:aliceblue">未确认 :</div>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.unconfirmedMalNum}}条</ion-note>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -66,10 +83,10 @@
                 <!-- </div> -->
 
                 <div style="position:absolute;bottom:5%;width:100%;font-size:12px;color:aliceblue;padding-left:5px;">
-                    <button ion-button clear type="submit" (click)="getSubNode(item.deviceId)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">子节点</button>
-                    <button ion-button clear type="submit" (click)="getChart(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">统计</button>
-                    <button ion-button clear type="submit" (click)="checkAlarm(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">警报</button>
-                    <button ion-button clear type="submit" (click)="checkmalfunction(item)" style="color:aliceblue;width:45%;background-image:url('../../assets/button.png');background-size:100% 100%">故障</button>
+                    <button ion-button clear type="submit" (click)="getSubNode(item.deviceId)" style="color:aliceblue;width:45%;background-image:url('assets/button.png');background-size:100% 100%">子节点</button>
+                    <button ion-button clear type="submit" (click)="getChart(item)" style="color:aliceblue;width:45%;background-image:url('assets/button.png');background-size:100% 100%">统计</button>
+                    <button ion-button clear type="submit" (click)="checkAlarm(item)" style="color:aliceblue;width:45%;background-image:url('assets/button.png');background-size:100% 100%">警报</button>
+                    <button ion-button clear type="submit" (click)="checkmalfunction(item)" style="color:aliceblue;width:45%;background-image:url('assets/button.png');background-size:100% 100%">故障</button>
                     <!-- <button ion-button clear type="submit" (click)="checkStatus(item)" style="border-radius:15px;margin-left:0;margin-right:0;padding-right:1;padding-left:0;">配置</button> -->
                 </div>
             </ion-card>

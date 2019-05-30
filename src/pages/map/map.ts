@@ -9,6 +9,8 @@ import { MalfunctionPage } from '../home/malfunction/malfunction';
 import { MaldetailPage } from'./mal_detail/mal_detail';
 import { NativeService } from'../../providers/native-service/native-service'
 import {getErrorLogger} from "@angular/core/src/errors";
+import { ChartPage } from '../home/chart/chart';
+import { Storage } from '@ionic/storage';
 // var app = angular.module('show_map',[]);
 /**
  * Generated class for the MapPage page.
@@ -47,6 +49,7 @@ enum BMapPosition {BMAP_ANCHOR_BOTTOM_RIGHT,BMAP_ANCHOR_TOP_RIGHT}
 
 export class MapPage{
    @ViewChild('map') mapElement : ElementRef;
+   @ViewChild('legend') legendElement : ElementRef;
 
    public map:any;
    public IsMapChoose:boolean;
@@ -239,8 +242,7 @@ public cityAlarmOrMul=[
     "grade":"2",
     "sparknum":"20",
 }];
-public citys=[
-    {
+public citys=[{
     "lnglat":[112.982279,28.19409],
     "name":"长沙市",
     "style":1
@@ -377,8 +379,7 @@ public citys=[
     "name":"北京市",
     "style":0
 }];
-public mapdata=[
-        {
+public mapdata=[{
             "lnglat":[112.982279,28.19409],
             "name":"长沙市",
             "deviceID":"12",
@@ -732,6 +733,8 @@ public element:any;
 public cityId:number; //记录当前查看的城市id
 public alarmOrmul:any;  //记录当前查看的是警报还是故障，警报true，故障false
 public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部下，false为指定地区
+public showLegend:boolean=false;
+private userId:number;
 
   constructor(
               public http:Http,
@@ -742,7 +745,11 @@ public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部�
               private  platform:Platform,
               private httpService: HttpService,
               private nativeService:NativeService,
+              private storage:Storage,
               public popoverCtrl: PopoverController,) {
+            this.storage.get('userId').then((userid)=>{
+                this.userId=userid;
+            })
             this.IsMapChoose = true;
             this.provincechoose = false;
             this.AllcityAlarm = this.cityAlarmOrMul;
@@ -755,9 +762,9 @@ public isInnerMsg:boolean=true;//记录是否查看指定地区，true为全部�
 }
 initdata(){
     this.nativeService.showLoading("数据加载中");
-        let url = "http://192.168.0.167:7002/Statistics/GPS_Alarm_Mal/ByUserID";
+        let url = this.httpService.getUrl() + "/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
-            "userId": 1,
+            "userId": this.userId,
         }
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -796,6 +803,7 @@ initdata(){
           zoom: 4
         });
         this.initdata();
+        // this.addMarker();
       }
 
 addMarker() {
@@ -882,7 +890,23 @@ gotoAlarmPage(data){
  */
 gotoMalfunctionPage(data)
 {
-   this.app.getRootNav().push(MalfunctionPage,data)
+   this.app.getRootNav().push(MalfunctionPage,data);
+}
+/**
+ * 跳转至当前设备的统计信息
+ * @param data 当前设备信息
+ */
+gotoChartPage(data){
+    this.app.getRootNav().push(ChartPage,data);
+}
+/**
+ * 打开图例
+ */
+changeLegend(){
+    this.showLegend = true;
+}
+closeLegendWindow(){
+    this.showLegend = false;
 }
 
   ionViewDidLoad() {
@@ -944,7 +968,7 @@ gotoMalfunctionPage(data)
      */
     AlarmdataInit(){
         this.nativeService.showLoading("数据加载中");
-            let url = "http://192.168.0.167:7002/Alarm/find/brief/byUserID";
+            let url = this.httpService.getUrl() + "/Alarm/find/brief/byUserID";
             let body = {
                 "userID":1,
                 "pageSize":10,
@@ -972,7 +996,7 @@ gotoMalfunctionPage(data)
      */
     MaldataInit(){
         this.nativeService.showLoading("数据加载中");
-        let url = "http://192.168.0.167:7002/Malfunction/find/brief/byUserID";
+        let url = this.httpService.getUrl() + "/Malfunction/find/brief/byUserID";
         let body = {
             "userId":1,
             "pageSize":10,
@@ -1001,7 +1025,7 @@ gotoMalfunctionPage(data)
     ischoose(){
         this.provincechoose = !this.provincechoose;
         if(this.provincechoose){
-            let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/provinceLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/provinceLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getUrl() + "/Statistics/district/provinceLevel/alarmOccurred":this.httpService.getUrl() + "/Statistics/district/provinceLevel/malOccurred";
             let body = {
                 "userID":1,
             };
@@ -1043,7 +1067,7 @@ gotoMalfunctionPage(data)
                 this.MaldataInit();
         }else{
           this.proviceName=proviceName;
-            let url=this.alarmOrmul?"http://192.168.0.167:7002/Statistics/district/cityLevel/alarmOccurred":"http://192.168.0.167:7002/Statistics/district/cityLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getUrl() + "/Statistics/district/cityLevel/alarmOccurred":this.httpService.getUrl() + "/Statistics/district/cityLevel/malOccurred";
             let body = {
                 "userID":1,
                 "provinceName":this.proviceName,
@@ -1084,7 +1108,7 @@ gotoMalfunctionPage(data)
      * 20. 获取指定地区的警报
      */
     AlarmCityArray(item){
-        let url = "http://192.168.0.167:7002/Alarm/find/byCitybyUserID";
+        let url = this.httpService.getUrl() + "/Alarm/find/byCitybyUserID";
         let body = {
             "userID":1,
             "cityName":item,
@@ -1111,7 +1135,7 @@ gotoMalfunctionPage(data)
      * 21. 获取指定地区的故障
      */
     MalCityArray(item){
-      let url = "http://192.168.0.167:7002/Malfunction/find/byCitybyUserID";
+      let url = this.httpService.getUrl() + "/Malfunction/find/byCitybyUserID";
       let body = {
             "userID":1,
             "cityName":item,

@@ -95,6 +95,7 @@ export class LoginPage {
                 this.nativeService.showLoading('正在登陆...');
 
                 let url = "http://192.168.0.137:7000/login";
+                // let url = this.httpService.getUrl() + "/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
                     // "username":"admin",
@@ -127,6 +128,7 @@ export class LoginPage {
                       this.storage.set('roleId',this.roleId);
                       this.userId=data['userId'];
                       this.storage.set('userId',this.userId);
+                      this.storage.set('username',value.username);
                         if(this.isToggled){
                             // // alert('记住密码');
                             this.storage.set('username',value.username);
@@ -229,40 +231,6 @@ export class LoginPage {
     setServerIP() {
         this.navCtrl.push(SetServerIpPage).then( ()=> {
         })
-    }
-
-    checkUserInfo(username?: string,password?: string) {
-
-        let url = this.httpService.getUrl() + "/NoiseDust/mainOfApp.do";
-        password = Md5.hashStr(password).toString();
-        let body= "name="+username+"&password="+password;
-        let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
-        });
-        let options = new RequestOptions({
-            headers: headers
-        });
-
-
-        return new Promise((resolve, reject) =>{
-            this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
-                    resolve(data);
-                    // alert(data);
-                    console.log(data);
-
-                },
-                err =>{
-                    //设置输入错误提示
-                    let toast = this.toastCtrl.create({
-                        message: '网络连接错误！',
-                        duration: 2000,
-                        position: 'middle'
-                    });
-
-                    toast.present(toast);
-                    reject(err);
-                });
-        });
     }
 
     createCode() {

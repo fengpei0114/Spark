@@ -22,50 +22,50 @@ export class AlarmPage {
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
-    dataArray=[
-        {
-          "alarmID":"01",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"1",
-          "alarmDetectors":"1号探头",
-        },{
-          "alarmID":"02",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"1",
-          "alarmDetectors":"1号探头",
-        },{
-          "alarmID":"03",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"1",
-          "alarmDetectors":"1号探头",
-        },{
-          "alarmID":"04",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"0",
-          "alarmDetectors":"1号探头",
-        },{
-          "alarmID":"05",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"0",
-          "alarmDetectors":"1号探头",
-        },{
-          "alarmID":"06",
-          "alarmType":"1",
-          "alarmTime":"2018-08-01 15:54:52.03",
-          "grade":"1",
-          "isConfirmed":"0",
-          "alarmDetectors":"1号探头",
-        } ]
+    // dataArray=[
+    //     {
+    //       "alarmID":"01",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"1",
+    //       "alarmDetectors":"1号探头",
+    //     },{
+    //       "alarmID":"02",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"1",
+    //       "alarmDetectors":"1号探头",
+    //     },{
+    //       "alarmID":"03",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"1",
+    //       "alarmDetectors":"1号探头",
+    //     },{
+    //       "alarmID":"04",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"0",
+    //       "alarmDetectors":"1号探头",
+    //     },{
+    //       "alarmID":"05",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"0",
+    //       "alarmDetectors":"1号探头",
+    //     },{
+    //       "alarmID":"06",
+    //       "alarmType":"1",
+    //       "alarmTime":"2018-08-01 15:54:52.03",
+    //       "grade":"1",
+    //       "isConfirmed":"0",
+    //       "alarmDetectors":"1号探头",
+    //     } ]
       name:string;
       deviceId:string;
       pagesizenow:number;
@@ -79,14 +79,14 @@ export class AlarmPage {
       roleId:string;
       unconfirmNum:number;
       alarmArray:Array<any> =[];
-
+      username:string;
 
 
   constructor(public navCtrl: NavController, 
             public navParams: NavParams,
             public httpService: HttpService,
             public http: Http,
-              private  storage:Storage,
+            private storage:Storage,
             public accountService:AccountService,
             private alertCtrl:AlertController,
             public toastCtrl: ToastController,
@@ -98,21 +98,21 @@ export class AlarmPage {
     this.deviceId = this.navParams.data.deviceId;
     this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
     this.storage.get('roleId').then(roleId=>{
-      this.roleId=roleId;
+        this.roleId=roleId;
     })
+    this.storage.get('username').then((username)=>{
+        this.username=username;
+      })
     // this.alarmNum = this.navParams.data.alarmsum;
     // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
     // this.alarmTime = this.alarm
       this.dataInit();
-      console.log(this.dataArray);
+    // this.alarmArray = this.dataArray;
+    //   console.log(this.dataArray);
   }
-
-  /**
-   *  6. 获取设备警报信息
-   */
   dataInit(){
     this.nativeService.showLoading("数据加载中...")
-    let url = "http://192.168.0.167:7002/Alarm/find/brief/byDeviceID";
+    let url = this.httpService.getUrl()+"/Alarm/find/brief/byDeviceID";
     let body = {
         "DeviceId":this.deviceId,
         "pageSize":10,
@@ -129,53 +129,52 @@ export class AlarmPage {
     this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
         this.nativeService.hideLoading();
         data.forEach(x=>{
+          x.grade=x.grade.toString();
           console.log( x.grade);
-          var d=(new Date(x.alarmtime));
-          x.alarmtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
-          d=(new Date(x.endtime));
-          x.endtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          var d=(new Date(x.alarmTime));
+          x.alarmTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
         })
         this.nativeService.hideLoading();
         this.alarmArray = data;
         console.log(this.alarmArray);
     },
       error=> {
-
         this.nativeService.hideLoading();
         this.nativeService.showToast("数据获取失败！");
-        this.alarmArray = this.dataArray;
+        console.log(url);
+        // this.alarmArray = this.dataArray;
       })
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmPage');
   }
 
+    // doInfinite(infiniteScroll){
+
+    //     console.log('Begin async operation');
+    //     console.log(infiniteScroll._scrollY);
+    //     console.log(infiniteScroll.scrollHeight);
+    //     setTimeout(()=>{
+    //         this.pageNum++;
+    //         console.log(this.pageNum);
+    //         if(this.pageNum<this.pageSize){
+    //             for(var i = 0;i<10;i++){
+    //                 this.dataArray.push(this.alarmArray[i+this.pageNum*10]);
+    //             }
+    //         }else if(this.pageNum==this.pageSize){
+    //             for(i = 0;i<this.pageOther;i++){
+    //                 this.dataArray.push(this.alarmArray[i+this.pageNum*10]);
+    //             }
+    //         }else{
+    //             infiniteScroll.enable(false);
+    //         }
+
+    //         console.log('Async operation has ended');
+    //         infiniteScroll.complete();
+    //     },500);
+    // }
+
     doInfinite(infiniteScroll){
-
-        console.log('Begin async operation');
-        console.log(infiniteScroll._scrollY);
-        console.log(infiniteScroll.scrollHeight);
-        setTimeout(()=>{
-            this.pageNum++;
-            console.log(this.pageNum);
-            if(this.pageNum<this.pageSize){
-                for(var i = 0;i<10;i++){
-                    this.dataArray.push(this.alarmArray[i+this.pageNum*10]);
-                }
-            }else if(this.pageNum==this.pageSize){
-                for(i = 0;i<this.pageOther;i++){
-                    this.dataArray.push(this.alarmArray[i+this.pageNum*10]);
-                }
-            }else{
-                infiniteScroll.enable(false);
-            }
-
-            console.log('Async operation has ended');
-            infiniteScroll.complete();
-        },500);
-    }
-
-    doInfinite1(infiniteScroll){
         
                 console.log('Begin async operation');
                 console.log(infiniteScroll._scrollY);
@@ -202,7 +201,7 @@ export class AlarmPage {
                                 infiniteScroll.enable(false);
                             }else{
                                 for(let i = 0 ; i < this.pagesizenow; i++){
-                                    this.dataArray.push(data.content[i]);
+                                    this.alarmArray.push(data.content[i]);
                                 }
                             }
                         })
@@ -241,9 +240,9 @@ export class AlarmPage {
         
             comfirmAlarmfunction(comfirmData,item) {
                 console.log(comfirmData.note);
-                let url = "http://192.168.0.167:7002/Alarm/update/confirm/single";
+                let url = this.httpService.getUrl()+"/Alarm/update/confirm/single";
                 let body = {
-                    "userName":"1233",
+                    "userName":this.username,
                     "alarmID":item.alarmID,
                     "Plantform":"移动端",
                     "note":comfirmData.note,

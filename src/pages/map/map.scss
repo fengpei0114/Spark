@@ -19,6 +19,11 @@ page-map {
   .scroll{
     height: 100%;
   }
+  .colsediv{
+    right:0px;
+    position:absolute;
+    z-index:99999;
+  }
   .buttonclass button {
     height: 2.0rem;
     margin-left: 0rem;

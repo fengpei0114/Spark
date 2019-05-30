@@ -15,30 +15,30 @@ import { NativeService } from '../native-service/native-service';
 */
 @Injectable()
 export class HttpService {
-
-    private url:string = "http://47.92.34.161:80";// 服务器端口号和IP
-    private urlIp:string = "47.92.34.161";
-    private urlPort:string = "80";
+ 
+    private url:string = "http://192.168.0.167:7002";// 服务器端口号和IP
+    private urlIp:string = "192.168.0.167";
+    private urlPort:string = "7002";
     constructor(public http: Http,public nativeService: NativeService,
                 private storage: Storage
     ) {
 
-        if (typeof(this.storage.get('urlIp'))!=="undefined"){
-            this.storage.get('urlIp').then((urlIp) =>{
+        // if (typeof(this.storage.get('urlIp'))!=="undefined"){
+        //     this.storage.get('urlIp').then((urlIp) =>{
 
-                this.urlIp = urlIp;
-            });
-            this.storage.get('urlPort').then((urlPort) =>{
-                this.urlPort = urlPort;
-            });
-            this.storage.get('url').then((url) =>{
-                this.url = url;
-            });
-        }else {
-           this.url = "http://47.92.34.161:80";
-           this.urlIp = "47.92.34.161";
-           this.urlPort = "80";
-        }
+        //         this.urlIp = urlIp;
+        //     });
+        //     this.storage.get('urlPort').then((urlPort) =>{
+        //         this.urlPort = urlPort;
+        //     });
+        //     this.storage.get('url').then((url) =>{
+        //         this.url = url;
+        //     });
+        // }else {
+           this.url = "http://192.168.0.167:7002";
+           this.urlIp = "192.168.0.167";
+           this.urlPort = "7002";
+        // }
     }
 
     public get(url: string, paramMap: any = null): Observable<Response> {
@@ -63,6 +63,7 @@ export class HttpService {
         return "http://10.175.200.30:8081";
     }
     getUrl() {
+        console.log("http-service:"+this.url);
         return this.url;
     }
     //生产环境URL
@@ -87,8 +88,8 @@ export class HttpService {
         // this.urlIp = Ip;
         // this.urlPort = port;
         this.url = "http://" + Ip + ":" + port;
-        this.storage.set('urlIp',this.urlIp).then();
-        this.storage.set('urlPort',this.urlPort).then();
-        this.storage.set('url',this.url).then();
+        // this.storage.set('urlIp',this.urlIp).then();
+        // this.storage.set('urlPort',this.urlPort).then();
+        // this.storage.set('url',this.url).then();
     }
 }

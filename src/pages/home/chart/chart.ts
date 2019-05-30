@@ -4,6 +4,7 @@ import { Http , Headers ,RequestOptions } from '@angular/http';
 import HighCharts from 'highcharts';
 import { NativeService } from '../../../providers/native-service/native-service';
 import { GetdataProvider } from '../../providers/getdata/getdata';
+import { HttpService } from '../../../providers/http-service/http-service';
 // import { preserveWhitespacesDefault } from '@angular/compiler';
 
 
@@ -21,8 +22,6 @@ export class ChartPage {
   public MallistNum=[];
   public deviceId:any;
   private _chart: any;
-  private alarmSum:number;
-  private malfunctionSum:number;
   public getdataArray={
     "MulNum":"12",
     "chartMsg":[{
@@ -71,18 +70,21 @@ export class ChartPage {
   }
   public alarmdom:any;
   public maldom:any;
+  public alarmSum:number;
+  public malsum:number;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public http:Http,
                 private nativeService: NativeService,
+                private httpService:HttpService,
                 public viewCtrl: ViewController ) {
                   this.deviceId = this.navParams.data.deviceId;
-                  this.alarmSum=this.navParams.data.alarmsum;
-                  this.malfunctionSum=this.navParams.data.malfunctionsum;
+                  this.alarmSum = 0;
+                  this.malsum = 0;
     }
 
     AlarmdataInit(){
-      let url = "http://192.168.0.167:7002/Statistics/alarm/countByDay/byDeviceID";
+      let url = this.httpService.getUrl()+"/Statistics/alarm/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }
@@ -105,7 +107,7 @@ export class ChartPage {
     });
     }
     MaldataInit(){
-      let url = "http://192.168.0.167:7002/Statistics/malfunction/countByDay/byDeviceID";
+      let url = this.httpService.getUrl()+"/Statistics/malfunction/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }
@@ -129,31 +131,50 @@ export class ChartPage {
     }
     ionViewDidLoad(){
         this.deviceId = this.navParams.data.deviceId;
-        // this.AlarmdataInit().then(data=>{
-        //     console.log(data);
-        //     // console.log(this.example);
-        //   for(var key in data){
-        //         this.AlarmlistData.push(key);
-        //         this.AlarmlistNum.push(data[key]);
+        this.nativeService.showLoading('正在加载...');
+        this.AlarmdataInit().then(data=>{
+            console.log(data);
+          for(var key in data){
+                this.AlarmlistData.push(key);
+                if(data[key]==0){
+                  this.AlarmlistNum.push(null);
+                }else{
+                  this.AlarmlistNum.push(data[key]);
+                }
+                this.alarmSum += data[key];
+          }
+          this.paint();
+        })
+        this.MaldataInit().then(data=>{
+            console.log(data);
+            for(var key in data){
+                this.MallistData.push(key);
+                if(data[key]==0){
+                  this.MallistNum.push(null);
+                }else{
+                  this.MallistNum.push(data[key]);
+                }
+                this.malsum += data[key];
+            }
+            this.paint();
+        })
+        //测试使用
+        // for(var key in this.example){
+        //   this.AlarmlistData.push(key);
+        //   this.MallistData.push(key);
+        //   if(this.example[key]==0){
+        //     this.MallistNum.push(null);
+        //   }else{
+        //     this.MallistNum.push(this.example[key]);
         //   }
-        //   this.paint();
-        // })
-        // this.MaldataInit().then(data=>{
-        //     console.log(data);
-        //     // console.log(this.example);
-        //     for(var key in data){
-        //         this.MallistData.push(key);
-        //         this.MallistNum.push(data[key]);
-        //     }
-        //     this.paint();
-        // })
-        for(var key in this.example){
-          this.AlarmlistData.push(key);
-          this.MallistData.push(key);
-          this.AlarmlistNum.push(this.example[key]);
-          this.MallistNum.push(this.example[key]);
-        }
-        this.paint();
+        //   this.alarmSum += this.example[key];
+        // }
+        // this.malsum = this.alarmSum;
+        // this.AlarmlistNum=[2,2,null,null,null,null,null,null,null,5];
+        // console.log(this.AlarmlistNum);
+        
+        // this.paint();
+        this.nativeService.hideLoading();
     }
 
     paint(){
@@ -194,6 +215,7 @@ export class ChartPage {
         series: [{
             type:'scatter',
             name: '警报次数',
+            color: 'rgb(255,0,0)',
             data: this.AlarmlistNum
            }]
       }
@@ -235,6 +257,7 @@ export class ChartPage {
         series: [{
             type:'scatter',
             name: '警报次数',
+            color: 'rgb(255,0,0)',
             data: this.MallistNum
            }]
       }

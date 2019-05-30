@@ -87,11 +87,22 @@ page-home {
     background-color: transparent;
     height:40%;
   }
+  .stylecol{
+    text-align:center;
+  }
   .imgstyle{
-    height:4.0rem !important;
+    height:4.5rem !important;
+    // top:50%;
+    // left:50%;
+    // transform: translate(90%, -50%);
+    margin:0 auto;
+  }
+  .imgstyle_small{
+    height:1.5rem !important;
+    display:inline;
     top:50%;
-    left:50%;
-    // position: absolute;
-    transform: translate(80%, -30%);
+    // left:50%;
+    transform: translateY(25%);
+    // margin:0 auto;
   }
 
