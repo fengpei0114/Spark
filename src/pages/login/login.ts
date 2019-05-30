@@ -37,7 +37,7 @@ export class LoginPage {
     randomCodeImage: string = "";
     randomCodeIsRight: boolean = false;
     roleId:string;
-
+  userId:string;
 
 
     ngOnInit() {
@@ -94,7 +94,7 @@ export class LoginPage {
                 // console.log(this.username+"  "+value.password);
                 this.nativeService.showLoading('正在登陆...');
 
-                let url = "http://192.168.0.136:7000/login";
+                let url = "http://192.168.0.137:7000/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
                     // "username":"admin",
@@ -121,21 +121,27 @@ export class LoginPage {
                     if(data.status == "1"){
                         //  console.log(value.password.length());
                         this.errorMsg = data.Msg;
-                    }else if(data.status == "0"){
+                    }else {
                         this.accountService.setAccount(data);
                       this.roleId=data['roles'];
                       this.storage.set('roleId',this.roleId);
+                      this.userId=data['userId'];
+                      this.storage.set('userId',this.userId);
                         if(this.isToggled){
                             // // alert('记住密码');
                             this.storage.set('username',value.username);
                             this.storage.set('password',value.password);
                         }
+                        console.log(this.roleId);
                         if(this.roleId == "3" || this.roleId == "4"){
                             this.nativeService.hideLoading();
                             this.navCtrl.setRoot(HomePage).then();
                         }else if(this.roleId == "5"){
                             this.nativeService.hideLoading();
                             this.navCtrl.setRoot(MapPage).then();
+                        }
+                        else {
+                          this.nativeService.showToast("用户无权限访问！");
                         }
                     }
                 },error=>{
