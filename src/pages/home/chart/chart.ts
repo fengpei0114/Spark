@@ -21,6 +21,8 @@ export class ChartPage {
   public MallistNum=[];
   public deviceId:any;
   private _chart: any;
+  private alarmSum:number;
+  private malfunctionSum:number;
   public getdataArray={
     "MulNum":"12",
     "chartMsg":[{
@@ -75,6 +77,8 @@ export class ChartPage {
                 private nativeService: NativeService,
                 public viewCtrl: ViewController ) {
                   this.deviceId = this.navParams.data.deviceId;
+                  this.alarmSum=this.navParams.data.alarmsum;
+                  this.malfunctionSum=this.navParams.data.malfunctionsum;
     }
 
     AlarmdataInit(){

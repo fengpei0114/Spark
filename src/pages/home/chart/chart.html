@@ -16,7 +16,7 @@
   <ion-card class = "card_style">
     <ion-card-header>
       <div style="color:aliceblue">警报记录</div>
-      <div style="color:aliceblue">警报总次数：{{getdataArray.MulNum}}</div>
+      <div style="color:aliceblue">警报总次数：{{alarmSum}}</div>
     </ion-card-header>
   <ion-card-content>
   <div id="alarm" #alarm></div>
@@ -29,7 +29,7 @@
   <ion-card class = "card_style"> 
       <ion-card-header>
       <div style="color:aliceblue">故障记录</div>
-      <div style="color:aliceblue">警报总次数：{{getdataArray.MulNum}}</div>
+      <div style="color:aliceblue">故障总次数：{{malfunctionSum}}</div>
       </ion-card-header>
   <ion-card-content>
   <div id="malfunction" #malfunction></div>

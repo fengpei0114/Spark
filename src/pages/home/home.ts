@@ -16,6 +16,7 @@ import { SubNodePage } from './subnode/subnode'
 import { StatusPage } from './status/status';
 import { ConfigHistoryPage } from './config_history/config_history'
 import { ChartPage } from './chart/chart';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the HomePage page.
@@ -160,24 +161,27 @@ export class HomePage implements OnInit{
                 private toastCtrl: ToastController,
                 public httpService: HttpService,
                 private accountService: AccountService,
+                private storage:Storage,
                 // private elementREf:ElementRef,
                 // private appConfig: AppConfig,
     ){
-        this.userId = this.navParams.data;
+        this.storage.get('userId').then((userid)=>{
+          this.userId=userid;
+        })
         /**
          * 接口3 
          */
-        // this.EquipmentArray=[],
-        // this.InitData();
-        this.runstatus = this.EquipmentArray[0].status.running;
-        this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
+        this.EquipmentArray=[],
+        this.InitData();
+        // this.runstatus = this.EquipmentArray[0].status.running;
+        // this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
         
     }
     InitData(){
         console.log("123123");
         let url = "http://192.168.0.167:7002/Device/find/mobile_brief/byUserID";
         let body = {
-            "userId":1
+            "userId":this.userId
         };
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -204,11 +208,11 @@ export class HomePage implements OnInit{
         })
     }
     ionViewDidEnter(){
-        this.EquipmentArray.forEach(x=>{
-            x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
-            x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();
-            x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
-        })
+        // this.EquipmentArray.forEach(x=>{
+        //     x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
+        //     x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();
+        //     x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
+        // })
         /**
          * 获取年月日和时分秒
          */
