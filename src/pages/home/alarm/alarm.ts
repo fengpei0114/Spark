@@ -22,62 +22,18 @@ export class AlarmPage {
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
-    // dataArray=[
-    //     {
-    //       "alarmID":"01",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"1",
-    //       "alarmDetectors":"1号探头",
-    //     },{
-    //       "alarmID":"02",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"1",
-    //       "alarmDetectors":"1号探头",
-    //     },{
-    //       "alarmID":"03",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"1",
-    //       "alarmDetectors":"1号探头",
-    //     },{
-    //       "alarmID":"04",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"0",
-    //       "alarmDetectors":"1号探头",
-    //     },{
-    //       "alarmID":"05",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"0",
-    //       "alarmDetectors":"1号探头",
-    //     },{
-    //       "alarmID":"06",
-    //       "alarmType":"1",
-    //       "alarmTime":"2018-08-01 15:54:52.03",
-    //       "grade":"1",
-    //       "isConfirmed":"0",
-    //       "alarmDetectors":"1号探头",
-    //     } ]
       name:string;
       deviceId:string;
       pagesizenow:number;
       alarmId:any;
-      alarmNum:any;
+      alarmsum:any;
       unconfirmAlarmNum:any;
       lastConfirmTime:any;
       errorMsg:any;
-      confirmNum:number;
+      confirmsum:number;
       alarmMsg:any;
       roleId:string;
-      unconfirmNum:number;
+      unconfirmsum:number;
       alarmArray:Array<any> =[];
       username:string;
 
@@ -94,21 +50,16 @@ export class AlarmPage {
                 console.log(this.httpService.getUrl());
                 this.alarmMsg = this.navParams.data.alarmMsg;
                 console.log(this.alarmMsg);
-    this.name = this.navParams.data.name;
+    this.alarmsum = this.navParams.data.alarmMsg.alarmsum;
+    this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
     this.deviceId = this.navParams.data.deviceId;
-    this.unconfirmAlarmNum = this.navParams.data.unconfirmedAlarmSum;
-    this.storage.get('roleId').then(roleId=>{
+    this.storage.get('roleId').then(roleId=>{name
         this.roleId=roleId;
-    })
+    });
     this.storage.get('username').then((username)=>{
         this.username=username;
-      })
-    // this.alarmNum = this.navParams.data.alarmsum;
-    // this.confirmNum = this.alarmNum - this.unconfirmAlarmNum;
-    // this.alarmTime = this.alarm
-      this.dataInit();
-    // this.alarmArray = this.dataArray;
-    //   console.log(this.dataArray);
+      });
+    this.dataInit();
   }
   dataInit(){
     this.nativeService.showLoading("数据加载中...")
@@ -129,13 +80,18 @@ export class AlarmPage {
     this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
         this.nativeService.hideLoading();
         data.forEach(x=>{
-          x.grade=x.grade.toString();
-          console.log( x.grade);
-          var d=(new Date(x.alarmTime));
-          x.alarmTime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          var d=(new Date(x.alarmtime));
+          x.alarmtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          if(x.isconfirmed)
+          {
+            var d=(new Date(x.endtime));
+            x.endtime=d.toLocaleDateString()+"  "+d.toLocaleTimeString();
+          }
+
         })
         this.nativeService.hideLoading();
         this.alarmArray = data;
+        this.pageNum++;
         console.log(this.alarmArray);
     },
       error=> {
@@ -174,41 +130,51 @@ export class AlarmPage {
     //     },500);
     // }
 
-    doInfinite(infiniteScroll){
-        
-                console.log('Begin async operation');
-                console.log(infiniteScroll._scrollY);
-                console.log(infiniteScroll.scrollHeight);
-                let url = this.httpService.getUrl() + "";
-                let body = "DeviceId="+this.deviceId+"&pageSize=10&pageNum"+this.pageNum;
-                let headers = new Headers({
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                });
-                let options = new RequestOptions({
-                    headers: headers
-                });
-                setTimeout(()=>{
-                        this.http.post(url,body,options).map(res=>res.json()).subscribe(data =>{
-                            console.log(data);
-                            if(this.pagesizenow < 10){
-                                infiniteScroll.enable(false);
-                            }
-                            this.pagesizenow = 0;
-                            data.content.forEach((x)=>{
-                                this.pagesizenow++;
-                            })  
-                            if(this.pagesizenow == 0){
-                                infiniteScroll.enable(false);
-                            }else{
-                                for(let i = 0 ; i < this.pagesizenow; i++){
-                                    this.alarmArray.push(data.content[i]);
-                                }
-                            }
-                        })
-                    console.log('Async operation has ended');
-                    infiniteScroll.complete();
-                },500);
+    doInfinite(infiniteScroll) {
+      if (this.alarmArray.length % 10 != 0) //如果当前列表未满，表明没有更多数据，不使用下拉功能
+      {
+        infiniteScroll.enable(false);
+      } else {
+        console.log('Begin async operation');
+        console.log(infiniteScroll._scrollY);
+        console.log(infiniteScroll.scrollHeight);
+        let url = this.httpService.getUrl() + "/Alarm/find/brief/byDeviceID";
+        let body = {
+          "DeviceId": this.deviceId,
+          "pageSize": 10,
+          "pageNum": this.pageNum,
+        };
+        let headers = new Headers({
+          'Content-Type': 'application/x-www-form-urlencoded'
+        });
+        let options = new RequestOptions({
+          headers: headers
+        });
+        this.http.post(url, body, options).map(res => res.json()).subscribe(data => {
+          console.log(data);
+          if (this.pagesizenow < 10) {
+            infiniteScroll.enable(false);
+          }
+          this.pagesizenow = 0;
+          data.content.forEach((x) => {
+            this.pagesizenow++;
+          })
+          if (this.pagesizenow == 0) {
+            infiniteScroll.enable(false);
+          } else {
+            for (let i = 0; i < this.pagesizenow; i++) {
+              this.alarmArray.push(data.content[i]);
             }
+            this.pageNum++;
+          }
+          console.log('Async operation has ended');
+          infiniteScroll.complete();
+        }, error => {
+          this.nativeService.showToast("数据获取失败！");
+          infiniteScroll.complete();
+        })
+      }
+    }
             OncomfirmClick(item)
             {
                 const prompt = this.alertCtrl.create({
@@ -243,7 +209,7 @@ export class AlarmPage {
                 let url = this.httpService.getUrl()+"/Alarm/update/confirm/single";
                 let body = {
                     "userName":this.username,
-                    "alarmID":item.alarmID,
+                    "alarmID":item.alarmid,
                     "Plantform":"移动端",
                     "note":comfirmData.note,
                 }

@@ -236,7 +236,7 @@ export class LoginPage {
     createCode() {
         let authCode: string ="";//设置这个为空变量，然后往里面添加随机数
         let authCodeLength=4;//随机数的长度
-        const randomArray=[0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z'];
+        const randomArray=[1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R', 'S','T','U','V','W','X','Y','Z'];
         //创建一个数组，随机数从里面选择四位数或者更多
         for(let i=0;i<authCodeLength;i++){
             let index=Math.floor(Math.random()*36);//随机取一位数

@@ -195,7 +195,8 @@ export class MalfunctionPage {
 
     // ]
 
-
+    malsum:string;
+  unconfirmsum:string;
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
@@ -215,19 +216,21 @@ export class MalfunctionPage {
     ) {
         this.storage.get('roleId').then(roleId=>{
             this.roleId=roleId;
+            this.roleId="3";///////////////////////////
         })
         this.storage.get('username').then((username)=>{
             this.username=username;
           })
-        this.deviceId = this.navParams.data.deviceId;
-        this.unconfirmMulNum = this.navParams.data.unconfirmedMalNum;
+      this.malsum = this.navParams.data.alarmMsg.alarmsum;
+      this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
+      this.deviceId = this.navParams.data.deviceId;
         this.dataInit();
         
         
     }
 
     dataInit(){
-        this.nativeService.showLoading("数据加载中...")
+        this.nativeService.showLoading("数据加载中...");
         let url = this.httpService.getUrl()+"/Malfunction/find/byDeviceID";
         let body = {
             "DeviceId":this.deviceId,
@@ -343,44 +346,49 @@ export class MalfunctionPage {
     //         infiniteScroll.complete();
     //     },500);
     // }
-    doInfinite1(infiniteScroll){
-        console.log('Begin async operation');
-        console.log(infiniteScroll._scrollY);
-        console.log(infiniteScroll.scrollHeight);
-        let url = this.httpService.getUrl()+"";
+    doInfinite(infiniteScroll){
+      if (this.malfunctionArray.length % 10 != 0) //如果当前列表未满，表明没有更多数据，不使用下拉功能
+      {
+        infiniteScroll.enable(false);
+      } else {
+        let url = this.httpService.getUrl() + "/Malfunction/find/byDeviceID";
         let body = {
-            "DeviceId":this.deviceId,
-            "pageSize":10,
-            "pageNum":this.pageNum,
+          "DeviceId": this.deviceId,
+          "pageSize": 10,
+          "pageNum": this.pageNum,
         }
         let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded'
         });
         let options = new RequestOptions({
-            headers: headers
+          headers: headers
         });
-        setTimeout(()=>{
-                this.http.post(url,body,options).map(res=>res.json()).subscribe(data =>{
-                    console.log(data);
-                    if(this.pagesizenow < 10){
-                        infiniteScroll.enable(false);
-                    }
-                    this.pagesizenow = 0;
-                    data.content.forEach((x)=>{
-                        this.pagesizenow++;
-                    })  
-                    if(this.pagesizenow == 0){
-                        infiniteScroll.enable(false);
-                    }else{
-                        for(let i = 0 ; i < this.pagesizenow; i++){
-                            this.malfunctionArray.push(data.content[i]);
-                        }
-                        this.pageNum++;
-                    }
-                })
-            console.log('Async operation has ended');
-            infiniteScroll.complete();
-        },500);
+
+        this.http.post(url, body, options).map(res => res.json()).subscribe(data => {
+          console.log(data);
+          if (this.pagesizenow < 10) {
+            infiniteScroll.enable(false);
+          }
+          this.pagesizenow = 0;
+          data.content.forEach((x) => {
+            this.pagesizenow++;
+          })
+          if (this.pagesizenow == 0) {
+            infiniteScroll.enable(false);
+          } else {
+            for (let i = 0; i < this.pagesizenow; i++) {
+              this.malfunctionArray.push(data.content[i]);
+            }
+            this.pageNum++;
+          }
+
+          infiniteScroll.complete();
+        }, error => {
+          this.nativeService.showToast("数据获取失败！");
+          infiniteScroll.complete();
+        });
+        console.log('Async operation has ended');
+      }
     }
     OncomfirmClick(item)
     {

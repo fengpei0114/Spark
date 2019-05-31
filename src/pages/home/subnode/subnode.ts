@@ -3,7 +3,8 @@ import { NavController, NavParams, App } from 'ionic-angular';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
 import {Color} from "highcharts";
-import {SubNodeDetailPage} from "../subnode_detail/subnode_detail"
+import {SubNodeDetailPage} from "../subnode_detail/subnode_detail";
+import { NativeService } from '../../../providers/native-service/native-service'
 
 /**
  * Generated class for the DevicePage page.
@@ -17,7 +18,7 @@ import {SubNodeDetailPage} from "../subnode_detail/subnode_detail"
 })
 export class SubNodePage {
     DeviceId:string;
-    pageNum:number = 0;
+    pageNum:number = 1;
     name:any;
     pagesizenow:number = 10;
     subnodeMsg:Array<any>;
@@ -215,6 +216,7 @@ export class SubNodePage {
                 public navCtrl: NavController,
                 public navParams: NavParams,
                 private httpService: HttpService,
+                private nativeService:NativeService,
 
     ) {
         // console.log(httpService.getUrl());
@@ -228,12 +230,14 @@ export class SubNodePage {
         
     }
     InitData(){
+
+      this.nativeService.showLoading("数据加载中...");
         console.log("initDate");
         let url = this.httpService.getUrl()+"/Subnode/find/byDeviceID";
         let body = {
             "DeviceId":this.DeviceId,
             "pageSize":10,
-            "pageNum":1,
+            "pageNum":this.pageNum,
         }
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -244,8 +248,15 @@ export class SubNodePage {
             headers: headers
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
+          this.nativeService.hideLoading();
             console.log(data);
             this.subnodeMsg = data.content;
+            this.pageNum++;
+        },error=> {
+
+          this.nativeService.hideLoading();
+          this.nativeService.showToast("数据获取失败！");
+          // this.malfunctionArray = this.dataArray;
         })
     }
     ionViewDidEnter(){
@@ -261,43 +272,50 @@ export class SubNodePage {
         this.app.getRootNav().push(SubNodeDetailPage,item);
     }
 
-    doInfinite1(infiniteScroll){
-        console.log('Begin async operation');
-        console.log(infiniteScroll._scrollY);
-        console.log(infiniteScroll.scrollHeight);
-        let url = this.httpService.getUrl() + "";
-        let body = {
-            "DeviceId":this.DeviceId,
-            "pageSize":10,
-            "pageNum":this.pageNum,
+    doInfinite(infiniteScroll) {
+      console.log('Begin async operation');
+      console.log(infiniteScroll._scrollY);
+      console.log(infiniteScroll.scrollHeight);
+      let url = this.httpService.getUrl() + "/Subnode/find/byDeviceID";
+      let body = {
+        "DeviceId": this.DeviceId,
+        "pageSize": 10,
+        "pageNum": this.pageNum,
+      }
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        'Accept': 'application/json'
+      });
+      let options = new RequestOptions({
+        headers: headers
+      });
+      if (this.pagesizenow < 10) {
+        infiniteScroll.enable(false);
+      }
+      this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
+        console.log(data);
+        this.pagesizenow = 0;
+        data.content.forEach((x) => {
+          this.pagesizenow++;
+        })
+        if (this.pagesizenow == 0) {
+          infiniteScroll.enable(false);
+        } else {
+          for (let i = 0; i < this.pagesizenow; i++) {
+            this.subnodeMsg.push(data.content[i]);
+          }
+          this.pageNum++;
         }
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            'Accept': 'application/json'
-        });
-        let options = new RequestOptions({
-            headers: headers
-        });
-        setTimeout(()=>{
-            if(this.pagesizenow < 10){
-                infiniteScroll.enable(false);
-            }
-            this.http.post(url,JSON.stringify(body),options).map(res=>res.json()).subscribe(data =>{
-                console.log(data);
-                this.pagesizenow = 0;
-                data.content.forEach((x)=>{
-                    this.pagesizenow++;
-                })  
-                if(this.pagesizenow == 0){
-                    infiniteScroll.enable(false);
-                }else{
-                    this.subnodeMsg = data;
-                }
-            })
-        console.log('Async operation has ended');
-        infiniteScroll.complete();
-        },500);
+          infiniteScroll.complete();
+      }, error => {
+          this.nativeService.showToast("数据获取失败！");
+          infiniteScroll.complete();
         }
+      )
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+
+    }
 
 }

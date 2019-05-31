@@ -14,16 +14,9 @@
 
 
 <ion-content padding class="padding">
-    <ion-item class="staticBar">
-        <ion-label style="text-align: center">{{unconfirmMulNum}}条故障未确认</ion-label>
-<!--        <ion-row >-->
-<!--            <ion-col col-5 no-padding>{{mulMsg.alarmsum-mulMsg.unconfirmedAlarmSum}}条 已确认</ion-col>-->
-<!--            <ion-col col-5 no-padding>{{mulMsg.unconfirmMulNum}} 条未确认</ion-col>-->
-<!--        </ion-row>-->
-<!--        <ion-row >-->
-<!--            <ion-col>最后确认时间：{{mulMsg.alarmtimeStartTime}}</ion-col>-->
-<!--        </ion-row>-->
-    </ion-item>
+  <ion-item class="staticBar">
+    <ion-label style="text-align: center;color: white">未确认警报：{{unconfirmsum}}条  （共{{malsum}}条）</ion-label>
+  </ion-item>
     <br>
     <ion-card *ngIf="0 == malfunctionArray.length" style="background-color: transparent">
     <ion-label style="text-align: center;color:aliceblue"> 此设备无故障历史</ion-label>
@@ -48,10 +41,10 @@
                         </ion-row>
                         <ion-row>
                             <ion-col col-6>故障确认人：{{item.user}}</ion-col>
-                        <ion-col *ngIf="item.platform">确认方：移动端</ion-col>
-                        <ion-col *ngIf="!item.platform">确认方：设备端</ion-col>
+                        <ion-col *ngIf="item.platform">确认人员：移动端</ion-col>
+                        <ion-col *ngIf="!item.platform">确认平台：设备端</ion-col>
                     </ion-row>
-                    <ion-row>
+                    <ion-row  *ngIf="item.note!=null">
                         <ion-col>备注：{{item.note}}</ion-col>
                     </ion-row>
                 </ion-grid>
