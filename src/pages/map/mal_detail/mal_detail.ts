@@ -47,6 +47,7 @@ export class MaldetailPage {
     prinicipalphone:any;
     plantform:any;
     comfirmUser:any;
+    factoryName:any;
     malId:number;
     // Msg_alarm = {
     //     "alarmId":"string1",
@@ -87,7 +88,7 @@ export class MaldetailPage {
         this.TestArray=[];
         // console.log(this.TestArray);
         this.deviceName = this.navParams.data.deviceName;
-        this.malId = this.navParams.data.malId;
+        this.malId = this.navParams.data.malID;
         this.measure = this.navParams.data.measure;
         // this.alarmOrmulMsg = this.navParams.data;
         // this.alarmOrMul = this.navParams.data.alarmOrmul;
@@ -105,7 +106,7 @@ export class MaldetailPage {
         console.log("maldata Init");
         let url = this.httpService.getUrl() + "/Malfunction/find/byMalID";
         let body = {
-            "malfunctionID":1,
+            "malfunctionID":this.malId,
         };
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -117,19 +118,20 @@ export class MaldetailPage {
         });
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
-            this.multype = data.malType;
-            this.mulComponent = data.component;
-            this.muldata = new Date(Date.parse(data.malTime)).toLocaleString();
-            this.isConfirmed = data.confirmed;
-            this.prinicipalName = data.prinicipalName;
-            this.prinicipalphone = data.prinicipalphone;
-            this.note = data.note;
-            if(data.confirmed){
-                this.plantform = data.plantform;
-                this.comfirmUser = data.user;
+            this.multype = data[0].malType;
+            this.mulComponent = data[0].malComponent;
+            this.muldata = new Date(Date.parse(data[0].malTime)).toLocaleString();
+            this.isConfirmed = data[0].confirmed;
+            // this.prinicipalName = data[0].prinicipalName;
+            // this.prinicipalphone = data[0].prinicipalphone;
+            this.factoryName = data[0].factoryName;
+            this.note = data[0].note;
+            if(data[0].confirmed){
+                this.plantform = data[0].plantform;
+                this.comfirmUser = data[0].user;
             }
             
-            
+            // console.log(data.malType);
             console.log("maldata");
         },error=>{
             console.log(error);

@@ -53,12 +53,16 @@
                     
                 <!-- </ion-item> -->
             </ion-list>
-                <div style="position:relative;float:right;font-size:1em;height:80px">
+                <!-- <div style="position:relative;float:right;font-size:1em;height:80px">
                     <div style="float:right;font-size:small;line-height:40px;color:#383737cb;color:aliceblue;display:inline;top:0;bottom:0">记住密码</div>
                     <div style="float:right;font-size:1em;color:aliceblue;display:inline;top:0;bottom:0"><ion-toggle (ionChange)="toggled()" [checked]="isToggled"></ion-toggle></div>
                         
-                    </div>
-            
+                    </div> -->
+                    <ion-item no-lines style="background-color: transparent;border-color: transparent">
+                            <label item-right style="color: white;font-size: small">记住密码</label>
+                            <ion-toggle (ionChange)="toggled()" [checked]="isToggled"></ion-toggle>
+                            <!--<ion-toggle (click)="toggled()"></ion-toggle>  -->
+                        </ion-item>
             <div style="text-align:center;padding-top:40px">
                 <button ion-button clear type="submit" style="border-radius:15px;width:75%;background-image:url('../../assets/loginbutton.png');background-size:100% 100%"></button>
             </div>

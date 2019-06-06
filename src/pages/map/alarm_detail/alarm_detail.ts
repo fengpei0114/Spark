@@ -85,7 +85,8 @@ export class AlarmdetailPage {
         // }
         this.TestArray=[];
         this.deviceName = this.navParams.data.deviceName;
-        this.alarmId = this.navParams.data.alarmId;
+        this.alarmId = this.navParams.data.alarmID;
+        console.log(this.alarmId);
         this.AlarmdataInit();
 
     }
@@ -96,7 +97,7 @@ export class AlarmdetailPage {
         console.log("alarmdata Init");
         let url = this.httpService.getUrl() + "/Alarm/find/detail/byAlarmID";
         let  body = {
-            "AlarmId":1,
+            "AlarmId":this.alarmId,
         };
         // let body="AlarmId=1";
         let headers = new Headers({

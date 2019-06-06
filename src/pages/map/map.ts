@@ -1098,9 +1098,9 @@ closeLegendWindow(){
         this.cityName = city.name;
         this.cityId=city.id;
         if(this.alarmOrmul){
-            this.AlarmCityArray(city.id);
+            this.AlarmCityArray(city.name);
         }else{
-            this.MalCityArray(city.id);
+            this.MalCityArray(city.name);
         }
         console.log(this.cityAlarmOrMul);
     }

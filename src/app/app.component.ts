@@ -25,6 +25,7 @@ export class MyApp {
   rootPage:any ;
   roleId:string;
   userId:string;
+  username:string;
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
@@ -44,7 +45,7 @@ export class MyApp {
   }
 
     checkPreviousAuthorization(): void {
-        // this.rootPage = LoginPage;
+        // this.rootPage = HomePage;
 
         this.storage.get('username').then((username) =>{
             this.storage.get('password').then((password) =>{
@@ -69,6 +70,7 @@ export class MyApp {
                         this.storage.set('roleId',this.roleId);
                         this.userId=data['userId'];
                         this.storage.set('userId',this.userId);
+                        this.username = data['username'];
                         this.storage.set('username',username);
                         if(this.roleId == "3" || this.roleId == "4"){
                             this.rootPage = HomePage;
