@@ -23,10 +23,10 @@ export class SubNodePage {
     pagesizenow:number = 10;
     subnodeMsg:Array<any>;
     // subnodeMsg = [{
-    //     "subnodeId":"1",
-    //     "installpoint":"XXX",
-    //     "subnode_alarmnum":"23",
-    //     "subnode_noconfirmalarm":"2",
+    //     "subnodeID":"1",
+    //     "installPoint":"陕西省西安市雁塔区",
+    //     "alarmNum":"23",
+    //     "malfunctionNum":"2",
     //     "subnode_malnum":"1",
     //     "subnode_noconfirmmal":"0",
     //     "subnode_detectornum":"4",
@@ -40,10 +40,10 @@ export class SubNodePage {
     //     "subnode_valve_3":"1",
     //     "subnode_valve_4":"1",
     // },{
-    //     "subnodeId":"2",
-    //     "installpoint":"XXX",
-    //     "subnode_alarmnum":"23",
-    //     "subnode_noconfirmalarm":"12",
+    //     "subnodeID":"2",
+    //     "installPoint":"XXX",
+    //     "alarmNum":"23",
+    //     "malfunctionNum":"12",
     //     "subnode_malnum":"1",
     //     "subnode_noconfirmmal":"1",
     //     "subnode_detectornum":"4",
@@ -57,10 +57,10 @@ export class SubNodePage {
     //     "subnode_valve_3":"0",
     //     "subnode_valve_4":"0",
     // },{
-    //     "subnodeId":"3",
-    //     "installpoint":"XXX",
-    //     "subnode_alarmnum":"23",
-    //     "subnode_noconfirmalarm":"12",
+    //     "subnodeID":"3",
+    //     "installPoint":"XXX",
+    //     "alarmNum":"23",
+    //     "malfunctionNum":"12",
     //     "subnode_malnum":"1",
     //     "subnode_noconfirmmal":"1",
     //     "subnode_detectornum":"4",
@@ -74,10 +74,10 @@ export class SubNodePage {
     //     "subnode_valve_3":"0",
     //     "subnode_valve_4":"0",
     // },{
-    //     "subnodeId":"4",
-    //     "installpoint":"XXX",
-    //     "subnode_alarmnum":"23",
-    //     "subnode_noconfirmalarm":"12",
+    //     "subnodeID":"4",
+    //     "installPoint":"XXX",
+    //     "alarmNum":"23",
+    //     "malfunctionNum":"12",
     //     "subnode_malnum":"1",
     //     "subnode_noconfirmmal":"1",
     //     "subnode_detectornum":"4",
@@ -233,7 +233,7 @@ export class SubNodePage {
 
       this.nativeService.showLoading("数据加载中...");
         console.log("initDate");
-        let url = this.httpService.getUrl()+"/Subnode/find/byDeviceID";
+        let url = this.httpService.getUrl()+":7002/Subnode/find/byDeviceID";
         let body = {
             "DeviceId":this.DeviceId,
             "pageSize":10,
@@ -276,7 +276,7 @@ export class SubNodePage {
       console.log('Begin async operation');
       console.log(infiniteScroll._scrollY);
       console.log(infiniteScroll.scrollHeight);
-      let url = this.httpService.getUrl() + "/Subnode/find/byDeviceID";
+      let url = this.httpService.getUrl() + ":7002/Subnode/find/byDeviceID";
       let body = {
         "DeviceId": this.DeviceId,
         "pageSize": 10,

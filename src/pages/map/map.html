@@ -89,7 +89,7 @@
         </div>
         </div>
             <div *ngIf="showInfoWindow" (click)="closeInfoWindow()" style="width:100%;height:100%;background:rgba(0, 0, 0, 0.021);z-index:99998;position:absolute">
-                <div style="width:50%;top:50%;left:50%;background:#f8f8f8;position: absolute;transform: translate(-50%, -110%);z-index:99999">
+                <div style="width:80%;top:50%;left:50%;background:#f8f8f8;position: absolute;transform: translate(-50%, -110%);z-index:99999">
                     <div class="colsediv">
                         <button ion-button clear icon-only (click)="closeInfoWindow()" style="height:10px;width:10px;">
                             <ion-icon name="close"></ion-icon>
@@ -97,48 +97,48 @@
                     </div>
                 <ion-grid>
                     <ion-row>
-                      <ion-col>
+                      <ion-col col-4>
                         设备号：
                     </ion-col>
-                  <ion-col>
+                  <ion-col col-8>
                     {{windowsMsg.deviceId}}
                   </ion-col>
                     </ion-row>
     
                     <ion-row >
-                      <ion-col>位置：</ion-col>
-                      <ion-col>{{windowsMsg.address}}</ion-col>
+                      <ion-col col-4>位置：</ion-col>
+                      <ion-col col-8>{{windowsMsg.address}}</ion-col>
                     </ion-row>
                     <ion-row *ngIf="windowsMsg.runstate==0">
-                    <ion-col>状态：</ion-col>
-                        <ion-col style="color:grey">
+                    <ion-col col-4>状态：</ion-col>
+                        <ion-col col-8 style="color:grey">
                           关机
                            <!-- {{windowsMsg.runstate|statusFilter}} -->
                         </ion-col>
                     </ion-row>
                     <ion-row *ngIf="windowsMsg.runstate==1">
-                        <ion-col>状态：</ion-col>
-                        <ion-col style="color:green">
+                        <ion-col col-4>状态：</ion-col>
+                        <ion-col col-8 style="color:green">
                           正常
                             <!-- {{windowsMsg.runstate|statusFilter}} -->
                         </ion-col>
                     </ion-row>
                     <ion-row *ngIf="!(windowsMsg.runstate == 0) && !(windowsMsg.runstate==1)">
-                        <ion-col>状态：</ion-col>
-                        <ion-col style="color:red">
+                        <ion-col col-4>状态：</ion-col>
+                        <ion-col col-8 style="color:red">
                           异常
                             <!-- {{windowsMsg.runstate|statusFilter}} -->
                         </ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col >警报数:</ion-col>
-                          <ion-col style="color:red">
+                        <ion-col col-4>警报数:</ion-col>
+                          <ion-col col-8 style="color:red">
                            {{windowsMsg.unconfirmedAlarmNum}}
                           </ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col >故障数:</ion-col>
-                        <ion-col style="color:orange">
+                        <ion-col col-4>故障数:</ion-col>
+                        <ion-col col-8 style="color:orange">
                             {{windowsMsg.unconfirmedMalNum}}
                         </ion-col>
                     </ion-row>

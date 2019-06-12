@@ -5,7 +5,7 @@ import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
 import { AccountService } from '../../../providers/account-service/account-service';
 import { UserInfoEditPage } from '../user-info-edit/user-info-edit';
-
+import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the UserInfoPage page.
@@ -39,10 +39,15 @@ export class UserInfoPage {
                 private httpService: HttpService,
                 private alertCtrl: AlertController,
                 private modalCtrl: ModalController,
+                private storage:Storage,
     ) {
         // this.accountId = (this.accountService.getAccount() as any).userId;
         console.log("userinfoPage");
-        this.dataInit();
+        this.storage.get('userId').then((userId)=>{
+            this.userId=userId;
+            this.dataInit();
+          });
+        
         // console.log("accounId:"+ this.accountId);
         // this.getUserInfoByAccountId(this.accountId).then(data => {
         //     this.realName = data['realName'];
@@ -62,10 +67,10 @@ export class UserInfoPage {
 
 
     dataInit(){
-        let url = "http://192.168.0.136:7000/user/getuser";
-        // let url = this.httpService.getUrl() + "/user/getuser";
+        // let url = "http://192.168.0.136:7000/user/getuser";
+        let url = this.httpService.getUrl() + ":7000/user/getuser";
         let body= {
-            "userId":3,
+            "userId":this.userId,
         }
         let headers = new Headers({
             'Content-Type': 'application/json',

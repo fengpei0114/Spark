@@ -7,7 +7,7 @@
                 <!-- <img *ngIf = "runstatus == '正常'" src="../../assets/powergreen.png" class="imgstyle_small"/> -->
                 <!-- <img *ngIf = "runstatus == '异常'" src="../../assets/powerred.png" class="imgstyle_small"/> -->
                 <img *ngIf = "runstatus == '正常'" src="assets/powergreen.png" class="imgstyle_small"/>
-                <img *ngIf = "runstatus == '异常'" src="assets/powerred.png" class="imgstyle_small"/>
+                <img *ngIf = "runstatus == '不正常'" src="assets/powerred.png" class="imgstyle_small"/>
             <p style="color:rgb(255,255,255);display:inline">{{equipmentName}}</p>
         </ion-title>
         <ion-buttons end>
@@ -50,11 +50,11 @@
                     <ion-row>
                         <ion-col>
                             <div class="name" style="color:aliceblue">未确认 :</div>
-                            <ion-note class="detail" style="color:aliceblue" >{{item.status.unconfirmedAlarmSum}}条</ion-note>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.alarmMsg.unconfirmedAlarmSum}}条</ion-note>
                         </ion-col>
                         <ion-col>
                             <div class="name" style="color:aliceblue">未确认 :</div>
-                            <ion-note class="detail" style="color:aliceblue" >{{item.status.unconfirmedMalNum}}条</ion-note>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.alarmMsg.unconfirmedMalSum}}条</ion-note>
                         </ion-col>
                     </ion-row>
                     <ion-row>

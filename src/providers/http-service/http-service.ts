@@ -16,9 +16,12 @@ import { NativeService } from '../native-service/native-service';
 @Injectable()
 export class HttpService {
  
-    private url:string = "http://192.168.0.167:7002";// 服务器端口号和IP
-    private urlIp:string = "192.168.0.167";
-    private urlPort:string = "7002";
+    // private url:string = "http://192.168.0.167:7002";// 服务器端口号和IP
+    // private urlIp:string = "192.168.0.167";
+    // private urlPort:string = "7002";
+    private url:string = "http://121.40.43.164";// 服务器端口号和IP
+    private urlIp:string = "121.40.43.164";
+    private urlPort:string = "80";
     constructor(public http: Http,public nativeService: NativeService,
                 private storage: Storage
     ) {
@@ -35,9 +38,9 @@ export class HttpService {
         //         this.url = url;
         //     });
         // }else {
-           this.url = "http://192.168.0.167:7002";
-           this.urlIp = "192.168.0.167";
-           this.urlPort = "7002";
+           this.url = "http://121.40.43.164";
+           this.urlIp = "121.40.43.164";
+           this.urlPort = "80";
         // }
     }
 

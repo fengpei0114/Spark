@@ -14,8 +14,11 @@
 
 
 <ion-content padding class="padding">
-  <ion-item class="staticBar">
+  <ion-item *ngIf="roleId==3 || roleId==4" class="staticBar">
     <ion-label style="text-align: center;color: white">未确认警报：{{unconfirmsum}}条  （共{{malsum}}条）</ion-label>
+  </ion-item>
+  <ion-item *ngIf="roleId==5" class="staticBar">
+    <ion-label style="text-align: center;color: white">未确认警报：{{unconfirmsum}}条</ion-label>
   </ion-item>
     <br>
     <ion-card *ngIf="0 == malfunctionArray.length" style="background-color: transparent">

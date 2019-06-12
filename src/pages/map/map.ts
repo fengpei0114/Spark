@@ -253,19 +253,19 @@ public citys=[{
 },{
     "lnglat":[126.642464,45.756967],
     "name":"哈尔滨市",
-    "style":1
+    "style":2
 },{
     "lnglat":[121.472644,31.231706],
     "name":"上海市",
-    "style":1
+    "style":3
 },{
     "lnglat":[118.767413,32.041544],
     "name":"南京市",
-    "style":1
+    "style":4
 },{
     "lnglat":[121.509062,25.044332],
     "name":"台北市",
-    "style":1
+    "style":5
 },{
     "lnglat":[114.173355,22.320048],
     "name":"香港",
@@ -273,23 +273,23 @@ public citys=[{
 },{
     "lnglat":[120.153576,30.287459],
     "name":"杭州市",
-    "style":1
+    "style":2
 },{
     "lnglat":[111.670801,40.818311],
     "name":"呼和浩特市",
-    "style":1
+    "style":3
 },{
     "lnglat":[117.283042,31.86119],
     "name":"合肥市",
-    "style":2
+    "style":4
 },{
     "lnglat":[119.306239,26.075302],
     "name":"福州市",
-    "style":2
+    "style":5
 },{
     "lnglat":[87.617733,43.792818],
     "name":"乌鲁木齐市",
-    "style":2
+    "style":1
 },{
     "lnglat":[115.892151,28.676493],
     "name":"南昌市",
@@ -301,83 +301,11 @@ public citys=[{
 },{
     "lnglat":[106.278179,38.46637],
     "name":"银川市",
-    "style":2
+    "style":3
 },{
     "lnglat":[113.665412,34.757975],
     "name":"郑州市",
-    "style":2
-},{
-    "lnglat":[114.298572,30.584355],
-    "name":"武汉市",
-    "style":2
-},{
-    "lnglat":[125.3245,43.886841],
-    "name":"长春市",
-    "style":2
-},{
-    "lnglat":[101.778916,36.623178],
-    "name":"西宁市",
-    "style":2
-},{
-    "lnglat":[112.549248,37.857014],
-    "name":"太原市",
-    "style":2
-},{
-    "lnglat":[113.280637,23.125178],
-    "name":"广州市",
-    "style":2
-},{
-    "lnglat":[108.320004,22.82402],
-    "name":"南宁市",
-    "style":1
-},{
-    "lnglat":[110.33119,20.031971],
-    "name":"海口市",
-    "style":0
-},{
-    "lnglat":[106.504962,29.533155],
-    "name":"重庆市",
-    "style":0
-},{
-    "lnglat":[104.065735,30.659462],
-    "name":"成都市",
     "style":4
-},{
-    "lnglat":[113.54909,22.198951],
-    "name":"澳门",
-    "style":5
-},{
-    "lnglat":[103.823557,36.058039],
-    "name":"兰州市",
-    "style":3
-},{
-    "lnglat":[106.713478,26.578343],
-    "name":"贵阳市",
-    "style":0
-},{
-    "lnglat":[102.712251,25.040609],
-    "name":"昆明市",
-    "style":0
-},{
-    "lnglat":[91.132212,29.660361],
-    "name":"拉萨市",
-    "style":0
-},{
-    "lnglat":[108.948024,34.263161],
-    "name":"西安市",
-    "style":2
-},{
-    "lnglat":[114.502461,38.045474],
-    "name":"石家庄市",
-    "style":0
-},{
-    "lnglat":[117.190182,39.125596],
-    "name":"天津市",
-    "style":0
-},{
-    "lnglat":[116.405285,39.904989],
-    "name":"北京市",
-    "style":0
 }];
 public mapdata=[{
             "lnglat":[112.982279,28.19409],
@@ -398,7 +326,7 @@ public mapdata=[{
         "UncomfirmMalNum":"2",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":1
+            "style":2
         },{
             "lnglat":[126.642464,45.756967],
             "name":"哈尔滨市",
@@ -408,7 +336,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"2",
         "MalType":"探头故障",
-            "style":1
+            "style":3
         },{
             "lnglat":[121.472644,31.231706],
             "name":"上海市",
@@ -418,7 +346,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":1
+            "style":4
         },{
             "lnglat":[118.767413,32.041544],
             "name":"南京市",
@@ -428,7 +356,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":1
+            "style":0
         },{
             "lnglat":[121.509062,25.044332],
             "name":"台北市",
@@ -448,7 +376,7 @@ public mapdata=[{
         "UncomfirmMalNum":"1",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":1
+            "style":2
         },{
             "lnglat":[120.153576,30.287459],
             "name":"杭州市",
@@ -458,7 +386,7 @@ public mapdata=[{
         "UncomfirmMalNum":"1",
         "AlarmLevel":"2",
         "MalType":"探头故障",
-            "style":1
+            "style":3
         },{
             "lnglat":[111.670801,40.818311],
             "name":"呼和浩特市",
@@ -468,7 +396,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":1
+            "style":4
         },{
             "lnglat":[117.283042,31.86119],
             "name":"合肥市",
@@ -478,7 +406,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":0
         },{
             "lnglat":[119.306239,26.075302],
             "name":"福州市",
@@ -488,7 +416,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":1
         },{
             "lnglat":[87.617733,43.792818],
             "name":"乌鲁木齐市",
@@ -518,7 +446,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":3
         },{
             "lnglat":[106.278179,38.46637],
             "name":"银川市",
@@ -528,7 +456,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":4
         },{
             "lnglat":[113.665412,34.757975],
             "name":"郑州市",
@@ -538,7 +466,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":0
         },{
             "lnglat":[114.298572,30.584355],
             "name":"武汉市",
@@ -548,7 +476,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":1
         },{
             "lnglat":[125.3245,43.886841],
             "name":"长春市",
@@ -568,7 +496,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":3
         },{
             "lnglat":[112.549248,37.857014],
             "name":"太原市",
@@ -578,7 +506,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":4
         },{
             "lnglat":[113.280637,23.125178],
             "name":"广州市",
@@ -588,7 +516,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":2
+            "style":0
         },{
             "lnglat":[108.320004,22.82402],
             "name":"南宁市",
@@ -598,7 +526,7 @@ public mapdata=[{
         "UncomfirmMalNum":"2",
         "AlarmLevel":"1",
         "MalType":"探头故障",
-            "style":0
+            "style":1
         },{
             "lnglat":[110.33119,20.031971],
             "name":"海口市",
@@ -608,7 +536,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":0
+            "style":2
         },{
             "lnglat":[106.504962,29.533155],
             "name":"重庆市",
@@ -618,107 +546,7 @@ public mapdata=[{
         "UncomfirmMalNum":"0",
         "AlarmLevel":"",
         "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[104.065735,30.659462],
-            "name":"成都市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[113.54909,22.198951],
-            "name":"澳门",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[103.823557,36.058039],
-            "name":"兰州市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[106.713478,26.578343],
-            "name":"贵阳市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[102.712251,25.040609],
-            "name":"昆明市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[91.132212,29.660361],
-            "name":"拉萨市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[108.948024,34.263161],
-            "name":"西安市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[114.502461,38.045474],
-            "name":"石家庄市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[117.190182,39.125596],
-            "name":"天津市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
-        },{
-            "lnglat":[116.405285,39.904989],
-            "name":"北京市",
-        "deviceID":"12",
-        "runstate":"1",
-        "uncomfirmAlarmNum":"0",
-        "UncomfirmMalNum":"0",
-        "AlarmLevel":"",
-        "MalType":"探头故障",
-            "style":0
+            "style":3
         }];
 public cityArray:any;
 public provincechoose:boolean;
@@ -747,22 +575,25 @@ private userId:number;
               private nativeService:NativeService,
               private storage:Storage,
               public popoverCtrl: PopoverController,) {
-            this.storage.get('userId').then((userid)=>{
-                this.userId=userid;
-            })
-            this.IsMapChoose = true;
+                  this.IsMapChoose = true;
             this.provincechoose = false;
             this.AllcityAlarm = this.cityAlarmOrMul;
             this.alarmOrmul = true;
             this.showInfoWindow = false;
+            
   }
   ionViewWillEnter () {
-    this.creatMap();
+    this.storage.get('userId').then((userid)=>{
+        this.userId=userid;
+        console.log(this.userId);
+        this.creatMap();
+    })
+    
     console.log("ionViewDidEnter");
 }
 initdata(){
     this.nativeService.showLoading("数据加载中");
-        let url = this.httpService.getUrl() + "/Statistics/GPS_Alarm_Mal/ByUserID";
+        let url = this.httpService.getUrl() + ":7002/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
             "userId": this.userId,
         }
@@ -774,7 +605,7 @@ initdata(){
         let options = new RequestOptions({
             headers: headers
         });
-        
+        console.log(body);
         this.http.post(url, JSON.stringify(body), options).map(res => res.json()).subscribe(data => {
             this.markerArray=data;
             this.markerArray.map(devicedata=>{
@@ -968,9 +799,9 @@ closeLegendWindow(){
      */
     AlarmdataInit(){
         this.nativeService.showLoading("数据加载中");
-            let url = this.httpService.getUrl() + "/Alarm/find/brief/byUserID";
+            let url = this.httpService.getUrl() + ":7002/Alarm/find/brief/byUserID";
             let body = {
-                "userID":1,
+                "userID":this.userId,
                 "pageSize":10,
                 "pageNum":this.alarmpageNum
             };
@@ -996,9 +827,9 @@ closeLegendWindow(){
      */
     MaldataInit(){
         this.nativeService.showLoading("数据加载中");
-        let url = this.httpService.getUrl() + "/Malfunction/find/brief/byUserID";
+        let url = this.httpService.getUrl() + ":7002/Malfunction/find/brief/byUserID";
         let body = {
-            "userId":1,
+            "userId":this.userId,
             "pageSize":10,
             "pageNum":this.malpageNum
         };
@@ -1025,9 +856,9 @@ closeLegendWindow(){
     ischoose(){
         this.provincechoose = !this.provincechoose;
         if(this.provincechoose){
-            let url=this.alarmOrmul?this.httpService.getUrl() + "/Statistics/district/provinceLevel/alarmOccurred":this.httpService.getUrl() + "/Statistics/district/provinceLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getUrl() + ":7002/Statistics/district/provinceLevel/alarmOccurred":this.httpService.getUrl() + ":7002/Statistics/district/provinceLevel/malOccurred";
             let body = {
-                "userID":1,
+                "userID":this.userId,
             };
             let headers = new Headers({
                 'Content-Type': 'application/json',
@@ -1067,9 +898,9 @@ closeLegendWindow(){
                 this.MaldataInit();
         }else{
           this.proviceName=proviceName;
-            let url=this.alarmOrmul?this.httpService.getUrl() + "/Statistics/district/cityLevel/alarmOccurred":this.httpService.getUrl() + "/Statistics/district/cityLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getUrl() + ":7002/Statistics/district/cityLevel/alarmOccurred":this.httpService.getUrl() + ":7002/Statistics/district/cityLevel/malOccurred";
             let body = {
-                "userID":1,
+                "userID":this.userId,
                 "provinceName":this.proviceName,
             };
             let headers = new Headers({
@@ -1108,9 +939,9 @@ closeLegendWindow(){
      * 20. 获取指定地区的警报
      */
     AlarmCityArray(item){
-        let url = this.httpService.getUrl() + "/Alarm/find/byCitybyUserID";
+        let url = this.httpService.getUrl() + ":7002/Alarm/find/byCitybyUserID";
         let body = {
-            "userID":1,
+            "userID":this.userId,
             "cityName":item,
             "pageSize":10,
             "pageNum":this.alarmpageNum,
@@ -1135,9 +966,9 @@ closeLegendWindow(){
      * 21. 获取指定地区的故障
      */
     MalCityArray(item){
-      let url = this.httpService.getUrl() + "/Malfunction/find/byCitybyUserID";
+      let url = this.httpService.getUrl() + ":7002/Malfunction/find/byCitybyUserID";
       let body = {
-            "userID":1,
+            "userID":this.userId,
             "cityName":item,
             "pageSize":10,
             "pageNum":this.malpageNum,

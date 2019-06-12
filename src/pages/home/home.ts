@@ -44,7 +44,7 @@ export class HomePage implements OnInit{
     userId:string;
     test:any;
     // EquipmentArray = [{
-    //     "deviceId":"1",
+    //     "deviceId":"51",
     //     "factoryName":"XXX厂",
     //     "status":{
     //         "power":"关",
@@ -69,7 +69,7 @@ export class HomePage implements OnInit{
     //         "relay2":"开启",
     //     },
     // },{
-    //     "deviceId":"2",
+    //     "deviceId":"581",
     //     "factoryName":"XXX厂",
     //     "status":{
     //         "power":"开",
@@ -172,10 +172,11 @@ export class HomePage implements OnInit{
         // this.runstatus = this.EquipmentArray[0].status.running;
         // this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
         console.log("url:"+httpService.getUrl());
+        
     }
     InitData(){
         console.log("123123");
-        let url = this.httpService.getUrl()+"/Device/find/mobile_brief/byUserID";
+        let url = this.httpService.getUrl()+":7002/Device/find/mobile_brief/byUserID";
         let body = {
             "userId":this.userId
         };

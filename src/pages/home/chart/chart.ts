@@ -84,7 +84,7 @@ export class ChartPage {
     }
 
     AlarmdataInit(){
-      let url = this.httpService.getUrl()+"/Statistics/alarm/countByDay/byDeviceID";
+      let url = this.httpService.getUrl()+":7002/Statistics/alarm/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }
@@ -107,7 +107,7 @@ export class ChartPage {
     });
     }
     MaldataInit(){
-      let url = this.httpService.getUrl()+"/Statistics/malfunction/countByDay/byDeviceID";
+      let url = this.httpService.getUrl()+":7002/Statistics/malfunction/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }

@@ -3,6 +3,7 @@ import { NavController, NavParams,ToastController,AlertController } from 'ionic-
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the DevicePage page.
@@ -19,6 +20,7 @@ export class ChangePasswordPage {
     oldpassword:string;
     newpassword1:string;
     newpassword2:string;
+    userId:string;
     errorMsg:string;
     password:string = "123123";
     old:string;
@@ -33,8 +35,12 @@ export class ChangePasswordPage {
                 private toastCtrl: ToastController,
                 private formBuilder: FormBuilder,
                 private alertCtrl: AlertController,
+                private storage:Storage,
 
     ) {
+        this.storage.get('userId').then((userId)=>{
+            this.userId=userId;
+          });
         this.changePasswordForm = formBuilder.group({
             oldpassword: new FormControl('',Validators.compose([Validators.minLength(4)])),
             newpassword1: new FormControl('',Validators.compose([Validators.minLength(4)])),
@@ -83,10 +89,10 @@ export class ChangePasswordPage {
                         text: '确定',
                         handler: () => {
                             console.log("确定");
-                            let url = "http://192.168.0.136:7000/user/updatepassword";
-                            // let url = this.httpService.getUrl() + "/user/updatepassword";
+                            // let url = "http://192.168.0.136:7000/user/updatepassword";
+                            let url = this.httpService.getUrl() + ":7000/user/updatepassword";
                             let body = {
-                                "userId":1,
+                                "userId":this.userId,
                                 "oldpassword":this.old,
                                 "newpassword":this.new1,
                             }

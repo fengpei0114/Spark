@@ -1,130 +1,130 @@
 page-malfunction{
-    .padding {
-      // background: url('../assets/login.png');
-      background: url('../assets/background.png');
-      height:100%;
-      background-size:100% 100%;
-    }
-    .buttonclass button {
-        height: 1.0rem;
-        margin-left: 0rem;
-        margin-right: 0rem;
-        margin-top: 0rem;
-        margin-bottom: 0rem;
-        padding-left: 0.5rem;
-        padding-right: 0rem;
-        padding-top:0px;
-        padding-bottom: 0px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-      }
-      #ionlabel1, #ionlabel2 {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 80%;
-        font-size:1.2rem;
-      }
-      #row1{
-        background-color:#f8f8f8;
-        border:2px solid #ffffff
-      }
-      #rowcol1, #rowcol2{
-        border-right:1px solid #ffffff
-      }
-      #equipmentdiv{
-        position: fixed;
-        z-index: 9999;
-        height:200px;
-        width:100%;
-        background:#f8f8f8;
-        border-left: 2px solid #ffffff;
-        border-right: 2px solid #ffffff;
-        border-bottom: 2px solid #ffffff;
-      }
-      #equipmentbtn1{
-        width:100%;
-        color:#000000;
-        padding:0px;
-        margin:0px;
-        text-align:center
-      }
-      #equipmentbtn2{
-        top:10px;
-        width:20%;
-        background:#5eb1f5;
-        color:#000000;
-        padding:0px;
-        margin:0px;
-        text-align:center
-      }
-      #equipmentbtn3{
-        position:absolute;
-        bottom:0;
-        width:100%;
-        background:#5eb1f5;
-        color:#000000;
-        padding:0px;
-        margin:0px;
-        text-align:center
-      }
-      #equipmentdiv-inner1{
-        float:left;
-        display:inline;
-        height:100%;
-        width:40%;
-        border-right:1px solid #ffffff
-      }
-      #equipmentdiv-inner2{
-        float:left;
-        display:inline;
-        height:100%;
-        width:60%;
-        border-right:1px solid #ffffff;
-      }
-
-  .statusBt{
-  //  min-width: 30%;
-  }
-
-  .equAndRecoBt{
-    padding:0px 0px 0px 0px;
-    position:fixed;width:100%;
+  .padding {
+    // background: url('../assets/login.png');
+    background: url('../assets/background.png');
     height:100%;
-    background-color:rgba(0,0,0,0.1);
-    opacity:0.5;
-    filter:Alpha(ipacity=50);
-    z-index:9977;
-    min-width: 80px;
+    background-size:100% 100%;
   }
-  .staticBar{
-    //position: fixed;
-    //top:0px;
-    //left: 0px;
-    //z-index: 2;
-    background-color: transparent;
-  }
+  .buttonclass button {
+      height: 1.0rem;
+      margin-left: 0rem;
+      margin-right: 0rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      padding-left: 0.5rem;
+      padding-right: 0rem;
+      padding-top:0px;
+      padding-bottom: 0px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+    #ionlabel1, #ionlabel2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 80%;
+      font-size:1.2rem;
+    }
+    #row1{
+      background-color:#f8f8f8;
+      border:2px solid #ffffff
+    }
+    #rowcol1, #rowcol2{
+      border-right:1px solid #ffffff
+    }
+    #equipmentdiv{
+      position: fixed;
+      z-index: 9999;
+      height:200px;
+      width:100%;
+      background:#f8f8f8;
+      border-left: 2px solid #ffffff;
+      border-right: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+    }
+    #equipmentbtn1{
+      width:100%;
+      color:#000000;
+      padding:0px;
+      margin:0px;
+      text-align:center
+    }
+    #equipmentbtn2{
+      top:10px;
+      width:20%;
+      background:#5eb1f5;
+      color:#000000;
+      padding:0px;
+      margin:0px;
+      text-align:center
+    }
+    #equipmentbtn3{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      background:#5eb1f5;
+      color:#000000;
+      padding:0px;
+      margin:0px;
+      text-align:center
+    }
+    #equipmentdiv-inner1{
+      float:left;
+      display:inline;
+      height:100%;
+      width:40%;
+      border-right:1px solid #ffffff
+    }
+    #equipmentdiv-inner2{
+      float:left;
+      display:inline;
+      height:100%;
+      width:60%;
+      border-right:1px solid #ffffff;
+    }
 
-  .confirmHead{
-    color: grey;
-    border-bottom: solid grey 1px;
-  }
-  .confirmBody{
-    color: grey;
-    font-size: small;
-  }
+.statusBt{
+//  min-width: 30%;
+}
 
-  .noconfirmHead{
-    color: black;
-    border-bottom: solid darkgray 1px;
-  }
+.equAndRecoBt{
+  padding:0px 0px 0px 0px;
+  position:fixed;width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.1);
+  opacity:0.5;
+  filter:Alpha(ipacity=50);
+  z-index:9977;
+  min-width: 80px;
+}
+.staticBar{
+  //position: fixed;
+  //top:0px;
+  //left: 0px;
+  //z-index: 2;
+  background-color: transparent;
+}
 
-  .noconfirmBody{
-    color: black;
-    border-bottom: solid darkgray 1px;
-    font-size: small;
-  }
+.confirmHead{
+  color: grey;
+  border-bottom: solid grey 1px;
+}
+.confirmBody{
+  color: grey;
+  font-size: small;
+}
+
+.noconfirmHead{
+  color: black;
+  border-bottom: solid darkgray 1px;
+}
+
+.noconfirmBody{
+  color: black;
+  border-bottom: solid darkgray 1px;
+  font-size: small;
+}
 
 }

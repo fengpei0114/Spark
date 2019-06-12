@@ -94,8 +94,8 @@ export class LoginPage {
                 // console.log(this.username+"  "+value.password);
                 this.nativeService.showLoading('正在登陆...');
 
-                let url = "http://192.168.0.137:7000/login";
-                // let url = this.httpService.getUrl() + "/login";
+                // let url = "http://192.168.0.136:7000/login";
+                let url = this.httpService.getUrl() + ":7000/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
                     // "username":"admin",
@@ -115,7 +115,8 @@ export class LoginPage {
                 let options = new RequestOptions({
                     headers: headers
                 });
-                this.http.post(url,JSON.stringify(body),options).map(res =>res.json()).subscribe(data => {
+                console.log(JSON.stringify(body));
+                this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
                     // alert(data);
                   this.nativeService.hideLoading();
                     console.log(data);

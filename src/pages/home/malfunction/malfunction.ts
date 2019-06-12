@@ -52,11 +52,11 @@ export class MalfunctionPage {
     // dataArray=[
     //     {
     //         "malfunctionNo":"01",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"1",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"2018-08-01 15:55:52",
-    //         "malfunctionEquipment":"xxx",
+    //         "component":"探头1",
     //         "recommendedMeasure":"XXX",
     //         "malfunctionState":"未确认",
     //         "dealPlatform":"equipment",
@@ -64,11 +64,11 @@ export class MalfunctionPage {
     //         "note":""
     //     },    {
     //         "malfunctionNo":"02",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"1",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"2018-08-01 15:55:52",
-    //         "malfunctionEquipment":"xxx",
+    //         "component":"探头2",
     //         "recommendedMeasure":"XXX",
     //         "malfunctionState":"未确认",
     //         "dealPlatform":"equipment",
@@ -77,11 +77,11 @@ export class MalfunctionPage {
     //     },
     //     {
     //         "malfunctionNo":"03",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"3",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"2018-08-01 15:55:52",
-    //         "malfunctionEquipment":"xxx",
+    //         "component":"电磁阀1",
     //         "recommendedMeasure":"XXX",
     //         "malfunctionState":"未确认",
     //         "dealPlatform":"equipment",
@@ -90,9 +90,9 @@ export class MalfunctionPage {
     //     },
     //     {
     //         "malfunctionNo":"04",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"2",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"2018-08-01 15:55:52",
     //         "malfunctionEquipment":"xxx",
     //         "recommendedMeasure":"XXX",
@@ -103,9 +103,9 @@ export class MalfunctionPage {
     //     },
     //     {
     //         "malfunctionNo":"05",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"XXX",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"2018-08-01 15:55:52",
     //         "malfunctionEquipment":"xxx",
     //         "recommendedMeasure":"XXX",
@@ -116,33 +116,33 @@ export class MalfunctionPage {
     //     },
     //     {
     //         "malfunctionNo":"06",
-    //         "malfunctionType":"1",
-    //         "childNode":"XXX",
-    //         "startTime":"2018-08-01 15:54:52",
+    //         "malType":"1",
+    //         "subNodeId":"XXX",
+    //         "malTime":"2018-08-01 15:54:52",
     //         "endTime":"",
     //         "malfunctionEquipment":"xxx",
     //         "recommendedMeasure":"XXX",
     //         "malfunctionState":"已确认",
-    //         "dealPlatform":"",
-    //         "dealStaff":"",
+    //         "platform":true,
+    //         "user":"123",
     //         "note":""
     //     },
     //     {
     //         "malfunctionNo":"07",
-    //         "malfunctionType":"1",
+    //         "malType":"1",
     //         "childNode":"XXX",
     //         "startTime":"2018-08-01 15:54:52",
     //         "endTime":"",
     //         "malfunctionEquipment":"xxx",
     //         "recommendedMeasure":"XXX",
     //         "malfunctionState":"已确认",
-    //         "dealPlatform":"",
-    //         "dealStaff":"",
+    //         "platform":true,
+    //         "user":"123",
     //         "note":""
     //     },
     //     {
     //         "malfunctionNo":"08",
-    //         "malfunctionType":"1",
+    //         "malType":"1",
     //         "childNode":"XXX",
     //         "startTime":"2018-08-01 15:54:52",
     //         "endTime":"",
@@ -196,7 +196,7 @@ export class MalfunctionPage {
     // ]
 
     malsum:string;
-  unconfirmsum:string;
+  unconfirmsum:number;
     pageSize: number = 0;
     pageNum: number = 0;
     pageOther: number = 0;
@@ -214,24 +214,28 @@ export class MalfunctionPage {
                 private  storage:Storage,
 
     ) {
-        this.storage.get('roleId').then(roleId=>{
-            this.roleId=roleId;
-            this.roleId="3";///////////////////////////
-        })
+        this.deviceId = this.navParams.data.deviceId;
+        // this.malfunctionArray = this.dataArray;
+
+
         this.storage.get('username').then((username)=>{
             this.username=username;
           })
-      this.malsum = this.navParams.data.alarmMsg.alarmsum;
-      this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
-      this.deviceId = this.navParams.data.deviceId;
+          this.storage.get('roleId').then(roleId=>{
+            this.roleId=roleId;
+            if(this.roleId == "3" || this.roleId == "4"){
+                this.malsum = this.navParams.data.alarmMsg.alarmsum;
+                this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedMalSum;
+        }else if(this.roleId == "5"){
+            this.unconfirmsum = this.navParams.data.unconfirmedMalSum;
+        }
         this.dataInit();
-        
-        
+        })
     }
 
     dataInit(){
         this.nativeService.showLoading("数据加载中...");
-        let url = this.httpService.getUrl()+"/Malfunction/find/byDeviceID";
+        let url = this.httpService.getUrl()+":7002/Malfunction/find/byDeviceID";
         let body = {
             "DeviceId":this.deviceId,
             "pageSize":10,
@@ -351,7 +355,7 @@ export class MalfunctionPage {
       {
         infiniteScroll.enable(false);
       } else {
-        let url = this.httpService.getUrl() + "/Malfunction/find/byDeviceID";
+        let url = this.httpService.getUrl() + ":7002/Malfunction/find/byDeviceID";
         let body = {
           "DeviceId": this.deviceId,
           "pageSize": 10,
@@ -421,7 +425,7 @@ export class MalfunctionPage {
 
     comfirmMalfunction(comfirmData,item) {
         console.log(comfirmData.note);
-        let url = this.httpService.getUrl()+"/Malfunction/update/confirm/ByMalID";
+        let url = this.httpService.getUrl()+":7002/Malfunction/update/confirm/ByMalID";
         let body = {
             "userName":this.username,
             "malfunctionID":item.malId,
@@ -454,6 +458,7 @@ export class MalfunctionPage {
                 prompt.present();
             }else{
                 this.pageNum--;
+                this.unconfirmsum--;
                 this.dataInit();
             }                
         },err =>{

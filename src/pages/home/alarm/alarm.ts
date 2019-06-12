@@ -47,23 +47,32 @@ export class AlarmPage {
             private alertCtrl:AlertController,
             public toastCtrl: ToastController,
             private nativeService:NativeService,) {
-                console.log(this.httpService.getUrl());
-                this.alarmMsg = this.navParams.data.alarmMsg;
-                console.log(this.alarmMsg);
-    this.alarmsum = this.navParams.data.alarmMsg.alarmsum;
-    this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
+        console.log(this.httpService.getUrl());
+    // this.alarmsum = this.navParams.data.alarmMsg.alarmsum;
+    // this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
     this.deviceId = this.navParams.data.deviceId;
-    this.storage.get('roleId').then(roleId=>{name
-        this.roleId=roleId;
-    });
     this.storage.get('username').then((username)=>{
         this.username=username;
       });
-    this.dataInit();
+    this.storage.get('roleId').then(roleId=>{
+        this.roleId=roleId;
+        if(this.roleId == "3" || this.roleId == "4"){
+            this.alarmMsg = this.navParams.data.alarmMsg;
+            console.log(this.alarmMsg);
+            this.alarmsum = this.navParams.data.alarmMsg.alarmsum;
+            this.unconfirmsum = this.navParams.data.alarmMsg.unconfirmedAlarmSum;
+        }else if(this.roleId == "5"){
+            this.nativeService.hideLoading();
+            this.unconfirmsum = this.navParams.data.unconfirmedAlarmNum;
+        }
+        this.dataInit();
+    });
+    
+    
   }
   dataInit(){
     this.nativeService.showLoading("数据加载中...")
-    let url = this.httpService.getUrl()+"/Alarm/find/brief/byDeviceID";
+    let url = this.httpService.getUrl()+":7002/Alarm/find/brief/byDeviceID";
     let body = {
         "DeviceId":this.deviceId,
         "pageSize":10,
@@ -138,7 +147,7 @@ export class AlarmPage {
         console.log('Begin async operation');
         console.log(infiniteScroll._scrollY);
         console.log(infiniteScroll.scrollHeight);
-        let url = this.httpService.getUrl() + "/Alarm/find/brief/byDeviceID";
+        let url = this.httpService.getUrl() + ":7002/Alarm/find/brief/byDeviceID";
         let body = {
           "DeviceId": this.deviceId,
           "pageSize": 10,
@@ -206,7 +215,7 @@ export class AlarmPage {
         
             comfirmAlarmfunction(comfirmData,item) {
                 console.log(comfirmData.note);
-                let url = this.httpService.getUrl()+"/Alarm/update/confirm/single";
+                let url = this.httpService.getUrl()+":7002/Alarm/update/confirm/single";
                 let body = {
                     "userName":this.username,
                     "alarmID":item.alarmid,
@@ -239,6 +248,7 @@ export class AlarmPage {
                         prompt.present();
                     }else{
                         this.pageNum--;
+                        this.unconfirmsum--;
                         this.dataInit();
                     }                
                 },err =>{
