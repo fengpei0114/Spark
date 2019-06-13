@@ -87,25 +87,15 @@ export class LoginPage {
         
         // this.httpService.setIpAndPort("47.92.34.161","80");
         if (value.randomCode.toLocaleLowerCase() === this.randomCodeImage.toLocaleLowerCase()){
-            // console.log(this.loginForm.valid);
-            // this.username = value.username;
-            // this.password = value.password;
             if(this.loginForm.valid) {
-                // console.log(this.username+"  "+value.password);
                 this.nativeService.showLoading('正在登陆...');
 
                 // let url = "http://192.168.0.136:7000/login";
                 let url = this.httpService.getUrl() + ":7000/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
-                    // "username":"admin",
-                    // "password":"admin",
                     "username":value.username,
                     "password":value.password,
-                };
-                let body2={
-                    "username":"admin",
-                    "password":"admin",
                 }
                 let headers = new Headers({
                   'Content-Type': 'application/json',
@@ -240,7 +230,7 @@ export class LoginPage {
         const randomArray=[1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R', 'S','T','U','V','W','X','Y','Z'];
         //创建一个数组，随机数从里面选择四位数或者更多
         for(let i=0;i<authCodeLength;i++){
-            let index=Math.floor(Math.random()*36);//随机取一位数
+            let index=Math.floor(Math.random()*randomArray.length);//随机取一位数
             authCode +=randomArray[index];//取四位数，并+相连
         }
         console.log(authCode);//取到四位随机数之后，跳出循环

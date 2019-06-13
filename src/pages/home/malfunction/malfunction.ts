@@ -198,7 +198,7 @@ export class MalfunctionPage {
     malsum:string;
   unconfirmsum:number;
     pageSize: number = 0;
-    pageNum: number = 0;
+    pageNum: number = 1;
     pageOther: number = 0;
     malfunctionArray:Array<Object> = [];
     pagesizenow:number;
@@ -239,7 +239,7 @@ export class MalfunctionPage {
         let body = {
             "DeviceId":this.deviceId,
             "pageSize":10,
-            "pageNum":this.pageNum,
+            "pageNum":1,
         }
         let headers = new Headers({
             'Content-Type': 'application/json',

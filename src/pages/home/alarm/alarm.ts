@@ -20,7 +20,7 @@ import { Storage } from '@ionic/storage';
 })
 export class AlarmPage {
     pageSize: number = 0;
-    pageNum: number = 0;
+    pageNum: number = 1;
     pageOther: number = 0;
       name:string;
       deviceId:string;
@@ -76,7 +76,7 @@ export class AlarmPage {
     let body = {
         "DeviceId":this.deviceId,
         "pageSize":10,
-        "pageNum":this.pageNum,
+        "pageNum":1,
     }
     let headers = new Headers({
         'Content-Type': 'application/json',

@@ -191,10 +191,21 @@ export class HomePage implements OnInit{
         this.http.post(url,JSON.stringify(body),options).map(res => res.json()).subscribe(data =>{
             console.log(data);
             data.forEach(x=>{
+                if(x.alarmMsg.unconfirmedAlarmSum == 0){
+                    x.status.running = "正常";
+                }else{
+                    x.status.running = "不正常";
+                }
+                if(x.alarmMsg.unconfirmedMalSum == 0){
+                    x.status.malfunction = "无";
+                }else{
+                    x.status.malfunction = "有";
+                }
                 x.alarmMsg.alarmtimeStartTime = new Date(Date.parse(x.alarmMsg.alarmtimeStartTime)).toLocaleString();
                 x.alarmMsg.malfunctiontimeTime = new Date(Date.parse(x.alarmMsg.malfunctiontimeTime)).toLocaleString();
                 x.alarmMsg.sittingtimeEnd = new Date(Date.parse(x.alarmMsg.sittingtimeEnd)).toLocaleString();
             })
+            console.log(new Date());
             this.EquipmentArray = data;
             this.runstatus = this.EquipmentArray[0].status.running;
             this.equipmentName = this.EquipmentArray[0].factoryName+" - 设备"+this.EquipmentArray[0].deviceId

@@ -27,24 +27,24 @@
                         <ion-col class="stylecol">
                             <!-- <img *ngIf = "item.status.malfunction == '无'" src="../../assets/alarmgreen.png" class="imgstyle"/> -->
                             <!-- <img *ngIf = "item.status.malfunction == '有'" src="../../assets/alarmred.png" class="imgstyle"/> -->
-                            <img *ngIf = "item.status.malfunction == '无'" src="assets/alarmgreen.png" class="imgstyle"/>
-                            <img *ngIf = "item.status.malfunction == '有'" src="assets/alarmred.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.running == '正常'" src="assets/malgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.running == '不正常'" src="assets/malred.png" class="imgstyle"/>
                         </ion-col>
                         <ion-col>
                             <!-- <img *ngIf = "item.status.running == '正常'" src="../../assets/malgreen.png" class="imgstyle"/> -->
                             <!-- <img *ngIf = "item.status.running == '异常'" src="../../assets/malred.png" class="imgstyle"/> -->
-                            <img *ngIf = "item.status.running == '正常'" src="assets/malgreen.png" class="imgstyle"/>
-                            <img *ngIf = "item.status.running == '不正常'" src="assets/malred.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.malfunction == '无'" src="assets/alarmgreen.png" class="imgstyle"/>
+                            <img *ngIf = "item.status.malfunction == '有'" src="assets/alarmred.png" class="imgstyle"/>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
                             <div class="name" style="color:aliceblue">报警 :</div>
-                            <ion-note class="detail" style="color:aliceblue" >{{item.status.malfunction}}</ion-note>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.running}}</ion-note>
                         </ion-col>
                         <ion-col>
                             <div class="name" style="color:aliceblue">故障 :</div>
-                            <ion-note class="detail" style="color:aliceblue" >{{item.status.running}}</ion-note>
+                            <ion-note class="detail" style="color:aliceblue" >{{item.status.malfunction}}</ion-note>
                         </ion-col>
                     </ion-row>
                     <ion-row>

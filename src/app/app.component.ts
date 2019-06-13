@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { HelpPage } from  '../pages/menu/help/help';
 import { AboutPage } from  '../pages/menu/about/about';
 import { Http, RequestOptions, Headers} from '@angular/http';
+import { NativeService } from '../providers/native-service/native-service';
 // import { AboutPage } from '../pages/about/about';
 import { HttpService } from '../providers/http-service/http-service';
 import { AccountService } from '../providers/account-service/account-service';
@@ -33,6 +34,7 @@ export class MyApp {
               public httpService: HttpService,
               public accountService: AccountService,
               private storage: Storage,
+              private nativeService: NativeService,
               private menuCtrl: MenuController ) {
     // console.log(Md5.hashStr("111111{admin}"));
     platform.ready().then(() => {
@@ -45,26 +47,36 @@ export class MyApp {
   }
 
     checkPreviousAuthorization(): void {
+        // this.storage.set('roleId',3);
+        // this.storage.set('userId',1);
+        // this.storage.set('username',"123123");
         // this.rootPage = HomePage;
-
+        
+        this.storage.get('username').then((username)=>{
+            this.username=username;
+            console.log(this.username);
+        })
         this.storage.get('username').then((username) =>{
             this.storage.get('password').then((password) =>{
                 if(username === null || username === "undefined" || password === null || password === "undefined" ){
                     this.rootPage = LoginPage;
                 }else{
-                    let url = "http://192.168.0.137:7000/login";
-                    // let url = this.httpService.getUrl() + "/login";
+                    this.nativeService.hideLoading();
+                    let url = this.httpService.getUrl() + ":7000/login";
                     // password = Md5.hashStr(password).toString();
-                    let body= "name="+username+"&password="+password;
+                    let body={
+                        "username":username,
+                        "password":password,
+                    }
                     let headers = new Headers({
-                        'Content-Type': 'application/x-www-form-urlencoded' 
-                    });
+                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*",
+                        'Accept': 'application/json'
+                      });
                     let options = new RequestOptions({
                         headers: headers
                     });
                     this.http.post(url,body,options).map(res =>res.json()).subscribe(data => {
-                                // console.log(data);
-                                // this.accountService.setAccount(data);
                         this.accountService.setAccount(data);
                         this.roleId=data['roles'];
                         this.storage.set('roleId',this.roleId);
@@ -73,9 +85,14 @@ export class MyApp {
                         this.username = data['username'];
                         this.storage.set('username',username);
                         if(this.roleId == "3" || this.roleId == "4"){
+                            this.nativeService.hideLoading();
                             this.rootPage = HomePage;
                         }else if(this.roleId == "5"){
+                            this.nativeService.hideLoading();
                             this.rootPage = MapPage;
+                        }else{
+                            this.nativeService.hideLoading();
+                            this.nativeService.showToast("用户无权限访问！");
                         }
                     },err =>{
                     });

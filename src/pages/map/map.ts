@@ -663,24 +663,24 @@ addMarker() {
     // ];
 
     var style = [{
-        url: '../../assets/style_3.png',
+        url: 'assets/style_3.png',
         anchor: new AMap.Pixel(3, 3),
         size: new AMap.Size(15, 22)
     }, {
-        url: '../../assets/style_1.png',
-        // url: 'assets/style_1.png',手机打包时使用，否则图片不显示
+        // url: '../../assets/style_1.png',
+        url: 'assets/style_1.png',
         anchor: new AMap.Pixel(6, 6),
         size: new AMap.Size(15, 22)
     }, {
-        url: '../../assets/style_2.png',
+        url: 'assets/style_2.png',
         anchor: new AMap.Pixel(4, 4),
         size: new AMap.Size(15, 22)
     }, {
-        url: '../../assets/style_4.png',
+        url: 'assets/style_4.png',
         anchor: new AMap.Pixel(11, 11),
         size: new AMap.Size(15,22)
     }, {
-        url: '../../assets/style_5.png',
+        url: 'assets/style_5.png',
         anchor: new AMap.Pixel(11, 11),
         size: new AMap.Size(15, 22)
     }
