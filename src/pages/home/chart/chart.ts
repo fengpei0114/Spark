@@ -235,7 +235,7 @@ export class ChartPage {
         },
         yAxis: {
           title: {
-            text: '警报次数'
+            text: '故障次数'
         },           
         allowDecimals:false,
             plotLines: [{
@@ -246,7 +246,7 @@ export class ChartPage {
         },
         tooltip: {
             headerFormat:'<b>{point.x}</b><br>',
-            pointFormat:'警报次数:{point.y}次',
+            pointFormat:'故障次数:{point.y}次',
         },
         plotOptions: {
           series: {
@@ -256,7 +256,7 @@ export class ChartPage {
         },
         series: [{
             type:'scatter',
-            name: '警报次数',
+            name: '故障次数',
             color: 'rgb(255,0,0)',
             data: this.MallistNum
            }]
