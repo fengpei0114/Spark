@@ -87,7 +87,16 @@ export class UserInfoPage {
             this.phone = data.phone;
             this.remark = data.remark;
             
-        })
+        },
+          error =>{
+
+            this.storage.get("username").then(usernane=>{
+              this.username=usernane;
+            });
+            this.email="haoyunlai@163.com";
+            this.phone="13579111315";
+            this.plantname="生产部";
+          })
     }
 
     openSignupModal() {

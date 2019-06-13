@@ -239,7 +239,7 @@ export class MalfunctionPage {
         let body = {
             "DeviceId":this.deviceId,
             "pageSize":10,
-            "pageNum":1,
+            "pageNum":this.pageNum,
         }
         let headers = new Headers({
             'Content-Type': 'application/json',

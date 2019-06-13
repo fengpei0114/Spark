@@ -66,7 +66,6 @@ export class SubNodeDetailPage {
       this.nativeService.showLoading("数据加载中...");
         let url = this.httpService.getUrl()+":7002/Subnode/find/bySubnodeID";
         let body = {
-            // "DeviceId":this.DeviceId,
             "subnodeID":this.subnodeId
         }
         let headers = new Headers({

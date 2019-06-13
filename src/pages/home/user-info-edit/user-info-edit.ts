@@ -23,7 +23,7 @@ export class UserInfoEditPage {
     passwordConfirm : string = "";
     userInfoForm : any;
     phone1: string = "";
-    user : any;
+    userId: string;
     checkPassword: boolean = true;
 
     constructor(public  viewCtrl : ViewController,
@@ -37,7 +37,6 @@ export class UserInfoEditPage {
                 public alertCtrl : AlertController
     ) {
         console.log(this.navParams.data);
-        this.user = this.navParams.data;
         this.userInfoForm = formBuilder.group({
             password: new FormControl('',Validators.compose([Validators.required,Validators.minLength(4)])),
             passwordConfirm: new FormControl('',Validators.compose([Validators.required])),
@@ -65,25 +64,13 @@ export class UserInfoEditPage {
     }
 
     updateInfo(password) {
-        this.user.password = password;
-        var url = this.httpService.getUrl()+"/NoiseDust/saveAccount.do";
+        var url = this.httpService.getUrl()+"/user/updatepassword";
         // var url = this.appConfig.getUrl()+'/NoiseDust/getOrganizations.do';
-        let body = "id="+this.user.accountID+"&account="+this.user.account+
-            "&password="+this.user.password+
-            "&accountType="+this.user.accountType+
-            "&isForcedChange="+this.user.isForcedChange+
-            "&realname="+this.user.realName+
-            "&mobilePhone1="+this.user.phone1+
-            "&mobilePhone2="+this.user.phone2+
-            "&email="+this.user.email+
-            "&userPosition="+this.user.userPosition+
-            "&isAllowDelete="+this.user.isAllowDelete+
-            "&isDeleted="+this.user.isDeleted+
-            "&isAccountDisabled="+this.user.isAccountDisabled+
-            "&note="+this.user.note+
-            "&organizationId="+this.user.accountOrgID+
-            "&roleId="+this.user.roleId+
-            "&accountExpireDate="+this.user.accountExpireDate;
+        let body = {
+          "userId":this.storage.get("userId"),
+          "oldpassword":this.storage.get("password"),
+          "newpassword":password,
+        }
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
