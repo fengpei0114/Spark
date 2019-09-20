@@ -17,7 +17,6 @@ export class SetServerIpPage {
     newServerIp: string;
     newServerPort: string;
     serverIp: string;
-    serverPort: string;
     errorMsg: string;
     is:boolean = true;
 
@@ -30,7 +29,6 @@ export class SetServerIpPage {
     ) {
 
      this.serverIp = this.httpService.getIp();
-     this.serverPort = this.httpService.getPort();
 
         // this.serverIp = "47.92.34.161";
         // this.serverPort = "80";
@@ -38,9 +36,8 @@ export class SetServerIpPage {
 
     changeIpAndPort() {
 
-        this.httpService.setIpAndPort(this.newServerIp,this.newServerPort);
-        console.log(this.serverIp+":"+this.serverPort);
-        console.log("new"+this.httpService.getUrl());
+        this.httpService.setIp(this.newServerIp);
+        console.log("new"+this.httpService.getIp());
         
         var exp=/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;  
         var reg = this.newServerIp.match(exp);  
@@ -49,8 +46,8 @@ export class SetServerIpPage {
             this.errorMsg = "ip地址错误！";
         }else{
             let confirm = this.alertCtrl.create({
-                title: '设置服务器',
-                message: '确认设置服务器吗？',
+                title: '确认修改',
+                message: '修改新服务器IP为:'+this.newServerIp,
                 buttons: [
                     {
                         text: '取消',
@@ -65,11 +62,10 @@ export class SetServerIpPage {
                             if(this.is == true){
                                 this.showConfirm("设置服务器","设置服务器成功！","确定",()=>{
                                     this.serverIp = this.newServerIp;
-                                    this.serverPort = this.newServerPort;
                                     this.newServerIp= "";
                                     this.newServerPort = "";
                                     this.errorMsg = "";
-                                    this.httpService.setIpAndPort(this.serverIp,this.serverPort);
+                                    this.httpService.setIp(this.serverIp);
                                 })
                             }else{
                                 this.showConfirm("设置服务器","设置服务器失败！","确定",()=>{

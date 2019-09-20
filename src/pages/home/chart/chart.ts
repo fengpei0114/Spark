@@ -84,7 +84,7 @@ export class ChartPage {
     }
 
     AlarmdataInit(){
-      let url = this.httpService.getUrl()+":7002/Statistics/alarm/countByDay/byDeviceID";
+      let url = this.httpService.getDeviceUrl()+"/Statistics/alarm/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }
@@ -107,7 +107,7 @@ export class ChartPage {
     });
     }
     MaldataInit(){
-      let url = this.httpService.getUrl()+":7002/Statistics/malfunction/countByDay/byDeviceID";
+      let url = this.httpService.getDeviceUrl()+"/Statistics/malfunction/countByDay/byDeviceID";
       let body = {
           "deviceID":this.deviceId,
       }
@@ -157,6 +157,7 @@ export class ChartPage {
                 this.malsum += data[key];
             }
             this.paint();
+            this.nativeService.hideLoading();
         })
         //测试使用
         // for(var key in this.example){
@@ -174,7 +175,6 @@ export class ChartPage {
         // console.log(this.AlarmlistNum);
         
         // this.paint();
-        this.nativeService.hideLoading();
     }
 
     paint(){

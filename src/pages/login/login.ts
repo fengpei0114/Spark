@@ -91,7 +91,7 @@ export class LoginPage {
                 this.nativeService.showLoading('正在登陆...');
 
                 // let url = "http://192.168.0.136:7000/login";
-                let url = this.httpService.getUrl() + ":7000/login";
+                let url = this.httpService.getAccountUrl() + "/login";
                 // this.password = Md5.hashStr(this.password).toString();
                 let body= {
                     "username":value.username,

@@ -593,9 +593,10 @@ private userId:number;
 }
 initdata(){
     this.nativeService.showLoading("数据加载中");
-        let url = this.httpService.getUrl() + ":7002/Statistics/GPS_Alarm_Mal/ByUserID";
+        let url = this.httpService.getDeviceUrl() + "/Statistics/GPS_Alarm_Mal/ByUserID";
         let body = {
-            "userId": this.userId,
+            "userId": 3,
+
         }
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -615,6 +616,8 @@ initdata(){
             console.log(this.markerArray);
             this.nativeService.hideLoading();
             this.addMarker();
+
+            // this.nativeService.showToast(this.markerArray.length.toString());
          //   console.log(this.mapdata);
         },
         error => {
@@ -799,7 +802,7 @@ closeLegendWindow(){
      */
     AlarmdataInit(){
         this.nativeService.showLoading("数据加载中");
-            let url = this.httpService.getUrl() + ":7002/Alarm/find/brief/byUserID";
+            let url = this.httpService.getDeviceUrl() + "/Alarm/find/brief/byUserID";
             let body = {
                 "userID":this.userId,
                 "pageSize":10,
@@ -827,7 +830,7 @@ closeLegendWindow(){
      */
     MaldataInit(){
         this.nativeService.showLoading("数据加载中");
-        let url = this.httpService.getUrl() + ":7002/Malfunction/find/brief/byUserID";
+        let url = this.httpService.getDeviceUrl() + "/Malfunction/find/brief/byUserID";
         let body = {
             "userId":this.userId,
             "pageSize":10,
@@ -856,7 +859,7 @@ closeLegendWindow(){
     ischoose(){
         this.provincechoose = !this.provincechoose;
         if(this.provincechoose){
-            let url=this.alarmOrmul?this.httpService.getUrl() + ":7002/Statistics/district/provinceLevel/alarmOccurred":this.httpService.getUrl() + ":7002/Statistics/district/provinceLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getDeviceUrl() + "/Statistics/district/provinceLevel/alarmOccurred":this.httpService.getDeviceUrl() + "/Statistics/district/provinceLevel/malOccurred";
             let body = {
                 "userID":this.userId,
             };
@@ -898,7 +901,7 @@ closeLegendWindow(){
                 this.MaldataInit();
         }else{
           this.proviceName=proviceName;
-            let url=this.alarmOrmul?this.httpService.getUrl() + ":7002/Statistics/district/cityLevel/alarmOccurred":this.httpService.getUrl() + ":7002/Statistics/district/cityLevel/malOccurred";
+            let url=this.alarmOrmul?this.httpService.getDeviceUrl() + "/Statistics/district/cityLevel/alarmOccurred":this.httpService.getDeviceUrl() + "/Statistics/district/cityLevel/malOccurred";
             let body = {
                 "userID":this.userId,
                 "provinceName":this.proviceName,
@@ -939,7 +942,7 @@ closeLegendWindow(){
      * 20. 获取指定地区的警报
      */
     AlarmCityArray(item){
-        let url = this.httpService.getUrl() + ":7002/Alarm/find/byCitybyUserID";
+        let url = this.httpService.getDeviceUrl() + "/Alarm/find/byCitybyUserID";
         let body = {
             "userID":this.userId,
             "cityName":item,
@@ -966,7 +969,7 @@ closeLegendWindow(){
      * 21. 获取指定地区的故障
      */
     MalCityArray(item){
-      let url = this.httpService.getUrl() + ":7002/Malfunction/find/byCitybyUserID";
+      let url = this.httpService.getDeviceUrl() + "/Malfunction/find/byCitybyUserID";
       let body = {
             "userID":this.userId,
             "cityName":item,

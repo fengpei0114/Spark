@@ -31,22 +31,22 @@ export class DevicePage {
     ) {
         this.dev_id = this.navParams.data;
         console.log(this.dev_id);
-        this.getDeviceById(this.dev_id).then(data => {
-            this.dev_org = data['organizationName'];
-            this.dev_mod = data['model'];
-            this.dev_simNo = data['simNo'];
-            if(data['status']==0)
-            {
-                this.dev_status="未安装";
-            } else
-            {
-                this.dev_status="已安装";
-            }
-            // this.dev_status = data['status'];
-            this.dev_latestHeartbeat = data['latestHeartbeat'];
-            this.dev_note = data['note'];
-
-        });
+        // this.getDeviceById(this.dev_id).then(data => {
+        //     this.dev_org = data['organizationName'];
+        //     this.dev_mod = data['model'];
+        //     this.dev_simNo = data['simNo'];
+        //     if(data['status']==0)
+        //     {
+        //         this.dev_status="未安装";
+        //     } else
+        //     {
+        //         this.dev_status="已安装";
+        //     }
+        //     // this.dev_status = data['status'];
+        //     this.dev_latestHeartbeat = data['latestHeartbeat'];
+        //     this.dev_note = data['note'];
+        //
+        // });
     }
 
     getDeviceById(deviceId) {
@@ -56,20 +56,20 @@ export class DevicePage {
         let options = new RequestOptions({
             headers: headers
         });
-        let url = this.httpService.getUrl()+"/NoiseDust/getDeviceByIdForApp.do";
-        let body= "deviceId="+deviceId;
-        return new Promise((resolve,reject) => {
-            this.http.post(url, body, options)
-                .map(res => res.json())
-                .subscribe(data => {
-                    resolve(data);
-                    console.log(data);
-                    // alert(this.userInfo.realName + this.userInfo.phone1);
-
-                },err => {
-                    reject(err);
-                });
-        });
+        // let url = this.httpService.getUrl()+"/NoiseDust/getDeviceByIdForApp.do";
+        // let body= "deviceId="+deviceId;
+        // return new Promise((resolve,reject) => {
+        //     this.http.post(url, body, options)
+        //         .map(res => res.json())
+        //         .subscribe(data => {
+        //             resolve(data);
+        //             console.log(data);
+        //             // alert(this.userInfo.realName + this.userInfo.phone1);
+        //
+        //         },err => {
+        //             reject(err);
+        //         });
+        // });
     }
 
     ionViewDidLoad() {

@@ -62,7 +62,7 @@ export class MyApp {
                     this.rootPage = LoginPage;
                 }else{
                     this.nativeService.hideLoading();
-                    let url = this.httpService.getUrl() + ":7000/login";
+                    let url = this.httpService.getAccountUrl() + "/login";
                     // password = Md5.hashStr(password).toString();
                     let body={
                         "username":username,

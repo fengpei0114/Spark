@@ -233,7 +233,7 @@ export class SubNodePage {
 
       this.nativeService.showLoading("数据加载中...");
         console.log("initDate");
-        let url = this.httpService.getUrl()+":7002/Subnode/find/byDeviceID";
+        let url = this.httpService.getDeviceUrl()+"/Subnode/find/byDeviceID";
         let body = {
             "DeviceId":this.DeviceId,
             "pageSize":10,
@@ -276,7 +276,7 @@ export class SubNodePage {
       console.log('Begin async operation');
       console.log(infiniteScroll._scrollY);
       console.log(infiniteScroll.scrollHeight);
-      let url = this.httpService.getUrl() + ":7002/Subnode/find/byDeviceID";
+      let url = this.httpService.getDeviceUrl() + "/Subnode/find/byDeviceID";
       let body = {
         "DeviceId": this.DeviceId,
         "pageSize": 10,

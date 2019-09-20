@@ -304,7 +304,7 @@ export class NativeService {
             });
         }
 
-        this.file.resolveLocalFilesystemUrl(path).then(fileEnter => gotFile(fileEnter)).catch(err => fail(err));
+        // this.file.resolveLocalFilesystemUrl(path).then(fileEnter => gotFile(fileEnter)).catch(err => fail(err));
         // window['resolveLocalFileSystemURL'](path, gotFile, fail);
     }
 

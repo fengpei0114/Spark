@@ -6,6 +6,7 @@ import { HttpService } from '../../../providers/http-service/http-service';
 import { AccountService } from '../../../providers/account-service/account-service';
 import { UserInfoEditPage } from '../user-info-edit/user-info-edit';
 import { Storage } from '@ionic/storage';
+import { NativeService} from "../../../providers/native-service/native-service";
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the UserInfoPage page.
@@ -20,14 +21,13 @@ import 'rxjs/add/operator/map';
 export class UserInfoPage {
 
     userInfo: UserInfo;
-    accountOrgName:string = "";
     username = "";
     userId = "";
-    plantname = "";
+    plants :Array<string>=[];
+    plantname ="";
     phone = "";
     email = "";
     remark = "";
-    userPosition = "";
     account = "";
     accountId = 0 ;
 
@@ -40,6 +40,7 @@ export class UserInfoPage {
                 private alertCtrl: AlertController,
                 private modalCtrl: ModalController,
                 private storage:Storage,
+                private nativeService:NativeService,
     ) {
         // this.accountId = (this.accountService.getAccount() as any).userId;
         console.log("userinfoPage");
@@ -67,8 +68,8 @@ export class UserInfoPage {
 
 
     dataInit(){
-        // let url = "http://192.168.0.136:7000/user/getuser";
-        let url = this.httpService.getUrl() + ":7000/user/getuser";
+      this.nativeService.showLoading();
+        let url = this.httpService.getAccountUrl() + "/user/getuser";
         let body= {
             "userId":this.userId,
         }
@@ -86,17 +87,28 @@ export class UserInfoPage {
             this.email = data.email;
             this.phone = data.phone;
             this.remark = data.remark;
-            
+            if(data.plantname) {
+              this.plants = data.plantname;
+              if (this.plants.length > 0) {
+                this.plants.forEach(x => {
+                  this.plantname += x;
+                  this.plantname += " ";
+                })
+              }
+            }
+          this.nativeService.hideLoading();
         },
         error =>{
 
           this.storage.get("username").then(usernane=>{
             this.username=usernane;
           });
-          this.email="haoyunlai@163.com";
-          this.phone="13579111315";
-          this.plantname="生产部";
-        })
+          this.email="";
+          this.phone="";
+          this.plantname="";
+          this.nativeService.showToast("信息获取失败！")
+        });
+
     }
 
     openSignupModal() {

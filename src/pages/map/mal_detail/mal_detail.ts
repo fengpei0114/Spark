@@ -104,7 +104,7 @@ export class MaldetailPage {
     MuldataInit(){
 
         console.log("maldata Init");
-        let url = this.httpService.getUrl() + ":7002/Malfunction/find/byMalID";
+        let url = this.httpService.getDeviceUrl() + "/Malfunction/find/byMalID";
         let body = {
             "malfunctionID":this.malId,
         };

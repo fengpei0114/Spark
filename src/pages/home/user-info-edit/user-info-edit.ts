@@ -64,7 +64,7 @@ export class UserInfoEditPage {
     }
 
     updateInfo(password) {
-        var url = this.httpService.getUrl()+"/user/updatepassword";
+        // var url = this.httpService.getUrl()+"/user/updatepassword";
         // var url = this.appConfig.getUrl()+'/NoiseDust/getOrganizations.do';
         let body = {
           "userId":this.storage.get("userId"),
@@ -77,30 +77,30 @@ export class UserInfoEditPage {
         let options = new RequestOptions({
             headers: headers
         });
-        this.http.post(url,body,options).subscribe(data => {
-            console.log("Success");
-            let alert = this.alertCtrl.create({
-                title: '修改成功',
-                subTitle: '返回重新登录！',
-                buttons: [{
-                    text: '退出',
-                    handler: () => {
-                        this.logout();
-                    }
-                },],
-
-            });
-            alert.present().then();
-        },err => {
+        // this.http.post(url,body,options).subscribe(data => {
+        //     console.log("Success");
+        //     let alert = this.alertCtrl.create({
+        //         title: '修改成功',
+        //         subTitle: '返回重新登录！',
+        //         buttons: [{
+        //             text: '退出',
+        //             handler: () => {
+        //                 this.logout();
+        //             }
+        //         },],
+        //
+        //     });
+        //     alert.present().then();
+        // },err => {
             //设置输入错误提示
-            let toast = this.toastCtrl.create({
-                message: '修改密码失败！',
-                duration: 2000,
-                position: 'middle'
-            });
-
-            toast.present(toast);
-        } );
+        //     let toast = this.toastCtrl.create({
+        //         message: '修改密码失败！',
+        //         duration: 2000,
+        //         position: 'middle'
+        //     });
+        //
+        //     toast.present(toast);
+        // } );
 
     }
 

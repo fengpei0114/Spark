@@ -118,7 +118,7 @@ export class StatisticDetailPage implements OnInit{
         let organizationId = (this.accountService.getAccount() as any).role['organizationId'];
         console.log("orgID===");
         console.log(organizationId);
-        let url = this.httpService.getUrl()+"/NoiseDust/getOrganizationTreeDataForApp.do";
+        let url;// = this.httpService.getUrl()+"/NoiseDust/getOrganizationTreeDataForApp.do";
         // let url = this.httpService.getUrl()+"/NoiseDust/getSelectableOrganizationsForApp.do";
         // var url = this.appConfig.getUrl()+'/NoiseDust/getOrganizations.do';
         let body= "organizationId="+organizationId;
@@ -147,7 +147,7 @@ export class StatisticDetailPage implements OnInit{
     }
     selectAccountAttentionPoints(accountId){
         this.attentionPoints = [];
-        let url = this.httpService.getUrl()+"/NoiseDust/getAccountAttentionPoints.do";
+        let url;// = this.httpService.getUrl()+"/NoiseDust/getAccountAttentionPoints.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -176,7 +176,7 @@ export class StatisticDetailPage implements OnInit{
 
     organChange() {
         this.organizationOut.emit(this.organization);
-        let url = this.httpService.getUrl()+"/NoiseDust/getProjectsByOrg.do";
+        let url;// this.httpService.getUrl()+"/NoiseDust/getProjectsByOrg.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -194,7 +194,7 @@ export class StatisticDetailPage implements OnInit{
 
     projectChange() {
         this.projectOut.emit(this.project);
-        let url = this.httpService.getUrl()+"/NoiseDust/getCollectionOfProject.do";
+        let url ;//= this.httpService.getUrl()+"/NoiseDust/getCollectionOfProject.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -382,7 +382,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getNoiseByPointID.do";
+        let url;// = this.httpService.getUrl()+"/NoiseDust/getNoiseByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -437,7 +437,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getPm25ByPointID.do";
+        let url ;//= this.httpService.getUrl()+"/NoiseDust/getPm25ByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -494,7 +494,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getPm10ByPointID.do";
+        let url ;//= this.httpService.getUrl()+"/NoiseDust/getPm10ByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -552,7 +552,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getContinuationByPointID.do";
+        let url  ;//this.httpService.getUrl()+"/NoiseDust/getContinuationByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -604,7 +604,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getGDByPointID.do";
+        let url ;//= this.httpService.getUrl()+"/NoiseDust/getGDByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -653,7 +653,7 @@ export class StatisticDetailPage implements OnInit{
         this.collectionpointOut.emit(this.collectionPoint);
 
         console.log(this.collectionPoint);
-        let url = this.httpService.getUrl()+"/NoiseDust/getJGByPointID.do";
+        let url ;//= this.httpService.getUrl()+"/NoiseDust/getJGByPointID.do";
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });

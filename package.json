@@ -23,7 +23,7 @@
     "@ionic-native/app-version": "^3.10.3",
     "@ionic-native/camera": "^3.14.0",
     "@ionic-native/core": "3.10.2",
-    "@ionic-native/file": "^3.10.3",
+    "@ionic-native/file": "^4.3.3",
     "@ionic-native/geolocation": "^3.12.1",
     "@ionic-native/http": "^4.1.0",
     "@ionic-native/network": "^3.10.3",
@@ -31,9 +31,10 @@
     "@ionic-native/status-bar": "3.10.2",
     "@ionic-native/toast": "^3.10.3",
     "@ionic-native/transfer": "^3.10.3",
+    "@ionic/lab": "^2.0.2",
     "@ionic/storage": "2.0.1",
     "angular2-highcharts": "^0.5.5",
-    "cordova-android": "^6.2.3",
+    "cordova-android": "^5.2.2",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-camera": "^2.4.1",
@@ -60,6 +61,7 @@
     "zone.js": "0.8.11"
   },
   "devDependencies": {
+    "@ionic/app-scripts": "3.2.4",
     "escape-string-regexp": "^1.0.5",
     "ionic": "3.18.0",
     "typescript": "2.3.3"
@@ -88,7 +90,6 @@
       "cordova-plugin-http": {}
     },
     "platforms": [
-      "android",
       "ios"
     ]
   }

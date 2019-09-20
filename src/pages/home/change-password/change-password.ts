@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController,AlertController } from 'ionic-angular';
+import {NavController, NavParams, ToastController, AlertController, ViewController} from 'ionic-angular';
 import { Http , Headers ,RequestOptions } from '@angular/http';
 import { HttpService } from '../../../providers/http-service/http-service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import {NativeService} from "../../../providers/native-service/native-service";
 
 /**
  * Generated class for the DevicePage page.
@@ -36,15 +37,16 @@ export class ChangePasswordPage {
                 private formBuilder: FormBuilder,
                 private alertCtrl: AlertController,
                 private storage:Storage,
-
+                private nativeSerivce:NativeService,
+                private viewCtrl : ViewController,
     ) {
         this.storage.get('userId').then((userId)=>{
             this.userId=userId;
           });
         this.changePasswordForm = formBuilder.group({
-            oldpassword: new FormControl('',Validators.compose([Validators.minLength(4)])),
-            newpassword1: new FormControl('',Validators.compose([Validators.minLength(4)])),
-            newpassword2: new FormControl('',Validators.compose([Validators.minLength(4)])),
+            oldpassword: new FormControl('',Validators.compose([Validators.required])),
+            newpassword1: new FormControl('',Validators.compose([Validators.required])),
+            newpassword2: new FormControl('',Validators.compose([Validators.required])),
         })
         this.oldpassword = this.changePasswordForm.controls['oldpassword'];
         this.newpassword1 = this.changePasswordForm.controls['newpassword1'];
@@ -67,7 +69,7 @@ export class ChangePasswordPage {
     }
     onSubmit(value){
         //1.密码不能为空
-        if(this.new1 == "" || this.new2 == "" || this.old == ""){
+        if(!this.changePasswordForm.valid) {
             this.errorMsg = "密码不能为空！"
         }
         //2.两次输入密码相同
@@ -89,8 +91,9 @@ export class ChangePasswordPage {
                         text: '确定',
                         handler: () => {
                             console.log("确定");
+                            this.nativeSerivce.showLoading();
                             // let url = "http://192.168.0.136:7000/user/updatepassword";
-                            let url = this.httpService.getUrl() + ":7000/user/updatepassword";
+                            let url = this.httpService.getAccountUrl() + "/user/updatepassword";
                             let body = {
                                 "userId":this.userId,
                                 "oldpassword":this.old,
@@ -114,20 +117,19 @@ export class ChangePasswordPage {
                                         })
                                     }               
                             },err =>{
-                                //设置输入错误提示
-                                // console.log("status==0")
-                                // const prompt = this.alertCtrl.create({
-                                //     title: '确认失败',
-                                //     message: '网络连接错误',
-                                //     buttons: [
-                                //         {
-                                //             text: '确认',
-                                //             handler: data => {
-                                //             }
-                                //         }
-                                //     ]
-                                // });
-                                // prompt.present();
+                                console.log("status==0")
+                                const prompt = this.alertCtrl.create({
+                                    title: '确认失败',
+                                    message: '网络连接错误',
+                                    buttons: [
+                                        {
+                                            text: '确认',
+                                            handler: data => {
+                                            }
+                                        }
+                                    ]
+                                });
+                                prompt.present();
                             });
                         }
                     }
@@ -149,5 +151,9 @@ export class ChangePasswordPage {
             }]
         });
         confirm.present();
+    }
+
+    miss(){
+      this.viewCtrl.dismiss();
     }
 }

@@ -171,12 +171,12 @@ export class HomePage implements OnInit{
         this.InitData();
         // this.runstatus = this.EquipmentArray[0].status.running;
         // this.equipmentName = this.EquipmentArray[0].factoryName+" - 火花探测设备"+this.EquipmentArray[0].deviceId;
-        console.log("url:"+httpService.getUrl());
+        console.log("url:"+httpService.getDeviceUrl());
         
     }
     InitData(){
         console.log("123123");
-        let url = this.httpService.getUrl()+":7002/Device/find/mobile_brief/byUserID";
+        let url = this.httpService.getDeviceUrl()+"/Device/find/mobile_brief/byUserID";
         let body = {
             "userId":this.userId
         };

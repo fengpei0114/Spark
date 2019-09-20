@@ -72,18 +72,18 @@ export class AttentionPage implements OnInit{
             this.collectionPointShow = "noise";
         }
         this.icon = "ios-heart-outline";
-        this.getAttentionList();
+        // this.getAttentionList();
 
     }
 
-    doRefresh(refresher) {
-        setTimeout(() => {
-            this.clearDeviceData();
-            this.getAttentionList().then();
-             console.log('Async operation has ended');
-             refresher.complete();
-            }, 2000);
-    }
+    // doRefresh(refresher) {
+    //     setTimeout(() => {
+    //         this.clearDeviceData();
+    //         this.getAttentionList().then();
+    //          console.log('Async operation has ended');
+    //          refresher.complete();
+    //         }, 2000);
+    // }
 
     ngAfterViewInit() {
 
@@ -115,52 +115,52 @@ export class AttentionPage implements OnInit{
         return tmpArr;
     }
 
-    getAttentionList() {
-
-        let url = this.httpService.getUrl()+"/NoiseDust/getAccountAttentionPoints.do";
-        let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
-        });
-        let body = "accountId="+(this.accountService.getAccount() as any).accountId;
-        let options = new RequestOptions({
-            headers: headers
-        });
-
-        return new Promise((resolve, reject) =>{
-            this.http.post(url,body,options).map(res =>res.json()).subscribe(data =>{
-
-                this.showCollectionPoint = true;
-                console.log(data);
-                this.collectionData = this.dedupe(data);
-                console.log("=========dedupe");
-                console.log(this.dedupe(data));
-                console.log("==============");
-                  this.http.post(url,body,options).map(res => res.json()).subscribe(data =>{
-            // console.log(data);
-            this.projectData = data;
-        });
-
-
-
-                for (let i =0; i<this.collectionData.length;i++){
-                    // console.log(this.collectionData[i].deviceId);
-                    this.getDeviceTypeById((this.collectionData[i] as any).deviceId,i);
-
-                }
-            },err =>{
-                    //设置输入错误提示
-                    let toast = this.toastCtrl.create({
-                        message: '网络连接错误！',
-                        duration: 2000,
-                        position: 'middle'
-                    });
-
-                    toast.present(toast);
-                    reject(err);
-                });
-            });
-            
-    }
+    // getAttentionList() {
+    //
+    //     let url = this.httpService.getUrl()+"/NoiseDust/getAccountAttentionPoints.do";
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/x-www-form-urlencoded'
+    //     });
+    //     let body = "accountId="+(this.accountService.getAccount() as any).accountId;
+    //     let options = new RequestOptions({
+    //         headers: headers
+    //     });
+    //
+    //     return new Promise((resolve, reject) =>{
+    //         this.http.post(url,body,options).map(res =>res.json()).subscribe(data =>{
+    //
+    //             this.showCollectionPoint = true;
+    //             console.log(data);
+    //             this.collectionData = this.dedupe(data);
+    //             console.log("=========dedupe");
+    //             console.log(this.dedupe(data));
+    //             console.log("==============");
+    //               this.http.post(url,body,options).map(res => res.json()).subscribe(data =>{
+    //         // console.log(data);
+    //         this.projectData = data;
+    //     });
+    //
+    //
+    //
+    //             for (let i =0; i<this.collectionData.length;i++){
+    //                 // console.log(this.collectionData[i].deviceId);
+    //                 this.getDeviceTypeById((this.collectionData[i] as any).deviceId,i);
+    //
+    //             }
+    //         },err =>{
+    //                 //设置输入错误提示
+    //                 let toast = this.toastCtrl.create({
+    //                     message: '网络连接错误！',
+    //                     duration: 2000,
+    //                     position: 'middle'
+    //                 });
+    //
+    //                 toast.present(toast);
+    //                 reject(err);
+    //             });
+    //         });
+    //
+    // }
 
     clearDeviceData() {
         // console.log(result);
@@ -170,31 +170,31 @@ export class AttentionPage implements OnInit{
         this.WellDeviceData = [];
     }
 
-    getDeviceTypeById(Id,i){
-        let url = this.httpService.getUrl()+"/NoiseDust/getDeviceByIdForApp.do";
-        let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
-        });
-        let body = "deviceId="+Id;
-        let options = new RequestOptions({
-            headers: headers
-        });
-        this.http.post(url,body,options).map(res =>res.json()).subscribe(result =>{
-            console.log(result);
-            // console.log(this.collectionData[i]);
-            if(result.model=='ZN-WCZ-01') {
-                this.NoiseDeviceData.push(this.collectionData[i]);
-            }else if(result.model=='ZF-LX-01'){
-                this.LXWaterLevelData.push(this.collectionData[i]);
-            }else if(result.model=='ZF-GD-01'){
-                this.GDWaterLevelData.push(this.collectionData[i]);
-            }else if(result.model=='ZF-JG-01'){
-                this.WellDeviceData.push(this.collectionData[i]);
-            }
-            else if(result.dev_model==''){
-            }
-        });
-    }
+    // getDeviceTypeById(Id,i){
+    //     let url = this.httpService.getUrl()+"/NoiseDust/getDeviceByIdForApp.do";
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/x-www-form-urlencoded'
+    //     });
+    //     let body = "deviceId="+Id;
+    //     let options = new RequestOptions({
+    //         headers: headers
+    //     });
+    //     this.http.post(url,body,options).map(res =>res.json()).subscribe(result =>{
+    //         console.log(result);
+    //         // console.log(this.collectionData[i]);
+    //         if(result.model=='ZN-WCZ-01') {
+    //             this.NoiseDeviceData.push(this.collectionData[i]);
+    //         }else if(result.model=='ZF-LX-01'){
+    //             this.LXWaterLevelData.push(this.collectionData[i]);
+    //         }else if(result.model=='ZF-GD-01'){
+    //             this.GDWaterLevelData.push(this.collectionData[i]);
+    //         }else if(result.model=='ZF-JG-01'){
+    //             this.WellDeviceData.push(this.collectionData[i]);
+    //         }
+    //         else if(result.dev_model==''){
+    //         }
+    //     });
+    // }
 
 
     gotoDeviceInfo(id){
@@ -248,23 +248,23 @@ export class AttentionPage implements OnInit{
 
     }
 
-    delAttention(item) {
-        this.accountId = (this.accountService.getAccount() as any).accountId;
-        let url = this.httpService.getUrl() + "/NoiseDust/delAccountAttentionPoint.do";
-        let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded'
-        });
-        let body = "accountId=" + this.accountId + "&pointId=" + (item as any).id;
-        let options = new RequestOptions({
-            headers: headers
-        });
-        this.http.post(url, body, options).subscribe(result => {
-            // this.attentionPoints = result;
-            // console.log(this.attentionPoints);
-            console.log("取消关注成功！！！！");
-        }, err => {
-        });
-    }
+    // delAttention(item) {
+    //     this.accountId = (this.accountService.getAccount() as any).accountId;
+    //     let url = this.httpService.getUrl() + "/NoiseDust/delAccountAttentionPoint.do";
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/x-www-form-urlencoded'
+    //     });
+    //     let body = "accountId=" + this.accountId + "&pointId=" + (item as any).id;
+    //     let options = new RequestOptions({
+    //         headers: headers
+    //     });
+    //     this.http.post(url, body, options).subscribe(result => {
+    //         // this.attentionPoints = result;
+    //         // console.log(this.attentionPoints);
+    //         console.log("取消关注成功！！！！");
+    //     }, err => {
+    //     });
+    // }
 
 }
 
