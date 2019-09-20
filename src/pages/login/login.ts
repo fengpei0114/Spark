@@ -187,12 +187,9 @@ export class LoginPage {
             }else{
                 if(value.username==""){
                     this.errorMsg = "  *用户名不能为空！";
-                }else if(value.password==""){
-                    this.errorMsg = "  *密码不能为空！";
+                }else {
+                    this.errorMsg = "  *密码不正确！";
                 }
-                
-                console.log(value.password);
-                
             }
 
         }else {
